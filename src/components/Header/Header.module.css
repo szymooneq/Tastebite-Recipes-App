@@ -1,0 +1,13 @@
+.header {
+  height: 50px;
+  background: url('../../assets/images/header.jpg') center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 15px;
+}
+
+/* .input {
+  width: calc(100% - 20px);
+} */

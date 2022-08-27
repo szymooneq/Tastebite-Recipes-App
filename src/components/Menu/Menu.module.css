@@ -1,0 +1,15 @@
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.menuItem {
+  display: inline-block;
+}
+
+.menuContainer {
+  border: 1px solid #cdcdcd;
+  margin: 10px 0;
+}
