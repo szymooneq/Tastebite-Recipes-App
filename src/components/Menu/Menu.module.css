@@ -9,6 +9,10 @@
   display: inline-block;
 }
 
+.menuItem a {
+  color: #6c757d;
+}
+
 .menuContainer {
   border: 1px solid #cdcdcd;
   margin: 10px 0;
