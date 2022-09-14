@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { useEffect, useReducer } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -10,91 +10,113 @@ import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/ThemeContext';
 import AuthContext from './context/AuthContext';
+import BestHotel from './components/Hotels/BestHotel/BestHotel';
 
-class App extends Component {
-  hotels = [
-    {
-      id: 0,
-      name: 'Pod akacjami',
-      city: 'Warszawa',
-      rating: 8.3,
-      description: 'Lorem officia cupidatat velit pariatur do quis eiusmod voluptate.',
-      image: ''
-    },
-    {
-      id: 1,
-      name: 'Dębowy',
-      city: 'Lublin',
-      rating: 8.8,
-      description: 'Lorem officia cupidatat velit pariatur do quis eiusmod voluptate.',
-      image: ''
+const backendHotels = [
+  {
+    id: 0,
+    name: 'Pod akacjami',
+    city: 'Warszawa',
+    rating: 8.3,
+    description: 'Lorem officia cupidatat velit pariatur do quis eiusmod voluptate.',
+    image: ''
+  },
+  {
+    id: 1,
+    name: 'Dębowy',
+    city: 'Lublin',
+    rating: 8.8,
+    description: 'Lorem officia cupidatat velit pariatur do quis eiusmod voluptate.',
+    image: ''
+  }
+]
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'change-theme':
+      const theme = state.theme === 'danger' ? 'primary' : 'danger'
+      return { ...state, theme }
+    case 'set-hotels':
+      return { ...state, hotels: action.hotels }
+    case 'set-loading':
+      return { ...state, loading: action.loading }
+    case 'login':
+      return { ...state, isAuthenticated: true }
+    case 'logout':
+      return { ...state, isAuthenticated: false }
+    default:
+      throw new Error('Nie ma takiej akcji: ' + action.type)
+  }
+}
+
+const initialState = {
+  theme: 'danger',
+  hotels: [],
+  loading: true,
+  isAuthenticated: false
+}
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  const searchHandler = (term) => {
+    const newHotels = [...backendHotels].filter(x => x.name.toLowerCase().includes(term.toLowerCase()));
+    /* setHotels(newHotels) */
+    dispatch({ type: 'set-hotels', hotels: newHotels })
+  }
+
+  const getBestHotel = () => {
+    if(state.hotels.length < 2) {
+      return null
+    } else {
+      return state.hotels.sort((a, b) => a.rating > b.rating ? -1 : 1)[0]
     }
-  ]
-
-  state = {
-    hotels: [],
-    loading: true,
-    theme: 'danger',
-    isAuthenticated: false
-  }
-
-  searchHandler = (term) => {
-    const hotels = [...this.hotels]
-      .filter(x => x.name
-        .toLowerCase()
-        .includes(term.toLowerCase()));
-    this.setState({hotels})
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ hotels: this.hotels, loading: false })
-    }, 1000)
-  }
-
-  changeTheme = () => {
-    const newTheme = this.state.theme === 'primary' ? 'danger' : 'primary';
-    this.setState({ theme: newTheme})
-  }
-
-  render () {
-    
-    const header = (
-      <Header>
-        <Searchbar onSearch={term => this.searchHandler(term)} />
-        <ThemeButton />
-      </Header>)
-
-    const menu = <Menu />
-
-    const content = (
-      this.state.loading 
-      ? <LoadingIcon /> 
-      : <Hotels hotels={this.state.hotels} />)
-
-    const footer = <Footer />
-
-    return (
-      <AuthContext.Provider value={{ 
-        isAuthenticated: this.state.isAuthenticated,
-        login: () => this.setState({ isAuthenticated: true }),
-        logout: () => this.setState({ isAuthenticated: false })
-      }}>
-        <ThemeContext.Provider value={{
-          color: this.state.theme,
-          changeTheme: this.changeTheme
-        }}>
-          <Layout 
-            header={header}
-            menu={menu}
-            content={content}
-            footer={footer}
-          />
-        </ThemeContext.Provider>
-      </AuthContext.Provider>
-    );
   }
   
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch({ type: 'set-hotels', hotels: backendHotels })
+      dispatch({ type: 'set-loading', loading: false })
+    }, 1000)
+  }, [])
+
+
+  const header = (
+    <Header>
+      <Searchbar onSearch={term => searchHandler(term)} />
+      <ThemeButton />
+    </Header>)
+
+  const menu = <Menu />
+
+  const content = state.loading 
+    ? <LoadingIcon /> 
+    : <>
+        <BestHotel getHotel={getBestHotel} />
+        <Hotels hotels={state.hotels} />
+      </>
+
+  const footer = <Footer />
+
+  return (
+    <AuthContext.Provider value={{ 
+      isAuthenticated: state.isAuthenticated,
+      login: () => dispatch({ type: 'login' }),
+      logout: () => dispatch({ type: 'logout' })
+    }}>
+      <ThemeContext.Provider value={{
+        color: state.theme,
+        changeTheme: () => dispatch({ type: 'change-theme' })
+      }}>
+        <Layout 
+          header={header}
+          menu={menu}
+          content={content}
+          footer={footer}
+        />
+      </ThemeContext.Provider>
+    </AuthContext.Provider>
+  )
 }
 
 export default App;
