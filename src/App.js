@@ -11,6 +11,8 @@ import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/ThemeContext';
 import AuthContext from './context/AuthContext';
 import BestHotel from './components/Hotels/BestHotel/BestHotel';
+import InspiringQuote from './components/InspiringQuote/InspiringQuote';
+import useLocalStorage from './hooks/useLocalStorage';
 
 const backendHotels = [
   {
@@ -53,11 +55,12 @@ const initialState = {
   theme: 'danger',
   hotels: [],
   loading: true,
-  isAuthenticated: false
+  isAuthenticated: true
 }
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const [storage, setStorage] = useLocalStorage('klucz', 'wartość startowa')
 
   const searchHandler = (term) => {
     const newHotels = [...backendHotels].filter(x => x.name.toLowerCase().includes(term.toLowerCase()));
@@ -83,6 +86,7 @@ function App() {
 
   const header = (
     <Header>
+      <InspiringQuote />
       <Searchbar onSearch={term => searchHandler(term)} />
       <ThemeButton />
     </Header>)
@@ -92,7 +96,11 @@ function App() {
   const content = state.loading 
     ? <LoadingIcon /> 
     : <>
-        <BestHotel getHotel={getBestHotel} />
+        <input 
+          type="text" 
+          value={storage} 
+          onChange={e => setStorage(e.target.value)} />
+        {getBestHotel() && <BestHotel getHotel={getBestHotel} />}
         <Hotels hotels={state.hotels} />
       </>
 
