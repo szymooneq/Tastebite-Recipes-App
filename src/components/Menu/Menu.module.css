@@ -13,6 +13,10 @@
   color: #6c757d;
 }
 
+.menuItemActive {
+  text-decoration: none;
+}
+
 .menuContainer {
   border: 1px solid #cdcdcd;
   margin: 10px 0;

@@ -1,18 +1,16 @@
 import { useContext, useEffect, useState, useRef } from "react"
 import PropTypes from 'prop-types'
-import ThemeContext from "../../../context/ThemeContext"
-
-const propTypes = {
-  onSearch: PropTypes.func.isRequired
-}
+import ThemeContext from "../../../context/themeContext"
+import { useNavigate } from 'react-router'
 
 function Searchbar(props) {
   const [term, setTerm] = useState('')
   const theme = useContext(ThemeContext)
   const inputRef = useRef(null)
+  const navigate = useNavigate()
 
   const search = () => {
-    props.onSearch(term)
+    navigate(`wyszukaj/${term}`)
   }
 
   const onKeyDownHandler = e => {
@@ -23,7 +21,7 @@ function Searchbar(props) {
 
   useEffect(() => {
     focusInput()
-  }, [])
+  }, []) 
 
   return (
     <div className="d-flex">
@@ -44,7 +42,5 @@ function Searchbar(props) {
     </div>
   );
 }
-
-Searchbar.propTypes = propTypes;
 
 export default Searchbar;
