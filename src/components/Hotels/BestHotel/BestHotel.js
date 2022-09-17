@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom'
 import moment from 'moment'
 
 function BestHotel(props) {
@@ -33,7 +34,7 @@ function BestHotel(props) {
           <p>Ocena: {hotel.rating}</p>
         </div>
         <p>Do końca oferty pozostało: {time}</p>
-        <a href="#" className="btn btn-sm btn-light">Pokaż</a>
+        <Link to={`/hotele/${hotel.id}`} className="btn btn-sm btn-light">Pokaż</Link>
       </div>
     </div>
   )

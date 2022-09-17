@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState, useRef } from "react"
-import PropTypes from 'prop-types'
 import ThemeContext from "../../../context/themeContext"
 import { useNavigate } from 'react-router'
 
@@ -10,7 +9,7 @@ function Searchbar(props) {
   const navigate = useNavigate()
 
   const search = () => {
-    navigate(`wyszukaj/${term}`)
+    navigate(`szukaj/${term}`)
   }
 
   const onKeyDownHandler = e => {

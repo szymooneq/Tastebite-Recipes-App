@@ -1,10 +1,10 @@
 import ProfileDetails from "./ProfileDetails/ProfileDetails";
 import MyHotels from "./MyHotels/MyHotels";
-import { Routes, Route, NavLink, Outlet, useMatches } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 export default function Profile(props) {
-  const { pathname } = useMatches();
-  console.log(pathname)
+
+  throw new Error('Problem z internetem')
 
   return (
     <div className="card">
@@ -14,18 +14,16 @@ export default function Profile(props) {
       <div className="card-body">
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <NavLink end className="nav-link" to={'/profil'}>Profil</NavLink>
+            <NavLink end className="nav-link" to={``}>Profil</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to={'/profil/hotele'}>Hotele</NavLink>
+            <NavLink className="nav-link" to={'hotele'}>Hotele</NavLink>
           </li>
         </ul>
 
         <div className="pt-4">
           <Outlet />
         </div>
-        
-        <p>....</p>
       </div>
     </div>
   )
