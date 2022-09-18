@@ -4,8 +4,6 @@ import { NavLink, Outlet } from 'react-router-dom';
 
 export default function Profile(props) {
 
-  throw new Error('Problem z internetem')
-
   return (
     <div className="card">
       <div className="card-header">
