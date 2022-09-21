@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import style from './Hotel.module.css'
-import hotelImg from '../../../assets/images/hotel.jpg'
 import ThemeContext from '../../../context/themeContext'
 import { useContext } from 'react'
 import useAuth from '../../../hooks/useAuth'
@@ -29,7 +28,7 @@ function Hotel(props) {
           <div className="col-4">
             {props.missing}
             <img 
-              src={hotelImg}
+              src={`https://placeimg.com/220/18${Math.floor(Math.random() * 10)}/arch`}
               alt=""
               className="img-fluid img-thumbnail" />
           </div>

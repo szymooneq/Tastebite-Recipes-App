@@ -47,13 +47,13 @@ export default function HotelForm(props) {
       error: '',
       showError: false,
       rules: ['required']
-    },
+    }
   });
 
   useEffect(() => {
     const newForm = {...form}
     for (const key in props.hotel) {
-      if (key !== 'user_id') newForm[key].value = props.hotel[key]
+      newForm[key].value = props.hotel[key]
     }
     setForm(newForm)
   }, [props.hotel])
