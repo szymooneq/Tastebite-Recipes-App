@@ -64,17 +64,19 @@ export default function Login(props) {
       {valid === false ? (<div className="alert alert-danger">Niepoprawne dane logowania</div>) : null}
       <form onSubmit={submit}>
         <div className="form-group">
-          <label>Email</label>
+          <label htmlFor="email-input">Email</label>
           <input 
             type="email" 
+            id="email-input"
             value={email} 
             onChange={e => setEmail(e.target.value)} 
             className="form-control" />
         </div>
         <div className="form-group">
-          <label>Hasło</label>
+          <label htmlFor="password-input">Hasło</label>
           <input 
             type="password" 
+            id="password-input"
             value={password} 
             onChange={e => setPassword(e.target.value)} 
             className="form-control" />
