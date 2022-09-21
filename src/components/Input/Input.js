@@ -22,10 +22,12 @@ const InputTextarea = props => {
       <label htmlFor={props.id} className="form-label">{props.label}</label>
       <textarea 
         id={props.id}
+        style={{resize: 'none'}}
         value={props.value}
         onChange={e => props.onChange(e.target.value)}
         type={props.type} 
-        className={`form-control ${props.error && props.showError ? 'is-invalid' : ''}`} />
+        className={`form-control ${props.error && props.showError ? 'is-invalid' : ''}`}
+        rows="5" />
       <div className="invalid-feedback">{props.error}</div>
     </div>
   );

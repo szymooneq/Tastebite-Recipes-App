@@ -1,4 +1,4 @@
-import { useReducer, Suspense, lazy } from 'react';
+import { useReducer, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
@@ -18,10 +18,12 @@ import Search from './pages/Search/Search';
 import ProfileDetails from './pages/Profile/ProfileDetails/ProfileDetails';
 import MyHotels from './pages/Profile/MyHotels/MyHotels';
 import AddHotel from './pages/Profile/MyHotels/AddHotel/AddHotel';
+import EditHotel from './pages/Profile/MyHotels/EditHotel/EditHotel';
 import NotFound from './pages/404/404';
 import Login from './pages/Auth/Login/Login';
 import ErrorBoundary from './hoc/ErrorBoundary';
 import ProtectedRoutes from './hoc/ProtectedRoutes';
+import Register from './pages/Auth/Register/Register';
 const Profile = lazy(() => import('./pages/Profile/Profile'));
 
 function App() {
@@ -57,9 +59,11 @@ function App() {
                 </Route>
               </Route>
               <Route path="profil/hotele/dodaj" element={<AddHotel />} />
+              <Route path="profil/hotele/edytuj/:id" element={<EditHotel />} />
             </Route>
 
             <Route path="zaloguj" element={<Login />} />
+            <Route path="rejestracja" element={<Register />} />
             <Route path="*" element={<NotFound />} />
 
           </Routes>
@@ -73,8 +77,8 @@ function App() {
   return (
     <Router>
       <AuthContext.Provider value={{ 
-        isAuthenticated: state.isAuthenticated,
-        login: () => dispatch({ type: 'login' }),
+        user: state.user,
+        login: (user) => dispatch({ type: 'login', user }),
         logout: () => dispatch({ type: 'logout' })
       }}>
         <ThemeContext.Provider value={{

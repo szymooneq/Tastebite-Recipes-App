@@ -40,7 +40,7 @@ function Hotel(props) {
                 <span className="badge text-bg-light">{props.city}</span>
               </div>
               <div className="col text-end">
-                <h5>Ocena: {props.rating}</h5>
+                <h5>Ocena: {props.rating ?? 0}</h5>
                 <Link to={`/hotele/${props.id}`} onClick={clickHandler}>Pokaż</Link>
                 {/* <a href="#" onClick={clickHandler} className={`btn btn-${theme.color} mt-2 px-5 float-end`}>Pokaż</a> */}  
               </div>
@@ -49,7 +49,7 @@ function Hotel(props) {
           <div className="col-12">
             <p className={style.description}>{props.description}</p>
             {auth 
-              ? <p className="mt-2">Dostępność: 4 pokoje</p>
+              ? <p className="mt-2">Dostępność: {props.rooms} pokoje</p>
               : <p className="mt-2">Dostępność: zaloguj</p>}
             
           </div>
