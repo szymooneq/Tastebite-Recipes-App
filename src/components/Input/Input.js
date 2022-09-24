@@ -24,7 +24,7 @@ const InputTextarea = props => {
         id={props.id}
         style={{resize: 'none'}}
         value={props.value}
-        onChange={e => props.onChange(e.target.value)}
+        onChange={props.onChange()}
         type={props.type} 
         className={`form-control ${props.error && props.showError ? 'is-invalid' : ''}`}
         rows="5" />

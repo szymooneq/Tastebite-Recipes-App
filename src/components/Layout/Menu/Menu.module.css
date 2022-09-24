@@ -14,7 +14,8 @@
 }
 
 .menuItemActive {
-  text-decoration: none;
+  color: red;
+  text-decoration: underline;
 }
 
 .menuContainer {

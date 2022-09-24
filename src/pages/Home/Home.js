@@ -34,7 +34,9 @@ export default function Home(props) {
     } catch (ex) {
       console.log(ex.response)
     }
-    setLoading(false)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
   }
 
   useEffect(() => {
