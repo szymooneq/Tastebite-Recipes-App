@@ -31,18 +31,12 @@ const EditHotel = props => {
   }, [])
 
   return (
-    <div className="card">
-      <div className="card-header">Edytuj hotel</div>
-      <div className="card-body">
-        <p className="text-muted">Uzupełnij dane hotelu</p>
-
-        <HotelForm
-          hotel={hotel}
-          buttonText="Zapisz!"
-          onSubmit={submit} />
-
-      </div>
-    </div>
+    <>
+      <HotelForm
+        hotel={hotel}
+        buttonText="Zapisz!"
+        onSubmit={submit} />
+    </>
   );
 }
 

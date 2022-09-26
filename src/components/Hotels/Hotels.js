@@ -1,4 +1,3 @@
-import React, { useMemo } from "react"
 import Hotel from "./Hotel/Hotel"
 import style from './Hotels.module.css'
 

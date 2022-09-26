@@ -40,7 +40,7 @@ export default function Login(props) {
       setError(ex.response.data.error.message)
       switch(ex.response.data.error.message) {
         case 'EMAIL_NOT_FOUND':
-          setValid({...valid, login: "Nie znaleziono takiego e-mailu"})
+          setValid({...valid, login: "Nie ma takiego adresu e-mail"})
           break
         case 'INVALID_EMAIL':
           setValid({...valid, login: "Wprowadź adres e-mail"})
@@ -54,11 +54,10 @@ export default function Login(props) {
         case 'MISSING_PASSWORD':
           setValid({...valid, password: "Wprowadź hasło"})
           break
+        case 'TOO_MANY_ATTEMPTS_TRY_LATER : Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.':
+          setValid({...valid, password: "debil"})
+          break
       }
-      /* setValid({
-        login: "Błędny login",
-        password: "Złe hasło"
-      }) */
       setLoading(false)
       console.log(ex.response)
     }
@@ -69,30 +68,10 @@ export default function Login(props) {
   }, [])
 
   return (
-    <div>
+    <>
       <h2 className="p-5 text-3xl font-bold text-center">Logowanie</h2>
-      
-      <form onSubmit={submit}>
-        {/* <div className="form-group">
-          <label htmlFor="email-input">Email</label>
-          <input 
-            type="email" 
-            id="email-input"
-            value={email || ''} 
-            onChange={e => setEmail(e.target.value)} 
-            className="form-control" />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="password-input">Hasło</label>
-          <input 
-            type="password" 
-            id="password-input"
-            value={password || ''} 
-            onChange={e => setPassword(e.target.value)} 
-            className="form-control" />
-        </div> */}
 
+      <form onSubmit={submit}>
         <InputT    
         id="email"
         label="Email"
@@ -100,7 +79,7 @@ export default function Login(props) {
         type="email"
         value={email}
         onChange={(val) => setEmail(val)}
-        placeholder="Wprowadź email do edycji..." />
+        placeholder="Wprowadź login..." />
 
       <InputT
         id="password"
@@ -109,16 +88,15 @@ export default function Login(props) {
         type="password"
         value={password}
         onChange={(val) => setPassword(val)}
-        placeholder="Wprowadź hasło do edycji..." />
+        placeholder="Wprowadź hasło..." />
 
         {error ?? <div className="alert alert-danger">{error}</div>}
 
       <div className="text-center">
-        <LoadingButton loading={loading}>Zapisz</LoadingButton>
+        <LoadingButton loading={loading}>Zaloguj</LoadingButton>
       </div>
-
       </form>
-    </div>
+    </>
   )
 
   /* return (

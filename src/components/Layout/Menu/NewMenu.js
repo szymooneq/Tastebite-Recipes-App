@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import MenuItem from './MenuItem'
 
@@ -17,7 +18,7 @@ function NewMenu() {
         ? (
           <>
             <MenuItem link="profil">Mój profil</MenuItem>
-            <li><a className="text-gray-700 hover:bg-gray-100 py-2 px-4 rounded dark:text-white cursor-pointer dark:hover:bg-gray-700 dark:hover:text-white" onClick={logout}>Wyloguj</a></li>
+            <li><Link to={'/'} className="text-gray-700 hover:bg-gray-100 py-2 px-4 rounded dark:text-white cursor-pointer dark:hover:bg-gray-700 dark:hover:text-white" onClick={logout}>Wyloguj</Link></li>
           </>
         )
         : (

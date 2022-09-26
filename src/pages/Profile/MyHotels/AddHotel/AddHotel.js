@@ -14,17 +14,11 @@ const AddHotel = props => {
   }
 
   return (
-    <div className="card">
-      <div className="card-header">Dodaj hotel</div>
-      <div className="card-body">
-        <p className="text-muted">Uzupełnij dane hotelu</p>
-
-        <HotelForm
-          buttonText="Dodaj!"
-          onSubmit={submit} />
-
-      </div>
-    </div>
+    <>
+      <HotelForm
+        buttonText="Dodaj!"
+        onSubmit={submit} />
+    </>
   );
 }
 

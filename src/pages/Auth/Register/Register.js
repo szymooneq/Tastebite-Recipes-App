@@ -5,6 +5,8 @@ import { validate } from "../../../helpers/validations";
 import axios from "../../../axios-auth"
 import useAuth from '../../../hooks/useAuth'
 import { useNavigate } from "react-router-dom";
+import InputT from "../../../components/UI/InputT"
+
 
 export default function Register(props) {
   const [auth, setAuth] = useAuth()
@@ -12,18 +14,8 @@ export default function Register(props) {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
-    email: {
-      value: '',
-      error: '',
-      showError: false,
-      rules: ['required', 'email']
-    },
-    password: {
-      value: '',
-      error: '',
-      showError: false,
-      rules: ['required']
-    }
+    email: '',
+    password: ''
   });
 
   const valid = !Object.values(form)
@@ -37,8 +29,8 @@ export default function Register(props) {
 
     try {
       const res = await axios.post('accounts:signUp', {
-        email: form.email.value,
-        password: form.password.value,
+        email: form.email,
+        password: form.password,
         returnSecureToken: true
       });
 
@@ -50,7 +42,6 @@ export default function Register(props) {
       navigate('/')
       
     } catch (ex) {
-      /* console.log(ex.response) */
       //TODO validation error
       setError(ex.response.data.error.message)
     }
@@ -60,64 +51,39 @@ export default function Register(props) {
     }, 500);
   }
 
-  const changeHandler = (value, fieldName) => {
-    const error = validate(form[fieldName].rules, value);
-    setForm({
-        ...form, 
-        [fieldName]: {
-          ...form[fieldName],
-          value,
-          showError: true,
-          error: error
-        } 
-      });
-  }
-
   useEffect(() => {
     if(auth) navigate('/')
   }, [])
 
   return (
-    <div className="card">
-      <div className="card-header">Rejestracja</div>
-      <div className="card-body">
-        <p className="text-muted">Uzupełnij dane</p>
+    <>
+      <h2 className="p-5 text-3xl font-bold text-center">Rejestracja</h2>
 
-        <form onSubmit={submit}>
+      <form onSubmit={submit}>
+      <InputT    
+        id="email"
+        label="Email"
+        error={valid?.login}
+        type="email"
+        value={form.email}
+        onChange={(val) => setForm({...form, email: val })}
+        placeholder="Wprowadź login..." />
 
-          <Input
-            label="Email"
-            type="email"
-            id="name"
-            value={form.email.value}
-            onChange={val => changeHandler(val, 'email')}
-            error={form.email.error}
-            showError={form.email.showError} />
+      <InputT
+        id="password"
+        label="Hasło"
+        error={valid?.password}
+        type="password"
+        value={form.password}
+        onChange={(val) => setForm({...form, password: val })}
+        placeholder="Wprowadź hasło..." />
 
-          <Input
-            label="Hasło"
-            id="password"
-            type="password"
-            value={form.password.value}
-            onChange={val => changeHandler(val, 'password')}
-            error={form.password.error}
-            showError={form.password.showError} />
+        {error ?? <div className="alert alert-danger">{error}</div>}
 
-          {error ? (
-            <div className="alert alert-danger">{error}</div>
-          ) : null}
-          
-          <div className="float-end">
-            <LoadingButton 
-              loading={loading} 
-              disabled={!valid}
-              className="btn-primary">
-                Gotowe
-            </LoadingButton>
-          </div>
-
-        </form>
-      </div>
-    </div>
-  );
+        <div className="text-center">
+          <LoadingButton loading={loading}>Zarejestruj</LoadingButton>
+        </div>
+      </form>
+    </>
+  )
 }

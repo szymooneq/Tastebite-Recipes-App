@@ -2,7 +2,7 @@ import { useContext } from "react"
 import ThemeContext from "../../../context/themeContext"
 
 export default function LoadingIcon() {
-  const theme = useContext(ThemeContext)
+  //const theme = useContext(ThemeContext)
 
   return (
     <div className="flex items-center justify-center h-96" role="status">

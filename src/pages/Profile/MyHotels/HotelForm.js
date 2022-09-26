@@ -43,7 +43,7 @@ export default function HotelForm(props) {
       showError: false
     },
     status: {
-      value: 0,
+      value: true,
       error: '',
       showError: false,
       rules: ['required']
@@ -134,7 +134,7 @@ export default function HotelForm(props) {
         showError={form.rooms.showError} />
 
       <div className="mb-3">
-        <h4>Udogodnienia</h4>
+      <h6 class="text-lg font-bold dark:text-white">Udogodnienia</h6>
         <Input
           type="checkbox"
           value={form.features.value}
@@ -147,30 +147,32 @@ export default function HotelForm(props) {
           error={form.features.error}
           showError={form.features.showError} />
       </div>
+ 
+      <h6 class="text-lg font-bold dark:text-white">Zdjęcie</h6>
+      <Input 
+        type="file" 
+        onChange={val => changeHandler(val, 'image')}
+        error={form.image.error}
+        showError={form.image.showError} />
+      
+      
+      <h6 class="text-lg font-bold dark:text-white">Status</h6>
+      <Input
+        type="switch"
+        name="status"
+        value={form.status.value}
+        onChange={val => changeHandler(!val, 'status')}
+        error={form.status.error}
+        showError={form.status.showError} />
 
-      <div className="mb-3">
-        <h4>Zdjęcie</h4>
-        <Input 
-          type="file" 
-          onChange={val => changeHandler(val, 'image')}
-          error={form.image.error}
-          showError={form.image.showError} />
-      </div>
+      {/* <div className="mx-auto mb-4 w-96">
+        <label htmlFor="default-toggle" className="inline-flex relative items-center cursor-pointer">
+          <input type="checkbox" value="" id="default-toggle" className="sr-only peer" onChange={check} />
+          <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+          <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Toggle me</span>
+        </label>
+      </div> */}
 
-      <div className="mb-3">
-        <h4>Status</h4>
-        <Input
-          type="radio"
-          name="status"
-          value={form.status.value}
-          onChange={val => changeHandler(val, 'status')}
-          options={[
-            { value: '1', label: 'Aktywny'},
-            { value: '0', label: 'Ukryty'},
-          ]}
-          error={form.status.error}
-          showError={form.status.showError} />
-      </div>
       <div className="float-end">
             <LoadingButton 
               loading={loading} 

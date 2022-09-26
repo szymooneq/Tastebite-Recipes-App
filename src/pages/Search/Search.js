@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { objectToArrayWithId } from "../../helpers/objects"
 import axios from "../../axios"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Hotels from "../../components/Hotels/Hotels"
 import useLocalStorage from "../../hooks/useLocalStorage"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
@@ -12,21 +12,21 @@ export default function Search() {
   const [loading, setLoading] = useState(false)
   const [setLastHotel] = useLocalStorage('last-hotel', null)
 
-  const search = async () => {
-    try {
-      setLoading(true)
-      const res = await axios.get('/hotels.json')
-      const newHotel = objectToArrayWithId(res.data).filter(hotel => hotel.name.toLowerCase().includes(term.toLowerCase()))
-      setHotels(newHotel)
-    } catch (ex) {
-      console.log(ex.response)
-    }
-    setLoading(false)
-  }
+  const search = useCallback(async () => {
+      try {
+        setLoading(true)
+        const res = await axios.get('/hotels.json')
+        const newHotel = objectToArrayWithId(res.data).filter(hotel => hotel.name.toLowerCase().includes(term.toLowerCase()))
+        setHotels(newHotel)
+      } catch (ex) {
+        console.log(ex.response)
+      }
+      setLoading(false)
+    }, [term]) 
 
   useEffect(() => {
     search()
-  }, [term])
+  }, [search])
 
   const openHotel = (hotel) => setLastHotel(hotel)
 

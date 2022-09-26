@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
 import { validateEmail } from "../../../helpers/validations"
 import useAuth from "../../../hooks/useAuth"
@@ -44,21 +44,23 @@ export default function ProfileDetails() {
     setLoading(false)
   }
 
-  useEffect(() => {
+  const validate = useCallback(() => {
     if (validateEmail(email)) {
       setErrors({...errors, email: ''})
     } else {
       setErrors({...errors, email: 'Niepoprawny email'})
     }
-  }, [email])
 
-  useEffect(() => {
     if (password.length >= 4 || password.length === 0) {
       setErrors({...errors, password: ''})
     } else {
       setErrors({...errors, password: 'Wymagane 4 znaki'})
     }
-  }, [password])
+  }, [email, password])
+
+  useEffect(() => {
+    validate()
+  }, [validate])
 
   return (
     <form onSubmit={submit}>

@@ -1,6 +1,6 @@
 import style from './Menu.module.css';
 import useAuth from "../../../hooks/useAuth";
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Menu() {
   const [auth, setAuth] = useAuth()
@@ -24,7 +24,7 @@ function Menu() {
                 <NavLink to={"/profil"} className={({ isActive }) => isActive ? activeClassName : undefined}>Mój profil</NavLink>
               </li>
               <li className={`${style.menuItem} breadcrumb-item`}>
-                <a href="#" onClick={logout}>Wyloguj</a>
+                <button onClick={logout}>Wyloguj</button>
               </li>
             </>
             )

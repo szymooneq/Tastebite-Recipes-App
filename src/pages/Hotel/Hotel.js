@@ -1,5 +1,5 @@
 import axios from "../../axios"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
 import useWebsiteTitle from "../../hooks/useWebsiteTitle"
@@ -15,17 +15,18 @@ function Hotel(props) {
 
   const setTitle = useWebsiteTitle()
 
-  const fetchHotel = async () => {
+  const fetchHotel = useCallback(async () => {
     try {
       setLoading(true)
       const res = await axios.get(`/hotels/${id}.json`)
+      if (res.data.status === false) navigate('/')
       setHotel(res.data)
       setTitle(`Hotel - ${res.data.name}`)
     } catch (ex) {
       console.log(ex.response)
     }
     setLoading(false)
-  }
+  }, []) 
 
   const rateHotel = async () => {
     try {
@@ -39,7 +40,7 @@ function Hotel(props) {
   useEffect(() => {
     //pobieranie danych
     fetchHotel()
-  }, [])
+  }, [fetchHotel])
 
   return loading ? <LoadingIcon /> : (
     <div className="card">

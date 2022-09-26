@@ -1,8 +1,7 @@
-import { useReducer, useEffect, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { useReducer, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Layout/Header/Header';
-import Menu from './components/Layout/Menu/Menu';
 import NewMenu from './components/Layout/Menu/NewMenu';
 import Searchbar from "./components/UI/Searchbar/Searchbar";
 import Layout from './components/Layout/Layout';
@@ -57,10 +56,10 @@ function App() {
                 <Route index element={<ProfileDetails />} />
                 <Route path="hotele">
                   <Route index element={<MyHotels />} />
+                  <Route path="dodaj" element={<AddHotel />} />
+                  <Route path="edytuj/:id" element={<EditHotel />} />
                 </Route>
               </Route>
-              <Route path="profil/hotele/dodaj" element={<AddHotel />} />
-              <Route path="profil/hotele/edytuj/:id" element={<EditHotel />} />
             </Route>
 
             <Route path="zaloguj" element={<Login />} />

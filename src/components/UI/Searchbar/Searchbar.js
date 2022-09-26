@@ -4,7 +4,7 @@ import ThemeContext from "../../../context/themeContext"
 
 function Searchbar(props) {
   const [term, setTerm] = useState('')
-  const theme = useContext(ThemeContext)
+  //const theme = useContext(ThemeContext)
   const inputRef = useRef(null)
   const navigate = useNavigate()
 
