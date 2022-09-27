@@ -85,17 +85,12 @@ function App() {
           color: state.theme,
           changeTheme: () => dispatch({ type: 'change-theme' })
         }}>
-          <ReducerContext.Provider value={{
-            state: state,
-            dispatch: dispatch
-          }}>
             <Layout 
               header={header}
               menu={menu}
               content={content}
               footer={footer}
             />
-          </ReducerContext.Provider>
         </ThemeContext.Provider>
       </AuthContext.Provider>
     </Router>

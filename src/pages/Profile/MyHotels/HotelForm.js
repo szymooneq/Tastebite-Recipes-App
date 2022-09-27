@@ -134,7 +134,7 @@ export default function HotelForm(props) {
         showError={form.rooms.showError} />
 
       <div className="mb-3">
-      <h6 class="text-lg font-bold dark:text-white">Udogodnienia</h6>
+      <h6 className="text-lg font-bold dark:text-white">Udogodnienia</h6>
         <Input
           type="checkbox"
           value={form.features.value}
@@ -148,7 +148,7 @@ export default function HotelForm(props) {
           showError={form.features.showError} />
       </div>
  
-      <h6 class="text-lg font-bold dark:text-white">Zdjęcie</h6>
+      <h6 className="text-lg font-bold dark:text-white">Zdjęcie</h6>
       <Input 
         type="file" 
         onChange={val => changeHandler(val, 'image')}
@@ -156,7 +156,7 @@ export default function HotelForm(props) {
         showError={form.image.showError} />
       
       
-      <h6 class="text-lg font-bold dark:text-white">Status</h6>
+      <h6 className="text-lg font-bold dark:text-white">Status</h6>
       <Input
         type="switch"
         name="status"
