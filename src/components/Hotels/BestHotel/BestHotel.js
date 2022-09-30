@@ -8,7 +8,6 @@ function BestHotel(props) {
   const endTime = useRef(moment().add(23, 'minutes').add(34, 'seconds'))
   let interval = useRef(null)
   
-  //componentDidMount()
   useEffect(() => {
     interval.current = setInterval(() => {
       const leftTime = -moment().diff(endTime.current) / 1000
@@ -17,29 +16,16 @@ function BestHotel(props) {
       setTime(`minut: ${minutes}, sekund ${seconds}`)
     }, 1000)
 
-    //componentWillUnmount()
     return () => {
       clearInterval(interval.current)
     } 
   }, [])
 
-  if(!hotel) return null;
-
-  /* return (
-    <div className="card bg-success text-white">
-      <div className="card-header">Najlepsza oferta!</div>
-      <div className="card-body">
-        <div className="d-flex justify-content-between">
-          <h5 className="card-title">{hotel.name}</h5>
-          <p>Ocena: {hotel.rating}</p>
-        </div>
-        <p>Do końca oferty pozostało: {time}</p>
-        <Link to={`/hotele/${hotel.id}`} className="btn btn-sm btn-light">Pokaż</Link>
-      </div>
-    </div>
-  ) */
+  const clickHandler = e => {
+    props.onOpen(hotel)
+  }
   
-  return (
+  return hotel ? (
     <div className="m-1 p-4 bg-green-700 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <div className="mb-2 text-lg font-bold tracking-tight text-black dark:text-white">Najlepsza oferta</div>
       <p className="font-normal text-gray-300 dark:text-gray-400">{hotel.name}</p>
@@ -48,9 +34,9 @@ function BestHotel(props) {
         <p className="ml-2 text-sm font-bold text-gray-300 dark:text-white">{hotel.rating}</p>
       </div>
       <p>Do końca oferty pozostało: {time}</p>
-      <Link to={`/hotele/${hotel.id}`} className="btn btn-sm btn-light">Pokaż</Link>
+      <Link to={`/hotele/${hotel.id}`} onClick={clickHandler} className="btn btn-sm btn-light">Pokaż</Link>
     </div>
-  );
+  ) : null
 }
 
 export default BestHotel

@@ -1,89 +1,102 @@
 import { useEffect, useState } from "react";
-import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton";
-import Input from "../../../components/Input/Input";
-import { validate } from "../../../helpers/validations";
-import axios from "../../../axios-auth"
-import useAuth from '../../../hooks/useAuth'
 import { useNavigate } from "react-router-dom";
-import InputT from "../../../components/UI/InputT"
-
+import axios from "../../../axios-auth"
+import { useFormik } from "formik";
+import useAuth from '../../../hooks/useAuth'
+import { registerSchema } from "../../../schemas/formSchemas";
+import Input from "../../../components/Input/Input";
+import Alert from "../../../components/UI/Alert";
+import AlertRegister from "../../../components/UI/AlertRegister";
+import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton";
 
 export default function Register(props) {
-  const [auth, setAuth] = useAuth()
-  const [error, setError] = useState('')
-  const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
-  const [form, setForm] = useState({
-    email: '',
-    password: ''
-  });
+  const [auth, setAuth] = useAuth()
+  const [message, setMessage] = useState(null)
+  const [success, setSuccess] = useState(false)
+  const navigate = useNavigate()
 
-  const valid = !Object.values(form)
-    .map(input => input.error)
-    .filter(error => error)
-    .length
-
-  const submit = async e => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const res = await axios.post('accounts:signUp', {
-        email: form.email,
-        password: form.password,
-        returnSecureToken: true
-      });
-
-      setAuth({
-        email: res.data.email,
-        token: res.data.idToken,
-        userId: res.data.localId
-      })
-      navigate('/')
-      
-    } catch (ex) {
-      //TODO validation error
-      setError(ex.response.data.error.message)
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      confirmPassword: ''
+    },
+    validationSchema: registerSchema,
+    onSubmit: async (values) => {
+      setLoading(true)
+      try {
+        const res = await axios.post('accounts:signUp', {
+          email: values.email,
+          password: values.password,
+          returnSecureToken: true
+        })
+        setAuth({
+          email: res.data.email,
+          token: res.data.idToken,
+          userId: res.data.localId
+        })
+        setSuccess(true)
+        setTimeout(() => {navigate('/')}, 5000)
+      } catch (ex) {
+        setLoading(false)
+        setMessage(ex.response.data.error.message)
+      }
     }
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }
+  })
 
   useEffect(() => {
     if(auth) navigate('/')
-  }, [])
+  })
 
   return (
-    <>
-      <h2 className="p-5 text-3xl font-bold text-center">Rejestracja</h2>
+    success ? <AlertRegister /> : (
+      <>
+        <h2 className="p-5 text-3xl font-bold text-center">Rejestracja</h2>
+        {message && <Alert message={message} theme="danger" />}
 
-      <form onSubmit={submit}>
-      <InputT    
-        id="email"
-        label="Email"
-        error={valid?.login}
-        type="email"
-        value={form.email}
-        onChange={(val) => setForm({...form, email: val })}
-        placeholder="Wprowadź login..." />
+        <form onSubmit={handleSubmit}>
+          <Input
+            label="Email"
+            type="email"
+            id="email"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.email}
+            touch={touched.email}
+            placeholder="Podaj adres e-mail..." />
 
-      <InputT
-        id="password"
-        label="Hasło"
-        error={valid?.password}
-        type="password"
-        value={form.password}
-        onChange={(val) => setForm({...form, password: val })}
-        placeholder="Wprowadź hasło..." />
+          <Input
+            label="Hasło"
+            type="password"
+            id="password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.password}
+            touch={touched.password}
+            placeholder="Podaj hasło..." />
 
-        {error ?? <div className="alert alert-danger">{error}</div>}
+          <Input
+            label="Potwierdź hasło"
+            type="password"
+            id="confirmPassword"
+            value={values.confirmPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.confirmPassword}
+            touch={touched.confirmPassword}
+            placeholder="Potwierdź hasło..." />
 
-        <div className="text-center">
-          <LoadingButton loading={loading}>Zarejestruj</LoadingButton>
-        </div>
-      </form>
-    </>
+          <div className="text-center">
+            <LoadingButton 
+              disabled={(errors?.email || errors?.password || errors?.confirmPassword) && true} 
+              loading={loading} 
+              loadingMessage="Rejestrowanie...">Zarejestruj</LoadingButton>
+          </div>
+        </form>
+      </>
+    )
   )
 }

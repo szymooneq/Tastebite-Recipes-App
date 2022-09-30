@@ -5,7 +5,7 @@ export default function MenuItem(props) {
     props.end ? (
       <li>
         <NavLink
-          end
+          end="true"
           to={props.link}
           className={({ isActive }) =>
             isActive

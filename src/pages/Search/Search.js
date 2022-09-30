@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { objectToArrayWithId } from "../../helpers/objects"
 import axios from "../../axios"
 import { useCallback, useEffect, useState } from "react"
-import Hotels from "../../components/Hotels/Hotels"
+import HotelList from "../../components/Hotels/HotelList"
 import useLocalStorage from "../../hooks/useLocalStorage"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
 
@@ -13,16 +13,16 @@ export default function Search() {
   const [setLastHotel] = useLocalStorage('last-hotel', null)
 
   const search = useCallback(async () => {
-      try {
-        setLoading(true)
-        const res = await axios.get('/hotels.json')
-        const newHotel = objectToArrayWithId(res.data).filter(hotel => hotel.name.toLowerCase().includes(term.toLowerCase()))
-        setHotels(newHotel)
-      } catch (ex) {
-        console.log(ex.response)
-      }
-      setLoading(false)
-    }, [term]) 
+    try {
+      setLoading(true)
+      const res = await axios.get('/hotels.json')
+      const newHotel = objectToArrayWithId(res.data).filter(hotel => hotel.status === true && hotel.name.toLowerCase().includes(term.toLowerCase()))
+      setHotels(newHotel)
+    } catch (ex) {
+      console.log(ex.response)
+    }
+    setLoading(false)
+  }, [term]) 
 
   useEffect(() => {
     search()
@@ -33,7 +33,7 @@ export default function Search() {
   return loading ? <LoadingIcon /> : (
     <>
       <h2>Wyniki dla frazy "{term}":</h2>
-      <Hotels onOpen={openHotel} hotels={hotels} />
+      <HotelList onOpen={openHotel} hotels={hotels} />
     </>
   )
 }

@@ -1,21 +1,11 @@
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 100px 15px;
-  position: relative;
-  height: 50px;
-  overflow: hidden;
-}
-
 .headerImage {
-  background: url('../../../assets/images/header.jpg') center;
-  background-size: 110%;
   position: absolute;
   top: -5%;
   bottom: -5%;
   left: -5%;
   right: -5%;
+  background: url('../../assets/images/header.jpg') center;
+  background-size: 110%;
   z-index: -1;
 }
 

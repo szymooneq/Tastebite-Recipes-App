@@ -1,22 +1,23 @@
-import axios from '../../../../axios';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import HotelForm from '../HotelForm';
-import { useEffect, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
+import axios from '../../../../axios';
+import LoadingIcon from '../../../../components/UI/LoadingIcon/LoadingIcon'
+import HotelForm from '../HotelForm';
 
-const EditHotel = props => {
-  //TODO walidacja każdego pola, dodać isValidate
+const EditHotel = (props) => {
   const { id } = useParams()
   const [hotel, setHotel] = useState(null)
   const [auth] = useAuth()
+  const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
   const submit = async form => {
     await axios.patch(`/hotels/${id}.json?auth=${auth.token}`, form)
-    navigate('/profil/hotele')
+    navigate('/profil/hotele?update')
   }
 
-  const fetchHotel = async () => {
+  const fetchHotel = useCallback(async () => {
     const res = await axios.get(`/hotels/${id}.json`)
     const hotelData = res.data
 
@@ -24,20 +25,18 @@ const EditHotel = props => {
     delete(hotelData.rating)
 
     setHotel(hotelData)
-  }
+    setLoading(false)
+  }, [id]) 
 
   useEffect(() => {
     fetchHotel()
-  }, [])
+  }, [fetchHotel])
 
-  return (
+  return loading ? <LoadingIcon /> : (
     <>
-      <HotelForm
-        hotel={hotel}
-        buttonText="Zapisz!"
-        onSubmit={submit} />
+      {hotel && <HotelForm hotel={hotel} buttonText="Zapisz!" onSubmit={submit} />}
     </>
-  );
+  )
 }
 
 export default EditHotel;

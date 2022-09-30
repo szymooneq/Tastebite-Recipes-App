@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const quotes = [
   'Podróże to jedyna rzecz na którą wydajemy pieniądze, a stajemy się bogatsi.” – Anonim',
@@ -10,32 +10,15 @@ const quotes = [
   'Jeśli naszym przeznaczeniem byłoby być w jednym miejscu, mielibyśmy korzenie zamiast stóp.” – Rachel Wolchin',
 ];
 
-const styles = {
-  padding: '10px',
-  position: 'absolute',
-  top: '10px',
-  left: 0,
-  right: 0,
-  textAlign: 'center',
-  color: '#fff',
-  fontStyle: 'italic'
-}
-
 function InspiringQuote(props) {
   const [quote, setQuote] = useState('Wczytywanie cytatu...')
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    //pobieranie quotów
-    setLoading(false)
+    setQuote(quotes[Math.floor(Math.random() * quotes.length)])
   }, [])
 
-  useLayoutEffect(() => {
-    setQuote(quotes[Math.floor(Math.random() * quotes.length)])
-  }, [loading])
-
   return (
-    <p style={styles}>{quote}</p>
+    <p className="italic text-center text-white text-sm font-bold">{quote}</p>
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import useAuth from '../../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import MenuItem from './MenuItem'
 
 function NewMenu() {
@@ -13,7 +13,7 @@ function NewMenu() {
   return (
     <nav className=" dark:bg-gray-900 bg-gray-50">
       <ul className="flex justify-center p-4 mt-4 rounded-lg border border-gray-100 space-x-8 mt-0 text-sm font-medium border-0 dark:bg-gray-800 dark:bg-gray-900 dark:border-gray-700">
-        <MenuItem end link="/">Home</MenuItem>
+        <MenuItem end={"end"} link="/">Home</MenuItem>
         {auth
         ? (
           <>

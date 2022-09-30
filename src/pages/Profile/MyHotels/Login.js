@@ -3,7 +3,7 @@ import axios from "../../../axios-auth"
 import { useNavigate } from "react-router-dom"
 import { useFormik } from "formik"
 import useAuth from "../../../hooks/useAuth"
-import { loginSchema } from "../../../schemas/formSchemas"
+import { hotelSchema } from "../../../schemas"
 import Input from "../../../components/Input/Input"
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
 import Alert from "../../../components/UI/Alert"
@@ -16,34 +16,17 @@ export default function Login(props) {
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: {
-      email: '',
-      password: ''
+      name: '',
+      description: '',
+      city: ''
     },
-    validationSchema: loginSchema,
+    validationSchema: hotelSchema,
     onSubmit: async (values) => {
-      setLoading(true)
-      try {
-        const res = await axios.post('accounts:signInWithPassword', {
-          email: values.email,
-          password: values.password,
-          returnSecureToken: true
-        })
-        console.log(res)
-        setAuth({
-          email: res.data.email,
-          token: res.data.idToken,
-          userId: res.data.localId
-        })
-        navigate('/')
-      } catch (ex) {
-        //console.log(ex.response.data.error.message)
-        setLoading(false)
-        setMessage(ex.response.data.error.message)
-      }
+      console.log(values.city)
     }
   })
 
-  useEffect(() => {if(auth) navigate('/')})
+  //useEffect(() => {if(auth) navigate('/')})
 
   return (
     <>
@@ -52,25 +35,25 @@ export default function Login(props) {
       
       <form onSubmit={handleSubmit}>  
         <Input
-          label="Email"
-          type="email"
-          id="email"
-          value={values.email}
+          label="Nazwa"
+          type="text"
+          id="name"
+          value={values.name}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors.email}
-          touch={touched.email}
+          error={errors.name}
+          touch={touched.name}
           placeholder="Podaj adres e-mail..." />
 
         <Input
-          label="Hasło"
-          type="password"
-          id="password"
-          value={values.password}
+          label="Miasto"
+          type="text"
+          id="city"
+          value={values.city}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={errors.password}
-          touch={touched.password}
+          error={errors.city}
+          touch={touched.city}
           placeholder="Podaj adres hasło..." />
 
         <div className="text-center">

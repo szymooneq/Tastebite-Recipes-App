@@ -1,12 +1,11 @@
-import axios from '../../../../axios';
 import { useNavigate } from 'react-router-dom';
-import HotelForm from '../HotelForm';
 import useAuth from '../../../../hooks/useAuth';
+import axios from '../../../../axios';
+import HotelForm from '../HotelForm';
 
-const AddHotel = props => {
-  //TODO walidacja każdego pola, dodać isValidate
-  const navigate = useNavigate()
+const AddHotel = (props) => {
   const [auth] = useAuth()
+  const navigate = useNavigate()
 
   const submit = async form => {
     await axios.post(`/hotels.json?auth=${auth.token}`, form)
@@ -15,9 +14,7 @@ const AddHotel = props => {
 
   return (
     <>
-      <HotelForm
-        buttonText="Dodaj!"
-        onSubmit={submit} />
+      <HotelForm buttonText="Dodaj!" hotel={{}} onSubmit={submit} />
     </>
   );
 }

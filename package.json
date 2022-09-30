@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
+    "flowbite-typography": "^1.0.3",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8"
   }

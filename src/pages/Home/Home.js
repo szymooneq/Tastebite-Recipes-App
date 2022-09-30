@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import useWebsiteTitle from '../../hooks/useWebsiteTitle';
-import Hotels from '../../components/Hotels/Hotels';
+import HotelList from '../../components/Hotels/HotelList';
 import LastHotel from '../../components/Hotels/LastHotel/LastHotel';
 import BestHotel from '../../components/Hotels/BestHotel/BestHotel';
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon";
@@ -34,9 +34,7 @@ export default function Home(props) {
     } catch (ex) {
       console.log(ex.response)
     }
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -46,8 +44,8 @@ export default function Home(props) {
   return loading ? <LoadingIcon /> : (
     <>
       {lastHotel && <LastHotel {...lastHotel} onRemove={removeLastHotel} />}
-      {getBestHotel() && <BestHotel getHotel={getBestHotel} />}
-      <Hotels onOpen={openHotel} hotels={hotels} />
+      {getBestHotel() && <BestHotel getHotel={getBestHotel} onOpen={openHotel} />}
+      <HotelList onOpen={openHotel} hotels={hotels} />
     </>
   )
 }
