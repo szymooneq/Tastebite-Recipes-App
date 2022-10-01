@@ -1,22 +1,20 @@
 import { useFormik } from "formik"
 import { useContext, useState } from "react"
-import axios from "../../../axios-auth"
 import Input from "../../../components/Input/Input"
-import Alert from "../../../components/UI/Alert"
+import Alert from "../../../components/UI/Alert/Alert"
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
-import AuthContext from "../../../context/authContext"
-import useAuth from "../../../hooks/useAuth"
+import AuthContext from "../../../context/AuthContext"
+import axios from "../../../firebase/axios-auth"
 import { registerSchema } from "../../../schemas/formSchemas"
 
 export default function ProfileDetails() {
-  const context = useContext(AuthContext)
-  const [auth, setAuth] = useAuth()
+  const { user, login } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: {
-      email: context.user.email,
+      email: user.email,
       password: '',
       confirmPassword: ''
     },
@@ -25,12 +23,12 @@ export default function ProfileDetails() {
       setLoading(true)
       try {
         const res = await axios.post('accounts:update', {
-          idToken: auth.token,
+          idToken: user.token,
           email: values.email,
           password: values.password,
           returnSecureToken: true
         })
-        setAuth({
+        login({
           email: res.data.email,
           token: res.data.idToken,
           userId: res.data.localId

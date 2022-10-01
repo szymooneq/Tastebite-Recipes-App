@@ -3,7 +3,7 @@ import axios from 'axios'
 const instance = axios.create({
   baseURL: 'https://identitytoolkit.googleapis.com/v1/',
   params: {
-    key: 'AIzaSyAk-gqSkZCXrFI4ItYcXbZMSEptQVugPVA'
+    key: process.env.REACT_APP_FIREBASE_KEY
   }
 })
 

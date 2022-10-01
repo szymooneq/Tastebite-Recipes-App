@@ -1,15 +1,15 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import axios from "../../axios"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
-import useAuth from "../../hooks/useAuth"
+import AuthContext from "../../context/AuthContext"
+import axios from "../../firebase/axios"
 
 function Hotel(props) {
+  const { user } = useContext(AuthContext)
   const { id } = useParams()
   const [hotel, setHotel] = useState(null)
   const [loading, setLoading] = useState(true)
   const [rating, setRating] = useState(5)
-  const [auth] = useAuth()
   const navigate = useNavigate()
 
   const fetchHotel = useCallback (async () => {
@@ -17,8 +17,8 @@ function Hotel(props) {
     try {
       const res = await axios.get(`/hotels/${id}.json`)
       if (res.data.status === false) navigate('/')
-      document.title = `Hotel - ${res.data.name}`
       setHotel(res.data)
+      document.title = `Hotel - ${res.data.name}`
     } catch (ex) {
       console.log(ex.response)
     }
@@ -27,7 +27,7 @@ function Hotel(props) {
 
   const rateHotel = async () => {
     try {
-      await axios.put(`/hotels/${id}/rating.json?auth=${auth.token}`, rating)
+      await axios.put(`/hotels/${id}/rating.json?auth=${user.token}`, rating)
       navigate('/')
     } catch (ex) {
       console.log(ex.response)
@@ -59,7 +59,7 @@ function Hotel(props) {
         <h4>Ocena: {hotel.rating ?? 'brak ocen'}</h4>
       </div>
       <div className="card-footer">
-        {auth ? (
+        {user ? (
           <div className="input-group row mt-4">
             <div className="col">
               <select className="form-control form-select-lg mb-3" value={rating} onChange={e => setRating(e.target.value)}>

@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import { useFormik } from 'formik';
-import useAuth from '../../../hooks/useAuth';
-import { hotelSchema } from '../../../schemas/formSchemas';
+import { useContext, useState } from 'react';
 import Input from '../../../components/Input/Input';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
+import AuthContext from '../../../context/AuthContext';
+import { hotelSchema } from '../../../schemas/formSchemas';
 
 export default function HotelForm(props) {
-  const [auth] = useAuth()
+  const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(false);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
@@ -29,7 +29,7 @@ export default function HotelForm(props) {
           rooms: values.rooms,
           features: values.features,
           status: values.status,
-          user_id: auth.userId
+          user_id: user.userId
         })
       } catch (ex) {
         console.log(ex.response)

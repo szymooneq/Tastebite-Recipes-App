@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "../../../axios-auth"
 import { useFormik } from "formik";
-import useAuth from '../../../hooks/useAuth'
-import { registerSchema } from "../../../schemas/formSchemas";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../../components/Input/Input";
-import Alert from "../../../components/UI/Alert";
-import AlertRegister from "../../../components/UI/AlertRegister";
+import Alert from "../../../components/UI/Alert/Alert";
+import AlertRegister from "../../../components/UI/Alert/AlertRegister";
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton";
+import AuthContext from "../../../context/AuthContext";
+import axios from "../../../firebase/axios-auth";
+import { registerSchema } from "../../../schemas/formSchemas";
 
 export default function Register(props) {
+  const { user, login} = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
-  const [auth, setAuth] = useAuth()
   const [message, setMessage] = useState(null)
   const [success, setSuccess] = useState(false)
   const navigate = useNavigate()
@@ -31,7 +31,7 @@ export default function Register(props) {
           password: values.password,
           returnSecureToken: true
         })
-        setAuth({
+        login({
           email: res.data.email,
           token: res.data.idToken,
           userId: res.data.localId
@@ -46,7 +46,7 @@ export default function Register(props) {
   })
 
   useEffect(() => {
-    if(auth) navigate('/')
+    if(user) navigate('/')
   })
 
   return (

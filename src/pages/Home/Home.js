@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "../../axios";
 import BestHotel from '../../components/Hotels/BestHotel/BestHotel';
 import HotelList from '../../components/Hotels/HotelList';
 import LastHotel from '../../components/Hotels/LastHotel/LastHotel';
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon";
+import axios from "../../firebase/axios";
 import { objectToArrayWithId } from "../../helpers/objects";
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import useLocalStorage from "../../hooks/useLocalStorage";

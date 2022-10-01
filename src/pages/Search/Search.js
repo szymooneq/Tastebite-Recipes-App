@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom"
-import { objectToArrayWithId } from "../../helpers/objects"
-import axios from "../../axios"
 import { useCallback, useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import HotelList from "../../components/Hotels/HotelList"
-import useLocalStorage from "../../hooks/useLocalStorage"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
+import axios from "../../firebase/axios"
+import { objectToArrayWithId } from "../../helpers/objects"
+import useLocalStorage from "../../hooks/useLocalStorage"
 
 export default function Search() {
   const { term } = useParams()

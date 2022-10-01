@@ -1,10 +1,9 @@
 import React from "react";
 
 const ThemeContext = React.createContext({
-  color: 'primary',
-  changeTheme: () => {}
+  dark: true,
+  //changeDark: ThemeContext.dark === true ? false : true
 })
-
 ThemeContext.displayName = 'ThemeContext'
 
 export default ThemeContext

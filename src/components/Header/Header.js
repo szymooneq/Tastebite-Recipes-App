@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
+import ThemeButton from '../UI/ThemeButton/ThemeButton';
 import styles from './Header.module.css';
 import InspiringQuote from './InspiringQuote/InspiringQuote';
-import ThemeButton from '../UI/ThemeButton/ThemeButton';
 import Searchbar from './Searchbar/Searchbar';
 
 function Header(props) {

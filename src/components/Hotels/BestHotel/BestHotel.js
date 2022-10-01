@@ -1,6 +1,6 @@
+import moment from 'moment';
 import { useEffect, useRef, useState } from "react";
-import { Link } from 'react-router-dom'
-import moment from 'moment'
+import { Link } from 'react-router-dom';
 
 function BestHotel(props) {
   const [time, setTime] = useState('')

@@ -1,13 +1,13 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import axios from "../../../axios"
-import Alert from "../../../components/UI/Alert"
+import Alert from "../../../components/UI/Alert/Alert"
 import LoadingIcon from "../../../components/UI/LoadingIcon/LoadingIcon"
+import AuthContext from "../../../context/AuthContext"
+import axios from "../../../firebase/axios"
 import { objectToArrayWithId } from "../../../helpers/objects"
-import useAuth from "../../../hooks/useAuth"
 
 export default function MyHotels(props) {
-  const [auth] = useAuth()
+  const { user } = useContext(AuthContext)
   const { search } = useLocation()
   const [hotels, setHotels] = useState([])
   const [loading, setLoading] = useState(true)
@@ -15,13 +15,13 @@ export default function MyHotels(props) {
   const fetchHotels = useCallback(async () => {
     try {
       const res = await axios.get('/hotels.json')
-      const newHotel = objectToArrayWithId(res.data).filter(hotel => hotel.user_id === auth.userId)
+      const newHotel = objectToArrayWithId(res.data).filter(hotel => hotel.user_id === user.userId)
       setHotels(newHotel)
       setLoading(false)
     } catch (ex) {
       console.log(ex.response)
     }
-  }, [auth.userId]) 
+  }, [user.userId]) 
 
   const deleteHandler = async id => {
     try {

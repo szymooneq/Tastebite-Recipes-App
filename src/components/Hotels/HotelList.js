@@ -1,4 +1,4 @@
-import HotelCard from "./HotelCard/HotelCard"
+import HotelCard from "./HotelCard/HotelCard";
 
 function HotelList(props) {
   const count = props.hotels.length

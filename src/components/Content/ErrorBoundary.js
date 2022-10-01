@@ -22,7 +22,8 @@ class ErrorBoundary extends Component {
       return (
         <div className="alert alert-danger">
           Wystąpił jakiś problem: {this.state.error.message}
-        </div>)
+        </div>
+      )
     }
 
     return this.props.children

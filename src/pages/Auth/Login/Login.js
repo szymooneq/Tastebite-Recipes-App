@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react"
-import axios from "../../../axios-auth"
-import { useNavigate } from "react-router-dom"
 import { useFormik } from "formik"
-import useAuth from "../../../hooks/useAuth"
-import { loginSchema } from "../../../schemas/formSchemas"
+import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Input from "../../../components/Input/Input"
+import Alert from "../../../components/UI/Alert/Alert"
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
-import Alert from "../../../components/UI/Alert"
+import AuthContext from "../../../context/AuthContext"
+import axios from "../../../firebase/axios-auth"
+import { loginSchema } from "../../../schemas/formSchemas"
 
 export default function Login(props) {
-  const [auth, setAuth] = useAuth()
+  const { user, login } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)
   const navigate = useNavigate()
@@ -29,7 +29,7 @@ export default function Login(props) {
           returnSecureToken: true
         })
         console.log(res)
-        setAuth({
+        login({
           email: res.data.email,
           token: res.data.idToken,
           userId: res.data.localId
@@ -43,7 +43,7 @@ export default function Login(props) {
     }
   })
 
-  useEffect(() => {if(auth) navigate('/')})
+  useEffect(() => {if(user) navigate('/')})
 
   return (
     <>
