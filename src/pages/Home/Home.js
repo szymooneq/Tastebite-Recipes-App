@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import useWebsiteTitle from '../../hooks/useWebsiteTitle';
+import axios from "../../axios";
+import BestHotel from '../../components/Hotels/BestHotel/BestHotel';
 import HotelList from '../../components/Hotels/HotelList';
 import LastHotel from '../../components/Hotels/LastHotel/LastHotel';
-import BestHotel from '../../components/Hotels/BestHotel/BestHotel';
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon";
-import axios from "../../axios";
-import { objectToArrayWithId } from "../../helpers/objects"
+import { objectToArrayWithId } from "../../helpers/objects";
+import useDocumentTitle from '../../hooks/useDocumentTitle';
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 
 export default function Home(props) {
-  useWebsiteTitle('Strona główna')
+  useDocumentTitle('Strona główna')
   const [lastHotel, setLastHotel] = useLocalStorage('last-hotel', null)
   const [loading, setLoading] = useState(true)
   const [hotels, setHotels] = useState(true)

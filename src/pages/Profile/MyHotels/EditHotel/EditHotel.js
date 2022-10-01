@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import useAuth from '../../../../hooks/useAuth';
 import axios from '../../../../axios';
-import LoadingIcon from '../../../../components/UI/LoadingIcon/LoadingIcon'
+import LoadingIcon from '../../../../components/UI/LoadingIcon/LoadingIcon';
+import useAuth from '../../../../hooks/useAuth';
 import HotelForm from '../HotelForm';
 
 const EditHotel = (props) => {

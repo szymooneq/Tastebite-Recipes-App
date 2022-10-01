@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
+    "eslint": "^8.24.0",
     "flowbite": "^1.5.3",
     "formik": "^2.2.9",
     "moment": "^2.29.4",

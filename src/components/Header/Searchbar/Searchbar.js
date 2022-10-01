@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate } from 'react-router'
-import ThemeContext from "../../../context/themeContext"
 
 function Searchbar(props) {
   const [term, setTerm] = useState('')
-  //const theme = useContext(ThemeContext)
   const inputRef = useRef(null)
   const navigate = useNavigate()
 

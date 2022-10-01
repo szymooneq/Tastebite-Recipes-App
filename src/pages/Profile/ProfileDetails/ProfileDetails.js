@@ -1,18 +1,18 @@
-import { useState, useContext } from "react"
-import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
-import useAuth from "../../../hooks/useAuth"
-import axios from "../../../axios-auth"
 import { useFormik } from "formik"
-import { registerSchema } from "../../../schemas/formSchemas"
-import AuthContext from "../../../context/authContext"
+import { useContext, useState } from "react"
+import axios from "../../../axios-auth"
 import Input from "../../../components/Input/Input"
 import Alert from "../../../components/UI/Alert"
+import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
+import AuthContext from "../../../context/authContext"
+import useAuth from "../../../hooks/useAuth"
+import { registerSchema } from "../../../schemas/formSchemas"
 
 export default function ProfileDetails() {
   const context = useContext(AuthContext)
   const [auth, setAuth] = useAuth()
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState({})
+  const [message, setMessage] = useState(null)
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: {

@@ -1,8 +1,7 @@
-import axios from "../../axios"
 import { useCallback, useEffect, useState } from "react"
-import { useParams, useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import axios from "../../axios"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
-import useWebsiteTitle from "../../hooks/useWebsiteTitle"
 import useAuth from "../../hooks/useAuth"
 
 function Hotel(props) {
@@ -13,20 +12,18 @@ function Hotel(props) {
   const [auth] = useAuth()
   const navigate = useNavigate()
 
-  const setTitle = useWebsiteTitle()
-
-  const fetchHotel = useCallback(async () => {
+  const fetchHotel = useCallback (async () => {
+    setLoading(true)
     try {
-      setLoading(true)
       const res = await axios.get(`/hotels/${id}.json`)
       if (res.data.status === false) navigate('/')
+      document.title = `Hotel - ${res.data.name}`
       setHotel(res.data)
-      setTitle(`Hotel - ${res.data.name}`)
     } catch (ex) {
       console.log(ex.response)
     }
     setLoading(false)
-  }, []) 
+  }, [id, navigate])
 
   const rateHotel = async () => {
     try {
@@ -38,7 +35,6 @@ function Hotel(props) {
   }
 
   useEffect(() => {
-    //pobieranie danych
     fetchHotel()
   }, [fetchHotel])
 
