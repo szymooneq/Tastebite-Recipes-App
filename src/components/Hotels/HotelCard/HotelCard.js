@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { rightArrow, star } from '../../UI/svg'
+import pancakes from "../../../assets/images/pancakes.jpg"
+import { rightArrow } from '../../UI/svg'
 
 export default function HotelCard(props) {
   const description = props.description.length > 220 ? props.description.slice(0, 220).concat('...') : props.description
@@ -10,7 +11,7 @@ export default function HotelCard(props) {
   
   return (
     <div className="mx-4 w-auto xl:w-full rounded-lg bg-white border-gray-200 shadow-md hover:shadow-2xl transition dark:bg-gray-800 dark:border-gray-700">
-      <img className="w-full rounded-t-lg" src={`https://placeimg.com/600/34${Math.floor(Math.random() * 10)}/arch`} alt="" />
+      <img className="w-full h-64 object-cover object-center rounded-t-lg" src={pancakes} alt="" />
       <div className="p-5">
         
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

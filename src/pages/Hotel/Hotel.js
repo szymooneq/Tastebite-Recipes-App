@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import pancakes from "../../assets/images/pancakes.jpg"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
 import AuthContext from "../../context/AuthContext"
 import axios from "../../firebase/axios"
@@ -83,8 +84,8 @@ export default function Hotel(props) {
   ) */
   return loading ? <LoadingIcon /> : (
     <div className='container'>
-      <div className="mx-4 flex flex-col lg:flex-row lg:justify-between">
-        <div className="">
+      <div className="mx-4 flex flex-col gap-4 md:mx-0 lg:flex-row lg:justify-center">
+        <div className="lg:w-[40rem]">
           <div className="flex flex-row items-center justify-between">
             <div className="dark:text-white">
               <h2 className='text-2xl font-semibold'>Pancakes</h2>
@@ -99,14 +100,21 @@ export default function Hotel(props) {
               </span>
             </div>
           </div>
-          <img className="w-full" src={`https://placeimg.com/420/180/arch`} alt='' />
+          <img className="w-full h-40 object-cover" src={pancakes} alt='' />
           <p className="text-justify dark:text-gray-400">{hotel.description}</p>
         </div>
-        <div className="lg:w-96 lg:mx-10 dark:text-gray-400">
-          <p>Wyposażenie:</p>
-          <ul>
-            {hotel.features.map(item => <li key={item}>{item}</li>)}
-          </ul>
+        <div>
+          <div className="px-4 py-2 h-max rounded text-white bg-amber-500">
+            <p>Czas przygotowania: 25 minut</p>
+            <p>Czas smażenia: 25 minut</p>
+            <p>Liczba porcji: 8 sztuk o średnicy 15 cm</p>
+          </div>
+          <div className="px-4 py-2 h-max rounded text-white bg-blue-700">
+            <p className="font-bold">Składniki:</p>
+            <ul className="list-disc">
+              {hotel.features.map(item => <li key={item} className="ml-3">{item}</li>)}
+            </ul>
+          </div>
         </div>
       </div>
 
