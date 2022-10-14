@@ -4,7 +4,7 @@ import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
 import AuthContext from "../../context/AuthContext"
 import axios from "../../firebase/axios"
 
-function Hotel(props) {
+export default function Hotel(props) {
   const { user } = useContext(AuthContext)
   const { id } = useParams()
   const [hotel, setHotel] = useState(null)
@@ -38,27 +38,31 @@ function Hotel(props) {
     fetchHotel()
   }, [fetchHotel])
 
-  return loading ? <LoadingIcon /> : (
-    <div className="card">
-      <div className="card-header">
-        <h1>Hotel: {hotel.name}</h1>
+  /* return loading ? <LoadingIcon /> : (
+    <div className="container mb-14 mx-auto">
+      
+      <div className='flex flex-col lg:flex-row'>
+        <div>
+          <h2 className="text-2xl font-semibold">Hotel: {hotel.name}</h2>
+          <div className='mb-4 lg:mb-0 flex text-sm'>
+            <span className="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full dark:bg-indigo-200 dark:text-indigo-900">
+              {hotel.city}
+            </span>
+          </div>
+          <div className=''>
+            <img className="p-20 w-full" src={`https://placeimg.com/420/180/arch`} alt="" />
+            <p className="lead">{hotel.description}</p>
+          </div>
+        </div>
+        <div className='mb-8 px-6 py-8 w-full'>
+          <p>Wyposażenie:</p>
+          <ul>
+            {hotel.features.map(item => <li key={item}>{item}</li>)}
+          </ul>
+        </div>
       </div>
-      <div className="card-body">
-        <img 
-          src={`https://placeimg.com/420/180/arch`}
-          alt=""
-          className="img-fluid img-thumbnail mb-4" />
-        
-        <p>Miejscowość: <b>{hotel.city}</b></p>
-        <p>Pokoje: <b>{hotel.rooms}</b></p>
-        <p className="lead">{hotel.description}</p>
-        <p>Wyposażenie:</p>
-        <ul>
-          {hotel.features.map(item => <li key={item}>{item}</li>)}
-        </ul>
-        <h4>Ocena: {hotel.rating ?? 'brak ocen'}</h4>
-      </div>
-      <div className="card-footer">
+    
+      <h4>Ocena: {hotel.rating ?? 'brak ocen'}</h4>
         {user ? (
           <div className="input-group row mt-4">
             <div className="col">
@@ -75,9 +79,40 @@ function Hotel(props) {
             </div>
           </div>
         ): null}
-      </div>
     </div>
-  )
+  ) */
+  return loading ? <LoadingIcon /> : (
+    <div className='container'>
+      <div className="mx-4 flex flex-col lg:flex-row lg:justify-between">
+        <div className="">
+          <div className="flex flex-row items-center justify-between">
+            <div className="dark:text-white">
+              <h2 className='text-2xl font-semibold'>Pancakes</h2>
+              <h3 className='italic text-md mb-4 dark:text-gray-400'>by Szymon Dudka</h3>
+            </div>
+            <div className="flex gap-2">
+              <span className="w-max bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full dark:bg-indigo-200 dark:text-indigo-900">
+                5 min
+              </span>
+              <span className="w-max bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full dark:bg-indigo-200 dark:text-indigo-900">
+                Easy
+              </span>
+            </div>
+          </div>
+          <img className="w-full" src={`https://placeimg.com/420/180/arch`} alt='' />
+          <p className="text-justify dark:text-gray-400">{hotel.description}</p>
+        </div>
+        <div className="lg:w-96 lg:mx-10 dark:text-gray-400">
+          <p>Wyposażenie:</p>
+          <ul>
+            {hotel.features.map(item => <li key={item}>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+
+   
+    </div>
+  );
+
 }
 
-export default Hotel

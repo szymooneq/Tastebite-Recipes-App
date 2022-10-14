@@ -13,8 +13,8 @@ export default function AppContext (props) {
       logout: () => dispatch({ type: 'logout' })
     }}>
       <ThemeContext.Provider value={{
-            color: state.theme,
-            changeTheme: () => dispatch({ type: 'change-theme' })
+            theme: state.theme,
+            changeMode: () => dispatch({ type: 'changeTheme' })
           }}>
         {props.children}
       </ThemeContext.Provider>

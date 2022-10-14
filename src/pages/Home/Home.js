@@ -8,7 +8,6 @@ import { objectToArrayWithId } from "../../helpers/objects";
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-
 export default function Home(props) {
   useDocumentTitle('Strona główna')
   const [lastHotel, setLastHotel] = useLocalStorage('last-hotel', null)

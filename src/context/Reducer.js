@@ -1,8 +1,16 @@
 export const reducer = (state, action) => {
   switch (action.type) {
-    case 'change-theme':
-      const theme = state.theme === 'danger' ? 'primary' : 'danger'
-      return { ...state, theme }
+    case 'changeTheme':
+      let value = state.theme
+      if (value === "dark") {
+        document.documentElement.classList.remove('dark')
+        value = "light"
+      } else {
+        document.documentElement.classList.add('dark')
+        value = "dark"
+      }
+      window.localStorage.setItem('theme', value);
+      return { ...state, theme: value}
     case 'login':
       window.localStorage.setItem('token-data', JSON.stringify(action.user));
       return { ...state, user: action.user }
@@ -15,6 +23,6 @@ export const reducer = (state, action) => {
 }
 
 export const initialState = {
-  theme: 'danger',
+  theme: document.documentElement.classList.contains('dark') ? "dark" : "light",
   user: JSON.parse(window.localStorage.getItem('token-data')) ?? null
 }

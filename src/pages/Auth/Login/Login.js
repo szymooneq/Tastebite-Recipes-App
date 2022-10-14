@@ -47,7 +47,7 @@ export default function Login(props) {
 
   return (
     <>
-      <h2 className="p-5 text-3xl font-bold text-center">Logowanie</h2>
+      <h2 className="p-5 text-3xl font-bold text-center dark:text-white">Logowanie</h2>
       {message && <Alert message={message} theme="danger" />}
       
       <form onSubmit={handleSubmit}>  

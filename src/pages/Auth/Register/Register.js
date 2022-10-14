@@ -52,7 +52,7 @@ export default function Register(props) {
   return (
     success ? <AlertRegister /> : (
       <>
-        <h2 className="p-5 text-3xl font-bold text-center">Rejestracja</h2>
+        <h2 className="p-5 text-3xl font-bold text-center dark:text-white">Rejestracja</h2>
         {message && <Alert message={message} theme="danger" />}
 
         <form onSubmit={handleSubmit}>
