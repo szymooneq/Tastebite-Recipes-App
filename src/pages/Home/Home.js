@@ -42,8 +42,8 @@ export default function Home(props) {
 
   return loading ? <LoadingIcon /> : (
     <>
-      {lastHotel && <LastHotel {...lastHotel} onRemove={removeLastHotel} />}
-      {getBestHotel() && <BestHotel getHotel={getBestHotel} onOpen={openHotel} />}
+      {/* {lastHotel && <LastHotel {...lastHotel} onRemove={removeLastHotel} />} */}
+      {/* {getBestHotel() && <BestHotel getHotel={getBestHotel} onOpen={openHotel} />} */}
       <HotelList onOpen={openHotel} hotels={hotels} />
     </>
   )

@@ -10,14 +10,17 @@ function Header(props) {
 
   useEffect(() => {
     document.body.addEventListener('mousemove', (e) => setMousePosition({ x: e.pageX, y: e.pageY}))
-  })
+  }, [])
 
   return (
-    <header className="flex flex-col justify-center items-center p-3 gap-3 relative h-56 overflow-hidden">
+    <header className="flex flex-col justify-center items-center p-3 gap-3 relative h-[40vh] overflow-hidden">
       <div className={styles.headerImage} style={paralaxStyles}></div>
-      <InspiringQuote />
-      <Searchbar />
-      <ThemeButton />
+      <div className={`${styles.logo} text-[3.4rem] text-white`}>Tastebite</div>
+      <div className='container flex items-center justify-center gap-3 '>
+        <Searchbar />
+        <ThemeButton />
+      </div>
+      {/* <InspiringQuote /> */}
     </header>
   );
 }

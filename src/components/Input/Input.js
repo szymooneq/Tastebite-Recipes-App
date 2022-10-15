@@ -1,6 +1,6 @@
 const InputText = (props) => {
   return (
-    <div className="mx-auto mb-4 w-96">
+    <div className="mb-4">
       <label
         htmlFor={props.id}
         className={`block mb-2 text-sm font-medium ${
@@ -37,7 +37,7 @@ const InputText = (props) => {
 
 const InputTextarea = (props) => {
   return (
-    <div className="mx-auto mb-4 w-96">
+    <div className="mb-4">
       <label
         htmlFor={props.id}
         className={`block mb-2 text-sm font-medium ${
@@ -73,7 +73,7 @@ const InputTextarea = (props) => {
 
 const InputSelect = (props) => {
   return (
-    <div className="mx-auto mb-4 w-96">
+    <div className="mb-4">
       <label
         htmlFor={props.id}
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
@@ -99,7 +99,7 @@ const InputSelect = (props) => {
 
 const InputCheckbox = (props) => {
   return (
-    <div className="mx-auto mb-4 w-96">
+    <div className="mb-4">
       {props.options.map((option) => (
         <div key={option.value} className="flex items-center mb-4">
           <input
@@ -136,7 +136,7 @@ const InputFile = (props) => {
 
 const InputSwitch = (props) => {
   return (
-    <div className="mx-auto mb-4 w-96">
+    <div className="mb-4">
       <label
         htmlFor={props.id}
         className="inline-flex relative items-center cursor-pointer">

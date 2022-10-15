@@ -46,11 +46,11 @@ export default function Login(props) {
   useEffect(() => {if(user) navigate('/')})
 
   return (
-    <>
+    <div className="mx-auto md:w-96">
       <h2 className="p-5 text-3xl font-bold text-center dark:text-white">Logowanie</h2>
       {message && <Alert message={message} theme="danger" />}
       
-      <form onSubmit={handleSubmit}>  
+      <form className="mx-3" onSubmit={handleSubmit}>  
         <Input
           label="Email"
           type="email"
@@ -80,6 +80,6 @@ export default function Login(props) {
             loadingMessage="Logowanie...">Zaloguj</LoadingButton>
         </div>
       </form>
-    </>
+    </div>
   )
 }

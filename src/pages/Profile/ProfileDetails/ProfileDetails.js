@@ -43,10 +43,10 @@ export default function ProfileDetails() {
   })
 
   return (
-    <>
+    <div className="mx-auto md:w-96">
       {message && <Alert message={message.info} theme={message.theme} />}
 
-      <form onSubmit={handleSubmit}>
+      <form className="mx-3" onSubmit={handleSubmit}>
         <Input
           label="Email"
           type="email"
@@ -87,6 +87,6 @@ export default function ProfileDetails() {
             loadingMessage="Aktualizacje...">Zaktualizuj dane</LoadingButton>
         </div>
       </form>
-    </>
+    </div>
   )
 }

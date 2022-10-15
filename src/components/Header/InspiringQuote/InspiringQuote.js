@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
 const quotes = [
-  'Podróże to jedyna rzecz na którą wydajemy pieniądze, a stajemy się bogatsi.” – Anonim',
-  'Podróżowanie uczy skromności. Widzisz, jak niewiele miejsca zajmujesz w świecie.” –  Gustave Flaubert',
-  'Życie daje każdemu tyle, ile sam ma odwagę sobie wziąć, a ja nie zamierzam zrezygnować z niczego, co mi się należy.” – Jacek Pałkiewicz',
-  'Nie czekaj. Pora nigdy nie będzie idealna.” – Napoleon Hill',
-  'Uwielbiam poczucie bycia anonimowym w mieście, w którym nigdy wcześniej nie byłem.” – Bill Bryson',
-  'Jeśli myślisz, że przygody bywają niebezpieczne, spróbuj rutyny. Ona jest śmiercionośna.”  – Paulo Coelho',
-  'Jeśli naszym przeznaczeniem byłoby być w jednym miejscu, mielibyśmy korzenie zamiast stóp.” – Rachel Wolchin',
+  `“Cooking is like love. It should be entered into with abandon or not at all.” – Harriet Van Horne`,
+  `“A recipe has no soul. You as the cook must bring soul to the recipe.” – Thomas Keller`,
+  `“Cooking with kids is not just about ingredients, recipes, and cooking. It’s about harnessing imagination, empowerment, and creativity.” – Guy Fieri`,
+  `“Real cooking is more about following your heart than following recipes.” – Unknown`,
+  `“Cooking is at once child’s play and adult joy. And cooking done with care is an act of love.” – Craig Claiborne`,
+  `“So when people ask me, ‘What do you think of Michelin?’ I don’t cook for guides. I cook for customers.” – Gordon Ramsay`,
+  `“The only real stumbling block is fear of failure. In cooking, you’ve got to have a what-the-hell attitude.” – Julia Child`,
 ];
 
 function InspiringQuote(props) {
@@ -18,7 +18,7 @@ function InspiringQuote(props) {
   }, [])
 
   return (
-    <p className="italic text-center text-white text-sm font-bold">{quote}</p>
+    <p className="italic text-center text-white text-sm font-bold antialiased">{quote}</p>
   )
 }
 

@@ -9,8 +9,8 @@ export default function MenuItem(props) {
           to={props.link}
           className={({ isActive }) =>
             isActive
-              ? "text-white bg-blue-700 py-2 px-4 rounded dark:text-white"
-              : "text-gray-700 hover:bg-gray-100 py-2 px-4 rounded dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
+              ? "text-white bg-green-700 py-2 px-4 rounded dark:text-white"
+              : "text-gray-700 hover:bg-gray-200 py-2 px-4 rounded dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
           }
         >
           {props.children}
@@ -22,8 +22,8 @@ export default function MenuItem(props) {
           to={props.link}
           className={({ isActive }) =>
             isActive
-              ? "text-white bg-blue-700 py-2 px-4 rounded dark:text-white"
-              : "text-gray-700 hover:bg-gray-100 py-2 px-4 rounded dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
+              ? "text-white bg-green-700 py-2 px-4 rounded dark:text-white"
+              : "text-gray-700 hover:bg-gray-200 py-2 px-4 rounded dark:text-white dark:hover:bg-gray-700 dark:hover:text-white"
           }
         >
           {props.children}
