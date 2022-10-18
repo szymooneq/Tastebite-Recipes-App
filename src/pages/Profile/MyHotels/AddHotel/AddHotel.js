@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../../../context/AuthContext';
 import axios from '../../../../firebase/axios';
-import HotelForm from '../HotelForm';
+import RecipeForm from '../RecipeForm';
 
 const AddHotel = (props) => {
   const { user } = useContext(AuthContext)
@@ -14,7 +14,7 @@ const AddHotel = (props) => {
   }
 
   return (
-    <HotelForm buttonText="Dodaj!" hotel={{}} onSubmit={submit} />
+    <RecipeForm buttonText="Dodaj przepis" hotel={{}} onSubmit={submit} />
   );
 }
 

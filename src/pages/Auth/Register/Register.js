@@ -51,11 +51,11 @@ export default function Register(props) {
 
   return (
     success ? <AlertRegister /> : (
-      <div className="mx-auto md:w-96">
+      <div className="mx-7 md:mx-auto md:w-96">
         <h2 className="p-5 text-3xl font-bold text-center dark:text-white">Rejestracja</h2>
         {message && <Alert message={message} theme="danger" />}
 
-        <form className="mx-3" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <Input
             label="Email"
             type="email"

@@ -27,7 +27,45 @@ const InputText = (props) => {
       />
 
       {props.error && props.touch && (
-        <p className="mt-2 text-sm font-semibold text-red-600 dark:text-red-500">
+        <p className="mt-2 text-sm text-center font-semibold text-red-600 dark:text-red-500">
+          {props.error}
+        </p>
+      )}
+    </div>
+  );
+};
+
+const InputNumber = (props) => {
+  return (
+    <div className="mb-4 w-full">
+      <label
+        htmlFor={props.id}
+        className={`block mb-2 text-sm font-medium ${
+          props.error && props.touch
+            ? "text-red-700 dark:text-red-500"
+            : "text-gray-900 dark:text-gray-300"
+        } `}>
+        {props.label}
+      </label>
+
+      <input
+        type={props.type}
+        id={props.id}
+        name={props.id}
+        value={props.value || ""}
+        onChange={props.onChange}
+        onBlur={props.onBlur}
+        placeholder={props.placeholder}
+        step={props.step}
+        className={`block w-full p-2.5 border text-sm rounded-lg outline-none ${
+          props.error && props.touch
+            ? "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500"
+            : "bg-gray-50 border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        }`}
+      />
+
+      {props.error && props.touch && (
+        <p className="mt-2 text-sm text-center font-semibold text-red-600 dark:text-red-500">
           {props.error}
         </p>
       )}
@@ -57,16 +95,16 @@ const InputTextarea = (props) => {
         placeholder={props.placeholder}
         rows="4"
         className={`block w-full p-2.5 border text-sm rounded-lg outline-none ${
-          props.error
+          props.error && props.touch
             ? "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500"
             : "bg-gray-50 border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         }`}></textarea>
 
-      {props.error ? (
-        <p className="mt-2 text-sm font-semibold text-red-600 dark:text-red-500">
-          {props.error}
-        </p>
-      ) : null}
+      {props.error && props.touch && (
+              <p className="mt-2 text-sm text-center font-semibold text-red-600 dark:text-red-500">
+                {props.error}
+              </p>
+            )}
     </div>
   );
 };
@@ -76,7 +114,11 @@ const InputSelect = (props) => {
     <div className="mb-4">
       <label
         htmlFor={props.id}
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+        className={`block mb-2 text-sm font-medium ${
+          props.error && props.touch
+            ? "text-red-700 dark:text-red-500"
+            : "text-gray-900 dark:text-gray-300"
+        } `}>
         {props.label}
       </label>
 
@@ -85,14 +127,25 @@ const InputSelect = (props) => {
         name={props.id}
         value={props.value}
         onChange={props.onChange}
-        //onBlur={props.onBlur}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        {props.options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
+        onBlur={props.onBlur}
+        className={`block w-full p-2.5 border text-sm rounded-lg outline-none ${
+          props.error && props.touch
+            ? "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500"
+            : "bg-gray-50 border-gray-300 text-gray-900  focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        }`}>
+          <option className="bg-gray-100" value="" disabled selected hidden>Wybierz opcję</option>
+          {props.options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
       </select>
+
+      {props.error && props.touch && (
+        <p className="mt-2 text-sm font-semibold text-red-600 dark:text-red-500">
+          {props.error}
+        </p>
+      )}
     </div>
   );
 };
@@ -174,6 +227,8 @@ function Input(props) {
       return <InputSwitch {...props} />;
     case "textarea":
       return <InputTextarea {...props} />;
+    case "number":
+      return <InputNumber {...props} />;
     default:
       return <InputText {...props} />;
   }

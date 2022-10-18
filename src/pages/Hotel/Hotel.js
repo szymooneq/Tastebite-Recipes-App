@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import pancakes from "../../assets/images/pancakes.jpg"
+import ProductInfo from "../../components/Product/ProductInfo"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
 import AuthContext from "../../context/AuthContext"
 import axios from "../../firebase/axios"
@@ -83,25 +84,25 @@ export default function Hotel(props) {
     </div>
   ) */
   return loading ? <LoadingIcon /> : (
-    <div className='container'>
-      <div className="mx-4 flex flex-col flex-wrap gap-4 md:w-[40rem] md:mx-auto md:justify-center lg:mx-0 lg:w-auto lg:flex-row">
-        <div className="flex flex-col gap-3 lg:w-[40rem]">
+    <div className='mx-4 lg:w-max lg:mx-auto'>
+      <div className="grid gap-4 lg:grid-cols-3 lg:w-[60rem] xl:w-[70rem]">
+        <div className="flex flex-col gap-3 lg:col-span-2 h-max">
           <div className="flex flex-row items-center justify-between">
             <div className="dark:text-white">
               <h2 className='text-2xl font-semibold'>Pancakes</h2>
-              <h3 className='italic text-md dark:text-gray-400'>by Szymon Dudka</h3>
+              {/* <h3 className='italic text-md dark:text-gray-400'>by Szymon Dudka</h3> */}
             </div>
             <div className="flex gap-2">
               <span className="w-max inline-flex items-center bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full dark:bg-indigo-200 dark:text-indigo-900">
-                <svg aria-hidden="true" class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                <svg aria-hidden="true" className="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd"></path></svg>
                 25 min
               </span>
               <span className="w-max inline-flex items-center bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full dark:bg-green-200 dark:text-green-900">
-                <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
+                <svg className="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
                 Easy
               </span>
               <span className="w-max inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded-full dark:bg-yellow-200 dark:text-yellow-900">
-                <svg aria-hidden="true" class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                <svg aria-hidden="true" className="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                 <span className="font-bold">4.95</span>
               </span>
             </div>
@@ -109,25 +110,38 @@ export default function Hotel(props) {
           <img className="w-full max-h-60 rounded object-cover object-center" src={pancakes} alt='' />
           <p className="text-justify dark:text-gray-400">{hotel.description}</p>
         </div>
-        <div className="flex flex-col gap-3">
-          <div className="px-4 py-2 h-max rounded text-white bg-amber-600">
-            <p><b>Czas przygotowania:</b> 25 minut</p>
-            <p><b>Czas smażenia:</b> 25 minut</p>
-            <p><b>Liczba porcji:</b> 8 sztuk o średnicy 15 cm</p>
-          </div>
-          <div className="px-4 py-2 h-max rounded text-white bg-blue-700">
-            <p className="font-bold">Składniki:</p>
-            <ul className="list-disc">
+
+        <div className="flex flex-row flex-wrap gap-3 sm:justify-center lg:flex-col lg:sticky lg:top-0">
+
+          <ProductInfo theme="bg-amber-600">
+            <p className="italic"><span className="font-bold">Czas całkowity:</span> 25 minut</p>
+            <p className="italic"><span className="font-bold">Poziom trudności:</span> łatwy</p>
+            <p className="italic"><span className="font-bold">Liczba porcji:</span> 10 sztuk</p>
+          </ProductInfo>
+
+          <ProductInfo theme="bg-rose-700" title="Wartości odżywcze">
+            <p className="italic"><span className="font-bold">Kalorie:</span> 903.8 kJ / 216 kcal</p>
+            <p className="italic"><span className="font-bold">Białko:</span> 5.9 g</p>
+            <p className="italic"><span className="font-bold">Węglowodany:</span> 30.5 g</p>
+            <p className="italic"><span className="font-bold">Tłuszcz:</span> 7.8 g</p>
+          </ProductInfo>
+
+          <ProductInfo theme="bg-blue-700" title="Składniki">
+            <ul className="list-disc italic">
               {hotel.features.map(item => <li key={item} className="ml-3">{item}</li>)}
             </ul>
-          </div>
-          <div className="px-4 py-2 h-max rounded text-white bg-rose-700">
-            <p><b>Czas przygotowania:</b> 25 minut</p>
-            <p><b>Czas smażenia:</b> 25 minut</p>
-            <p><b>Liczba porcji:</b> 8 sztuk o średnicy 15 cm</p>
-          </div>
+          </ProductInfo>
+          
+          {/* <div>
+            <input type="radio" name="rate" value="1" className="bg-orange-400" />
+            <input type="radio" name="rate" value="2" className="bg-orange-400" />
+            <input type="radio" name="rate" value="3" className="bg-orange-400" />
+            <input type="radio" name="rate" value="4" className="bg-orange-400" />
+            <input type="radio" name="rate" value="5" className="bg-orange-400" />
+          </div> */}
         </div>
-        <div className="my-3 lg:max-w-[60rem] self-start justify-self-start dark:text-white">
+        
+        <div className="my-3 dark:text-white lg:col-span-2">
           <h3 className='mb-2 text-xl'>Wykonanie</h3>
           <ol className="list-decimal dark:text-gray-400">
             <li className="ml-3 mb-3">Heat a griddle or large skillet over medium-low heat. In a bowl, mix together dry ingredients. Beat eggs into 1½ cups milk, then stir in 2 tablespoons melted cooled butter, if using it. Gently stir this mixture into dry ingredients, mixing only enough to moisten flour; don't worry about a few lumps. If batter seems thick, add a little more milk.</li>

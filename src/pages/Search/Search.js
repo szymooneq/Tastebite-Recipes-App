@@ -32,8 +32,7 @@ export default function Search() {
 
   return loading ? <LoadingIcon /> : (
     <>
-      <h2>Wyniki dla frazy "{term}":</h2>
-      <HotelList onOpen={openHotel} hotels={hotels} />
+      <HotelList onOpen={openHotel} hotels={hotels} header={`Results for the "${term}"`} />
     </>
   )
 }

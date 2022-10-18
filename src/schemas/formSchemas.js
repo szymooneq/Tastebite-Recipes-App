@@ -30,18 +30,51 @@ export const loginSchema = yup.object().shape({
     .required("Pole wymagane")
 });
 
-export const hotelSchema = yup.object().shape({
+export const recipeSchema = yup.object().shape({
   name: yup
     .string()
     .required("Pole wymagane"),
-  /* description: yup
+  description: yup
     .string()
     .max(550, "Maksymalna ilość znaków wynosi 550")
-    .required("Pole wymagane"), */
-  city: yup
-    .string()
     .required("Pole wymagane"),
-  /* rooms: yup
-    .string()
-    .required("Pole wymagane") */
+  details: yup.object().shape({
+    duration: yup
+      .number()
+      .min(1, "Niedozwolona wartość")
+      .integer("Niedozwolona wartość")
+      .positive("Wartość nie może być ujemna")
+      .required("Wprowadzona wartość nie jest liczbą"),
+    level: yup
+      .string()
+      .required("Musisz wybrać jedną z dostępnych opcji"),
+    portions: yup
+      .number()
+      .min(1, "Niedozwolona wartość")
+      .integer("Niedozwolona wartość")
+      .positive("Wartość nie może być ujemna")
+      .required("Wprowadzona wartość nie jest liczbą"),
+  }),
+  nutrions: yup.object().shape({
+    calories: yup
+      .number()
+      .min(0.1, "Niedozwolona wartość")
+      .positive("Wartość nie może być ujemna")
+      .required("Wprowadzona wartość nie jest liczbą"),
+    protein: yup
+      .number()
+      .min(0.1, "Niedozwolona wartość")
+      .positive("Wartość nie może być ujemna")
+      .required("Wprowadzona wartość nie jest liczbą"),
+    carbohydrates: yup
+      .number()
+      .min(0.1, "Niedozwolona wartość")
+      .positive("Wartość nie może być ujemna")
+      .required("Wprowadzona wartość nie jest liczbą"),
+    fat: yup
+      .number()
+      .min(0.1, "Niedozwolona wartość")
+      .positive("Wartość nie może być ujemna")
+      .required("Wprowadzona wartość nie jest liczbą"),
+  })
 });

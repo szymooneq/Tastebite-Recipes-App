@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import Input from '../../../components/Input/Input';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
 import AuthContext from '../../../context/AuthContext';
-import { hotelSchema } from '../../../schemas/formSchemas';
+import { recipeSchema } from '../../../schemas/formSchemas';
 
 export default function HotelForm(props) {
   const { user } = useContext(AuthContext)
@@ -18,7 +18,7 @@ export default function HotelForm(props) {
       features: props.hotel.features || [],
       status: props.hotel.status || false
     },
-    validationSchema: hotelSchema,
+    validationSchema: recipeSchema,
     onSubmit: async (values) => {
       setLoading(true);
       try {

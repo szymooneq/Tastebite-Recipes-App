@@ -14,7 +14,7 @@ function App() {
           <div className='flex-1'>
             <Header />
             <NewMenu />
-            <div className='container'>
+            <div className='container my-8'>
               <Content />
             </div>
           </div>

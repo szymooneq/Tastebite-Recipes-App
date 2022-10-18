@@ -44,7 +44,7 @@ export default function Home(props) {
     <>
       {/* {lastHotel && <LastHotel {...lastHotel} onRemove={removeLastHotel} />} */}
       {/* {getBestHotel() && <BestHotel getHotel={getBestHotel} onOpen={openHotel} />} */}
-      <HotelList onOpen={openHotel} hotels={hotels} />
+      <HotelList onOpen={openHotel} hotels={hotels} header="All recipes" />
     </>
   )
 }
