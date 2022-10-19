@@ -2,7 +2,7 @@ import moment from 'moment';
 import { useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom';
 
-function BestHotel(props) {
+export default function BestProduct(props) {
   const [time, setTime] = useState('')
   const hotel = props.getHotel();
   const endTime = useRef(moment().add(23, 'minutes').add(34, 'seconds'))
@@ -38,5 +38,3 @@ function BestHotel(props) {
     </div>
   )
 }
-
-export default BestHotel

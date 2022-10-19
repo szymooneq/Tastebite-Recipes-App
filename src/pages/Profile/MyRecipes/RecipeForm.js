@@ -4,50 +4,68 @@ import DynamicInput from '../../../components/Input/DynamicInput';
 import Input from '../../../components/Input/Input';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
 import AuthContext from '../../../context/AuthContext';
+import { roundToTwo } from '../../../helpers/roundToTwo';
 import { recipeSchema } from '../../../schemas/formSchemas';
 
-export default function HotelForm(props) {
+export default function RecipeForm(props) {
   const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(false);
-  const [ingredients, setIngredients] = useState([''])
-  const [steps, setSteps] = useState([''])
+  const [ingredients, setIngredients] = useState(props.recipe.ingredients || [])
+  const [steps, setSteps] = useState(props.recipe.steps || [])
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: {
-      name: '',
-      description: '',
+      name: props.recipe.name || '',
+      description: props.recipe.description || '',
       details: {
-        duration: '',
-        level: '',
-        portions: ''
+        duration: props.recipe.details?.duration || '',
+        level: props.recipe.details?.level || '',
+        portions: props.recipe.details?.portions || ''
       },
       nutrions: {
-        calories: '',
-        protein: '',
-        carbohydrates: '',
-        fat: ''
+        calories: props.recipe.nutrions?.calories || '',
+        protein: props.recipe.nutrions?.protein || '',
+        carbohydrates: props.recipe.nutrions?.carbohydrates || '',
+        fat: props.recipe.nutrions?.fat || ''
       },
-      status: false
+      ingredients: [],
+      steps: [],
+      status: props.recipe.status || false
     },
     validationSchema: recipeSchema,
     onSubmit: async (values) => {
-      setLoading(true);
-      values.ingredients = ingredients.filter(item => item.length > 0)
-      values.steps = steps.filter(item => item.length > 0)
-      console.log(values)
-      /* try {
+      setLoading(true)
+
+      // values.nutrions.calories = roundToTwo(values.nutrions.calories)
+      // values.nutrions.protein = roundToTwo(values.nutrions.protein)
+      // values.nutrions.carbohydrates = roundToTwo(values.nutrions.carbohydrates)
+      // values.nutrions.fat = roundToTwo(values.nutrions.fat)
+      // values.ingredients = ingredients.filter(item => item.length > 0)
+      // values.steps = steps.filter(item => item.length > 0)
+
+      try {
         props.onSubmit({
           name: values.name,
           description: values.description,
-          city: values.city,
-          rooms: values.rooms,
-          features: values.features,
+          details: {
+            duration: values.details.duration,
+            level: values.details.level,
+            portions: values.details.portions
+          },
+          nutrions: {
+            calories: roundToTwo(values.nutrions.calories),
+            protein: roundToTwo(values.nutrions.protein),
+            carbohydrates: roundToTwo(values.nutrions.carbohydrates),
+            fat: roundToTwo(values.nutrions.fat)
+          },
+          ingredients: ingredients.filter(item => item.length > 0),
+          steps: steps.filter(item => item.length > 0),
           status: values.status,
           user_id: user.userId
         })
       } catch (ex) {
         console.log(ex.response)
-      } */
+      }
       setLoading(false);
       //console.log(values)
     }
@@ -61,6 +79,7 @@ export default function HotelForm(props) {
             <div className='md:w-96'>
               <h2 className="font-bold text-2xl text-center text-black dark:text-white">Główne informacje</h2>
               <hr className="mt-2 mb-7 border-4 border-amber-600" />
+                
               <Input
                 label="Nazwa"
                 type="text"
@@ -82,6 +101,16 @@ export default function HotelForm(props) {
                 error={errors?.description}
                 touch={touched?.description}
                 placeholder="Opisz swoją potrawę..." />
+
+              <Input
+                label="Status"
+                type="switch"
+                id="status"
+                value={values.status}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.status}
+                touch={touched.status} />
 
               <div className='flex flex-nowrap justify-between gap-3'>
                 <Input
@@ -194,9 +223,6 @@ export default function HotelForm(props) {
               <DynamicInput list={steps} updateList={setSteps} type="list-decimal" error={errors.steps} touch={touched.steps} />
             </div>
           </div>
-
-          
-
         </div>
 
         <LoadingButton 

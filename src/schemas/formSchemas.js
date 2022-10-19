@@ -33,6 +33,7 @@ export const loginSchema = yup.object().shape({
 export const recipeSchema = yup.object().shape({
   name: yup
     .string()
+    .max(50, "Maksymalna ilość znaków wynosi 50")
     .required("Pole wymagane"),
   description: yup
     .string()
@@ -76,5 +77,5 @@ export const recipeSchema = yup.object().shape({
       .min(0.1, "Niedozwolona wartość")
       .positive("Wartość nie może być ujemna")
       .required("Wprowadzona wartość nie jest liczbą"),
-  })
+  }),
 });

@@ -20,7 +20,7 @@ function Header(props) {
         <Searchbar />
         <ThemeButton />
       </div>
-      {/* <InspiringQuote /> */}
+      <InspiringQuote />
     </header>
   );
 }

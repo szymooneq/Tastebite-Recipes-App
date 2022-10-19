@@ -4,18 +4,16 @@ import AuthContext from '../../../../context/AuthContext';
 import axios from '../../../../firebase/axios';
 import RecipeForm from '../RecipeForm';
 
-const AddHotel = (props) => {
+export default function AddRecipe(props) {
   const { user } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const submit = async form => {
-    await axios.post(`/hotels.json?auth=${user.token}`, form)
+    await axios.post(`/recipes.json?auth=${user.token}`, form)
     navigate('/profil/hotele')
   }
 
   return (
-    <RecipeForm buttonText="Dodaj przepis" hotel={{}} onSubmit={submit} />
+    <RecipeForm buttonText="Dodaj przepis" recipe={{}} onSubmit={submit} />
   );
 }
-
-export default AddHotel;

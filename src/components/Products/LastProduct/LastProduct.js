@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function LastHotel(props) {
+export default function LastView(props) {
   return (
     <div className="m-1 p-4 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <div className="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Ostatnio oglądałeś ten hotel. Wciąż zainteresowany?</div>
@@ -17,5 +17,3 @@ function LastHotel(props) {
     </div>
   );
 }
-
-export default LastHotel;

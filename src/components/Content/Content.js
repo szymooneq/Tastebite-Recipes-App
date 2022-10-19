@@ -4,10 +4,10 @@ import NotFound from "../../pages/404/404";
 import Login from "../../pages/Auth/Login/Login";
 import Register from "../../pages/Auth/Register/Register";
 import Home from "../../pages/Home/Home";
-import Hotel from "../../pages/Hotel/Hotel";
-import AddHotel from "../../pages/Profile/MyHotels/AddHotel/AddHotel";
-import EditHotel from "../../pages/Profile/MyHotels/EditHotel/EditHotel";
-import MyHotels from "../../pages/Profile/MyHotels/MyHotels";
+import ProductView from "../../pages/ProductView/ProductView";
+import AddRecipe from "../../pages/Profile/MyRecipes/AddRecipe/AddRecipe";
+import EditRecipe from "../../pages/Profile/MyRecipes/EditRecipe/EditRecipe";
+import MyRecipes from "../../pages/Profile/MyRecipes/MyRecipes";
 import Profile from "../../pages/Profile/Profile";
 import ProfileDetails from "../../pages/Profile/ProfileDetails/ProfileDetails";
 import Search from "../../pages/Search/Search";
@@ -21,7 +21,7 @@ export default function Content() {
       <Suspense fallback={<LoadingIcon />}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="hotele/:id" element={<Hotel />} />
+          <Route path="hotele/:id" element={<ProductView />} />
           <Route path="szukaj">
             <Route index element={<Search />} />
             <Route path=":term" element={<Search />} />
@@ -31,9 +31,9 @@ export default function Content() {
             <Route path="profil" element={<Profile />}>
               <Route index element={<ProfileDetails />} />
               <Route path="hotele">
-                <Route index element={<MyHotels />} />
-                <Route path="dodaj" element={<AddHotel />} />
-                <Route path="edytuj/:id" element={<EditHotel />} />
+                <Route index element={<MyRecipes />} />
+                <Route path="dodaj" element={<AddRecipe />} />
+                <Route path="edytuj/:id" element={<EditRecipe />} />
               </Route>
             </Route>
           </Route>

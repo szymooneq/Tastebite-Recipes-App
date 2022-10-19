@@ -10,7 +10,7 @@ const quotes = [
   `“The only real stumbling block is fear of failure. In cooking, you’ve got to have a what-the-hell attitude.” – Julia Child`,
 ];
 
-function InspiringQuote(props) {
+export default function InspiringQuote() {
   const [quote, setQuote] = useState('Wczytywanie cytatu...')
 
   useEffect(() => {
@@ -21,5 +21,3 @@ function InspiringQuote(props) {
     <p className="italic text-center text-white text-sm font-bold antialiased">{quote}</p>
   )
 }
-
-export default InspiringQuote

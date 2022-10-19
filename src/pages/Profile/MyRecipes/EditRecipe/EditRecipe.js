@@ -3,28 +3,28 @@ import { useNavigate, useParams } from 'react-router-dom';
 import LoadingIcon from '../../../../components/UI/LoadingIcon/LoadingIcon';
 import AuthContext from '../../../../context/AuthContext';
 import axios from '../../../../firebase/axios';
-import HotelForm from '../HotelForm';
+import RecipeForm from '../RecipeForm';
 
-const EditHotel = (props) => {
+export default function EditRecipe(props) {
   const { id } = useParams()
-  const [hotel, setHotel] = useState(null)
+  const [recipe, setRecipe] = useState(null)
   const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
   const submit = async form => {
-    await axios.patch(`/hotels/${id}.json?auth=${user.token}`, form)
+    await axios.patch(`/recipes/${id}.json?auth=${user.token}`, form)
     navigate('/profil/hotele?update')
   }
 
   const fetchHotel = useCallback(async () => {
-    const res = await axios.get(`/hotels/${id}.json`)
-    const hotelData = res.data
+    const res = await axios.get(`/recipes/${id}.json`)
+    const recipeData = res.data
 
-    delete(hotelData.user_id)
-    delete(hotelData.rating)
+    delete(recipeData.user_id)
+    delete(recipeData.rating)
 
-    setHotel(hotelData)
+    setRecipe(recipeData)
     setLoading(false)
   }, [id]) 
 
@@ -34,9 +34,7 @@ const EditHotel = (props) => {
 
   return loading ? <LoadingIcon /> : (
     <>
-      {hotel && <HotelForm hotel={hotel} buttonText="Zapisz!" onSubmit={submit} />}
+      {recipe && <RecipeForm recipe={recipe} buttonText="Zaaktualizuj przepis" onSubmit={submit} />}
     </>
   )
 }
-
-export default EditHotel;

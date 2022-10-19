@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components//Header/Header';
 import Content from './components/Content/Content';
 import Footer from './components/Footer/Footer';
-import NewMenu from './components/Menu/Menu';
+import Navbar from './components/Navbar/Navbar';
 import AppContext from './context/AppContext';
 
 function App() {     
@@ -13,7 +13,7 @@ function App() {
         <div className='flex flex-col min-h-screen'>
           <div className='flex-1'>
             <Header />
-            <NewMenu />
+            <Navbar />
             <div className='container my-8'>
               <Content />
             </div>

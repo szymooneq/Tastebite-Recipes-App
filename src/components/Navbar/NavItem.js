@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export default function MenuItem(props) {
+export default function NavItem(props) {
   return (
     props.end ? (
       <li>

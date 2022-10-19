@@ -31,7 +31,7 @@ export default function DynamicForm(props) {
               <button 
                 type='button' 
                 onClick={() => handleDelete(id)}
-                className="px-3 py-2 w-max border rounded-lg text-sm font-semibold focus:ring-4 focus:outline-none text-rose-600 border-rose-600 hover:text-white hover:bg-rose-600 focus:ring-rose-300 dark:focus:ring-rose-800">Usuń</button>
+                className="px-3 py-2 w-max border rounded-lg text-sm font-semibold focus:ring-4 focus:outline-none text-rose-600 border-rose-300 hover:bg-rose-100 focus:ring-rose-300 dark:text-rose-600 dark:hover:bg-gray-800 dark:border-rose-600 dark:focus:ring-rose-800">Usuń</button>
             </div>
           </li>
           )
@@ -41,7 +41,7 @@ export default function DynamicForm(props) {
       <button 
         type='button' 
         onClick={handleAdd}
-        className="block p-2.5 ml-auto w-max border rounded-lg text-sm font-semibold focus:ring-4 focus:outline-none text-sky-600 bg-gray-50 border-sky-300 hover:bg-sky-100 focus:ring-sky-300 dark:text-sky-600 dark:bg-gray-700 dark:border-sky-600 dark:focus:ring-sky-800">Dodaj</button>
+        className="block p-2.5 ml-auto w-max border rounded-lg text-sm font-semibold focus:ring-4 focus:outline-none text-sky-600 border-sky-300 hover:bg-sky-100 focus:ring-sky-300 dark:text-sky-600 dark:hover:bg-gray-800 dark:border-sky-600 dark:focus:ring-sky-800">Dodaj</button>
 
 
     </>

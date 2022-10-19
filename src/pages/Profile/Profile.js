@@ -15,7 +15,7 @@ export default function Profile(props) {
                 isActive
                   ? "inline-block p-4 text-green-600 rounded-t-lg border-b-2 border-green-600 active dark:text-green-500 dark:border-green-500"
                   : "inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              }>Edytuj profil</NavLink>
+              }>Edycja profilu</NavLink>
           </li>
           <li className="mr-2">
             <NavLink 
@@ -25,20 +25,20 @@ export default function Profile(props) {
                 isActive
                   ? "inline-block p-4 text-green-600 rounded-t-lg border-b-2 border-green-600 active dark:text-green-500 dark:border-green-500"
                   : "inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-              }>Hotele</NavLink>
+              }>Moje przepisy</NavLink>
           </li>
 
           {location.pathname.includes('dodaj') ?  (
           <li className="mr-2">
             <button 
-              className="inline-block p-4 text-green-600 rounded-t-lg border-b-2 border-green-600 active dark:text-green-500 dark:border-green-500">Dodaj hotel</button>
+              className="inline-block p-4 text-green-600 rounded-t-lg border-b-2 border-green-600 active dark:text-green-500 dark:border-green-500">Nowy przepis</button>
           </li>
           ) : null}
 
           {location.pathname.includes('edytuj') ?  (
           <li className="mr-2">
             <button 
-              className="inline-block p-4 text-green-600 rounded-t-lg border-b-2 border-green-600 active dark:text-green-500 dark:border-green-500">Edytuj hotel</button>
+              className="inline-block p-4 text-green-600 rounded-t-lg border-b-2 border-green-600 active dark:text-green-500 dark:border-green-500">Edycja przepisu</button>
           </li>
           ) : null}
         </ul>
