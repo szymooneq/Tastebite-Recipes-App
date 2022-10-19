@@ -7,6 +7,8 @@ import AuthContext from '../../../context/AuthContext';
 import { roundToTwo } from '../../../helpers/roundToTwo';
 import { recipeSchema } from '../../../schemas/formSchemas';
 
+// TODO: string spaces validationSchema
+
 export default function RecipeForm(props) {
   const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(false);

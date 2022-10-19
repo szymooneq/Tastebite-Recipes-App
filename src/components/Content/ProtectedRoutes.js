@@ -4,5 +4,5 @@ import AuthContext from "../../context/AuthContext"
 
 export default function ProtectedRoutes() {
   const context = useContext(AuthContext)
-  return context.user ? <Outlet /> : <Navigate to={'/zaloguj'} />
+  return context.user ? <Outlet /> : <Navigate to={'/logowanie'} />
 }

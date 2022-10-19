@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "../../pages/404/404";
 import Login from "../../pages/Auth/Login/Login";
@@ -21,7 +21,7 @@ export default function Content() {
       <Suspense fallback={<LoadingIcon />}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="hotele/:id" element={<ProductView />} />
+          <Route path="przepis/:id/:name" element={<ProductView />} />
           <Route path="szukaj">
             <Route index element={<Search />} />
             <Route path=":term" element={<Search />} />
@@ -30,7 +30,7 @@ export default function Content() {
           <Route element={<ProtectedRoutes />}>
             <Route path="profil" element={<Profile />}>
               <Route index element={<ProfileDetails />} />
-              <Route path="hotele">
+              <Route path="przepisy">
                 <Route index element={<MyRecipes />} />
                 <Route path="dodaj" element={<AddRecipe />} />
                 <Route path="edytuj/:id" element={<EditRecipe />} />
@@ -38,7 +38,7 @@ export default function Content() {
             </Route>
           </Route>
 
-          <Route path="zaloguj" element={<Login />} />
+          <Route path="logowanie" element={<Login />} />
           <Route path="rejestracja" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

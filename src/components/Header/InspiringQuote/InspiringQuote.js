@@ -18,6 +18,6 @@ export default function InspiringQuote() {
   }, [])
 
   return (
-    <p className="italic text-center text-white text-sm font-bold antialiased">{quote}</p>
+    <p className="italic text-sm font-bold text-center antialiased text-white">{quote}</p>
   )
 }

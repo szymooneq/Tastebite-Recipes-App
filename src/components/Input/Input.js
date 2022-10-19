@@ -7,9 +7,7 @@ const InputText = (props) => {
           props.error && props.touch
             ? "text-red-700 dark:text-red-500"
             : "text-gray-900 dark:text-gray-300"
-        } `}>
-        {props.label}
-      </label>
+        } `}>{props.label}</label>
 
       <input
         type={props.type}
