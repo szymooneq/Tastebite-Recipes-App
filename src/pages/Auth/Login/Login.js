@@ -1,3 +1,4 @@
+import { signInWithEmailAndPassword } from "firebase/auth"
 import { useFormik } from "formik"
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -5,8 +6,10 @@ import Input from "../../../components/Input/Input"
 import Alert from "../../../components/UI/Alert/Alert"
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
 import AuthContext from "../../../context/AuthContext"
+import { auth } from "../../../firebase"
 import axios from "../../../firebase/axios-auth"
 import { loginSchema } from "../../../schemas/formSchemas"
+
 
 export default function Login(props) {
   const { user, login } = useContext(AuthContext)
@@ -22,8 +25,24 @@ export default function Login(props) {
     validationSchema: loginSchema,
     onSubmit: async (values) => {
       setLoading(true)
-      try {
-        const res = await axios.post('accounts:signInWithPassword', {
+      // try {
+        signInWithEmailAndPassword(auth, values.email, values.password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user
+          // console.log(user)
+          login(user)
+          navigate('/')
+        })
+        .catch((error) => {
+          // const errorCode = error.code;
+          // const errorMessage = error.message;
+          console.log(error.code)
+          setMessage(error.message)
+          setLoading(false)
+          // ..
+        });
+        /* const res = await axios.post('accounts:signInWithPassword', {
           email: values.email,
           password: values.password,
           returnSecureToken: true
@@ -33,13 +52,13 @@ export default function Login(props) {
           email: res.data.email,
           token: res.data.idToken,
           userId: res.data.localId
-        })
-        navigate('/')
-      } catch (ex) {
+        }) */
+        // navigate('/')
+      // } catch (ex) {
         //console.log(ex.response.data.error.message)
-        setLoading(false)
-        setMessage(ex.response.data.error.message)
-      }
+        // setLoading(false)
+        // setMessage(ex.response.data.error.message)
+      // }
     }
   })
 

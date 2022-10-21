@@ -1,10 +1,11 @@
-import { useCallback, useContext, useEffect, useState } from "react"
-import { Link, useLocation } from "react-router-dom"
-import Alert from "../../../components/UI/Alert/Alert"
-import LoadingIcon from "../../../components/UI/LoadingIcon/LoadingIcon"
-import AuthContext from "../../../context/AuthContext"
-import axios from "../../../firebase/axios"
-import { objectToArrayWithId } from "../../../helpers/objectToArrayWithId"
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Alert from "../../../components/UI/Alert/Alert";
+import LoadingIcon from "../../../components/UI/LoadingIcon/LoadingIcon";
+import AuthContext from "../../../context/AuthContext";
+import { db } from "../../../firebase";
+import axios from "../../../firebase/axios";
 
 export default function MyRecipes(props) {
   const { user } = useContext(AuthContext)
@@ -12,16 +13,37 @@ export default function MyRecipes(props) {
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const fetchRecipes = useCallback(async () => {
+  const fetchData = useCallback(async () => {
+    let list = []
+
     try {
+      const q = query(collection(db, "recipes"), where("userId", "==", user.uid))
+      const querySnapshot = await getDocs(q)
+
+      querySnapshot.forEach((doc) => {
+        list.push({ id: doc.id, ...doc.data() })
+      })
+      
+      setRecipes(list)
+
+    } catch (ex) {
+      console.log(ex.response)
+    }
+    setLoading(false)
+    
+    /* try {
       const res = await axios.get('/recipes.json')
+      /* const querySnapshot = await getDocs(collection(db, "recipes"));
+      querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+      });
       const newHotel = objectToArrayWithId(res.data).filter(product => product.user_id === user.userId)
       setRecipes(newHotel)
       setLoading(false)
     } catch (ex) {
       console.log(ex.response)
-    }
-  }, [user.userId]) 
+    } */
+  }, [user.uid]) 
 
   const deleteHandler = async id => {
     try {
@@ -33,8 +55,8 @@ export default function MyRecipes(props) {
   }
 
   useEffect(() => {
-    fetchRecipes()
-  }, [fetchRecipes])
+    fetchData()
+  }, [fetchData])
 
   return loading ? <LoadingIcon /> : (
     <>
@@ -69,7 +91,7 @@ export default function MyRecipes(props) {
                     }
                 </td>
                 <td className="p-4 flex gap-1 justify-center font-semibold">
-                    <Link to={`/profil/hotele/edytuj/${product.id}`} className="text-blue-600 dark:text-blue-500 hover:underline">Edytuj</Link>
+                    <Link to={`edytuj/${product.id}`} className="text-blue-600 dark:text-blue-500 hover:underline">Edytuj</Link>
                     <button onClick={() => deleteHandler(product.id)} className="text-red-600 dark:text-red-500 hover:underline">Usuń</button>
                 </td>
               </tr>

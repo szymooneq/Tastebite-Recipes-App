@@ -1,3 +1,4 @@
+import { serverTimestamp } from 'firebase/firestore';
 import { useFormik } from 'formik';
 import { useContext, useState } from 'react';
 import DynamicInput from '../../../components/Input/DynamicInput';
@@ -11,44 +12,41 @@ import { recipeSchema } from '../../../schemas/formSchemas';
 
 export default function RecipeForm(props) {
   const { user } = useContext(AuthContext)
-  const [loading, setLoading] = useState(false);
+
   const [ingredients, setIngredients] = useState(props.recipe.ingredients || [])
   const [steps, setSteps] = useState(props.recipe.steps || [])
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: {
-      name: props.recipe.name || '',
-      description: props.recipe.description || '',
+  const { values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit } = useFormik({
+    initialValues: {...props.recipe} || {
+      name: '',
+      description: '',
+      file: null,
       details: {
-        duration: props.recipe.details?.duration || '',
-        level: props.recipe.details?.level || '',
-        portions: props.recipe.details?.portions || ''
+        duration: '',
+        level: '',
+        portions: ''
       },
       nutrions: {
-        calories: props.recipe.nutrions?.calories || '',
-        protein: props.recipe.nutrions?.protein || '',
-        carbohydrates: props.recipe.nutrions?.carbohydrates || '',
-        fat: props.recipe.nutrions?.fat || ''
+        calories: '',
+        protein: '',
+        carbohydrates: '',
+        fat: ''
       },
       ingredients: [],
       steps: [],
-      status: props.recipe.status || false
+      status: false,
+      timeStamp: '',
+      userId: ''
     },
     validationSchema: recipeSchema,
     onSubmit: async (values) => {
-      setLoading(true)
-
-      // values.nutrions.calories = roundToTwo(values.nutrions.calories)
-      // values.nutrions.protein = roundToTwo(values.nutrions.protein)
-      // values.nutrions.carbohydrates = roundToTwo(values.nutrions.carbohydrates)
-      // values.nutrions.fat = roundToTwo(values.nutrions.fat)
-      // values.ingredients = ingredients.filter(item => item.length > 0)
-      // values.steps = steps.filter(item => item.length > 0)
+      console.log(values)
 
       try {
         props.onSubmit({
           name: values.name,
           description: values.description,
+          file: values.file,
           details: {
             duration: values.details.duration,
             level: values.details.level,
@@ -63,15 +61,16 @@ export default function RecipeForm(props) {
           ingredients: ingredients.filter(item => item.length > 0),
           steps: steps.filter(item => item.length > 0),
           status: values.status,
-          user_id: user.userId
+          userId: props.recipe.userId || user.uid,
+          timeStamp: props.recipe.timeStamp || serverTimestamp()
         })
       } catch (ex) {
         console.log(ex.response)
       }
-      setLoading(false);
-      //console.log(values)
     }
   })
+
+  // console.log(props.recipe.img)
 
   return (
     <div className="mx-7 md:mx-auto lg:w-[60rem] xl:w-[70rem]">
@@ -103,6 +102,17 @@ export default function RecipeForm(props) {
                 error={errors?.description}
                 touch={touched?.description}
                 placeholder="Opisz swoją potrawę..." />
+
+              <Input 
+                label="Zdjęcie (podgląd)" 
+                type="file"
+                id="file"
+                img={props.recipe.img ? props.recipe.img : null}
+                file={values.file ? values.file : null}
+                onChange={value => {setFieldValue("file", value)}}
+                error={errors.file}
+                // touch={touched.file}
+                />
 
               <Input
                 label="Status"
@@ -228,10 +238,10 @@ export default function RecipeForm(props) {
         </div>
 
         <LoadingButton 
-            loading={loading} 
-            className="btn-success">
-              {props.buttonText}
-          </LoadingButton>
+          loading={props.loading} 
+          loadingMessage="Dodawanie...">
+            {props.buttonText}
+        </LoadingButton>
           
       </form>
     </div>

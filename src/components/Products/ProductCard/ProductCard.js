@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import pancakes from "../../../assets/images/pancakes.jpg"
 import Badge from '../../UI/Badge/Badge'
 import { levelIcon, rightArrow, starIcon, timerIcon } from '../../UI/svg'
 
@@ -11,23 +10,23 @@ export default function ProductCard(props) {
   
   return (
     <div className="w-100% rounded-lg shadow-md hover:shadow-2xl transition bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700 xl:w-full">
-      <img className="w-full h-60 object-cover object-center rounded-t-lg" src={pancakes} alt="" />
+      <img className="w-full h-60 object-cover object-center rounded-t-lg" src={props.img} alt="Meal preview" />
       <div className="p-4 flex flex-col gap-2">
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {props.name}
         </h5>
         
         <div className="flex gap-2">
-          <Badge color="indigo">
+          <span className="px-2.5 py-0.5 w-max inline-flex items-center text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-200 dark:text-indigo-900">
             {timerIcon}{props.details.duration} min
-          </Badge>
-          <Badge color="green">
+          </span>
+          <span className="px-2.5 py-0.5 w-max inline-flex items-center text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-200 dark:text-green-900">
             {levelIcon}{props.details.level}
-          </Badge>
-          <Badge color="yellow">
+          </span>
+          <span className="px-2.5 py-0.5 w-max inline-flex items-center text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-200 dark:text-yellow-900">
             {starIcon}
             <span className="font-bold">{props.rating ?? "No rating"}</span>
-          </Badge>
+          </span>
         </div>
         
         <p className="text-gray-700 dark:text-gray-400">

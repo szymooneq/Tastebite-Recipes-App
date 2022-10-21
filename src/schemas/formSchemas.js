@@ -3,6 +3,12 @@ import * as yup from "yup";
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 // min 6 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit
 
+const FILE_SIZE = 1024000;
+// max 1mb
+
+const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
+// supported formats: jpg, jpeg, gif, png
+
 export const registerSchema = yup.object().shape({
   email: yup
     .string()
@@ -39,6 +45,11 @@ export const recipeSchema = yup.object().shape({
     .string()
     .max(550, "Maksymalna ilość znaków wynosi 550")
     .required("Pole wymagane"),
+  file: yup
+    .mixed()
+    .nullable()
+    .test('fileSize', "Maksymalna wielkość pliku to 1mb", (value) => !value || (value && value.size <= FILE_SIZE))
+    .test('fileType', "Nieobsługiwany format pliku", (value) => !value || (value && SUPPORTED_FORMATS.includes(value?.type))),
   details: yup.object().shape({
     duration: yup
       .number()
@@ -76,6 +87,6 @@ export const recipeSchema = yup.object().shape({
       .number()
       .min(0.1, "Niedozwolona wartość")
       .positive("Wartość nie może być ujemna")
-      .required("Wprowadzona wartość nie jest liczbą"),
+      .required("Wprowadzona wartość nie jest liczbą")
   }),
 });

@@ -1,14 +1,16 @@
+import { doc, getDoc } from "firebase/firestore"
 import { useCallback, useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import pancakes from "../../assets/images/pancakes.jpg"
 import Information from "../../components/ProductView/Information"
 import InformationItem from "../../components/ProductView/InformationItem"
 import Badge from "../../components/UI/Badge/Badge"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
 import { levelIcon, starIcon, timerIcon } from "../../components/UI/svg"
 import AuthContext from "../../context/AuthContext"
+import { db } from "../../firebase"
 import axios from "../../firebase/axios"
 import { roundToTwo } from '../../helpers/roundToTwo'
+
 
 export default function ProductView(props) {
   const { user } = useContext(AuthContext)
@@ -19,12 +21,22 @@ export default function ProductView(props) {
   const navigate = useNavigate()
 
   const fetchRecipe = useCallback (async () => {
-    setLoading(true)
     try {
-      const res = await axios.get(`/recipes/${id}.json`)
+      const docRef = doc(db, "recipes", id);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        setRecipe(docSnap.data())
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+
+      /* const res = await axios.get(`/recipes/${id}.json`)
       if (res.data.status === false) navigate('/')
       setRecipe(res.data)
-      document.title = `${res.data.name}`
+      document.title = `${res.data.name}` */
     } catch (ex) {
       console.log(ex.response)
     }
@@ -63,7 +75,7 @@ export default function ProductView(props) {
               </Badge>
             </div>
           </div>
-          <img className="w-full max-h-60 rounded object-cover object-center" src={pancakes} alt='' />
+          <img className="w-full max-h-60 rounded object-cover object-center" src={recipe.img} alt='Meal preview' />
           <p className="text-justify dark:text-gray-400">{recipe.description}</p>
         </div>
 

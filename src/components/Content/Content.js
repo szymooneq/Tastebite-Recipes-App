@@ -20,8 +20,12 @@ export default function Content() {
     <ErrorBoundary>
       <Suspense fallback={<LoadingIcon />}>
         <Routes>
+          
           <Route path="/" element={<Home />} />
+          <Route path="logowanie" element={<Login />} />
+          <Route path="rejestracja" element={<Register />} />
           <Route path="przepis/:id/:name" element={<ProductView />} />
+
           <Route path="szukaj">
             <Route index element={<Search />} />
             <Route path=":term" element={<Search />} />
@@ -38,9 +42,8 @@ export default function Content() {
             </Route>
           </Route>
 
-          <Route path="logowanie" element={<Login />} />
-          <Route path="rejestracja" element={<Register />} />
           <Route path="*" element={<NotFound />} />
+
         </Routes>
       </Suspense>
     </ErrorBoundary>

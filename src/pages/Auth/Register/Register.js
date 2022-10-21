@@ -16,6 +16,8 @@ export default function Register(props) {
   const [success, setSuccess] = useState(false)
   const navigate = useNavigate()
 
+  // TODO: Add user to firestore
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: '',

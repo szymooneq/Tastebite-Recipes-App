@@ -22,7 +22,7 @@ export default function Navbar() {
       ): (
         <>
           <NavItem link="rejestracja">Register</NavItem>
-          <NavItem link="zaloguj">Login</NavItem>
+          <NavItem link="logowanie">Login</NavItem>
         </>
       )}
     </nav>

@@ -1,3 +1,7 @@
+import { useState } from "react";
+import defaultImage from "../../assets/images/defaultImage.jpg";
+import PreviewImage from "./PreviewImage";
+
 const InputText = (props) => {
   return (
     <div className="mb-4">
@@ -175,13 +179,34 @@ const InputCheckbox = (props) => {
 
 const InputFile = (props) => {
   return (
-    <>
+    <div className="mb-4">
+      <label
+        htmlFor={props.id}
+        className={`block mb-2 text-sm font-medium ${
+          props.error
+            ? "text-red-700 dark:text-red-500"
+            : "text-gray-900 dark:text-gray-300"
+        } `}>{props.label}</label>
+
+      {(props.img || props.file) && !props.error && <PreviewImage file={props?.file} img={props?.img} />}
+
       <input
-        className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-        id="file_input"
         type="file"
-      />
-    </>
+        name={props.id}
+        onChange={e => props.onChange(e.target.files[0])}
+        // onBlur={props.onBlur}
+        className={`w-full border text-sm rounded-lg outline-none ${
+          props.error
+            ? "bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500"
+            : "bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        }`} />
+
+      {props.error && (
+        <p className="mt-2 text-sm text-center font-semibold text-red-600 dark:text-red-500">
+          {props.error}
+        </p>
+      )}
+    </div>
   );
 };
 

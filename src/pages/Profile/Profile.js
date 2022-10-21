@@ -20,7 +20,7 @@ export default function Profile(props) {
           <li className="mr-2">
             <NavLink 
               end
-              to={'hotele'}
+              to={'przepisy'}
               className={({ isActive }) =>
                 isActive
                   ? "inline-block p-4 text-green-600 rounded-t-lg border-b-2 border-green-600 active dark:text-green-500 dark:border-green-500"
