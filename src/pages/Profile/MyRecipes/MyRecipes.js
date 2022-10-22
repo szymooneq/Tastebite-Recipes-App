@@ -1,7 +1,6 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Alert from "../../../components/UI/Alert/Alert";
 import LoadingIcon from "../../../components/UI/LoadingIcon/LoadingIcon";
 import AuthContext from "../../../context/AuthContext";
 import { db } from "../../../firebase";
@@ -9,7 +8,6 @@ import axios from "../../../firebase/axios";
 
 export default function MyRecipes(props) {
   const { user } = useContext(AuthContext)
-  const { search } = useLocation()
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -23,26 +21,13 @@ export default function MyRecipes(props) {
       querySnapshot.forEach((doc) => {
         list.push({ id: doc.id, ...doc.data() })
       })
-      
-      setRecipes(list)
 
+      setRecipes(list)
     } catch (ex) {
       console.log(ex.response)
     }
+
     setLoading(false)
-    
-    /* try {
-      const res = await axios.get('/recipes.json')
-      /* const querySnapshot = await getDocs(collection(db, "recipes"));
-      querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-      });
-      const newHotel = objectToArrayWithId(res.data).filter(product => product.user_id === user.userId)
-      setRecipes(newHotel)
-      setLoading(false)
-    } catch (ex) {
-      console.log(ex.response)
-    } */
   }, [user.uid]) 
 
   const deleteHandler = async id => {
@@ -60,8 +45,6 @@ export default function MyRecipes(props) {
 
   return loading ? <LoadingIcon /> : (
     <>
-      {search.includes("?update") && <Alert message="Przepis został zaaktualizowany!" theme="success" />}
-      
       <div className="mb-2 overflow-x-auto">
           {recipes ? (
           <table className="mx-auto w-full text-sm text-center text-gray-500 dark:text-gray-400">
@@ -92,17 +75,17 @@ export default function MyRecipes(props) {
                 </td>
                 <td className="p-4 flex gap-1 justify-center font-semibold">
                     <Link to={`edytuj/${product.id}`} className="text-blue-600 dark:text-blue-500 hover:underline">Edytuj</Link>
-                    <button onClick={() => deleteHandler(product.id)} className="text-red-600 dark:text-red-500 hover:underline">Usuń</button>
+                    {/* <button onClick={() => deleteHandler(product.id)} className="text-red-600 dark:text-red-500 hover:underline">Usuń</button> */}
                 </td>
               </tr>
             ))}
             </tbody>
         </table>
-          ) : (<p>Nie masz jeszcze żadnego hotelu.</p>)}
+          ) : (<p className="italic text-gray-500 dark:text-gray-400">Nie masz jeszcze żadnego przepisu...</p>)}
       </div>
       <Link 
         to={"dodaj"} 
-        className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 block w-max mx-auto mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">Dodaj przepis</Link>
+        className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 block w-max mx-auto mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">Nowy przepis</Link>
     </>
   )
 }

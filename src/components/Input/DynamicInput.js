@@ -42,8 +42,6 @@ export default function DynamicForm(props) {
         type='button' 
         onClick={handleAdd}
         className="block p-2.5 ml-auto w-max border rounded-lg text-sm font-semibold focus:ring-4 focus:outline-none text-sky-600 border-sky-300 hover:bg-sky-100 focus:ring-sky-300 dark:text-sky-600 dark:hover:bg-gray-800 dark:border-sky-600 dark:focus:ring-sky-800">Dodaj</button>
-
-
     </>
     
   )

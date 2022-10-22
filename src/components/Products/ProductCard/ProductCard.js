@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Badge from '../../UI/Badge/Badge'
-import { levelIcon, rightArrow, starIcon, timerIcon } from '../../UI/svg'
+import LoadingIcon from '../../UI/LoadingIcon/LoadingIcon'
+import { levelIcon, rightArrow, skeletonImg, starIcon, timerIcon } from '../../UI/svg'
 
 export default function ProductCard(props) {
+  const [loading, setLoading] = useState(true)
   
   const clickHandler = () => {
     props.onOpen(props)
@@ -10,7 +13,14 @@ export default function ProductCard(props) {
   
   return (
     <div className="w-100% rounded-lg shadow-md hover:shadow-2xl transition bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700 xl:w-full">
-      <img className="w-full h-60 object-cover object-center rounded-t-lg" src={props.img} alt="Meal preview" />
+      
+      {loading && (
+        <div className="w-full h-60 flex justify-center items-center rounded animate-pulse bg-gray-300 dark:bg-gray-700">
+          {skeletonImg}
+        </div>
+      )}
+      <img style={{display: loading ? "none" : "block"}} className="w-full h-60 object-cover object-center rounded-t-lg" src={props.img} onLoad={() => setLoading(false)} alt="Meal preview" />
+      
       <div className="p-4 flex flex-col gap-2">
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {props.name}
@@ -25,7 +35,7 @@ export default function ProductCard(props) {
           </span>
           <span className="px-2.5 py-0.5 w-max inline-flex items-center text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-200 dark:text-yellow-900">
             {starIcon}
-            <span className="font-bold">{props.rating ?? "No rating"}</span>
+            <span className="font-bold">{props.rating ?? "Brak ocen"}</span>
           </span>
         </div>
         

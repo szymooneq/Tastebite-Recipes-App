@@ -1,23 +1,16 @@
-import { serverTimestamp } from 'firebase/firestore';
 import { useFormik } from 'formik';
-import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import DynamicInput from '../../../components/Input/DynamicInput';
 import Input from '../../../components/Input/Input';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
-import AuthContext from '../../../context/AuthContext';
 import { roundToTwo } from '../../../helpers/roundToTwo';
 import { recipeSchema } from '../../../schemas/formSchemas';
 
 // TODO: string spaces validationSchema
 
 export default function RecipeForm(props) {
-  const { user } = useContext(AuthContext)
-
-  const [ingredients, setIngredients] = useState(props.recipe.ingredients || [])
-  const [steps, setSteps] = useState(props.recipe.steps || [])
-
   const { values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: {...props.recipe} || {
+    initialValues: props.recipe || {
       name: '',
       description: '',
       file: null,
@@ -34,18 +27,16 @@ export default function RecipeForm(props) {
       },
       ingredients: [],
       steps: [],
-      status: false,
-      timeStamp: '',
-      userId: ''
+      status: false
     },
     validationSchema: recipeSchema,
     onSubmit: async (values) => {
-      console.log(values)
+      // console.log(values)
 
       try {
         props.onSubmit({
-          name: values.name,
-          description: values.description,
+          name: values.name.trim().replace( /  +/g, ' ' ),
+          description: values.description.trim().replace( /  +/g, ' ' ),
           file: values.file,
           details: {
             duration: values.details.duration,
@@ -58,11 +49,9 @@ export default function RecipeForm(props) {
             carbohydrates: roundToTwo(values.nutrions.carbohydrates),
             fat: roundToTwo(values.nutrions.fat)
           },
-          ingredients: ingredients.filter(item => item.length > 0),
-          steps: steps.filter(item => item.length > 0),
-          status: values.status,
-          userId: props.recipe.userId || user.uid,
-          timeStamp: props.recipe.timeStamp || serverTimestamp()
+          ingredients: values.ingredients.filter(item => item.length > 0).map(item => item.trim().replace( /  +/g, ' ' )),
+          steps: values.steps.filter(item => item.length > 0).map(item => item.trim().replace( /  +/g, ' ' )),
+          status: values.status
         })
       } catch (ex) {
         console.log(ex.response)
@@ -70,7 +59,7 @@ export default function RecipeForm(props) {
     }
   })
 
-  // console.log(props.recipe.img)
+  // console.log(values)
 
   return (
     <div className="mx-7 md:mx-auto lg:w-[60rem] xl:w-[70rem]">
@@ -107,8 +96,8 @@ export default function RecipeForm(props) {
                 label="Zdjęcie (podgląd)" 
                 type="file"
                 id="file"
-                img={props.recipe.img ? props.recipe.img : null}
-                file={values.file ? values.file : null}
+                img={props.recipe?.img || null}
+                file={values.file || null}
                 onChange={value => {setFieldValue("file", value)}}
                 error={errors.file}
                 // touch={touched.file}
@@ -156,9 +145,9 @@ export default function RecipeForm(props) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 options={[
-                  { value: "Easy", label: "Easy" },
-                  { value: "Medium", label: "Medium" },
-                  { value: "Hard", label: "Hard" }
+                  { value: "Łatwe", label: "Łatwe" },
+                  { value: "Średnie", label: "Średnie" },
+                  { value: "Trudne", label: "Trudne" }
                 ]}
                 error={errors.details?.level}
                 touch={touched.details?.level} />
@@ -225,23 +214,26 @@ export default function RecipeForm(props) {
               <h2 className="font-bold text-2xl text-center text-black dark:text-white">Lista składników</h2>
               <hr className="mt-2 mb-7 border-4 border-blue-700" />
 
-              <DynamicInput list={ingredients} updateList={setIngredients} type="list-disc" error={errors.ingredients} touch={touched.ingredients} />
+              <DynamicInput list={values.ingredients} updateList={value => setFieldValue("ingredients", value)} type="list-disc" error={errors.ingredients} touch={touched.ingredients} />
             </div>
 
             <div className='md:w-96'>
               <h2 className="font-bold text-2xl text-center text-black dark:text-white">Przygotowanie</h2>
               <hr className="mt-2 mb-7 border-4 border-green-700" />
 
-              <DynamicInput list={steps} updateList={setSteps} type="list-decimal" error={errors.steps} touch={touched.steps} />
+              <DynamicInput list={values.steps} updateList={value => setFieldValue("steps", value)} type="list-decimal" error={errors.steps} touch={touched.steps} />
             </div>
           </div>
         </div>
 
-        <LoadingButton 
-          loading={props.loading} 
-          loadingMessage="Dodawanie...">
-            {props.buttonText}
-        </LoadingButton>
+        <div className='my-12 flex justify-center items-center gap-5'>
+          <Link to={'/profil/przepisy'} className="p-2.5 text-sm font-bold rounded-lg focus:ring-4 focus:outline-none text-white bg-red-700 dark:bg-red-600 hover:bg-red-800 dark:hover:bg-red-700 focus:ring-red-200 dark:focus:ring-red-800">Anuluj</Link>
+          <LoadingButton 
+            loading={props.loading} 
+            loadingMessage="Dodawanie...">
+              {props.buttonText}
+          </LoadingButton>
+        </div>
           
       </form>
     </div>

@@ -33,13 +33,10 @@ export default function Home(props) {
     try {
       const q = query(collection(db, "recipes"), where("status", "==", true))
       const querySnapshot = await getDocs(q)
-
       querySnapshot.forEach((doc) => {
         list.push({ id: doc.id, ...doc.data() })
       })
-      
       setProducts(list)
-
     } catch (ex) {
       console.log(ex.response)
     }
@@ -55,7 +52,7 @@ export default function Home(props) {
     <>
       {/* {lastProducts && <LastProduct {...lastProducts} onRemove={removeLastProduct} />} */}
       {/* {getBestRecipe() && <BestProduct getHotel={getBestRecipe} onOpen={openHotel} />} */}
-      {products ? <Products onOpen={openHotel} products={products} header="All recipes" /> : <div>Nie ma żadnego przepisu</div>}
+      {products ? <Products onOpen={openHotel} products={products} header="Wszystkich przepisów" /> : <div>Nie ma żadnego przepisu</div>}
     </>
   )
 }

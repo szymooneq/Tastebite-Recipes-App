@@ -5,18 +5,18 @@ import Information from "../../components/ProductView/Information"
 import InformationItem from "../../components/ProductView/InformationItem"
 import Badge from "../../components/UI/Badge/Badge"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
-import { levelIcon, starIcon, timerIcon } from "../../components/UI/svg"
+import { levelIcon, skeletonImg, starIcon, timerIcon } from "../../components/UI/svg"
 import AuthContext from "../../context/AuthContext"
 import { db } from "../../firebase"
 import axios from "../../firebase/axios"
 import { roundToTwo } from '../../helpers/roundToTwo'
-
 
 export default function ProductView(props) {
   const { user } = useContext(AuthContext)
   const { id } = useParams()
   const [recipe, setRecipe] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [loadingImg, setLoadingImg] = useState(true)
   const [rating, setRating] = useState(5)
   const navigate = useNavigate()
 
@@ -60,27 +60,35 @@ export default function ProductView(props) {
     <div className='mx-4 lg:mx-auto lg:w-max'>
       <div className="grid gap-4 lg:grid-cols-3 lg:w-[60rem] xl:w-[70rem]">
         <div className="flex flex-col gap-3 h-max lg:col-span-2">
-          <div className="flex flex-row items-center justify-between">
-            <h2 className='text-2xl font-semibold dark:text-white'>{recipe.name}</h2>
-            <div className="flex gap-2">
-              <Badge color="indigo">
-                {timerIcon}{recipe.details.duration} min
-              </Badge>
-              <Badge color="green">
-                {levelIcon}{recipe.details.level}
-              </Badge>
-              <Badge color="yellow">
-                {starIcon}
-                <span className="font-bold">{props.rating ?? "No rating"}</span>
-              </Badge>
-            </div>
+          
+          <h2 className='text-3xl font-bold dark:text-white'>{recipe.name}</h2>
+
+          <div className="flex gap-2">
+            <Badge color="indigo">
+              {timerIcon}{recipe.details.duration} min
+            </Badge>
+            <Badge color="green">
+              {levelIcon}{recipe.details.level}
+            </Badge>
+            <Badge color="yellow">
+              {starIcon}
+              <span className="font-bold">{props.rating ?? "Brak ocen"}</span>
+            </Badge>
           </div>
-          <img className="w-full max-h-60 rounded object-cover object-center" src={recipe.img} alt='Meal preview' />
+
+          {loadingImg && (
+            <div className="w-full h-60 md:h-80 lg:h-96 flex justify-center items-center rounded animate-pulse bg-gray-300 dark:bg-gray-700">
+              {skeletonImg}
+            </div>
+          )}
+
+          <img style={{display: loadingImg ? "none" : "block"}} className="w-full h-60 md:h-80 lg:h-96 rounded object-cover object-center" src={recipe.img} onLoad={() => setLoadingImg(false)} alt='Meal preview' />
+          
           <p className="text-justify dark:text-gray-400">{recipe.description}</p>
         </div>
 
         <div className="flex flex-row flex-wrap gap-3 sm:justify-center lg:flex-col lg:sticky lg:top-0">
-          <Information theme="bg-amber-600">
+          <Information theme="bg-amber-600" title="Podstawowe informacje">
             <InformationItem title="Czas całkowity" content={`${recipe.details.duration} minut`} />
             <InformationItem title="Poziom trudności" content={recipe.details.level} />
             <InformationItem title="Liczba porcji" content={recipe.details.portions} />
@@ -116,7 +124,7 @@ export default function ProductView(props) {
         </div>
         
         <div className="my-3 lg:col-span-2 dark:text-white">
-          <h3 className='mb-2 text-xl font-semibold'>Wykonanie</h3>
+          <h3 className='mb-2 text-2xl font-bold'>Wykonanie</h3>
           <ol className="list-decimal list-inside dark:text-gray-400">
             {recipe.steps.map((item, id) => <li key={id} className="mb-3">{item}</li>)}
           </ol>
