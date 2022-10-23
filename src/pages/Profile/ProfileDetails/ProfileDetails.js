@@ -5,9 +5,11 @@ import Alert from "../../../components/UI/Alert/Alert"
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
 import AuthContext from "../../../context/AuthContext"
 import axios from "../../../firebase/axios-auth"
+import useDocumentTitle from "../../../hooks/useDocumentTitle"
 import { registerSchema } from "../../../schemas/formSchemas"
 
 export default function ProfileDetails() {
+  useDocumentTitle("Edytuj profil")
   const { user, login } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)

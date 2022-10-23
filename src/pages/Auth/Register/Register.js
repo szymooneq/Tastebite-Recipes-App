@@ -1,3 +1,4 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +7,7 @@ import Alert from "../../../components/UI/Alert/Alert";
 import AlertRegister from "../../../components/UI/Alert/AlertRegister";
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton";
 import AuthContext from "../../../context/AuthContext";
-import axios from "../../../firebase/axios-auth";
+import { auth } from "../../../firebase";
 import { registerSchema } from "../../../schemas/formSchemas";
 
 export default function Register(props) {
@@ -27,28 +28,22 @@ export default function Register(props) {
     validationSchema: registerSchema,
     onSubmit: async (values) => {
       setLoading(true)
-      try {
-        const res = await axios.post('accounts:signUp', {
-          email: values.email,
-          password: values.password,
-          returnSecureToken: true
-        })
-        login({
-          email: res.data.email,
-          token: res.data.idToken,
-          userId: res.data.localId
-        })
+      createUserWithEmailAndPassword(auth, values.email, values.password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
         setSuccess(true)
-        setTimeout(() => {navigate('/')}, 5000)
-      } catch (ex) {
+        login(user)
+        setTimeout(() => {
+          navigate('/')
+        }, 5000)
+      })
+      .catch((error) => {
+        // console.log(error.code)
+        setMessage(error.message)
         setLoading(false)
-        setMessage(ex.response.data.error.message)
-      }
+      })
     }
-  })
-
-  useEffect(() => {
-    if(user) navigate('/')
   })
 
   return (

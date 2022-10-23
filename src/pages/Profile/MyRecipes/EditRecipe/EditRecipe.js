@@ -5,9 +5,11 @@ import LoadingIcon from '../../../../components/UI/LoadingIcon/LoadingIcon';
 import AuthContext from '../../../../context/AuthContext';
 import { db } from "../../../../firebase";
 import { uploadFileToStorage } from "../../../../helpers/uploadFileToStorage";
+import useDocumentTitle from "../../../../hooks/useDocumentTitle";
 import RecipeForm from '../RecipeForm';
 
 export default function EditRecipe(props) {
+  useDocumentTitle("Edytuj | Moje przepisy")
   const { id } = useParams()
   const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)

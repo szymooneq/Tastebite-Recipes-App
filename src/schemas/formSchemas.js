@@ -23,7 +23,7 @@ export const registerSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Hasła nie są identyczne")
     .required("Pole wymagane")
-});
+})
 
 export const loginSchema = yup.object().shape({
   email: yup
@@ -32,9 +32,8 @@ export const loginSchema = yup.object().shape({
     .required("Pole wymagane"),
   password: yup
     .string()
-    .min(6)
     .required("Pole wymagane")
-});
+})
 
 // TODO: add validationSchema for ingredients and steps arrays
 
@@ -90,5 +89,5 @@ export const recipeSchema = yup.object().shape({
       .min(0.1, "Niedozwolona wartość")
       .positive("Wartość nie może być ujemna")
       .required("Wprowadzona wartość nie jest liczbą")
-  }),
-});
+  })
+})

@@ -15,6 +15,8 @@ import LoadingIcon from "../UI/LoadingIcon/LoadingIcon";
 import ErrorBoundary from "./ErrorBoundary";
 import ProtectedRoutes from "./ProtectedRoutes";
 
+// TODO: react-router v6.4 routing
+
 export default function Content() {
   return (
     <ErrorBoundary>

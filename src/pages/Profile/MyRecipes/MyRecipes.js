@@ -1,12 +1,14 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/firestore";
+import { deleteObject, ref } from "firebase/storage";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import LoadingIcon from "../../../components/UI/LoadingIcon/LoadingIcon";
 import AuthContext from "../../../context/AuthContext";
-import { db } from "../../../firebase";
-import axios from "../../../firebase/axios";
+import { db, storage } from "../../../firebase";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
 
 export default function MyRecipes(props) {
+  useDocumentTitle("Moje przepisy")
   const { user } = useContext(AuthContext)
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(true)
@@ -30,13 +32,22 @@ export default function MyRecipes(props) {
     setLoading(false)
   }, [user.uid]) 
 
-  const deleteHandler = async id => {
-    try {
-      await axios.delete(`/recipes/${id}.json`)
-      setRecipes(recipes.filter(x => x.id !== id))
-    } catch (ex) {
-      console.log(ex.response)
-    }
+  const deleteHandler = async product => {
+    // Create a reference to the file to delete
+
+    // console.log(product)
+
+    const imageRef = ref(storage, `${user.uid}/${product.createdAt.seconds}${user.uid}`);
+
+    // Delete the file
+    await deleteObject(imageRef).then(() => {
+      deleteDoc(doc(db, "recipes", product.id))
+      fetchData()
+      // File deleted successfully
+    }).catch((error) => {
+      // Uh-oh, an error occurred!
+    })
+    
   }
 
   useEffect(() => {
@@ -50,6 +61,9 @@ export default function MyRecipes(props) {
           <table className="mx-auto w-full text-sm text-center text-gray-500 dark:text-gray-400">
             <thead className="uppercase text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
               <tr>
+                <th className="py-3 px-6">
+                  Zdjęcie
+                </th>
                 <th className="py-3 px-6">
                     Nazwa
                 </th>
@@ -65,6 +79,9 @@ export default function MyRecipes(props) {
             {recipes.map(product => (
               <tr key={product.id} className="bg-white hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600">
                 <td className="p-4 text-left font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                  <img className="w-40 h-24 rounded object-contain object-center" src={product.img} alt={product.name} />
+                </td>
+                <td className="p-4 text-left font-semibold text-gray-900 whitespace-nowrap dark:text-white">
                   {product.name}
                 </td>
                 <td className="p-4">
@@ -73,9 +90,9 @@ export default function MyRecipes(props) {
                       : <span className="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-200 dark:text-red-900">Ukryty</span>
                     }
                 </td>
-                <td className="p-4 flex gap-1 justify-center font-semibold">
-                    <Link to={`edytuj/${product.id}`} className="text-blue-600 dark:text-blue-500 hover:underline">Edytuj</Link>
-                    {/* <button onClick={() => deleteHandler(product.id)} className="text-red-600 dark:text-red-500 hover:underline">Usuń</button> */}
+                <td className="p-4 flex gap-1 justify-center items-center font-semibold">
+                  <Link to={`edytuj/${product.id}`} className="text-blue-600 dark:text-blue-500 hover:underline">Edytuj</Link>
+                  <button onClick={() => deleteHandler(product)} className="text-red-600 dark:text-red-500 hover:underline">Usuń</button>
                 </td>
               </tr>
             ))}

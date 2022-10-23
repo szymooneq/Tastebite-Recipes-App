@@ -8,7 +8,6 @@ import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
 import { levelIcon, skeletonImg, starIcon, timerIcon } from "../../components/UI/svg"
 import AuthContext from "../../context/AuthContext"
 import { db } from "../../firebase"
-import axios from "../../firebase/axios"
 import { roundToTwo } from '../../helpers/roundToTwo'
 
 export default function ProductView(props) {
@@ -17,7 +16,7 @@ export default function ProductView(props) {
   const [recipe, setRecipe] = useState(null)
   const [loading, setLoading] = useState(true)
   const [loadingImg, setLoadingImg] = useState(true)
-  const [rating, setRating] = useState(5)
+  // const [rating, setRating] = useState(5)
   const navigate = useNavigate()
 
   const fetchRecipe = useCallback (async () => {
@@ -26,31 +25,29 @@ export default function ProductView(props) {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+        // console.log("Document data:", docSnap.data());
+        document.title = docSnap.data().name
         setRecipe(docSnap.data())
       } else {
         // doc.data() will be undefined in this case
-        console.log("No such document!");
+        console.log("No such document!")
+        navigate('/')
       }
-
-      /* const res = await axios.get(`/recipes/${id}.json`)
-      if (res.data.status === false) navigate('/')
-      setRecipe(res.data)
-      document.title = `${res.data.name}` */
     } catch (ex) {
       console.log(ex.response)
     }
     setLoading(false)
   }, [id, navigate])
 
-  const rateHotel = async () => {
+  // TODO: rating system
+  /* const rateHotel = async () => {
     try {
       await axios.put(`/recipes/${id}/rating.json?auth=${user.token}`, rating)
       navigate('/')
     } catch (ex) {
       console.log(ex.response)
     }
-  }
+  } */
 
   useEffect(() => {
     fetchRecipe()
@@ -132,6 +129,4 @@ export default function ProductView(props) {
       </div>
     </div>
   );
-
 }
-
