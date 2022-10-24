@@ -8,7 +8,7 @@ import useDocumentTitle from "../../../../hooks/useDocumentTitle";
 import RecipeForm from '../RecipeForm';
 
 export default function AddRecipe() {
-  useDocumentTitle("Nowy | Moje przepisy")
+  useDocumentTitle("Profil | Moje przepisy | Nowy")
   const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()

@@ -1,3 +1,4 @@
+import { ChartBarIcon, ClockIcon, StarIcon } from '@heroicons/react/20/solid'
 import { doc, getDoc } from "firebase/firestore"
 import { useCallback, useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
@@ -5,7 +6,7 @@ import Information from "../../components/ProductView/Information"
 import InformationItem from "../../components/ProductView/InformationItem"
 import Badge from "../../components/UI/Badge/Badge"
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
-import { levelIcon, skeletonImg, starIcon, timerIcon } from "../../components/UI/svg"
+import Skeleton from '../../components/UI/Skeleton/Skeleton'
 import AuthContext from "../../context/AuthContext"
 import { db } from "../../firebase"
 import { roundToTwo } from '../../helpers/roundToTwo'
@@ -25,11 +26,9 @@ export default function ProductView(props) {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        // console.log("Document data:", docSnap.data());
         document.title = docSnap.data().name
         setRecipe(docSnap.data())
       } else {
-        // doc.data() will be undefined in this case
         console.log("No such document!")
         navigate('/')
       }
@@ -62,20 +61,19 @@ export default function ProductView(props) {
 
           <div className="flex gap-2">
             <Badge color="indigo">
-              {timerIcon}{recipe.details.duration} min
+              <ClockIcon className="mr-1 w-3 h-3" />{recipe.details.duration} min
             </Badge>
             <Badge color="green">
-              {levelIcon}{recipe.details.level}
+              <ChartBarIcon className="mr-1 w-3 h-3" />{recipe.details.level}
             </Badge>
             <Badge color="yellow">
-              {starIcon}
-              <span className="font-bold">{props.rating ?? "Brak ocen"}</span>
+              <StarIcon className="mr-1 w-3 h-3" />{recipe.rating ?? "Brak ocen"}
             </Badge>
           </div>
 
           {loadingImg && (
             <div className="w-full h-60 md:h-80 lg:h-96 flex justify-center items-center rounded animate-pulse bg-gray-300 dark:bg-gray-700">
-              {skeletonImg}
+              <Skeleton />
             </div>
           )}
 

@@ -1,20 +1,22 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useFormik } from "formik";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Input from "../../../components/Input/Input";
-import Alert from "../../../components/UI/Alert/Alert";
-import AlertRegister from "../../../components/UI/Alert/AlertRegister";
-import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton";
-import AuthContext from "../../../context/AuthContext";
-import { auth } from "../../../firebase";
-import { registerSchema } from "../../../schemas/formSchemas";
+import { InformationCircleIcon } from '@heroicons/react/20/solid'
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import { useFormik } from "formik"
+import { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import Field from "../../../components/Field/Field"
+import Alert from "../../../components/UI/Alert/Alert"
+import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
+import AuthContext from "../../../context/AuthContext"
+import { auth } from "../../../firebase"
+import useDocumentTitle from "../../../hooks/useDocumentTitle"
+import { registerSchema } from "../../../schemas/formSchemas"
 
 export default function Register(props) {
+  useDocumentTitle("Rejestracja | Tastebite Recipe App")
   const { user, login} = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState(null)
-  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(null)
+  const [registered, setRegistered] = useState(false)
   const navigate = useNavigate()
 
   // TODO: Add user to firestore
@@ -32,7 +34,7 @@ export default function Register(props) {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        setSuccess(true)
+        setRegistered(true)
         login(user)
         setTimeout(() => {
           navigate('/')
@@ -40,23 +42,23 @@ export default function Register(props) {
       })
       .catch((error) => {
         // console.log(error.code)
-        setMessage(error.message)
+        setError(error.message)
         setLoading(false)
       })
     }
   })
 
   return (
-    success ? <AlertRegister /> : (
+    !registered ? (
       <div className="mx-7 md:mx-auto md:w-96">
         <h2 className="p-5 text-3xl font-bold text-center dark:text-white">Rejestracja</h2>
-        {message && <Alert message={message} theme="danger" />}
+        {error && <Alert message={error} theme="danger" />}
 
         <form onSubmit={handleSubmit}>
-          <Input
+          <Field
             label="Email"
             type="email"
-            id="email"
+            name="email"
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -64,10 +66,10 @@ export default function Register(props) {
             touch={touched.email}
             placeholder="Podaj adres e-mail..." />
 
-          <Input
+          <Field
             label="Hasło"
             type="password"
-            id="password"
+            name="password"
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -75,10 +77,10 @@ export default function Register(props) {
             touch={touched.password}
             placeholder="Podaj hasło..." />
 
-          <Input
+          <Field
             label="Potwierdź hasło"
             type="password"
-            id="confirmPassword"
+            name="confirmPassword"
             value={values.confirmPassword}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -93,6 +95,16 @@ export default function Register(props) {
               loadingMessage="Rejestrowanie...">Zarejestruj</LoadingButton>
           </div>
         </form>
+      </div>
+    ) : (
+      <div className="p-3 my-5 mx-auto rounded-lg">
+        <div className="flex justify-center items-center">
+          <InformationCircleIcon className='w-5 h-5 mr-2 text-green-700 dark:text-green-200' />
+          <h3 className="text-2xl font-bold text-green-700 dark:text-green-200">Twoje konto zostało utworzone!</h3>
+        </div>
+        <div className="my-3 text-center font-semibold text-md text-green-700 dark:text-green-200">
+          <p>Gratulacje! Twoje konto zostało utworzone.<br />Za 5 sekund zostaniesz automatycznie zalogowany i przekierowany na stronę główną...</p>
+        </div>
       </div>
     )
   )

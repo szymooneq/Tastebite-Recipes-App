@@ -1,4 +1,4 @@
-import { animateSpin } from "../svg";
+import { animateSpin } from "../LoadingIcon/animateSpin";
 
 export default function LoadingButton(props) {
   return props.loading ? (

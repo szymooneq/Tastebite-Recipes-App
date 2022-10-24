@@ -1,4 +1,4 @@
-export default function DynamicForm(props) {
+export default function DynamicField(props) {
   const handleDelete = (index) => {
     const newData = [...props.list]
     newData.splice(index, 1)

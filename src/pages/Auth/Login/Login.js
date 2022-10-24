@@ -2,17 +2,19 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { useFormik } from "formik"
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Input from "../../../components/Input/Input"
+import Field from "../../../components/Field/Field"
 import Alert from "../../../components/UI/Alert/Alert"
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
 import AuthContext from "../../../context/AuthContext"
 import { auth } from "../../../firebase"
+import useDocumentTitle from "../../../hooks/useDocumentTitle"
 import { loginSchema } from "../../../schemas/formSchemas"
 
 export default function Login() {
+  useDocumentTitle("Logowanie | Tastebite Recipe App")
   const { user, login } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState(null)
+  const [error, setError] = useState(null)
   const navigate = useNavigate()
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
@@ -32,7 +34,7 @@ export default function Login() {
         })
         .catch((error) => {
           // console.log(error.code)
-          setMessage(error.message)
+          setError(error.message)
           setLoading(false)
         })
     }
@@ -44,13 +46,13 @@ export default function Login() {
   return (
     <div className="mx-7 md:mx-auto md:w-96">
       <h2 className="p-5 text-3xl font-bold text-center dark:text-white">Logowanie</h2>
-      {message && <Alert message={message} theme="danger" />}
+      {error && <Alert message={error} theme="danger" />}
       
       <form onSubmit={handleSubmit}>  
-        <Input
+        <Field
           label="Email"
           type="email"
-          id="email"
+          name="email"
           value={values.email}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -58,10 +60,10 @@ export default function Login() {
           touch={touched.email}
           placeholder="Podaj adres e-mail..." />
 
-        <Input
+        <Field
           label="Hasło"
           type="password"
-          id="password"
+          name="password"
           value={values.password}
           onChange={handleChange}
           onBlur={handleBlur}

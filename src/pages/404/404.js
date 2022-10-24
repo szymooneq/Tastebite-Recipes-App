@@ -1,8 +1,8 @@
 export default function NotFound(props) {
   return (
-    <>
-      <h2>404</h2>
-      <p>Nie znaleziono takiej strony.</p>
-    </>
+    <div className="my-16 text-center font-bold text-lg italic text-black dark:text-white">
+      <h2>Błąd 404!</h2>
+      <p>Strona którą szukasz nie istnieje...</p>
+    </div>
   )
 }

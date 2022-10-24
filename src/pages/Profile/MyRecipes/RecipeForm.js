@@ -1,12 +1,10 @@
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
-import DynamicInput from '../../../components/Input/DynamicInput';
-import Input from '../../../components/Input/Input';
+import DynamicField from '../../../components/Field/DynamicField';
+import Field from '../../../components/Field/Field';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
 import { roundToTwo } from '../../../helpers/roundToTwo';
 import { recipeSchema } from '../../../schemas/formSchemas';
-
-// TODO: string spaces validationSchema
 
 export default function RecipeForm(props) {
   const { values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit } = useFormik({
@@ -32,7 +30,6 @@ export default function RecipeForm(props) {
     validationSchema: recipeSchema,
     onSubmit: async (values) => {
       // console.log(values)
-
       try {
         props.onSubmit({
           name: values.name.trim().replace( /  +/g, ' ' ),
@@ -70,10 +67,10 @@ export default function RecipeForm(props) {
               <h2 className="font-bold text-2xl text-center text-black dark:text-white">Główne informacje</h2>
               <hr className="mt-2 mb-7 border-4 border-amber-600" />
                 
-              <Input
+              <Field
                 label="Nazwa"
                 type="text"
-                id="name"
+                name="name"
                 value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -81,10 +78,10 @@ export default function RecipeForm(props) {
                 touch={touched.name}
                 placeholder="Podaj nazwę potrawy..." />
 
-              <Input
+              <Field
                 label="Opis"
                 type="textarea"
-                id="description"
+                name="description"
                 value={values.description}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -92,21 +89,19 @@ export default function RecipeForm(props) {
                 touch={touched?.description}
                 placeholder="Opisz swoją potrawę..." />
 
-              <Input 
+              <Field 
                 label="Zdjęcie (podgląd)" 
                 type="file"
-                id="file"
+                name="file"
                 img={props.recipe?.img || null}
                 file={values.file || null}
                 onChange={value => {setFieldValue("file", value)}}
-                error={errors.file}
-                // touch={touched.file}
-                />
+                error={errors.file} />
 
-              <Input
+              <Field
                 label="Status"
                 type="switch"
-                id="status"
+                name="status"
                 value={values.status}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -114,10 +109,10 @@ export default function RecipeForm(props) {
                 touch={touched.status} />
 
               <div className='flex flex-nowrap justify-between gap-3'>
-                <Input
+                <Field
                   label="Czas (min)"
                   type="number"
-                  id="details.duration"
+                  name="details.duration"
                   value={values.details.duration}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -125,10 +120,10 @@ export default function RecipeForm(props) {
                   touch={touched.details?.duration}
                   placeholder="Minutes..." />
                 
-                <Input
+                <Field
                   label="Porcje (sztuk)"
                   type="number"
-                  id="details.portions"
+                  name="details.portions"
                   value={values.details.portions}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -137,10 +132,10 @@ export default function RecipeForm(props) {
                   placeholder="np. 10 sztuk..." />
               </div>
 
-              <Input
+              <Field
                 label="Trudność"
                 type="select"
-                id="details.level"
+                name="details.level"
                 value={values.details.level}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -157,10 +152,10 @@ export default function RecipeForm(props) {
               <h2 className="font-bold text-2xl text-center text-black dark:text-white">Wartości odżywcze</h2>
               <hr className="mt-2 mb-7 border-4 border-rose-700" />
 
-              <Input
+              <Field
                 label="Kalorie (kcal)"
                 type="number"
-                id="nutrions.calories"
+                name="nutrions.calories"
                 value={values.nutrions.calories}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -170,10 +165,10 @@ export default function RecipeForm(props) {
                 placeholder="Liczba kalorii..." />
 
               <div className='flex flex-col md:flex-row md:gap-3'>
-                <Input
+                <Field
                   label="Białko (g)"
                   type="number"
-                  id="nutrions.protein"
+                  name="nutrions.protein"
                   value={values.nutrions.protein}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -182,10 +177,10 @@ export default function RecipeForm(props) {
                   touch={touched.nutrions?.protein}
                   placeholder="Ilość białka w g..." />
 
-                <Input
+                <Field
                   label="Węglowodany (g)"
                   type="number"
-                  id="nutrions.carbohydrates"
+                  name="nutrions.carbohydrates"
                   value={values.nutrions.carbohydrates}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -194,10 +189,10 @@ export default function RecipeForm(props) {
                   touch={touched.nutrions?.carbohydrates}
                   placeholder="Ilość węglowodanów w g..." />
                   
-                <Input
+                <Field
                   label="Tłuszcze (g)"
                   type="number"
-                  id="nutrions.fat"
+                  name="nutrions.fat"
                   value={values.nutrions.fat}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -214,14 +209,14 @@ export default function RecipeForm(props) {
               <h2 className="font-bold text-2xl text-center text-black dark:text-white">Lista składników</h2>
               <hr className="mt-2 mb-7 border-4 border-blue-700" />
 
-              <DynamicInput list={values.ingredients} updateList={value => setFieldValue("ingredients", value)} type="list-disc" error={errors.ingredients} touch={touched.ingredients} />
+              <DynamicField list={values.ingredients} updateList={value => setFieldValue("ingredients", value)} type="list-disc" error={errors.ingredients} touch={touched.ingredients} />
             </div>
 
             <div className='md:w-96'>
               <h2 className="font-bold text-2xl text-center text-black dark:text-white">Przygotowanie</h2>
               <hr className="mt-2 mb-7 border-4 border-green-700" />
 
-              <DynamicInput list={values.steps} updateList={value => setFieldValue("steps", value)} type="list-decimal" error={errors.steps} touch={touched.steps} />
+              <DynamicField list={values.steps} updateList={value => setFieldValue("steps", value)} type="list-decimal" error={errors.steps} touch={touched.steps} />
             </div>
           </div>
         </div>

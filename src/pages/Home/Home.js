@@ -1,12 +1,10 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import BestProduct from '../../components/Products/BestProduct/BestProduct';
-import LastProduct from '../../components/Products/LastProduct/LastProduct';
+import BestRecipe from '../../components/Products/BestRecipe/BestRecipe';
+import LastViewedRecipe from '../../components/Products/LastViewedRecipe/LastViewedRecipe';
 import Products from '../../components/Products/Products';
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon";
 import { db } from "../../firebase";
-import axios from "../../firebase/axios";
-import { objectToArrayWithId } from "../../helpers/objectToArrayWithId";
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import useLocalStorage from "../../hooks/useLocalStorage";
 
@@ -24,12 +22,15 @@ export default function Home(props) {
     }
   }
 
-  const openHotel = (recipe) => setLastProduct(recipe)
-  const removeLastProduct = () => setLastProduct(null)
+  const openHotel = (recipe) => {
+    setLastProduct(recipe)
+  }
+  const removeLastProduct = () => {
+    setLastProduct(null)
+  }
 
   const fetchData = async () => {
     let list = []
-
     try {
       const q = query(collection(db, "recipes"), where("status", "==", true))
       const querySnapshot = await getDocs(q)
@@ -50,8 +51,8 @@ export default function Home(props) {
 
   return loading ? <LoadingIcon /> : (
     <>
-      {/* {lastProducts && <LastProduct {...lastProducts} onRemove={removeLastProduct} />} */}
-      {/* {getBestRecipe() && <BestProduct getHotel={getBestRecipe} onOpen={openHotel} />} */}
+      {/* {lastProducts && <LastViewedRecipe {...lastProducts} onRemove={removeLastProduct} />} */}
+      {/* {getBestRecipe() && <BestRecipe getHotel={getBestRecipe} onOpen={openHotel} />} */}
       {products ? <Products onOpen={openHotel} products={products} header="Wszystkich przepisów" /> : <div>Nie ma żadnego przepisu</div>}
     </>
   )

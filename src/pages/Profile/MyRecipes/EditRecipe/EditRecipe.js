@@ -9,7 +9,7 @@ import useDocumentTitle from "../../../../hooks/useDocumentTitle";
 import RecipeForm from '../RecipeForm';
 
 export default function EditRecipe(props) {
-  useDocumentTitle("Edytuj | Moje przepisy")
+  useDocumentTitle("Profil | Moje przepisy | Edytuj")
   const { id } = useParams()
   const { user } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)

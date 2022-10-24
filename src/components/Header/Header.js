@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import ThemeButton from '../UI/ThemeButton/ThemeButton';
 import styles from './Header.module.css';
-// import InspiringQuote from './InspiringQuote/InspiringQuote';
+// import Quote from './Quote/Quote';
 import Searchbar from './Searchbar/Searchbar';
 
 export default function Header() {
   const [mousePosition, setMousePosition] = useState({})
-  const paralaxStyles = { transform: `translate(${mousePosition?.x / -20}px, ${mousePosition?.y / 120}px)` }
+  const paralaxStyles = { transform: `translate(${mousePosition?.x / -20}px, ${mousePosition?.y / 80}px)` }
 
   useEffect(() => {
     document.body.addEventListener('mousemove', (e) => setMousePosition({ x: e.pageX, y: e.pageY}))
@@ -20,7 +20,7 @@ export default function Header() {
         <Searchbar />
         <ThemeButton />
       </div>
-      {/* <InspiringQuote /> */}
+      {/* <Quote /> */}
     </header>
   );
 }

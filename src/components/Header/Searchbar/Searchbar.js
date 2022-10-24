@@ -1,7 +1,6 @@
+import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { useEffect, useRef, useState } from "react"
-import { useNavigate } from 'react-router'
-import { Link } from "react-router-dom"
-import { searchIcon } from "../../UI/svg"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Searchbar() {
   const [term, setTerm] = useState('')
@@ -9,7 +8,7 @@ export default function Searchbar() {
   const navigate = useNavigate()
 
   const onKeyDownHandler = e => {
-    e.key === 'Enter' && navigate(`szukaj/${term}`)
+    e.key === 'Enter' && navigate(`/szukaj/${term}`)
   }
 
   const focusInput = () => {
@@ -23,7 +22,7 @@ export default function Searchbar() {
   return (
     <div className="relative w-80">
       <div className="pl-3 flex absolute inset-y-0 left-0 items-center pointer-events-none">
-        {searchIcon}
+        <MagnifyingGlassIcon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
       </div>
 
       <input 

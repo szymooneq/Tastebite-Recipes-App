@@ -1,15 +1,16 @@
 import { useFormik } from "formik"
 import { useContext, useState } from "react"
-import Input from "../../../components/Input/Input"
+import Field from "../../../components/Field/Field"
 import Alert from "../../../components/UI/Alert/Alert"
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
 import AuthContext from "../../../context/AuthContext"
-import axios from "../../../firebase/axios-auth"
 import useDocumentTitle from "../../../hooks/useDocumentTitle"
 import { registerSchema } from "../../../schemas/formSchemas"
 
+// TODO: profile update information
+
 export default function ProfileDetails() {
-  useDocumentTitle("Edytuj profil")
+  useDocumentTitle("Profil | Edycja profilu")
   const { user, login } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)
@@ -23,7 +24,7 @@ export default function ProfileDetails() {
     validationSchema: registerSchema,
     onSubmit: async (values) => {
       setLoading(true)
-      try {
+      /* try {
         const res = await axios.post('accounts:update', {
           idToken: user.token,
           email: values.email,
@@ -39,7 +40,7 @@ export default function ProfileDetails() {
       } catch (ex) {
         //console.log(ex.response)
         setMessage({info: ex.response.data.error.message, theme: "danger"})
-      }
+      } */
       setLoading(false)
     }
   })
@@ -49,7 +50,7 @@ export default function ProfileDetails() {
       {message && <Alert message={message.info} theme={message.theme} />}
 
       <form onSubmit={handleSubmit}>
-        <Input
+        <Field
           label="Email"
           type="email"
           id="email"
@@ -60,7 +61,7 @@ export default function ProfileDetails() {
           touch={touched.email}
           placeholder="Podaj adres e-mail..." />
 
-        <Input
+        <Field
           label="Nowe hasło"
           type="password"
           id="password"
@@ -71,7 +72,7 @@ export default function ProfileDetails() {
           touch={touched.password}
           placeholder="Podaj hasło..." />
 
-        <Input
+        <Field
           label="Potwierdź nowe hasło"
           type="password"
           id="confirmPassword"
