@@ -1,71 +1,75 @@
-import { ReactLocation, Route } from "react-location"
-import ProtectedRoutes from "./components/Content/ProtectedRoutes"
-import NotFound from "./pages/404/404"
-import Login from "./pages/Auth/Login/Login"
-import Register from "./pages/Auth/Register/Register"
-import Home from "./pages/Home/Home"
-import ProductView from "./pages/ProductView/ProductView"
-import AddRecipe from "./pages/Profile/MyRecipes/AddRecipe/AddRecipe"
-import EditRecipe from "./pages/Profile/MyRecipes/EditRecipe/EditRecipe"
-import MyRecipes from "./pages/Profile/MyRecipes/MyRecipes"
-import Profile from "./pages/Profile/Profile"
-import ProfileDetails from "./pages/Profile/ProfileDetails/ProfileDetails"
-import Search from "./pages/Search/Search"
+import React from "react"
+import { createBrowserRouter } from "react-router-dom"
+import RootLayout from "./components/Layout/RootLayout"
 
-export const routes = [
+const NotFound = React.lazy(() => import("./pages/404/404"))
+const Home = React.lazy(() => import("./pages/Home/Home"))
+const Search = React.lazy(() => import("./pages/Search/Search"))
+const ProductView = React.lazy(() => import("./pages/ProductView/ProductView"))
+const Profile = React.lazy(() => import("./pages/Profile/Profile"))
+const ProfileDetails = React.lazy(() => import("./pages/Profile/ProfileDetails/ProfileDetails"))
+const MyRecipes = React.lazy(() => import("./pages/Profile/MyRecipes/MyRecipes"))
+const AddRecipe = React.lazy(() => import("./pages/Profile/MyRecipes/AddRecipe/AddRecipe"))
+const EditRecipe = React.lazy(() => import("./pages/Profile/MyRecipes/EditRecipe/EditRecipe"))
+const Login = React.lazy(() => import("./pages/Auth/Login/Login"))
+const Register = React.lazy(() => import("./pages/Auth/Register/Register"))
+
+export const router = createBrowserRouter([
   {
-    path: '/',
-    element: <Home />
-  },
-  {
-    path: 'logowanie',
-    element: <Login />
-  },
-  {
-    path: 'rejestracja',
-    element: <Register />
-  },
-  {
-    path: "przepis/:id",
-    element: <ProductView />
-  },
-  {
-    path: "szukaj/:term",
-    element: <Search />,
-  },
-  /* {
-    element: <ProtectedRoutes />,
+    element: <RootLayout />,
     children: [
+      {
+        path: "/",
+        element: <Home />
+      },
+      {
+        path: "przepis/:id/:name",
+        element: <ProductView />,
+      },
+      {
+        path: "logowanie",
+        element: <Login />
+      },
+      {
+        path: "rejestracja",
+        element: <Register />,
+      },
+      {
+        path: "szukaj",
+        element: <Search />,
+        children: [
+          {
+            path: ':term',
+            element: <Search />
+          }
+        ]
+      },
       {
         path: "profil",
         element: <Profile />,
         children: [
           {
-            path: "/",
+            path: "",
             element: <ProfileDetails />
           },
           {
             path: "przepisy",
             element: <MyRecipes />,
-            children: [
-              {
-                path: "dodaj",
-                element: <AddRecipe />
-              },
-              {
-                path: "edytuj/:id",
-                element: <EditRecipe />
-              }
-            ]
+          },
+          {
+            path: "przepisy/dodaj",
+            element: <AddRecipe />,
+          },
+          {
+            path: "przepisy/edytuj/:id",
+            element: <EditRecipe />,
           }
         ]
+      },
+      {
+        path: "*",
+        element: <NotFound />
       }
     ]
-  }, */
-  {
-    path: "*",
-    element: <NotFound />
-  },
-]
-
-export const location = new ReactLocation()
+  }
+])

@@ -1,9 +1,12 @@
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { Navigate, NavLink, Outlet, useLocation } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
 
 export default function Profile() {
   const location = useLocation()
+  const context = useContext(AuthContext)
 
-  return (
+  return context.user ? (
     <>
       <nav className="-mt-6 text-sm font-semibold text-center border-b text-gray-500 border-gray-200 dark:text-gray-400 dark:border-gray-700">
         <ul className="flex flex-wrap -mb-px">
@@ -39,5 +42,5 @@ export default function Profile() {
         <Outlet />
       </div>
     </>
-  )
+  ) : <Navigate to={'/logowanie'} />
 }

@@ -27,15 +27,15 @@ export default function ProductCard(props) {
         </h5>
         
         <div className="flex gap-2">
-          <Badge color="indigo">
-            <ClockIcon className="mr-1 w-3 h-3" />{props.details.duration} min
-          </Badge>
-          <Badge color="green">
-            <ChartBarIcon className="mr-1 w-3 h-3" />{props.details.level}
-          </Badge>
-          <Badge color="yellow">
-            <StarIcon className="mr-1 w-3 h-3" />{props.rating ?? "Brak ocen"}
-          </Badge>
+          <span className={`px-2.5 py-0.5 w-max inline-flex items-center text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-200 dark:text-indigo-900`}>
+              <ClockIcon className="mr-1 w-3 h-3" />{props.details.duration} min
+          </span>
+          <span className={`px-2.5 py-0.5 w-max inline-flex items-center text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-200 dark:text-green-900`}>
+              <ChartBarIcon className="mr-1 w-3 h-3" />{props.details.level}
+          </span>
+          <span className={`px-2.5 py-0.5 w-max inline-flex items-center text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-200 dark:text-yellow-900`}>
+              <StarIcon className="mr-1 w-3 h-3" />{props.rating ?? "Brak ocen"}
+          </span>
         </div>
         
         <p className="min-h-[4.5rem] text-gray-700 dark:text-gray-400">

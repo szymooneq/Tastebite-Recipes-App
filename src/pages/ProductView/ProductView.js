@@ -60,15 +60,15 @@ export default function ProductView(props) {
           <h2 className='text-3xl font-bold dark:text-white'>{recipe.name}</h2>
 
           <div className="flex gap-2">
-            <Badge color="indigo">
+            <span className={`px-2.5 py-0.5 w-max inline-flex items-center text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-200 dark:text-indigo-900`}>
               <ClockIcon className="mr-1 w-3 h-3" />{recipe.details.duration} min
-            </Badge>
-            <Badge color="green">
+            </span>
+            <span className={`px-2.5 py-0.5 w-max inline-flex items-center text-xs font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-200 dark:text-green-900`}>
               <ChartBarIcon className="mr-1 w-3 h-3" />{recipe.details.level}
-            </Badge>
-            <Badge color="yellow">
+            </span>
+            <span className={`px-2.5 py-0.5 w-max inline-flex items-center text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-200 dark:text-yellow-900`}>
               <StarIcon className="mr-1 w-3 h-3" />{recipe.rating ?? "Brak ocen"}
-            </Badge>
+            </span>
           </div>
 
           {loadingImg && (

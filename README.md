@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# Tastebite Recipes App
+![tutorial thumbnail](./src/assets/_thumbnail.jpg)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Application with the ability to add and manage recipes.
 
-## Available Scripts
+https://tastebite-app-sd.vercel.app/
 
-In the project directory, you can run:
+## Main technologies
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-0ea5e9?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Firebase](https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black)
 
-### `npm start`
+## Stack
+- [Firebase](https://firebase.google.com) - backend by Google, app development platform that helps you build and grow apps
+- [Flowbite](https://flowbite.com) - an open-source library of UI components based on the utility-first Tailwind CSS framework featuring dark mode support, a Figma design system, and more
+- [Formik](https://formik.org) - the world's most popular open source form library for React and React Native
+- [React Router](https://reactrouter.com/en/main) - a standard library for routing in React
+- [Yup](https://github.com/jquense/yup) - a schema builder for runtime value parsing and validation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Details
+- created with the React framework
+- CRUD - the ability to create and edit accounts and add and edit new properties
+- data stored on Firebase Cloud Firestore database
+- auth by Firebase Authentication
+- context and reducer used to manage context values
+- suspense for data fetching with lazy loading
+- saving data in local storage using custom hook
+- routing with React Router
+- form validation and sanitization
+- forms created with the Formik library
+- layout and styling with Tailwind CSS
+- responsive website design
+- light/dark mode prefer system color scheme
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tutorial and project structure
+Inside of project, you'll see the following folders and files:
 
-### `npm test`
+```
+PROJECT_ROOT
+├── public              # static assets
+└── src
+    ├── assets          # images and files
+    ├── components      # React components
+    ├── context         # React context and reducer files
+    ├── helpers         # helpful functions
+    ├── hooks           # custom hooks
+    ├── schemas         # yup schemas
+    └── pages           # page files
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Download the repository to your local machine and run to download all missing dependencies:
 
-### `npm run build`
+```
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After that you can run this project using: 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To build your application use:
 
-### `npm run eject`
+```
+npm run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**To manage the content on the app you need to create a new Firebase project. Check the official documentation: https://firebase.google.com/docs**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+After creating your own firebase project, just create the `.env.local` file with the following data in the main folder and restart your application:
+```
+REACT_APP_FIREBASE_KEY = YOUR_FIREBASE_KEY
+REACT_APP_AUTH_DOMAIN = YOUR_FIREBASE_AUTH_DOMAIN
+REACT_APP_PROJECT_ID = YOUR_FIREBASE_PROJECT_ID
+REACT_APP_STORAGE_BUCKET = YOUR_FIREBASE_STORAGE_BUCKET
+REACT_APP_MESSAGING_SENDER_ID = YOUR_FIREBASE_MESSAGING_SENDER_ID
+REACT_APP_APP_ID = YOUR_FIREBASE_APP_ID
+```
