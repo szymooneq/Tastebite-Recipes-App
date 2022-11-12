@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
-import AuthContext from '../../context/AuthContext'
-import { initialState, reducer } from '../../context/Reducer'
-import ThemeContext from '../../context/ThemeContext'
+import AuthContext from '../../context/authContext'
+import { initialState, reducer } from '../../context/reducer'
+import ThemeContext from '../../context/themeContext'
 
 export default function ContextLayout (props) {
   const [state, dispatch] = useReducer(reducer, initialState)

@@ -2,14 +2,14 @@ import { ChartBarIcon, ClockIcon, StarIcon } from '@heroicons/react/20/solid'
 import { doc, getDoc } from "firebase/firestore"
 import { useCallback, useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import Information from "../../components/ProductView/Information"
-import InformationItem from "../../components/ProductView/InformationItem"
-import Badge from "../../components/UI/Badge/Badge"
-import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
-import Skeleton from '../../components/UI/Skeleton/Skeleton'
-import AuthContext from "../../context/AuthContext"
-import { db } from "../../firebase"
-import { roundToTwo } from '../../helpers/roundToTwo'
+import Information from "../components/ProductView/Information"
+import InformationItem from "../components/ProductView/InformationItem"
+import Badge from "../components/UI/Badge/Badge"
+import LoadingIcon from "../components/UI/LoadingIcon/LoadingIcon"
+import Skeleton from '../components/UI/Skeleton/Skeleton'
+import AuthContext from "../context/authContext"
+import { db } from "../firebase"
+import { roundToTwo } from '../lib/helpers/roundToTwo'
 
 export default function ProductView(props) {
   const { user } = useContext(AuthContext)

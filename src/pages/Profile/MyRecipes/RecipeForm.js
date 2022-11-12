@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import DynamicField from '../../../components/Field/DynamicField';
 import Field from '../../../components/Field/Field';
 import LoadingButton from '../../../components/UI/LoadingButton/LoadingButton';
-import { roundToTwo } from '../../../helpers/roundToTwo';
-import { recipeSchema } from '../../../schemas/formSchemas';
+import { roundToTwo } from '../../../lib/helpers/roundToTwo';
+import { recipeSchema } from '../../../lib/schemas/schemas';
 
 export default function RecipeForm(props) {
   const { values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit } = useFormik({

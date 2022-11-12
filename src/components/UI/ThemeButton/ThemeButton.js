@@ -1,6 +1,6 @@
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
 import { useContext } from "react"
-import ThemeContext from "../../../context/ThemeContext"
+import ThemeContext from "../../../context/themeContext"
 
 export default function ThemeButton() {
   const theme = useContext(ThemeContext)

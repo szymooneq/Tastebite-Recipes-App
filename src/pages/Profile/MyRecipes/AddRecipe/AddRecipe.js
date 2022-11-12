@@ -1,10 +1,10 @@
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../../../../context/AuthContext';
+import AuthContext from '../../../../context/authContext';
 import { db } from "../../../../firebase";
-import { uploadFileToStorage } from "../../../../helpers/uploadFileToStorage";
-import useDocumentTitle from "../../../../hooks/useDocumentTitle";
+import { uploadFileToStorage } from "../../../../lib/helpers/uploadFileToStorage";
+import useDocumentTitle from "../../../../lib/hooks/useDocumentTitle";
 import RecipeForm from '../RecipeForm';
 
 export default function AddRecipe() {

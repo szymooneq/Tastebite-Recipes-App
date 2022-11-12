@@ -1,13 +1,12 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import LastViewedRecipe from '../../components/Products/LastViewedRecipe/LastViewedRecipe';
-import Products from '../../components/Products/Products';
-import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon";
-import { db } from "../../firebase";
-import useDocumentTitle from '../../hooks/useDocumentTitle';
-import useLocalStorage from "../../hooks/useLocalStorage";
+import Products from '../components/Products/Products';
+import LoadingIcon from "../components/UI/LoadingIcon/LoadingIcon";
+import { db } from "../firebase";
+import useDocumentTitle from '../lib/hooks/useDocumentTitle';
+import useLocalStorage from "../lib/hooks/useLocalStorage";
 
-export default function Home(props) {
+export default function Home() {
   useDocumentTitle('Strona główna')
   const [lastProducts, setLastProduct] = useLocalStorage('last-recipe', null)
   const [loading, setLoading] = useState(true)

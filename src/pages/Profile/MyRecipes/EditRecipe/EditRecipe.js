@@ -2,10 +2,10 @@ import { doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingIcon from '../../../../components/UI/LoadingIcon/LoadingIcon';
-import AuthContext from '../../../../context/AuthContext';
+import AuthContext from '../../../../context/authContext';
 import { db } from "../../../../firebase";
-import { uploadFileToStorage } from "../../../../helpers/uploadFileToStorage";
-import useDocumentTitle from "../../../../hooks/useDocumentTitle";
+import { uploadFileToStorage } from "../../../../lib/helpers/uploadFileToStorage";
+import useDocumentTitle from "../../../../lib/hooks/useDocumentTitle";
 import RecipeForm from '../RecipeForm';
 
 export default function EditRecipe(props) {

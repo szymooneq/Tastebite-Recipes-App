@@ -3,9 +3,9 @@ import { useContext, useState } from "react"
 import Field from "../../../components/Field/Field"
 import Alert from "../../../components/UI/Alert/Alert"
 import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton"
-import AuthContext from "../../../context/AuthContext"
-import useDocumentTitle from "../../../hooks/useDocumentTitle"
-import { registerSchema } from "../../../schemas/formSchemas"
+import AuthContext from "../../../context/authContext"
+import useDocumentTitle from "../../../lib/hooks/useDocumentTitle"
+import { registerSchema } from "../../../lib/schemas/schemas"
 
 // TODO: profile update information
 

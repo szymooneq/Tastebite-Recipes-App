@@ -1,10 +1,10 @@
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { useCallback, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import Products from "../../components/Products/Products"
-import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
-import { db } from "../../firebase"
-import useLocalStorage from "../../hooks/useLocalStorage"
+import Products from "../components/Products/Products"
+import LoadingIcon from "../components/UI/LoadingIcon/LoadingIcon"
+import { db } from "../firebase"
+import useLocalStorage from "../lib/hooks/useLocalStorage"
 
 // TODO: better searchbar
 
