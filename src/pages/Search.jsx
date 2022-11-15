@@ -1,42 +1,28 @@
-import { collection, getDocs, query, where } from "firebase/firestore"
-import { useCallback, useEffect, useState } from "react"
+import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
-import Products from "../components/Products/Products"
+import RecipeList from "../components/Recipes/RecipeList"
 import LoadingIcon from "../components/UI/LoadingIcon/LoadingIcon"
-import { db } from "../firebase"
+import { getRecipesByTerm } from "../lib/api/recipes"
 import useLocalStorage from "../lib/hooks/useLocalStorage"
 
 // TODO: better searchbar
 
 export default function Search() {
   const { term } = useParams()
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(false)
   const [setLastProduct] = useLocalStorage('last-hotel', null)
 
-  const search = useCallback(async () => {
-    let list = []
-    try {
-      const q = query(collection(db, "recipes"), where("status", "==", true))
-      const querySnapshot = await getDocs(q)
-      querySnapshot.forEach((doc) => {
-        list.push({ id: doc.id, ...doc.data() })
-      })
-      list = list.filter(item => item.name.toLowerCase().includes(term.toLowerCase()))
-      setProducts(list)
-    } catch (ex) {
-      console.log(ex.response)
-    }
-    setLoading(false)
-  }, [term])
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['recipes', term],
+    queryFn: () => getRecipesByTerm(term)
+  })
 
-  const openRecipe = (product) => {
-    setLastProduct(product)
+  const saveLastSeenRecipe = (data) => {
+    setLastProduct(data)
   }
 
-  useEffect(() => {
-    search()
-  }, [search])
+  if (isLoading) return <LoadingIcon />
 
-  return loading ? <LoadingIcon /> : <Products onOpen={openRecipe} products={products} header={`Rezultat wyszukiwania dla "${term ?? ""}"`} />
+  if (error) return 'An error has occurred: ' + error.message
+
+  return <RecipeList onOpen={saveLastSeenRecipe} products={data} header={`Rezultat wyszukiwania dla "${term ?? ""}"`} />
 }

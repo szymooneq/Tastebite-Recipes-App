@@ -3,17 +3,17 @@ import { createUserWithEmailAndPassword } from "firebase/auth"
 import { useFormik } from "formik"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Field from "../../components/Field/Field"
+import Field from "../../components/Forms/Fields/Field"
 import Alert from "../../components/UI/Alert/Alert"
 import LoadingButton from "../../components/UI/LoadingButton/LoadingButton"
-import AuthContext from "../../context/authContext"
+import authContext from "../../context/authContext"
 import { auth } from "../../firebase"
 import useDocumentTitle from "../../lib/hooks/useDocumentTitle"
 import { registerSchema } from "../../lib/schemas/schemas"
 
 export default function Register(props) {
   useDocumentTitle("Rejestracja | Tastebite Recipe App")
-  const { user, login} = useContext(AuthContext)
+  const { user, login} = useContext(authContext)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [registered, setRegistered] = useState(false)

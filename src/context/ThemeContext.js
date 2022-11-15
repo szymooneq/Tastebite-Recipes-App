@@ -1,10 +1,10 @@
 import React from "react";
 
-const ThemeContext = React.createContext({
+const themeContext = React.createContext({
   theme: '',
   changeMode: () => {}
 })
 
-// ThemeContext.displayName = 'ThemeContext'
+// themeContext.displayName = 'themeContext'
 
-export default ThemeContext
+export default themeContext

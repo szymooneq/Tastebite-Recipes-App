@@ -1,6 +1,6 @@
 {
   "name": "tastebite-recipes-app",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "private": true,
   "dependencies": {
     "@heroicons/react": "^2.0.12",
