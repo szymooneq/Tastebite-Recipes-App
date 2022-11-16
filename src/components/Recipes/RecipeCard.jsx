@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom'
-import Badges from '../UI/Badges/Badges'
-import Image from '../UI/Skeleton/Image'
+import Badges from '../UI/Badges'
+import Image from '../UI/ImageWithSkeleton/Image'
 
 export default function RecipeCard(props) {
   const clickHandler = () => {

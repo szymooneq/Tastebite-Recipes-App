@@ -4,7 +4,7 @@ import { useFormik } from "formik"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Field from "../../components/Forms/Fields/Field"
-import Alert from "../../components/UI/Alert/Alert"
+import Alerts from "../../components/UI/Alerts"
 import LoadingButton from "../../components/UI/LoadingButton/LoadingButton"
 import authContext from "../../context/authContext"
 import { auth } from "../../firebase"
@@ -52,7 +52,7 @@ export default function Register(props) {
     !registered ? (
       <div className="mx-7 md:mx-auto md:w-96">
         <h2 className="p-5 text-3xl font-bold text-center dark:text-white">Rejestracja</h2>
-        {error && <Alert message={error} theme="danger" />}
+        {error && <Alerts message={error} type="danger" />}
 
         <form onSubmit={handleSubmit}>
           <Field

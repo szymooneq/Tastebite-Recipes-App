@@ -13,19 +13,21 @@ export const getAllRecipes = async () => {
   return recipeList
 }
 
-export const getRecipeByID = async (id) => {
+export const getRecipeView = async (id) => {
   let recipe
   const docRef = doc(db, "recipes", id)
   const docSnap = await getDoc(docRef)
 
   if (docSnap.exists()) {
     recipe = docSnap.data()
+  } else {
+    console.log("No such document!")
   }
-
-  return recipe
+  
+  return recipe ? recipe : "404"
 }
 
-export const getUserRecipe = async (id, user) => {
+export const getEditRecipe = async (id, user) => {
   let recipe
   const docRef = doc(db, "recipes", id)
   const docSnap = await getDoc(docRef)
@@ -34,13 +36,12 @@ export const getUserRecipe = async (id, user) => {
     recipe = docSnap.data()
   } else {
     console.log("No such document!")
-    recipe = null
   }
 
-  return recipe
+  return recipe ? recipe : "404"
 }
 
-export const getRecipesByTerm = async (term) => {
+export const getSearchingRecipes = async (term) => {
   let recipeList = []
   const q = query(collection(db, "recipes"), where("status", "==", true))
   const querySnapshot = await getDocs(q)
@@ -86,7 +87,7 @@ export const uploadFileToStorage = (file, recipeOwnerId, timeStamp) => {
       }, 
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL)
+          // console.log('File available at', downloadURL)
           resolve(downloadURL)
         })
       }

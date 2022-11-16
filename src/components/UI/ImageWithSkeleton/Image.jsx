@@ -1,5 +1,5 @@
-import { useState } from "react";
-import SkeletonIcon from "./SkeletonIcon";
+import { useState } from "react"
+import { skeletonIcon } from "./skeletonIcon"
 
 export default function Image({ className, src, alt }) {
   const [loadingImg, setLoadingImg] = useState(true)
@@ -8,7 +8,7 @@ export default function Image({ className, src, alt }) {
     <>
       {loadingImg && (
         <div className={`${className} flex justify-center items-center animate-pulse bg-gray-300 dark:bg-gray-700`}>
-          <SkeletonIcon />
+          {skeletonIcon}
         </div>
       )}
 

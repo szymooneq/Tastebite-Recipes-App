@@ -1,4 +1,4 @@
-import PreviewImage from "./PreviewImage";
+import PreviewImage from "./PreviewImage"
 
 const Text = (props) => {
   return (
@@ -238,9 +238,9 @@ export default function Field(props) {
     case "email":
       return <Text {...props} type="email" />
     case "password":
-        return <Text {...props} type="password" />
+      return <Text {...props} type="password" />
     case "number":
-        return <Number {...props} />
+      return <Number {...props} />
     case "select":
       return <Select {...props} />
     case "checkbox":

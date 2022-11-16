@@ -1,23 +1,24 @@
 import { useQuery } from "@tanstack/react-query"
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore"
 import { useContext } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import RecipeForm from '../../../components/Forms/RecipeForm'
-import LoadingIcon from '../../../components/UI/LoadingIcon/LoadingIcon'
+import LoadingIcon from '../../../components/UI/LoadingIcon'
 import authContext from '../../../context/authContext'
 import { db } from "../../../firebase"
-import { getUserRecipe, uploadFileToStorage } from "../../../lib/api/recipes"
+import { getEditRecipe, uploadFileToStorage } from "../../../lib/api/recipes"
 import useDocumentTitle from "../../../lib/hooks/useDocumentTitle"
 
 export default function EditRecipe() {
-  useDocumentTitle("Profil | Moje przepisy | Edytuj")
+  useDocumentTitle("Profil | Moje przepisy | Edycja")
   const { id } = useParams()
   const { user } = useContext(authContext)
   const navigate = useNavigate()
 
   const { isLoading, error, data } = useQuery({
     queryKey: ['editRecipe', id],
-    queryFn: () => getUserRecipe(id, user)
+    queryFn: () => getEditRecipe(id, user),
+    cacheTime: 1
   })
 
   const editExistingRecipe = async (form) => {
@@ -38,5 +39,5 @@ export default function EditRecipe() {
 
   if (error) return 'An error has occurred: ' + error.message
 
-  return <RecipeForm recipe={data} buttonText="Zaaktualizuj przepis" onSubmit={editExistingRecipe} />
+  return data !== "404" ? <RecipeForm recipe={data} buttonText="Zaaktualizuj przepis" onSubmit={editExistingRecipe} /> : <Navigate to="/profil/przepisy" />
 }

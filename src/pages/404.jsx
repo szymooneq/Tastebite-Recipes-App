@@ -1,4 +1,4 @@
-export default function NotFound(props) {
+export default function NotFound() {
   return (
     <div className="my-16 text-center font-bold text-lg italic text-black dark:text-white">
       <h2>Błąd 404!</h2>

@@ -2,7 +2,7 @@ import { collection, deleteDoc, doc, getDocs, query, where } from "firebase/fire
 import { deleteObject, ref } from "firebase/storage"
 import { useCallback, useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon"
+import LoadingIcon from "../../components/UI/LoadingIcon"
 import authContext from "../../context/authContext"
 import { db, storage } from "../../firebase"
 import useDocumentTitle from "../../lib/hooks/useDocumentTitle"

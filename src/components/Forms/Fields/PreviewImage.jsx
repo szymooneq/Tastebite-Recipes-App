@@ -1,27 +1,16 @@
 import { useState } from 'react'
-import LoadingIcon from '../../UI/LoadingIcon/LoadingIcon'
+import Image from '../../UI/ImageWithSkeleton/Image'
 
-export default function PreviewImage(props) {
-  const [preview, setPreview] = useState(props?.img)
-  const [loading, setLoading] = useState(true)
+export default function PreviewImage({ file, img }) {
+  const [preview, setPreview] = useState(img)
 
-  if(props.file) {
+  if(file) {
     const reader = new FileReader()
-    reader.readAsDataURL(props.file)
+    reader.readAsDataURL(file)
     reader.onload = () => {
       setPreview(reader.result)
     }
   }
 
-  return preview && (
-    <>
-      {loading && <LoadingIcon />}
-      <img 
-        style={{display: loading ? "none" : "block"}} 
-        src={preview} 
-        alt="Preview"
-        onLoad={() => setLoading(false)} 
-        className="w-full mb-2 h-52 rounded-lg object-cover object-center" />
-    </>
-  )
+  return preview && <Image className="w-full mb-2 h-52 rounded-lg object-cover object-center" src={preview} alt="Food preview" />
 }

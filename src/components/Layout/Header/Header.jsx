@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import ThemeButton from '../../UI/ThemeButton/ThemeButton';
-import styles from './Header.module.css';
-// import Quote from './Quote/Quote';
-import Searchbar from './Searchbar/Searchbar';
+import { useEffect, useState } from 'react'
+import ThemeButton from '../../UI/ThemeButton'
+import styles from './Header.module.css'
+// import Quote from './Quote/Quote'
+import Searchbar from './Searchbar/Searchbar'
 
 export default function Header() {
   const [mousePosition, setMousePosition] = useState({})

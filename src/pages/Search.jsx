@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
 import RecipeList from "../components/Recipes/RecipeList"
-import LoadingIcon from "../components/UI/LoadingIcon/LoadingIcon"
-import { getRecipesByTerm } from "../lib/api/recipes"
+import LoadingIcon from "../components/UI/LoadingIcon"
+import { getSearchingRecipes } from "../lib/api/recipes"
 import useLocalStorage from "../lib/hooks/useLocalStorage"
 
 // TODO: better searchbar
@@ -13,7 +13,7 @@ export default function Search() {
 
   const { isLoading, error, data } = useQuery({
     queryKey: ['recipes', term],
-    queryFn: () => getRecipesByTerm(term)
+    queryFn: () => getSearchingRecipes(term)
   })
 
   const saveLastSeenRecipe = (data) => {

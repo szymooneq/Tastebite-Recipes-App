@@ -3,7 +3,7 @@ import authContext from "../../context/authContext"
 import { initialState, reducer } from "../../context/reducer"
 import themeContext from "../../context/themeContext"
 
-export default function AppContext({ children }) {
+export default function ContextLayout({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   return (

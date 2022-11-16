@@ -15,22 +15,25 @@ https://tastebite-app-sd.vercel.app/
 
 ## Stack
 - [Firebase](https://firebase.google.com) - backend by Google, app development platform that helps you build and grow apps
-- [Flowbite](https://flowbite.com) - an open-source library of UI components based on the utility-first Tailwind CSS framework featuring dark mode support, a Figma design system, and more
+- [Flowbite](https://flowbite.com) - an open-source library of UI components based on the utility-first Tailwind CSS framework
 - [Formik](https://formik.org) - the world's most popular open source form library for React and React Native
+- [Heroicons](https://heroicons.com/) - beautiful hand-crafted SVG icons, by the makers of Tailwind CSS
 - [React Router](https://reactrouter.com/en/main) - a standard library for routing in React
+- [React Query](https://tanstack.com/query/v4) - powerful asynchronous state management for TS/JS, React, Solid, Vue and Svelte
 - [Yup](https://github.com/jquense/yup) - a schema builder for runtime value parsing and validation
 
 ## Details
 - created with the React framework
-- CRUD - the ability to create and edit accounts and add and edit new properties
-- data stored on Firebase Cloud Firestore database
+- CRUD - the ability to manage account and recipes
+- data stored on Cloud Firestore
+- data fetching and caching with Tanstack React Query
 - auth by Firebase Authentication
 - context and reducer used to manage context values
 - suspense for data fetching with lazy loading
 - saving data in local storage using custom hook
-- routing with React Router
+- routing with React Router v6.4
+- forms created with the Formik
 - form validation and sanitization
-- forms created with the Formik library
 - layout and styling with Tailwind CSS
 - responsive website design
 - light/dark mode prefer system color scheme
@@ -45,9 +48,11 @@ PROJECT_ROOT
     ├── assets          # images and files
     ├── components      # React components
     ├── context         # React context and reducer files
-    ├── helpers         # helpful functions
-    ├── hooks           # custom hooks
-    ├── schemas         # yup schemas
+    ├── lib             
+    │   ├── api         # fetching functions
+    │   ├── helpers     # helpful functions
+    │   ├── hooks       # custom hooks
+    │   └── schemas     # yup schemas
     └── pages           # page files
 ```
 
@@ -69,7 +74,7 @@ To build your application use:
 npm run build
 ```
 
-**To manage the content on the app you need to create a new Firebase project. Check the official documentation: https://firebase.google.com/docs**
+**To manage the app content you need to create a new Firebase project. Check the official documentation: https://firebase.google.com/docs**
 
 After creating your own firebase project, just create the `.env.local` file with the following data in the main folder and restart your application:
 ```

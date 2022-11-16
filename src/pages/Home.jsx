@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query"
 import RecipeList from '../components/Recipes/RecipeList'
-import LoadingIcon from "../components/UI/LoadingIcon/LoadingIcon"
+import LoadingIcon from "../components/UI/LoadingIcon"
 import { getAllRecipes } from "../lib/api/recipes"
 import useDocumentTitle from '../lib/hooks/useDocumentTitle'
 import useLocalStorage from "../lib/hooks/useLocalStorage"
 
 export default function Home() {
-  useDocumentTitle('Strona główna')
+  useDocumentTitle('Home | Tastebite Recipes App')
   const [lastProducts, setLastProduct] = useLocalStorage('last-recipe', null)
 
   const { isLoading, error, data } = useQuery({

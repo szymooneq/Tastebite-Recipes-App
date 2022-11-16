@@ -12,10 +12,10 @@ export const reducer = (state, action) => {
       window.localStorage.setItem('theme', value);
       return { ...state, theme: value}
     case 'login':
-      window.localStorage.setItem('token-data', JSON.stringify(action.user));
+      window.localStorage.setItem('token-data', JSON.stringify(action.user))
       return { ...state, user: action.user }
     case 'logout':
-      window.localStorage.removeItem('token-data');
+      window.localStorage.removeItem('token-data')
       return { ...state, user: null }
     default:
       throw new Error('Nie ma takiej akcji: ' + action.type)

@@ -1,7 +1,7 @@
 import { useFormik } from "formik"
 import { useContext, useState } from "react"
 import Field from "../../components/Forms/Fields/Field"
-import Alert from "../../components/UI/Alert/Alert"
+import Alerts from "../../components/UI/Alerts"
 import LoadingButton from "../../components/UI/LoadingButton/LoadingButton"
 import authContext from "../../context/authContext"
 import useDocumentTitle from "../../lib/hooks/useDocumentTitle"
@@ -10,7 +10,7 @@ import { registerSchema } from "../../lib/schemas/schemas"
 // TODO: profile update information
 
 export default function UserDetails() {
-  useDocumentTitle("Profil | Edycja profilu")
+  useDocumentTitle("Profil | Szczegóły profilu")
   const { user, login } = useContext(authContext)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)
@@ -47,7 +47,7 @@ export default function UserDetails() {
 
   return (
     <div className="mx-7 md:mx-auto md:w-96">
-      {message && <Alert message={message.info} theme={message.theme} />}
+      {message && <Alerts message={message.info} type={message.theme} />}
 
       <form onSubmit={handleSubmit}>
         <Field

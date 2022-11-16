@@ -7,10 +7,10 @@ import { roundToTwo } from '../../lib/helpers/roundToTwo'
 import { recipeSchema } from '../../lib/schemas/schemas'
 import LoadingButton from '../UI/LoadingButton/LoadingButton'
 
-export default function RecipeForm(props) {
+export default function RecipeForm({ recipe, onSubmit, buttonText }) {
   const [loading, setLoading] = useState(false)
   const { values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: props.recipe || {
+    initialValues: recipe || {
       name: '',
       description: '',
       file: null,
@@ -32,7 +32,7 @@ export default function RecipeForm(props) {
     validationSchema: recipeSchema,
     onSubmit: async (values) => {
       setLoading(true)
-      props.onSubmit({
+      onSubmit({
         name: values.name.trim().replace( /  +/g, ' ' ),
         description: values.description.trim().replace( /  +/g, ' ' ),
         file: values.file,
@@ -92,7 +92,7 @@ export default function RecipeForm(props) {
                 label="Zdjęcie (podgląd)" 
                 type="file"
                 name="file"
-                img={props.recipe?.img || null}
+                img={recipe?.img || null}
                 file={values.file || null}
                 onChange={value => {setFieldValue("file", value)}}
                 error={errors.file} />
@@ -225,7 +225,7 @@ export default function RecipeForm(props) {
           <LoadingButton 
             loading={loading} 
             loadingMessage="Dodawanie...">
-              {props.buttonText}
+              {buttonText}
           </LoadingButton>
         </div>
           

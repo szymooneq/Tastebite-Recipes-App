@@ -1,25 +1,23 @@
 import { useQuery } from '@tanstack/react-query'
-import { useNavigate, useParams } from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom"
 import Details from "../components/Recipes/[id]/Details"
 import Ingredients from '../components/Recipes/[id]/Ingredients'
 import Nutrions from '../components/Recipes/[id]/Nutrions'
-import Badges from '../components/UI/Badges/Badges'
-import LoadingIcon from "../components/UI/LoadingIcon/LoadingIcon"
-import Image from '../components/UI/Skeleton/Image'
-import { getRecipeByID } from '../lib/api/recipes'
+import Badges from '../components/UI/Badges'
+import Image from '../components/UI/ImageWithSkeleton/Image'
+import LoadingIcon from "../components/UI/LoadingIcon"
+import { getRecipeView } from '../lib/api/recipes'
 
 export default function ProductView() {
   const { id } = useParams()
-  const navigate = useNavigate()
 
   const { isLoading, error, data } = useQuery({
     queryKey: ['recipe', id],
-    queryFn: () => getRecipeByID(id).then(res => {
-      if(res) {
-        return res
-      } else {
-        navigate('/')
+    queryFn: () => getRecipeView(id).then((res) => {
+      if(res !== "404") {
+        document.title = `${res.name} | Tastebite Recipes App`
       }
+      return res
     })
   })
 
@@ -29,7 +27,7 @@ export default function ProductView() {
 
   if (error) return 'An error has occurred: ' + error.message
 
-  return (
+  return data !== "404" ? (
     <div className='mx-4 lg:mx-auto lg:w-max'>
       <div className="grid gap-4 lg:grid-cols-3 lg:w-[60rem] xl:w-[70rem]">
 
@@ -55,5 +53,5 @@ export default function ProductView() {
         
       </div>
     </div>
-  )
+  ) : <Navigate to="/" />
 }
