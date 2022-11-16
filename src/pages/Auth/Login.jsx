@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom"
 import Field from "../../components/Forms/Fields/Field"
 import Alerts from "../../components/UI/Alerts"
 import LoadingButton from "../../components/UI/LoadingButton/LoadingButton"
-import authContext from "../../context/authContext"
+import AuthContext from "../../context/AuthContext"
 import { auth } from "../../firebase"
 import useDocumentTitle from "../../lib/hooks/useDocumentTitle"
 import { loginSchema } from "../../lib/schemas/schemas"
 
 export default function Login() {
   useDocumentTitle("Logowanie | Tastebite Recipe App")
-  const { user, login } = useContext(authContext)
+  const { user, login } = useContext(AuthContext)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const navigate = useNavigate()

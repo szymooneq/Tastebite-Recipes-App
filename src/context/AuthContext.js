@@ -1,11 +1,11 @@
 import React from "react";
 
-const authContext = React.createContext({
+const AuthContext = React.createContext({
   user: '',
   login: () => {},
   logout: () => {}
 })
 
-// authContext.displayName = 'authContext'
+// AuthContext.displayName = 'AuthContext'
 
-export default authContext
+export default AuthContext

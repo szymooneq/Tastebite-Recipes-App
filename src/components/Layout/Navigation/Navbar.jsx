@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import authContext from '../../../context/authContext'
+import AuthContext from '../../../context/AuthContext'
 import NavItem from './NavItem'
 
 export default function Navbar() {
-  const { user, logout } = useContext(authContext)
+  const { user, logout } = useContext(AuthContext)
   
   const handleLogout = (e) => {
     e.preventDefault()

@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 import { Navigate, NavLink, Outlet, useLocation } from 'react-router-dom'
-import authContext from '../../../context/authContext'
+import AuthContext from '../../../context/AuthContext'
 import ProfileItem from './ProfileItem'
 
 export default function Profile() {
   const { pathname } = useLocation()
-  const { user } = useContext(authContext)
+  const { user } = useContext(AuthContext)
 
   return user ? (
     <>

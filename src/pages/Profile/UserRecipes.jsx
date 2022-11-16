@@ -3,7 +3,7 @@ import { deleteObject, ref } from "firebase/storage"
 import { useCallback, useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import LoadingIcon from "../../components/UI/LoadingIcon"
-import authContext from "../../context/authContext"
+import AuthContext from "../../context/AuthContext"
 import { db, storage } from "../../firebase"
 import useDocumentTitle from "../../lib/hooks/useDocumentTitle"
 
@@ -11,7 +11,7 @@ import useDocumentTitle from "../../lib/hooks/useDocumentTitle"
 
 export default function UserDetails() {
   useDocumentTitle("Profil | Moje przepisy")
-  const { user } = useContext(authContext)
+  const { user } = useContext(AuthContext)
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(true)
 

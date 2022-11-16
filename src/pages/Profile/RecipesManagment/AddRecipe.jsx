@@ -2,14 +2,14 @@ import { addDoc, collection, Timestamp } from "firebase/firestore"
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RecipeForm from '../../../components/Forms/RecipeForm'
-import authContext from '../../../context/authContext'
+import AuthContext from '../../../context/AuthContext'
 import { db } from "../../../firebase"
 import { uploadFileToStorage } from "../../../lib/api/recipes"
 import useDocumentTitle from "../../../lib/hooks/useDocumentTitle"
 
 export default function AddRecipe() {
   useDocumentTitle("Profil | Moje przepisy | Nowy")
-  const { user } = useContext(authContext)
+  const { user } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const addRecipeToDatabase = async (form) => {

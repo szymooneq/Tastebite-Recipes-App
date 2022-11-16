@@ -1,25 +1,25 @@
 import React, { useReducer } from "react"
-import authContext from "../../context/authContext"
+import AuthContext from "../../context/AuthContext"
 import { initialState, reducer } from "../../context/reducer"
-import themeContext from "../../context/themeContext"
+import ThemeContext from "../../context/ThemeContext"
 
 export default function ContextLayout({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
-    <authContext.Provider
+    <AuthContext.Provider
       value={{
         user: state.user,
         login: (user) => dispatch({ type: "login", user }),
         logout: () => dispatch({ type: "logout" })
       }}>
-      <themeContext.Provider
+      <ThemeContext.Provider
         value={{
           theme: state.theme,
           changeMode: () => dispatch({ type: "changeTheme" })
         }}>
         {children}
-      </themeContext.Provider>
-    </authContext.Provider>
+      </ThemeContext.Provider>
+    </AuthContext.Provider>
   )
 }

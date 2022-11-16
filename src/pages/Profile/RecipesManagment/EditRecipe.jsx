@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import RecipeForm from '../../../components/Forms/RecipeForm'
 import LoadingIcon from '../../../components/UI/LoadingIcon'
-import authContext from '../../../context/authContext'
+import AuthContext from '../../../context/AuthContext'
 import { db } from "../../../firebase"
 import { getEditRecipe, uploadFileToStorage } from "../../../lib/api/recipes"
 import useDocumentTitle from "../../../lib/hooks/useDocumentTitle"
@@ -12,7 +12,7 @@ import useDocumentTitle from "../../../lib/hooks/useDocumentTitle"
 export default function EditRecipe() {
   useDocumentTitle("Profil | Moje przepisy | Edycja")
   const { id } = useParams()
-  const { user } = useContext(authContext)
+  const { user } = useContext(AuthContext)
   const navigate = useNavigate()
 
   const { isLoading, error, data } = useQuery({
