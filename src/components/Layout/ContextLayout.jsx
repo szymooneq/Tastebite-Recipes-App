@@ -1,6 +1,6 @@
 import React, { useReducer } from "react"
 import AuthContext from "../../context/AuthContext"
-import { initialState, reducer } from "../../context/reducer"
+import { initialState, reducer } from "../../context/Reducer"
 import ThemeContext from "../../context/ThemeContext"
 
 export default function ContextLayout({ children }) {
