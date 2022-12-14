@@ -1,29 +1,37 @@
-import { useFormik } from 'formik'
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import DynamicField from '../../components/Forms/Fields/DynamicField'
-import Field from '../../components/Forms/Fields/Field'
-import { roundToTwo } from '../../lib/helpers/roundToTwo'
-import { recipeSchema } from '../../lib/schemas/schemas'
-import LoadingButton from '../UI/LoadingButton/LoadingButton'
+import { useFormik } from "formik";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import DynamicField from "../../components/Forms/Fields/DynamicField";
+import Field from "../../components/Forms/Fields/Field";
+import { roundToTwo } from "../../lib/helpers/roundToTwo";
+import { recipeSchema } from "../../lib/schemas/schemas";
+import LoadingButton from "../UI/LoadingButton/LoadingButton";
 
 export default function RecipeForm({ recipe, onSubmit, buttonText }) {
-  const [loading, setLoading] = useState(false)
-  const { values, errors, touched, setFieldValue, handleBlur, handleChange, handleSubmit } = useFormik({
+  const [loading, setLoading] = useState(false);
+  const {
+    values,
+    errors,
+    touched,
+    setFieldValue,
+    handleBlur,
+    handleChange,
+    handleSubmit
+  } = useFormik({
     initialValues: recipe || {
-      name: '',
-      description: '',
+      name: "",
+      description: "",
       file: null,
       details: {
-        duration: '',
-        level: '',
-        portions: ''
+        duration: "",
+        level: "",
+        portions: ""
       },
       nutrions: {
-        calories: '',
-        protein: '',
-        carbohydrates: '',
-        fat: ''
+        calories: "",
+        protein: "",
+        carbohydrates: "",
+        fat: ""
       },
       ingredients: [],
       steps: [],
@@ -31,10 +39,10 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
     },
     validationSchema: recipeSchema,
     onSubmit: async (values) => {
-      setLoading(true)
+      setLoading(true);
       onSubmit({
-        name: values.name.trim().replace( /  +/g, ' ' ),
-        description: values.description.trim().replace( /  +/g, ' ' ),
+        name: values.name.trim().replace(/  +/g, " "),
+        description: values.description.trim().replace(/  +/g, " "),
         file: values.file,
         details: {
           duration: values.details.duration,
@@ -47,25 +55,31 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
           carbohydrates: roundToTwo(values.nutrions.carbohydrates),
           fat: roundToTwo(values.nutrions.fat)
         },
-        ingredients: values.ingredients.filter(item => item.length > 0).map(item => item.trim().replace( /  +/g, ' ' )),
-        steps: values.steps.filter(item => item.length > 0).map(item => item.trim().replace( /  +/g, ' ' )),
+        ingredients: values.ingredients
+          .filter((item) => item.length > 0)
+          .map((item) => item.trim().replace(/  +/g, " ")),
+        steps: values.steps
+          .filter((item) => item.length > 0)
+          .map((item) => item.trim().replace(/  +/g, " ")),
         status: values.status
-      })
-      setLoading(false)
+      });
+      setLoading(false);
     }
-  })
+  });
 
   // console.log(values)
 
   return (
     <div className="mx-7 md:mx-auto lg:w-[60rem] xl:w-[70rem]">
       <form onSubmit={handleSubmit}>
-        <div className='flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-7'>
+        <div className="flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-7">
           <div>
-            <div className='md:w-96'>
-              <h2 className="font-bold text-2xl text-center text-black dark:text-white">Główne informacje</h2>
+            <div className="md:w-96">
+              <h2 className="font-bold text-2xl text-center text-black dark:text-white">
+                Główne informacje
+              </h2>
               <hr className="mt-2 mb-7 border-4 border-amber-600" />
-                
+
               <Field
                 label="Nazwa"
                 type="text"
@@ -75,7 +89,8 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
                 onBlur={handleBlur}
                 error={errors.name}
                 touch={touched.name}
-                placeholder="Podaj nazwę potrawy..." />
+                placeholder="Podaj nazwę potrawy..."
+              />
 
               <Field
                 label="Opis"
@@ -86,16 +101,20 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
                 onBlur={handleBlur}
                 error={errors?.description}
                 touch={touched?.description}
-                placeholder="Opisz swoją potrawę..." />
+                placeholder="Opisz swoją potrawę..."
+              />
 
-              <Field 
-                label="Zdjęcie (podgląd)" 
+              <Field
+                label="Zdjęcie (podgląd)"
                 type="file"
                 name="file"
                 img={recipe?.img || null}
                 file={values.file || null}
-                onChange={value => {setFieldValue("file", value)}}
-                error={errors.file} />
+                onChange={(value) => {
+                  setFieldValue("file", value);
+                }}
+                error={errors.file}
+              />
 
               <Field
                 label="Status"
@@ -105,9 +124,10 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 error={errors.status}
-                touch={touched.status} />
+                touch={touched.status}
+              />
 
-              <div className='flex flex-nowrap justify-between gap-3'>
+              <div className="flex flex-nowrap justify-between gap-3">
                 <Field
                   label="Czas (min)"
                   type="number"
@@ -117,8 +137,9 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
                   onBlur={handleBlur}
                   error={errors.details?.duration}
                   touch={touched.details?.duration}
-                  placeholder="Minutes..." />
-                
+                  placeholder="Minutes..."
+                />
+
                 <Field
                   label="Porcje (sztuk)"
                   type="number"
@@ -128,7 +149,8 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
                   onBlur={handleBlur}
                   error={errors.details?.portions}
                   touch={touched.details?.portions}
-                  placeholder="np. 10 sztuk..." />
+                  placeholder="np. 10 sztuk..."
+                />
               </div>
 
               <Field
@@ -144,11 +166,14 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
                   { value: "Trudne", label: "Trudne" }
                 ]}
                 error={errors.details?.level}
-                touch={touched.details?.level} />
+                touch={touched.details?.level}
+              />
             </div>
 
-            <div className='md:w-96'>
-              <h2 className="font-bold text-2xl text-center text-black dark:text-white">Wartości odżywcze</h2>
+            <div className="md:w-96">
+              <h2 className="font-bold text-2xl text-center text-black dark:text-white">
+                Wartości odżywcze
+              </h2>
               <hr className="mt-2 mb-7 border-4 border-rose-700" />
 
               <Field
@@ -161,9 +186,10 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
                 error={errors.nutrions?.calories}
                 touch={touched.nutrions?.calories}
                 step="0.1"
-                placeholder="Liczba kalorii..." />
+                placeholder="Liczba kalorii..."
+              />
 
-              <div className='flex flex-col md:flex-row md:gap-3'>
+              <div className="flex flex-col md:flex-row md:gap-3">
                 <Field
                   label="Białko (g)"
                   type="number"
@@ -174,7 +200,8 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
                   step="0.1"
                   error={errors.nutrions?.protein}
                   touch={touched.nutrions?.protein}
-                  placeholder="Ilość białka w g..." />
+                  placeholder="Ilość białka w g..."
+                />
 
                 <Field
                   label="Węglowodany (g)"
@@ -186,8 +213,9 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
                   step="0.1"
                   error={errors.nutrions?.carbohydrates}
                   touch={touched.nutrions?.carbohydrates}
-                  placeholder="Ilość węglowodanów w g..." />
-                  
+                  placeholder="Ilość węglowodanów w g..."
+                />
+
                 <Field
                   label="Tłuszcze (g)"
                   type="number"
@@ -198,39 +226,56 @@ export default function RecipeForm({ recipe, onSubmit, buttonText }) {
                   step="0.1"
                   error={errors.nutrions?.fat}
                   touch={touched.nutrions?.fat}
-                  placeholder="Ilość tłuszczy w g..." />
+                  placeholder="Ilość tłuszczy w g..."
+                />
               </div>
             </div>
           </div>
-          
+
           <div>
-            <div className='md:w-96'>
-              <h2 className="font-bold text-2xl text-center text-black dark:text-white">Lista składników</h2>
+            <div className="md:w-96">
+              <h2 className="font-bold text-2xl text-center text-black dark:text-white">
+                Lista składników
+              </h2>
               <hr className="mt-2 mb-7 border-4 border-blue-700" />
 
-              <DynamicField list={values.ingredients} updateList={value => setFieldValue("ingredients", value)} type="list-disc" error={errors.ingredients} touch={touched.ingredients} />
+              <DynamicField
+                list={values.ingredients}
+                updateList={(value) => setFieldValue("ingredients", value)}
+                type="list-disc"
+                error={errors.ingredients}
+                touch={touched.ingredients}
+              />
             </div>
 
-            <div className='md:w-96'>
-              <h2 className="font-bold text-2xl text-center text-black dark:text-white">Przygotowanie</h2>
+            <div className="md:w-96">
+              <h2 className="font-bold text-2xl text-center text-black dark:text-white">
+                Przygotowanie
+              </h2>
               <hr className="mt-2 mb-7 border-4 border-green-700" />
 
-              <DynamicField list={values.steps} updateList={value => setFieldValue("steps", value)} type="list-decimal" error={errors.steps} touch={touched.steps} />
+              <DynamicField
+                list={values.steps}
+                updateList={(value) => setFieldValue("steps", value)}
+                type="list-decimal"
+                error={errors.steps}
+                touch={touched.steps}
+              />
             </div>
           </div>
         </div>
 
-        <div className='my-12 flex justify-center items-center gap-5'>
-          <Link to={'/profil/przepisy'} className="p-2.5 text-sm font-bold rounded-lg focus:ring-4 focus:outline-none text-white bg-red-700 dark:bg-red-600 hover:bg-red-800 dark:hover:bg-red-700 focus:ring-red-200 dark:focus:ring-red-800">Anuluj</Link>
-          <LoadingButton 
-            loading={loading} 
-            loadingMessage="Dodawanie...">
-              {buttonText}
+        <div className="my-12 flex justify-center items-center gap-5">
+          <Link
+            to={"/profil/przepisy"}
+            className="p-2.5 text-sm font-bold rounded-lg focus:ring-4 focus:outline-none text-white bg-red-700 dark:bg-red-600 hover:bg-red-800 dark:hover:bg-red-700 focus:ring-red-200 dark:focus:ring-red-800">
+            Anuluj
+          </Link>
+          <LoadingButton loading={loading} loadingMessage="Dodawanie...">
+            {buttonText}
           </LoadingButton>
         </div>
-          
       </form>
     </div>
-    
-  )
+  );
 }
