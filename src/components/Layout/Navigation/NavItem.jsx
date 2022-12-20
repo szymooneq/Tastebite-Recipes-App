@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom";
 
 export default function NavItem({ type, href, onClick, children }) {
   switch (type) {
@@ -16,7 +16,7 @@ export default function NavItem({ type, href, onClick, children }) {
           }>
           {children}
         </NavLink>
-      )
+      );
 
     case "logout":
       return (
@@ -26,7 +26,7 @@ export default function NavItem({ type, href, onClick, children }) {
           className="py-2 px-4 rounded cursor-pointer text-gray-700 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
           Wyloguj
         </Link>
-      )
+      );
 
     default:
       return (
@@ -41,6 +41,6 @@ export default function NavItem({ type, href, onClick, children }) {
           }>
           {children}
         </NavLink>
-      )
+      );
   }
 }

@@ -7,17 +7,19 @@ const quotes = [
   `“Real cooking is more about following your heart than following recipes.” – Unknown`,
   `“Cooking is at once child’s play and adult joy. And cooking done with care is an act of love.” – Craig Claiborne`,
   `“So when people ask me, ‘What do you think of Michelin?’ I don’t cook for guides. I cook for customers.” – Gordon Ramsay`,
-  `“The only real stumbling block is fear of failure. In cooking, you’ve got to have a what-the-hell attitude.” – Julia Child`,
+  `“The only real stumbling block is fear of failure. In cooking, you’ve got to have a what-the-hell attitude.” – Julia Child`
 ];
 
 export default function InspiringQuote() {
-  const [quote, setQuote] = useState('Wczytywanie cytatu...')
+  const [quote, setQuote] = useState("Wczytywanie cytatu...");
 
   useEffect(() => {
-    setQuote(quotes[Math.floor(Math.random() * quotes.length)])
-  }, [])
+    setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
+  }, []);
 
   return (
-    <p className="italic text-sm font-bold text-center antialiased text-white">{quote}</p>
-  )
+    <p className="italic text-sm font-bold text-center antialiased text-white">
+      {quote}
+    </p>
+  );
 }

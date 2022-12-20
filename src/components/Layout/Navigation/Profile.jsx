@@ -1,11 +1,11 @@
-import { useContext } from 'react'
-import { Navigate, NavLink, Outlet, useLocation } from 'react-router-dom'
-import AuthContext from '../../../context/AuthContext'
-import ProfileItem from './ProfileItem'
+import { useContext } from "react";
+import { Navigate, NavLink, Outlet, useLocation } from "react-router-dom";
+import AuthContext from "../../../context/AuthContext";
+import ProfileItem from "./ProfileItem";
 
 export default function Profile() {
-  const { pathname } = useLocation()
-  const { user } = useContext(AuthContext)
+  const { pathname } = useLocation();
+  const { user } = useContext(AuthContext);
 
   return user ? (
     <>
@@ -13,8 +13,12 @@ export default function Profile() {
         <ul className="flex flex-wrap -mb-px">
           <ProfileItem href="">Edycja profilu</ProfileItem>
           <ProfileItem href="przepisy">Moje przepisy</ProfileItem>
-          {pathname.includes('dodaj') && <ProfileItem type="button">Nowy przepis</ProfileItem>}
-          {pathname.includes('edytuj') && <ProfileItem type="button">Edycja przepisu</ProfileItem>}
+          {pathname.includes("dodaj") && (
+            <ProfileItem type="button">Nowy przepis</ProfileItem>
+          )}
+          {pathname.includes("edytuj") && (
+            <ProfileItem type="button">Edycja przepisu</ProfileItem>
+          )}
         </ul>
       </nav>
 
@@ -22,5 +26,7 @@ export default function Profile() {
         <Outlet />
       </div>
     </>
-  ) : <Navigate to={'/logowanie'} />
+  ) : (
+    <Navigate to={"/logowanie"} />
+  );
 }

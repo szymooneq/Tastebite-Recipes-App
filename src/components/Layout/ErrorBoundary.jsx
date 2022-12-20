@@ -4,10 +4,10 @@ export default class ErrorBoundary extends Component {
   state = {
     hasError: false,
     error: null
-  }
+  };
 
   static getDerivedStateFromError(error) {
-    return { hasError: true, error }
+    return { hasError: true, error };
   }
 
   componentDidCatch(error, errorInfo) {
@@ -23,9 +23,9 @@ export default class ErrorBoundary extends Component {
         <div className="alert alert-danger">
           Wystąpił jakiś problem: {this.state.error.message}
         </div>
-      )
+      );
     }
 
-    return this.props.children
+    return this.props.children;
   }
 }

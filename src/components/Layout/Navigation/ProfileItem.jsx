@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 
 export default function ProfileItem({ type, href, children }) {
   switch (type) {
@@ -9,7 +9,7 @@ export default function ProfileItem({ type, href, children }) {
             {children}
           </button>
         </li>
-      )
+      );
 
     default:
       return (
@@ -27,6 +27,6 @@ export default function ProfileItem({ type, href, children }) {
             {children}
           </NavLink>
         </li>
-      )
+      );
   }
 }
