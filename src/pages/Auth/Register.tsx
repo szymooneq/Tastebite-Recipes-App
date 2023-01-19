@@ -3,7 +3,8 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useFormik } from 'formik';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Field from '../../components/Forms/Fields/Field';
+import PasswordField from '../../components/Forms/Fields/PasswordField';
+import TextField from '../../components/Forms/Fields/TextField';
 import Alerts from '../../components/UI/Alerts';
 import LoadingButton from '../../components/UI/LoadingButton/LoadingButton';
 import { Context } from '../../lib/context/AppContext';
@@ -57,50 +58,41 @@ function Register(): JSX.Element {
 			{error && <Alerts message={error} type="danger" />}
 
 			<form onSubmit={handleSubmit}>
-				<Field
-					label="Email"
-					type="email"
+				<TextField
 					name="email"
-					value={values.email}
-					onChange={handleChange}
-					onBlur={handleBlur}
-					error={errors.email}
-					touch={touched.email}
+					label="Email"
 					placeholder="Podaj adres e-mail..."
+					value={values.email}
+					error={errors.email}
+					touched={touched.email}
+					onChange={handleChange}
+					onBlur={handleBlur}
 				/>
 
-				<Field
-					label="Hasło"
-					type="password"
+				<PasswordField
 					name="password"
+					label="Hasło"
+					placeholder="Podaj hasło..."
 					value={values.password}
+					error={errors.password}
+					touched={touched.password}
 					onChange={handleChange}
 					onBlur={handleBlur}
-					error={errors.password}
-					touch={touched.password}
-					placeholder="Podaj hasło..."
 				/>
 
-				<Field
-					label="Potwierdź hasło"
-					type="password"
+				<PasswordField
 					name="confirmPassword"
+					label="Potwierdź hasło"
+					placeholder="Potwierdź hasło..."
 					value={values.confirmPassword}
+					error={errors.confirmPassword}
+					touched={touched.confirmPassword}
 					onChange={handleChange}
 					onBlur={handleBlur}
-					error={errors.confirmPassword}
-					touch={touched.confirmPassword}
-					placeholder="Potwierdź hasło..."
 				/>
 
 				<div className="text-center">
-					<LoadingButton
-						disabled={
-							(errors?.email || errors?.password || errors?.confirmPassword) &&
-							true
-						}
-						loading={loading}
-						loadingMessage="Rejestrowanie...">
+					<LoadingButton loading={loading} loadingMessage="Rejestrowanie...">
 						Zarejestruj
 					</LoadingButton>
 				</div>

@@ -72,7 +72,7 @@ export const getSearchingRecipes = async (term: string) => {
 };
 
 export const uploadFileToStorage = (
-	file,
+	file: Blob,
 	recipeOwnerId: string,
 	timeStamp: number
 ) => {

@@ -2,7 +2,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useFormik } from 'formik';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Field from '../../components/Forms/Fields/Field';
+import PasswordField from '../../components/Forms/Fields/PasswordField';
+import TextField from '../../components/Forms/Fields/TextField';
 import Alerts from '../../components/UI/Alerts';
 import LoadingButton from '../../components/UI/LoadingButton/LoadingButton';
 import { Context } from '../../lib/context/AppContext';
@@ -49,35 +50,30 @@ function Login(): JSX.Element {
 			{error && <Alerts message={error} type="danger" />}
 
 			<form onSubmit={handleSubmit}>
-				<Field
-					label="Email"
-					type="email"
+				<TextField
 					name="email"
+					label="Email"
+					placeholder="Podaj adres e-mail..."
 					value={values.email}
+					error={errors.email}
+					touched={touched.email}
 					onChange={handleChange}
 					onBlur={handleBlur}
-					error={errors.email}
-					touch={touched.email}
-					placeholder="Podaj adres e-mail..."
 				/>
 
-				<Field
-					label="Hasło"
-					type="password"
+				<PasswordField
 					name="password"
+					label="Hasło"
+					placeholder="Podaj hasło..."
 					value={values.password}
+					error={errors.password}
+					touched={touched.password}
 					onChange={handleChange}
 					onBlur={handleBlur}
-					error={errors.password}
-					touch={touched.password}
-					placeholder="Podaj adres hasło..."
 				/>
 
 				<div className="text-center">
-					<LoadingButton
-						disabled={(errors?.email || errors?.password) && true}
-						loading={loading}
-						loadingMessage="Logowanie...">
+					<LoadingButton loading={loading} loadingMessage="Logowanie...">
 						Zaloguj
 					</LoadingButton>
 				</div>

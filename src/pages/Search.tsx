@@ -4,7 +4,7 @@ import RecipeList from '../components/Recipes/RecipeList';
 import LoadingIcon from '../components/UI/LoadingIcon';
 import { getSearchingRecipes } from '../lib/firebase/getRecipes';
 import useLocalStorage from '../lib/hooks/useLocalStorage';
-import { Recipe } from '../lib/interfaces/recipe';
+import { IRecipe } from '../lib/interfaces/recipe';
 
 // TODO: better searchbar
 
@@ -17,7 +17,7 @@ function Search(): JSX.Element {
 		queryFn: () => getSearchingRecipes(term)
 	});
 
-	const saveLastSeenRecipe = (recipe: Recipe) => {
+	const saveLastSeenRecipe = (recipe: IRecipe) => {
 		setLastProduct(recipe);
 	};
 

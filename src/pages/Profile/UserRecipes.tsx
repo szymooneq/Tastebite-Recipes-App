@@ -13,14 +13,14 @@ import LoadingIcon from '../../components/UI/LoadingIcon';
 import { Context } from '../../lib/context/AppContext';
 import { db, storage } from '../../lib/firebase/config';
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
-import { Recipe } from '../../lib/interfaces/recipe';
+import { IRecipe } from '../../lib/interfaces/recipe';
 
 // TODO: modal when delete document
 
 function UserRecipes(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy');
 	const { state } = useContext(Context);
-	const [recipes, setRecipes] = useState<Recipe[]>([]);
+	const [recipes, setRecipes] = useState<IRecipe[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [modal, setModal] = useState({
 		status: false,
@@ -28,7 +28,7 @@ function UserRecipes(): JSX.Element {
 	});
 
 	const fetchData = useCallback(async () => {
-		let list: Recipe[] = [];
+		let list: IRecipe[] = [];
 		try {
 			const q = query(
 				collection(db, 'recipes'),

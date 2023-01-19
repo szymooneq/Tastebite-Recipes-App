@@ -1,9 +1,9 @@
 import { useFormik } from 'formik';
-import { useContext, useState } from 'react';
-import Field from '../../components/Forms/Fields/Field';
+import { useState } from 'react';
+import PasswordField from '../../components/Forms/Fields/PasswordField';
+import TextField from '../../components/Forms/Fields/TextField';
 import Alerts from '../../components/UI/Alerts';
 import LoadingButton from '../../components/UI/LoadingButton/LoadingButton';
-import { Context } from '../../lib/context/AppContext';
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
 import { registerSchema } from '../../lib/schemas/schemas';
 
@@ -11,39 +11,18 @@ import { registerSchema } from '../../lib/schemas/schemas';
 
 function UserDetails(): JSX.Element {
 	useDocumentTitle('Profil | Szczegóły profilu');
-	const { state, login } = useContext(Context);
 	const [loading, setLoading] = useState(false);
 	const [message, setMessage] = useState(null);
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
 		useFormik({
 			initialValues: {
-				email: state.user?.email,
+				email: '',
 				password: '',
 				confirmPassword: ''
 			},
 			validationSchema: registerSchema,
-			onSubmit: async (values) => {
-				setLoading(true);
-				/* try {
-        const res = await axios.post('accounts:update', {
-          idToken: user.token,
-          email: values.email,
-          password: values.password,
-          returnSecureToken: true
-        })
-        login({
-          email: res.data.email,
-          token: res.data.idToken,
-          userId: res.data.localId
-        })
-        setMessage({info: "Dane zostały zaktualizowane!", theme: "success"})
-      } catch (ex) {
-        //console.log(ex.response)
-        setMessage({info: ex.response.data.error.message, theme: "danger"})
-      } */
-				setLoading(false);
-			}
+			onSubmit: async (values) => {}
 		});
 
 	return (
@@ -51,47 +30,45 @@ function UserDetails(): JSX.Element {
 			{message && <Alerts message={message.info} type={message.theme} />}
 
 			<form onSubmit={handleSubmit}>
-				<Field
+				<TextField
+					name="email"
 					label="Email"
-					type="email"
-					id="email"
-					value={values.email}
-					onChange={handleChange}
-					onBlur={handleBlur}
-					error={errors.email}
-					touch={touched.email}
 					placeholder="Podaj adres e-mail..."
-				/>
-
-				<Field
-					label="Nowe hasło"
-					type="password"
-					id="password"
-					value={values.password}
+					value={values.email}
+					error={errors.email}
+					touched={touched.email}
 					onChange={handleChange}
 					onBlur={handleBlur}
-					error={errors.password}
-					touch={touched.password}
+				/>
+
+				<PasswordField
+					name="password"
+					label="Password"
 					placeholder="Podaj hasło..."
-				/>
-
-				<Field
-					label="Potwierdź nowe hasło"
-					type="password"
-					id="confirmPassword"
-					value={values.confirmPassword}
+					value={values.password}
+					error={errors.password}
+					touched={touched.password}
 					onChange={handleChange}
 					onBlur={handleBlur}
-					error={errors.confirmPassword}
-					touch={touched.confirmPassword}
+				/>
+
+				<PasswordField
+					name="confirmPassword"
+					label="Potwierdź nowe hasło"
 					placeholder="Potwierdź hasło..."
+					value={values.confirmPassword}
+					error={errors.confirmPassword}
+					touched={touched.confirmPassword}
+					onChange={handleChange}
+					onBlur={handleBlur}
 				/>
 
 				<div className="text-center">
 					<LoadingButton
 						disabled={
-							(errors?.email || errors?.password || errors?.confirmPassword) &&
-							true
+							errors?.email || errors?.password || errors?.confirmPassword
+								? true
+								: false
 						}
 						loading={loading}
 						loadingMessage="Aktualizacje...">
