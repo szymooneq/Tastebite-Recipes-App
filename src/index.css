@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-  overflow-y: scroll;
+	overflow-y: scroll;
 }
 
 .dark body {
-  background-color: #111827;
+	background-color: #111827;
 }
