@@ -1,21 +1,24 @@
 import { useEffect, useState } from 'react';
-import ThemeButton from '../../UI/ThemeButton';
+import { throttle } from '../../../lib/helpers/throttle';
 import styles from './Header.module.css';
-// import Quote from './Quote/Quote'
 import Searchbar from './Searchbar/Searchbar';
+import ThemeButton from './Searchbar/ThemeButton';
 
 function Header() {
-	const [mousePosition, setMousePosition] = useState({});
+	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
 	const paralaxStyles = {
-		transform: `translate(${mousePosition?.x / -20}px, ${
-			mousePosition?.y / 80
+		transform: `translate(${mousePosition.x / -20}px, ${
+			mousePosition.y / 80
 		}px)`
 	};
 
+	const paralaxHandler = throttle((e: React.MouseEvent) => {
+		setMousePosition({ x: e.pageX, y: e.pageY });
+	}, 20);
+
 	useEffect(() => {
-		document.body.addEventListener('mousemove', (e) =>
-			setMousePosition({ x: e.pageX, y: e.pageY })
-		);
+		document.body.addEventListener('mousemove', paralaxHandler);
 	}, []);
 
 	return (
@@ -26,7 +29,6 @@ function Header() {
 				<Searchbar />
 				<ThemeButton />
 			</div>
-			{/* <Quote /> */}
 		</header>
 	);
 }

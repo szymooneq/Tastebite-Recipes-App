@@ -4,14 +4,14 @@ import Details from '../components/Recipes/[id]/Details';
 import Ingredients from '../components/Recipes/[id]/Ingredients';
 import Nutrions from '../components/Recipes/[id]/Nutrions';
 import Badges from '../components/UI/Badges';
-import Image from '../components/UI/ImageWithSkeleton/Image';
-import LoadingIcon from '../components/UI/LoadingIcon';
+import Image from '../components/UI/Image/Image';
+import Spinner from '../components/UI/Spinner';
 import { getRecipeView } from '../lib/firebase/getRecipes';
 
 function ProductView(): JSX.Element {
 	const { id } = useParams();
 
-	const { isLoading, error, data } = useQuery({
+	const { isLoading, data } = useQuery({
 		queryKey: ['recipe', id],
 		queryFn: () =>
 			getRecipeView(id).then((res) => {
@@ -19,14 +19,13 @@ function ProductView(): JSX.Element {
 					document.title = `${res.name} | Tastebite Recipes App`;
 				}
 				return res;
-			})
+			}),
+		useErrorBoundary: true
 	});
 
 	// TODO: rating system
 
-	if (isLoading) return <LoadingIcon />;
-
-	if (error) return <div>{`An error has occurred: ${error.message}`}</div>;
+	if (isLoading) return <Spinner />;
 
 	return data !== '404' ? (
 		<div className="mx-4 lg:mx-auto lg:w-max">

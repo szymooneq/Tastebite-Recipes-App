@@ -2,11 +2,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import AppContext from '../../lib/context/AppContext';
-import LoadingIcon from '../UI/LoadingIcon';
+import Spinner from '../UI/Spinner';
 import ErrorBoundary from './ErrorBoundary';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
-import Navbar from './Navigation/Navbar';
+import Navbar from './Navbar/Menu/Navbar';
 
 const queryClient = new QueryClient();
 
@@ -19,7 +19,7 @@ function RootLayout(): JSX.Element {
 						<Header />
 						<Navbar />
 						<div className="container my-8 mx-auto">
-							<Suspense fallback={<LoadingIcon />}>
+							<Suspense fallback={<Spinner />}>
 								<QueryClientProvider client={queryClient}>
 									<Outlet />
 								</QueryClientProvider>

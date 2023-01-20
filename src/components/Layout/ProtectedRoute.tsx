@@ -8,7 +8,7 @@ interface props {
 
 function ProtectedRoute({ children }: props): JSX.Element {
 	const { state } = useContext(Context);
-	return state.user ? <Navigate to="/" /> : <>{children}</>;
+	return state.user ? <>{children}</> : <Navigate to="/" />;
 }
 
 export default ProtectedRoute;

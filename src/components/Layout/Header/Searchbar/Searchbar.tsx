@@ -7,7 +7,7 @@ function Searchbar() {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const navigate = useNavigate();
 
-	const onKeyDownHandler = (e: React.KeyboardEvent) => {
+	const handlePressEnter = (e: React.KeyboardEvent) => {
 		e.key === 'Enter' && navigate(`/szukaj/${term}`);
 	};
 
@@ -29,7 +29,7 @@ function Searchbar() {
 				ref={inputRef}
 				type="text"
 				value={term}
-				onKeyDown={onKeyDownHandler}
+				onKeyDown={handlePressEnter}
 				onChange={(e) => setTerm(e.target.value)}
 				placeholder="Czego szukasz..."
 				className="p-4 pl-10 w-full rounded-lg border text-sm text-gray-900 bg-gray-50 border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"

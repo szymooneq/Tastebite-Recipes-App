@@ -1,31 +1,26 @@
 import { useQuery } from '@tanstack/react-query';
 import RecipeList from '../components/Recipes/RecipeList';
-import LoadingIcon from '../components/UI/LoadingIcon';
+import Spinner from '../components/UI/Spinner';
 import { getAllRecipes } from '../lib/firebase/getRecipes';
 import useDocumentTitle from '../lib/hooks/useDocumentTitle';
 import useLocalStorage from '../lib/hooks/useLocalStorage';
-import { Recipe } from '../lib/interfaces/recipe';
+import { IRecipe } from '../lib/interfaces/recipe';
 
 function Home(): JSX.Element {
 	useDocumentTitle('Home | Tastebite Recipes App');
 	const [lastProducts, setLastProduct] = useLocalStorage('last-recipe', null);
 
-	const { isLoading, error, data } = useQuery({
+	const { isLoading, data } = useQuery({
 		queryKey: ['recipes'],
-		queryFn: () => getAllRecipes()
+		queryFn: () => getAllRecipes(),
+		useErrorBoundary: true
 	});
 
-	const saveLastSeenRecipe = (recipe: Recipe) => {
+	const saveLastSeenRecipe = (recipe: IRecipe) => {
 		setLastProduct(recipe);
 	};
 
-	const removeLastSeenRecipe = () => {
-		setLastProduct(null);
-	};
-
-	if (isLoading) return <LoadingIcon />;
-
-	if (error) return <div>{`An error has occurred: ${error.message}`}</div>;
+	if (isLoading) return <Spinner />;
 
 	return data ? (
 		<RecipeList

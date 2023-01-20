@@ -1,12 +1,12 @@
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Link } from 'react-router-dom';
-import { Recipe } from '../../lib/interfaces/recipe';
+import { IRecipe } from '../../lib/interfaces/recipe';
 import Badges from '../UI/Badges';
-import Image from '../UI/ImageWithSkeleton/Image';
+import Image from '../UI/Image/Image';
 
 interface props {
 	onOpen: () => void;
-	recipe: Recipe;
+	recipe: IRecipe;
 }
 
 function RecipeCard({ onOpen, recipe }: props): JSX.Element {
@@ -27,7 +27,11 @@ function RecipeCard({ onOpen, recipe }: props): JSX.Element {
 					{recipe.name}
 				</h5>
 
-				<Badges {...recipe.details} />
+				<Badges
+					duration={recipe.details.duration}
+					level={recipe.details.level}
+					rating={5}
+				/>
 
 				<p className="min-h-[4.5rem] text-gray-700 dark:text-gray-400">
 					{recipe.description.slice(0, 100).concat('...')}

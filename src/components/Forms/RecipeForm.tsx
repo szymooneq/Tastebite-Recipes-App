@@ -20,7 +20,7 @@ interface props {
 }
 
 function RecipeForm({ recipe, onSubmit, buttonText }: props): JSX.Element {
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 	const {
 		values,
 		errors,

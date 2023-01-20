@@ -1,6 +1,6 @@
 import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { useContext } from 'react';
-import { Context } from '../../lib/context/AppContext';
+import { Context } from '../../../../lib/context/AppContext';
 
 function ThemeButton(): JSX.Element {
 	const { state, changeTheme } = useContext(Context);

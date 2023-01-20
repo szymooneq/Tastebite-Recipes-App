@@ -22,7 +22,7 @@ function Image({ className, src, alt }: props): JSX.Element {
 			<img
 				style={{ display: loadingImg ? 'none' : 'block' }}
 				className={className}
-				src={src}
+				src={src ? src : ''}
 				onLoad={() => setLoadingImg(false)}
 				alt={alt}
 			/>

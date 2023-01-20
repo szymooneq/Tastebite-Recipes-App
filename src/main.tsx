@@ -10,7 +10,7 @@ const Home = React.lazy(() => import('./pages/Home'));
 const Search = React.lazy(() => import('./pages/Search'));
 const ProductView = React.lazy(() => import('./pages/[id]'));
 const Profile = React.lazy(
-	() => import('./components/Layout/Navigation/Profile')
+	() => import('./components/Layout/Navbar/Profile/Profile')
 );
 const UserDetails = React.lazy(() => import('./pages/Profile/UserDetails'));
 const UserRecipes = React.lazy(() => import('./pages/Profile/UserRecipes'));

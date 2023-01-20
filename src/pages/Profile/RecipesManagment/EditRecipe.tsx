@@ -3,7 +3,7 @@ import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { useContext } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import RecipeForm from '../../../components/Forms/RecipeForm';
-import LoadingIcon from '../../../components/UI/LoadingIcon';
+import Spinner from '../../../components/UI/Spinner';
 import { Context } from '../../../lib/context/AppContext';
 import { db } from '../../../lib/firebase/config';
 import {
@@ -42,7 +42,7 @@ function EditRecipe(): JSX.Element {
 		navigate('/profil/przepisy');
 	};
 
-	if (isLoading) return <LoadingIcon />;
+	if (isLoading) return <Spinner />;
 
 	if (error) return 'An error has occurred: ' + error.message;
 

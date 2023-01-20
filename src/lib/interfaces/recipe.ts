@@ -18,12 +18,9 @@ export interface IRecipe {
 	id?: string;
 	img?: string;
 	userId?: string;
-	createdAt?: string;
-	/* file?: {
-		lastModified?: number;
-		name?: string;
-		size?: number;
-		webkitRelativePath?: string;
-	} | null; */
+	createdAt?: {
+		seconds: number;
+		nanoseconds: number;
+	};
 	file: Blob | null;
 }

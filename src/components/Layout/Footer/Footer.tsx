@@ -1,4 +1,4 @@
-function Footer() {
+function Footer(): JSX.Element {
 	return (
 		<footer className="p-4 text-center bg-white dark:bg-gray-800">
 			<span className="text-sm text-gray-500 dark:text-gray-400">

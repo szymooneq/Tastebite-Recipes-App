@@ -1,4 +1,4 @@
-function LoadingIcon(): JSX.Element {
+function Spinner(): JSX.Element {
 	return (
 		<div className="flex items-center justify-center h-96" role="status">
 			<svg
@@ -19,4 +19,4 @@ function LoadingIcon(): JSX.Element {
 	);
 }
 
-export default LoadingIcon;
+export default Spinner;
