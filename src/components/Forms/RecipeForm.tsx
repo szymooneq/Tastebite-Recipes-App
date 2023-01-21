@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { roundToTwo } from '../../lib/helpers/roundToTwo';
 import { IRecipe } from '../../lib/interfaces/recipe';
 import { recipeSchema } from '../../lib/schemas/schemas';
+import Button from '../UI/Button';
 import LoadingButton from '../UI/LoadingButton/LoadingButton';
 import DynamicField from './Fields/DynamicField';
 import FileField from './Fields/FileField';
@@ -265,9 +266,9 @@ function RecipeForm({ recipe, onSubmit, buttonText }: props): JSX.Element {
 						className="p-2.5 text-sm font-bold rounded-lg focus:ring-4 focus:outline-none text-white bg-red-700 dark:bg-red-600 hover:bg-red-800 dark:hover:bg-red-700 focus:ring-red-200 dark:focus:ring-red-800">
 						Anuluj
 					</Link>
-					<LoadingButton loading={loading} loadingMessage="Dodawanie...">
-						{buttonText}
-					</LoadingButton>
+					<Button type="submit" disabled={loading} loading={loading}>
+						{!loading ? 'Dodaj przepis' : 'Dodawanie'}
+					</Button>
 				</div>
 			</form>
 		</div>

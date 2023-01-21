@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { skeletonIcon } from './skeletonIcon';
+import { skeletonImage } from './SVG/skeletonImage';
 
 interface props {
 	className: string;
@@ -15,7 +15,7 @@ function Image({ className, src, alt }: props): JSX.Element {
 			{loadingImg && (
 				<div
 					className={`${className} flex justify-center items-center animate-pulse bg-gray-300 dark:bg-gray-700`}>
-					{skeletonIcon}
+					{skeletonImage}
 				</div>
 			)}
 

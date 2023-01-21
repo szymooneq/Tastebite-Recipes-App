@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css';
 
 import RootLayout from './components/Layout/RootLayout';
+import RecipeManagment from './pages/Profile/RecipeManagment';
 
 const NotFound = React.lazy(() => import('./pages/404'));
 const Home = React.lazy(() => import('./pages/Home'));
@@ -67,11 +68,11 @@ const router = createBrowserRouter([
 					},
 					{
 						path: 'przepisy/dodaj',
-						element: <AddRecipe />
+						element: <RecipeManagment />
 					},
 					{
 						path: 'przepisy/edytuj/:id',
-						element: <EditRecipe />
+						element: <RecipeManagment />
 					}
 				]
 			},

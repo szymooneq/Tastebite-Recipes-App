@@ -4,7 +4,7 @@ import Details from '../components/Recipes/[id]/Details';
 import Ingredients from '../components/Recipes/[id]/Ingredients';
 import Nutrions from '../components/Recipes/[id]/Nutrions';
 import Badges from '../components/UI/Badges';
-import Image from '../components/UI/Image/Image';
+import Image from '../components/UI/Image';
 import Spinner from '../components/UI/Spinner';
 import { getRecipeView } from '../lib/firebase/getRecipes';
 

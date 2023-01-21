@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import PasswordField from '../../components/Forms/Fields/PasswordField';
 import TextField from '../../components/Forms/Fields/TextField';
 import Alerts from '../../components/UI/Alerts';
-import LoadingButton from '../../components/UI/LoadingButton/LoadingButton';
+import Button from '../../components/UI/Button';
 import { Context } from '../../lib/context/AppContext';
 import { auth } from '../../lib/firebase/config';
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
@@ -73,9 +73,9 @@ function Login(): JSX.Element {
 				/>
 
 				<div className="text-center">
-					<LoadingButton loading={loading} loadingMessage="Logowanie...">
-						Zaloguj
-					</LoadingButton>
+					<Button type="submit" disabled={loading} loading={loading}>
+						{!loading ? 'Zaloguj' : 'Logowanie'}
+					</Button>
 				</div>
 			</form>
 		</div>

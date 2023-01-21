@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IRecipe } from '../../lib/interfaces/recipe';
-import Image from '../UI/Image/Image';
+import Image from '../UI/Image';
 import DeleteModal from './DeleteModal';
 
 interface props {
@@ -9,11 +9,13 @@ interface props {
 	deleteRecipe: (recipe: IRecipe) => Promise<void>;
 }
 
+export interface ModalData {
+	status: boolean;
+	deletingRecipe: IRecipe | null;
+}
+
 function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
-	const [modalData, setModalData] = useState<{
-		status: boolean;
-		deletingRecipe: IRecipe | null;
-	}>({
+	const [modalData, setModalData] = useState<ModalData>({
 		status: false,
 		deletingRecipe: null
 	});

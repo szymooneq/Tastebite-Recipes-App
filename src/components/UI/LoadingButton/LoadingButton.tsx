@@ -1,4 +1,4 @@
-import { animateSpin } from './animateSpin';
+import { buttonSpinner } from '../SVG/buttonSpinner';
 
 interface props {
 	loading: boolean;
@@ -16,7 +16,7 @@ function LoadingButton({
 			disabled={loading}
 			className="p-2.5 text-sm font-bold rounded-lg focus:ring-4 focus:outline-none cursor-not-allowed disabled:opacity-75 text-white bg-green-700 dark:bg-green-600">
 			<div className="flex justify-center items-center">
-				{animateSpin}
+				{buttonSpinner}
 				{loadingMessage}
 			</div>
 		</button>

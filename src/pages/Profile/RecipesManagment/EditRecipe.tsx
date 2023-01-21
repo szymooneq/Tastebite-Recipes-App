@@ -11,6 +11,7 @@ import {
 	uploadFileToStorage
 } from '../../../lib/firebase/getRecipes';
 import useDocumentTitle from '../../../lib/hooks/useDocumentTitle';
+import { IRecipe } from '../../../lib/interfaces/recipe';
 
 function EditRecipe(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy | Edycja');
@@ -20,19 +21,21 @@ function EditRecipe(): JSX.Element {
 
 	const { isLoading, error, data } = useQuery({
 		queryKey: ['editRecipe', id],
-		queryFn: () => getEditRecipe(id, state.user),
+		queryFn: () => {
+			if (id && state.user) getEditRecipe(id, state.user);
+		},
 		cacheTime: 1
 	});
 
-	const editExistingRecipe = async (form) => {
-		let newData = { ...form, lastEdit: serverTimestamp() };
+	const editExistingRecipe = async (formValues: IRecipe) => {
+		let newData = { ...formValues, lastEdit: serverTimestamp() };
 
-		if (newData.file) {
-			const downloadURL = await uploadFileToStorage(
+		if (newData.file && state.user && data) {
+			const downloadURL = (await uploadFileToStorage(
 				newData.file,
 				state.user?.uid,
-				data.createdAt.seconds
-			).catch((error) => console.log(error));
+				data?.createdAt.seconds
+			)) as string;
 			newData = { ...newData, img: downloadURL };
 		}
 

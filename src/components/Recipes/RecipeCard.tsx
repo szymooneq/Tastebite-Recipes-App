@@ -2,7 +2,8 @@ import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { Link } from 'react-router-dom';
 import { IRecipe } from '../../lib/interfaces/recipe';
 import Badges from '../UI/Badges';
-import Image from '../UI/Image/Image';
+import Button from '../UI/Button';
+import Image from '../UI/Image';
 
 interface props {
 	onOpen: () => void;
@@ -37,13 +38,10 @@ function RecipeCard({ onOpen, recipe }: props): JSX.Element {
 					{recipe.description.slice(0, 100).concat('...')}
 				</p>
 
-				<Link
-					to={`/przepis/${recipe.id}`}
-					// onClick={clickHandler}
-					className="py-2 px-3 w-max inline-flex justify-center items-center text-sm font-medium rounded-lg focus:ring-4 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+				<Button type="link" href={`/przepis/${recipe.id}`}>
 					Sprawdź
 					<ArrowRightIcon className="ml-2 -mr-1 w-4 h-4" />
-				</Link>
+				</Button>
 			</div>
 		</div>
 	);

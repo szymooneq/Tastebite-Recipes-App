@@ -1,4 +1,4 @@
-export const animateSpin: JSX.Element = (
+export const buttonSpinner: JSX.Element = (
 	<svg
 		aria-hidden="true"
 		role="status"

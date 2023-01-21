@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IFileField } from '../../../lib/interfaces/fields';
-import Image from '../../UI/Image/Image';
+import Image from '../../UI/Image';
 
 function FileField({
 	name,
