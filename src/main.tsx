@@ -68,11 +68,11 @@ const router = createBrowserRouter([
 					},
 					{
 						path: 'przepisy/dodaj',
-						element: <RecipeManagment />
+						element: <AddRecipe />
 					},
 					{
 						path: 'przepisy/edytuj/:id',
-						element: <RecipeManagment />
+						element: <EditRecipe />
 					}
 				]
 			},

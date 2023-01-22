@@ -41,7 +41,11 @@ function AddRecipe(): JSX.Element {
 	};
 
 	return (
-		<RecipeForm buttonText="Dodaj przepis" onSubmit={addRecipeToDatabase} />
+		<RecipeForm
+			loading={loading}
+			buttonText="Dodaj przepis"
+			submitForm={addRecipeToDatabase}
+		/>
 	);
 }
 

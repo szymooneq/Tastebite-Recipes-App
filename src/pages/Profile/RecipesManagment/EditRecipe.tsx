@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import RecipeForm from '../../../components/Forms/RecipeForm';
 import Spinner from '../../../components/UI/Spinner';
@@ -16,18 +16,18 @@ import { IRecipe } from '../../../lib/interfaces/recipe';
 function EditRecipe(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy | Edycja');
 	const { id } = useParams();
+	const [loading, setLoading] = useState(false);
 	const { state } = useContext(Context);
 	const navigate = useNavigate();
 
 	const { isLoading, error, data } = useQuery({
 		queryKey: ['editRecipe', id],
-		queryFn: () => {
-			if (id && state.user) getEditRecipe(id, state.user);
-		},
+		queryFn: () => getEditRecipe(id, state.user),
 		cacheTime: 1
 	});
 
 	const editExistingRecipe = async (formValues: IRecipe) => {
+		setLoading(true);
 		let newData = { ...formValues, lastEdit: serverTimestamp() };
 
 		if (newData.file && state.user && data) {
@@ -40,20 +40,20 @@ function EditRecipe(): JSX.Element {
 		}
 
 		const { file, createdAt, userId, ...restParams } = newData;
-		const docRef = doc(db, 'recipes', id);
+		const docRef = doc(db, 'recipes', id!);
 		await updateDoc(docRef, restParams).catch((error) => console.log(error));
 		navigate('/profil/przepisy');
+		setLoading(false);
 	};
 
 	if (isLoading) return <Spinner />;
 
-	if (error) return 'An error has occurred: ' + error.message;
-
 	return data !== '404' ? (
 		<RecipeForm
 			recipe={data}
+			loading={loading}
 			buttonText="Zaaktualizuj przepis"
-			onSubmit={editExistingRecipe}
+			submitForm={editExistingRecipe}
 		/>
 	) : (
 		<Navigate to="/profil/przepisy" />

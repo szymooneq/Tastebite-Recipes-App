@@ -5,6 +5,7 @@ import { roundToTwo } from '../../lib/helpers/roundToTwo';
 import { IRecipe } from '../../lib/interfaces/recipe';
 import { recipeSchema } from '../../lib/schemas/schemas';
 import Button from '../UI/Button';
+import CustomLink from '../UI/CustomLink';
 import LoadingButton from '../UI/LoadingButton/LoadingButton';
 import DynamicField from './Fields/DynamicField';
 import FileField from './Fields/FileField';
@@ -16,12 +17,38 @@ import TextareaField from './Fields/TextareaField';
 
 interface props {
 	recipe?: IRecipe;
-	onSubmit: (recipe: IRecipe) => void;
+	loading: boolean;
 	buttonText: string;
+	submitForm: (recipe: IRecipe) => void;
 }
 
-function RecipeForm({ recipe, onSubmit, buttonText }: props): JSX.Element {
-	const [loading, setLoading] = useState(false);
+const INITIAL_VALUES = {
+	name: '',
+	description: '',
+	img: '',
+	file: null,
+	details: {
+		duration: 0,
+		level: '',
+		portions: 0
+	},
+	nutrions: {
+		calories: 0,
+		protein: 0,
+		carbohydrates: 0,
+		fat: 0
+	},
+	ingredients: [],
+	steps: [],
+	status: false
+};
+
+function RecipeForm({
+	recipe,
+	loading,
+	buttonText,
+	submitForm
+}: props): JSX.Element {
 	const {
 		values,
 		errors,
@@ -31,32 +58,13 @@ function RecipeForm({ recipe, onSubmit, buttonText }: props): JSX.Element {
 		handleChange,
 		handleSubmit
 	} = useFormik({
-		initialValues: recipe || {
-			name: '',
-			description: '',
-			img: '',
-			file: null,
-			details: {
-				duration: 0,
-				level: '',
-				portions: 0
-			},
-			nutrions: {
-				calories: 0,
-				protein: 0,
-				carbohydrates: 0,
-				fat: 0
-			},
-			ingredients: [],
-			steps: [],
-			status: false
-		},
+		initialValues: recipe || INITIAL_VALUES,
 		validationSchema: recipeSchema,
 		onSubmit: async (values: IRecipe) => {
-			setLoading(true);
-			onSubmit({
+			const filteredValues = {
 				name: values.name.trim().replace(/  +/g, ' '),
 				description: values.description.trim().replace(/  +/g, ' '),
+				status: values.status,
 				file: values.file,
 				details: {
 					duration: +values.details.duration,
@@ -74,10 +82,9 @@ function RecipeForm({ recipe, onSubmit, buttonText }: props): JSX.Element {
 					.map((item) => item.trim().replace(/  +/g, ' ')),
 				steps: values.steps
 					.filter((item) => item.length > 0)
-					.map((item) => item.trim().replace(/  +/g, ' ')),
-				status: values.status
-			});
-			setLoading(false);
+					.map((item) => item.trim().replace(/  +/g, ' '))
+			};
+			submitForm(filteredValues);
 		}
 	});
 
@@ -261,13 +268,11 @@ function RecipeForm({ recipe, onSubmit, buttonText }: props): JSX.Element {
 				</div>
 
 				<div className="my-12 flex justify-center items-center gap-5">
-					<Link
-						to={'/profil/przepisy'}
-						className="p-2.5 text-sm font-bold rounded-lg focus:ring-4 focus:outline-none text-white bg-red-700 dark:bg-red-600 hover:bg-red-800 dark:hover:bg-red-700 focus:ring-red-200 dark:focus:ring-red-800">
+					<CustomLink href="/profil/przepisy" color="red">
 						Anuluj
-					</Link>
+					</CustomLink>
 					<Button type="submit" disabled={loading} loading={loading}>
-						{!loading ? 'Dodaj przepis' : 'Dodawanie'}
+						{!loading ? buttonText : 'Zapisywanie'}
 					</Button>
 				</div>
 			</form>
