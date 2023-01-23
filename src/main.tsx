@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './index.css';
-
 import RootLayout from './components/Layout/RootLayout';
-import RecipeManagment from './pages/Profile/RecipeManagment';
-
+import './index.css';
 const NotFound = React.lazy(() => import('./pages/404'));
 const Home = React.lazy(() => import('./pages/Home'));
 const Search = React.lazy(() => import('./pages/Search'));

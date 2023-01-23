@@ -8,7 +8,6 @@ import {
 } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import RecipeTable from '../../components/Recipes/RecipeTable';
 import CustomLink from '../../components/UI/CustomLink';
 import Spinner from '../../components/UI/Spinner';

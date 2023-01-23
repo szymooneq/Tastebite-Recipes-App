@@ -1,12 +1,9 @@
 import { useFormik } from 'formik';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { roundToTwo } from '../../lib/helpers/roundToTwo';
 import { IRecipe } from '../../lib/interfaces/recipe';
 import { recipeSchema } from '../../lib/schemas/schemas';
 import Button from '../UI/Button';
 import CustomLink from '../UI/CustomLink';
-import LoadingButton from '../UI/LoadingButton/LoadingButton';
 import DynamicField from './Fields/DynamicField';
 import FileField from './Fields/FileField';
 import NumberField from './Fields/NumberField';
@@ -271,11 +268,7 @@ function RecipeForm({
 					<CustomLink href="/profil/przepisy" color="red">
 						Anuluj
 					</CustomLink>
-					<Button
-						type="submit"
-						color="green"
-						disabled={loading}
-						loading={loading}>
+					<Button type="submit" color="green" disabled={loading}>
 						{!loading ? buttonText : 'Zapisywanie'}
 					</Button>
 				</div>
