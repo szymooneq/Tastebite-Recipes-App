@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import placeholder from './../../assets/placeholder.jpg';
 import { skeletonImage } from './SVG/skeletonImage';
 
 interface props {
 	className: string;
-	src: string;
+	src?: string;
 	alt: string;
 }
 
@@ -22,7 +23,7 @@ function Image({ className, src, alt }: props): JSX.Element {
 			<img
 				style={{ display: loadingImg ? 'none' : 'block' }}
 				className={className}
-				src={src ? src : ''}
+				src={src ? src : placeholder}
 				onLoad={() => setLoadingImg(false)}
 				alt={alt}
 			/>

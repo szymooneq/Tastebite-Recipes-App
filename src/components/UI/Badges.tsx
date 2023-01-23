@@ -3,7 +3,7 @@ import { ChartBarIcon, ClockIcon, StarIcon } from '@heroicons/react/20/solid';
 interface props {
 	duration: number;
 	level: string;
-	rating: number;
+	rating?: number;
 }
 
 function Badges({ duration, level, rating }: props): JSX.Element {
@@ -11,22 +11,21 @@ function Badges({ duration, level, rating }: props): JSX.Element {
 		{
 			name: 'duration',
 			color:
-				'bg-indigo-100 text-indigo-800 dark:bg-indigo-200 dark:text-indigo-900',
+				'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300',
 			icon: ClockIcon,
 			description: `${duration} min`
 		},
 		{
 			name: 'level',
 			color:
-				'bg-green-100 text-green-800 dark:bg-green-200 dark:text-green-900',
+				'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
 			icon: ChartBarIcon,
 			description: level
 		},
 		{
 			name: 'rating',
-
 			color:
-				'bg-yellow-100 text-yellow-800 dark:bg-yellow-200 dark:text-yellow-900',
+				'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
 			icon: StarIcon,
 			description: `${rating ?? 'Brak ocen'}`
 		}

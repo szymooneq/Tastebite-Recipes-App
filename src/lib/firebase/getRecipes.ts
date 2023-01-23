@@ -26,32 +26,35 @@ export const getAllRecipes = async () => {
 	return recipeList;
 };
 
-export const getRecipeView = async (id: string) => {
-	let recipe;
+export const getRecipeView = async (
+	id: string,
+	navigate: (path: string) => void
+) => {
 	const docRef = doc(db, 'recipes', id);
 	const docSnap = await getDoc(docRef);
 
 	if (docSnap.exists()) {
-		recipe = docSnap.data();
+		return docSnap.data() as IRecipe;
 	} else {
+		navigate('/');
 		console.log('No such document!');
 	}
-
-	return recipe ? recipe : '404';
 };
 
-export const getEditRecipe = async (id: string, user: IUser) => {
-	let recipe;
+export const getEditRecipe = async (
+	id: string,
+	user: IUser,
+	navigate: (path: string) => void
+) => {
 	const docRef = doc(db, 'recipes', id);
 	const docSnap = await getDoc(docRef);
 
 	if (docSnap.exists() && docSnap.data().userId === user.uid) {
-		recipe = docSnap.data();
+		return docSnap.data() as IRecipe;
 	} else {
+		navigate(`/profil/przepisy`);
 		console.log('No such document!');
 	}
-
-	return recipe ? recipe : '404';
 };
 
 export const getSearchingRecipes = async (term: string) => {

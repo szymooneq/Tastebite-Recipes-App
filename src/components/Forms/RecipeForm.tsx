@@ -271,7 +271,11 @@ function RecipeForm({
 					<CustomLink href="/profil/przepisy" color="red">
 						Anuluj
 					</CustomLink>
-					<Button type="submit" disabled={loading} loading={loading}>
+					<Button
+						type="submit"
+						color="green"
+						disabled={loading}
+						loading={loading}>
 						{!loading ? buttonText : 'Zapisywanie'}
 					</Button>
 				</div>

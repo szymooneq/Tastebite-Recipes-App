@@ -10,8 +10,8 @@ import { IRecipe } from '../../../lib/interfaces/recipe';
 
 function AddRecipe(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy | Nowy');
-	const [loading, setLoading] = useState(false);
 	const { state } = useContext(Context);
+	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 
 	const addRecipeToDatabase = async (formValues: IRecipe) => {

@@ -1,4 +1,4 @@
-import Item from './Item';
+import InfoCardLayout from './InfoCardLayout';
 
 interface props {
 	duration: number;
@@ -7,14 +7,29 @@ interface props {
 }
 
 function Details({ duration, level, portions }: props): JSX.Element {
+	const detailList = [
+		{
+			title: 'Całkowity czas',
+			description: `${duration} min`
+		},
+		{
+			title: 'Trudność',
+			description: level
+		},
+		{
+			title: 'Porcji',
+			description: portions
+		}
+	];
+
 	return (
-		<div
-			className={`p-3 flex flex-col justify-center w-full h-max rounded text-white bg-amber-600 sm:w-max lg:w-full`}>
-			<p className="text-xl font-bold">Podstawowe informacje:</p>
-			<Item title="Czas całkowity" content={`${duration} minut`} />
-			<Item title="Poziom trudności" content={level} />
-			<Item title="Liczba porcji" content={portions} />
-		</div>
+		<InfoCardLayout color="amber" title="Podstawowe informacje:">
+			{detailList.map((item) => (
+				<p key={item.title} className="italic">
+					<span className="font-bold">{item.title}:</span> {item.description}
+				</p>
+			))}
+		</InfoCardLayout>
 	);
 }
 

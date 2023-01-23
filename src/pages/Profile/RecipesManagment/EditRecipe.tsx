@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { useContext, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import RecipeForm from '../../../components/Forms/RecipeForm';
 import Spinner from '../../../components/UI/Spinner';
 import { Context } from '../../../lib/context/AppContext';
@@ -16,14 +16,15 @@ import { IRecipe } from '../../../lib/interfaces/recipe';
 function EditRecipe(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy | Edycja');
 	const { id } = useParams();
-	const [loading, setLoading] = useState(false);
 	const { state } = useContext(Context);
+	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 
-	const { isLoading, error, data } = useQuery({
+	const { isLoading, data } = useQuery({
 		queryKey: ['editRecipe', id],
-		queryFn: () => getEditRecipe(id, state.user),
-		cacheTime: 1
+		queryFn: () => getEditRecipe(id!, state.user!, navigate),
+		cacheTime: 1,
+		useErrorBoundary: true
 	});
 
 	const editExistingRecipe = async (formValues: IRecipe) => {
@@ -48,15 +49,13 @@ function EditRecipe(): JSX.Element {
 
 	if (isLoading) return <Spinner />;
 
-	return data !== '404' ? (
+	return (
 		<RecipeForm
 			recipe={data}
 			loading={loading}
 			buttonText="Zaaktualizuj przepis"
 			submitForm={editExistingRecipe}
 		/>
-	) : (
-		<Navigate to="/profil/przepisy" />
 	);
 }
 

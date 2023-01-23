@@ -10,6 +10,7 @@ import { deleteObject, ref } from 'firebase/storage';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecipeTable from '../../components/Recipes/RecipeTable';
+import CustomLink from '../../components/UI/CustomLink';
 import Spinner from '../../components/UI/Spinner';
 import { Context } from '../../lib/context/AppContext';
 import { db, storage } from '../../lib/firebase/config';
@@ -68,16 +69,14 @@ function UserRecipes(): JSX.Element {
 		<Spinner />
 	) : (
 		<>
-			<Link
-				to={'dodaj'}
-				className="mt-4 p-2.5 block w-max text-sm font-bold rounded-lg focus:ring-4 focus:outline-none text-white bg-green-700 dark:bg-green-600 hover:bg-green-800 dark:hover:bg-green-700 focus:ring-green-200 dark:focus:ring-green-800">
+			<CustomLink href="dodaj" color="green">
 				Dodaj nowy przepis
-			</Link>
+			</CustomLink>
 			<div className="my-2 overflow-x-auto">
 				{recipes ? (
 					<RecipeTable recipes={recipes} deleteRecipe={deleteRecipe} />
 				) : (
-					<p className="italic text-gray-500 dark:text-gray-400">
+					<p className="italic text-center text-gray-500 dark:text-gray-400">
 						Nie masz jeszcze żadnego przepisu...
 					</p>
 				)}

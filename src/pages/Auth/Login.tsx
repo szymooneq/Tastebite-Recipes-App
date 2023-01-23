@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PasswordField from '../../components/Forms/Fields/PasswordField';
 import TextField from '../../components/Forms/Fields/TextField';
-import Alerts from '../../components/UI/Alerts';
+import Alert from '../../components/UI/Alert';
 import Button from '../../components/UI/Button';
 import { Context } from '../../lib/context/AppContext';
 import { auth } from '../../lib/firebase/config';
@@ -47,7 +47,7 @@ function Login(): JSX.Element {
 			<h2 className="p-5 text-3xl font-bold text-center dark:text-white">
 				Logowanie
 			</h2>
-			{error && <Alerts message={error} type="danger" />}
+			{error && <Alert color="red" message={error} />}
 
 			<form onSubmit={handleSubmit}>
 				<TextField
@@ -73,7 +73,7 @@ function Login(): JSX.Element {
 				/>
 
 				<div className="text-center">
-					<Button type="submit" disabled={loading} loading={loading}>
+					<Button type="submit" color="green" disabled={loading}>
 						{!loading ? 'Zaloguj' : 'Logowanie'}
 					</Button>
 				</div>

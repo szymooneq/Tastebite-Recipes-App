@@ -5,8 +5,8 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PasswordField from '../../components/Forms/Fields/PasswordField';
 import TextField from '../../components/Forms/Fields/TextField';
-import Alerts from '../../components/UI/Alerts';
-import LoadingButton from '../../components/UI/LoadingButton/LoadingButton';
+import Alert from '../../components/UI/Alert';
+import Button from '../../components/UI/Button';
 import { Context } from '../../lib/context/AppContext';
 import { auth } from '../../lib/firebase/config';
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
@@ -55,7 +55,7 @@ function Register(): JSX.Element {
 			<h2 className="p-5 text-3xl font-bold text-center dark:text-white">
 				Rejestracja
 			</h2>
-			{error && <Alerts message={error} type="danger" />}
+			{error && <Alert color="red" message={error} />}
 
 			<form onSubmit={handleSubmit}>
 				<TextField
@@ -92,9 +92,9 @@ function Register(): JSX.Element {
 				/>
 
 				<div className="text-center">
-					<LoadingButton loading={loading} loadingMessage="Rejestrowanie...">
-						Zarejestruj
-					</LoadingButton>
+					<Button type="submit" color="green" disabled={loading}>
+						{!loading ? 'Zarejestruj' : 'Rejestrowanie'}
+					</Button>
 				</div>
 			</form>
 		</div>

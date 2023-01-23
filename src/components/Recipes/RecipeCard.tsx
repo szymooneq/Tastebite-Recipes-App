@@ -1,20 +1,14 @@
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 import { IRecipe } from '../../lib/interfaces/recipe';
 import Badges from '../UI/Badges';
-import Button from '../UI/Button';
 import CustomLink from '../UI/CustomLink';
 import Image from '../UI/Image';
 
 interface props {
-	onOpen: () => void;
 	recipe: IRecipe;
 }
 
-function RecipeCard({ onOpen, recipe }: props): JSX.Element {
-	/* 	const clickHandler = () => {
-		onOpen(props);
-	}; */
-
+function RecipeCard({ recipe }: props): JSX.Element {
 	return (
 		<div className="w-100% rounded-lg shadow-md hover:shadow-2xl transition bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700 xl:w-full">
 			<Image
@@ -38,7 +32,7 @@ function RecipeCard({ onOpen, recipe }: props): JSX.Element {
 					{recipe.description.slice(0, 100).concat('...')}
 				</p>
 
-				<CustomLink href={`/przepis/${recipe.id}`} color="red">
+				<CustomLink href={`/przepis/${recipe.id}`} color="green">
 					Sprawdź <ArrowRightIcon className="ml-2 -mr-1 w-4 h-4" />
 				</CustomLink>
 			</div>
