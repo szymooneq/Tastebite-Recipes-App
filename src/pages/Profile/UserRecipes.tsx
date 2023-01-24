@@ -16,7 +16,7 @@ function UserRecipes(): JSX.Element {
 	const { state } = useContext(Context);
 
 	const { isLoading, data, refetch } = useQuery({
-		queryKey: ['recipes'],
+		queryKey: ['userRecipes', state.user?.uid],
 		queryFn: () => {
 			if (state.user) return getUserRecipes(state.user?.uid);
 		},
