@@ -4,13 +4,14 @@
 
 Application with the ability to add and manage recipes.
 
-https://tastebite-app-sd.vercel.app/
+https://tastebite-app-sd.vercel.app
 
 ## Main technologies
 
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-0ea5e9?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black)
@@ -28,18 +29,19 @@ https://tastebite-app-sd.vercel.app/
 
 ## Details
 
-- created with the React framework
+- created with the React (Vite) and TypeScript
 - CRUD - the ability to manage account and recipes
 - data stored on Cloud Firestore
 - data fetching and caching with Tanstack React Query
 - auth by Firebase Authentication
 - context and reducer used to manage context values
 - suspense for data fetching with lazy loading
+- error boundary to catch errors in child components
 - saving data in local storage using custom hook
-- routing with React Router v6.4
+- routing with React Router
 - forms created with the Formik
-- form validation and sanitization
-- layout and styling with Tailwind CSS
+- form validation and sanitization (yup)
+- layout and styling with Tailwind CSS and Flowbite
 - responsive website design
 - light/dark mode prefer system color scheme
 
@@ -53,31 +55,32 @@ PROJECT_ROOT
 └── src
     ├── assets          # images and files
     ├── components      # React components
-    ├── context         # React context and reducer files
     ├── lib
-    │   ├── api         # fetching functions
+    │   ├── context     # React context and reducer files
+    │   ├── firebase    # firebase config and fetch functions
     │   ├── helpers     # helpful functions
     │   ├── hooks       # custom hooks
+    │   ├── interfaces  # TypeScript interfaces
     │   └── schemas     # yup schemas
     └── pages           # page files
 ```
 
-Download the repository to your local machine and run to download all missing dependencies:
+Download the repository to your local machine and run to download all missing dependencies (yarn required):
 
 ```
-npm install
+yarn install
 ```
 
 After that you can run this project using:
 
 ```
-npm start
+yarn dev
 ```
 
 To build your application use:
 
 ```
-npm run build
+yarn build
 ```
 
 **To manage the app content you need to create a new Firebase project. Check the official documentation: https://firebase.google.com/docs**

@@ -7,6 +7,8 @@ interface props {
 }
 
 function Badges({ duration, level, rating }: props): JSX.Element {
+	// TODO: add different colors for levels
+
 	const badgeList = [
 		{
 			name: 'duration',
