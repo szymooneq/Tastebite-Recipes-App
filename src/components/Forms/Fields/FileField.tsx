@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IFileField } from '../../../lib/interfaces/fields';
 import Image from '../../UI/Image';
 

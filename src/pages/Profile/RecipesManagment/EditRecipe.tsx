@@ -11,7 +11,7 @@ import {
 	uploadFileToStorage
 } from '../../../lib/firebase/getRecipes';
 import useDocumentTitle from '../../../lib/hooks/useDocumentTitle';
-import { IRecipe, IRecipeApi } from '../../../lib/interfaces/recipe';
+import { IRecipe } from '../../../lib/interfaces/recipe';
 
 function EditRecipe(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy | Edycja');

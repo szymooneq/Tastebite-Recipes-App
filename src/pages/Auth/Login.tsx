@@ -2,14 +2,13 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useFormik } from 'formik';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PasswordField from '../../components/Forms/Fields/PasswordField';
-import TextField from '../../components/Forms/Fields/TextField';
 import Alert from '../../components/UI/Alert';
 import Button from '../../components/UI/Button';
 import { Context } from '../../lib/context/AppContext';
 import { auth } from '../../lib/firebase/config';
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
 import { loginSchema } from '../../lib/schemas/schemas';
+import { PasswordField, TextField } from './../../components/Forms/Fields';
 
 function Login(): JSX.Element {
 	useDocumentTitle('Logowanie | Tastebite Recipe App');

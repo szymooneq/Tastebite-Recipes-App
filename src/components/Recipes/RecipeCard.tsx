@@ -1,11 +1,11 @@
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { IRecipe } from '../../lib/interfaces/recipe';
+import { IRecipeApi } from '../../lib/interfaces/recipe';
 import Badges from '../UI/Badges';
 import CustomLink from '../UI/CustomLink';
 import Image from '../UI/Image';
 
 interface props {
-	recipe: IRecipe;
+	recipe: IRecipeApi;
 }
 
 function RecipeCard({ recipe }: props): JSX.Element {

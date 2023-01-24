@@ -7,15 +7,28 @@ import {
 	where
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { IRecipe, IRecipeApi } from '../interfaces/recipe';
+import { IRecipeApi } from '../interfaces/recipe';
 import { IUser } from '../interfaces/user';
 import { db, storage } from './config';
 
-// TODO: api types
+// TODO: api function optimization
 
 export const getAllRecipes = async () => {
 	let recipeList: IRecipeApi[] = [];
 	const q = query(collection(db, 'recipes'), where('status', '==', true));
+	const querySnapshot = await getDocs(q);
+
+	querySnapshot.forEach((doc) => {
+		const recipe = { id: doc.id, ...doc.data() } as IRecipeApi;
+		recipeList.push(recipe);
+	});
+
+	return recipeList;
+};
+
+export const getUserRecipes = async (userId: string) => {
+	let recipeList: IRecipeApi[] = [];
+	const q = query(collection(db, 'recipes'), where('userId', '==', userId));
 	const querySnapshot = await getDocs(q);
 
 	querySnapshot.forEach((doc) => {

@@ -14,6 +14,8 @@ function AddRecipe(): JSX.Element {
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
 
+	// TODO: add react query mutations
+
 	const addRecipeToDatabase = async (formValues: IRecipe) => {
 		setLoading(true);
 		const timeStamp = Timestamp.now();
@@ -34,7 +36,6 @@ function AddRecipe(): JSX.Element {
 			await addDoc(collection(db, 'recipes'), restParams);
 			navigate('/profil/przepisy');
 		} catch (error) {
-			// TODO: alert with error while adding data to database
 			console.error('Error adding document: ', error);
 		}
 		setLoading(false);

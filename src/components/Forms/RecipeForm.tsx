@@ -4,13 +4,15 @@ import { IRecipe } from '../../lib/interfaces/recipe';
 import { recipeSchema } from '../../lib/schemas/schemas';
 import Button from '../UI/Button';
 import CustomLink from '../UI/CustomLink';
-import DynamicField from './Fields/DynamicField';
-import FileField from './Fields/FileField';
-import NumberField from './Fields/NumberField';
-import SelectField from './Fields/SelectField';
-import SwitchField from './Fields/SwitchField';
-import TextField from './Fields/TextField';
-import TextareaField from './Fields/TextareaField';
+import {
+	DynamicField,
+	FileField,
+	NumberField,
+	SelectField,
+	SwitchField,
+	TextField,
+	TextareaField
+} from './Fields';
 
 interface props {
 	recipe?: IRecipe;
