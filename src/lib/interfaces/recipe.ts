@@ -2,6 +2,8 @@ export interface IRecipe {
 	name: string;
 	description: string;
 	status: boolean;
+	file: Blob | null;
+	img?: string;
 	details: {
 		duration: number;
 		level: string;
@@ -15,12 +17,14 @@ export interface IRecipe {
 	};
 	ingredients: string[];
 	steps: string[];
-	id?: string;
-	img?: string;
-	userId?: string;
-	createdAt?: {
+}
+
+export interface IRecipeApi extends IRecipe {
+	id: string;
+	userId: string;
+	createdAt: {
 		seconds: number;
 		nanoseconds: number;
 	};
-	file: Blob | null;
+	editedAt: string;
 }

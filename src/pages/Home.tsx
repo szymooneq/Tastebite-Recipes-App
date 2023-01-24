@@ -21,7 +21,7 @@ function Home(): JSX.Element {
 	if (isLoading) return <Spinner />;
 
 	return data ? (
-		<RecipeList products={data} header="Wszystkich przepisów" />
+		<RecipeList recipeList={data} header="Wszystkich przepisów" />
 	) : (
 		<div>Nie ma żadnego przepisu</div>
 	);

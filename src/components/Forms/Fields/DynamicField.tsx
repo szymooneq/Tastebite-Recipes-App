@@ -32,7 +32,6 @@ function DynamicField({
 					<li key={id} className="mb-2 ml-2">
 						<div className="flex gap-2 font-normal">
 							<input
-								name="value"
 								placeholder={placeholder}
 								onChange={(e) => handleChangeItem(e, id)}
 								value={item}

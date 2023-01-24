@@ -7,26 +7,26 @@ import {
 	where
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { IRecipe } from '../interfaces/recipe';
+import { IRecipe, IRecipeApi } from '../interfaces/recipe';
 import { IUser } from '../interfaces/user';
 import { db, storage } from './config';
 
 // TODO: api types
 
 export const getAllRecipes = async () => {
-	let recipeList: IRecipe[] = [];
+	let recipeList: IRecipeApi[] = [];
 	const q = query(collection(db, 'recipes'), where('status', '==', true));
 	const querySnapshot = await getDocs(q);
 
 	querySnapshot.forEach((doc) => {
-		const recipe = { id: doc.id, ...doc.data() } as IRecipe;
+		const recipe = { id: doc.id, ...doc.data() } as IRecipeApi;
 		recipeList.push(recipe);
 	});
 
 	return recipeList;
 };
 
-export const getRecipeView = async (
+export const getRecipeData = async (
 	id: string,
 	navigate: (path: string) => void
 ) => {
@@ -34,14 +34,15 @@ export const getRecipeView = async (
 	const docSnap = await getDoc(docRef);
 
 	if (docSnap.exists()) {
-		return docSnap.data() as IRecipe;
+		document.title = `${docSnap.data().name} | Tastebite Recipes App`;
+		return docSnap.data() as IRecipeApi;
 	} else {
 		navigate('/');
 		console.log('No such document!');
 	}
 };
 
-export const getEditRecipe = async (
+export const getRecipeToEdit = async (
 	id: string,
 	user: IUser,
 	navigate: (path: string) => void
@@ -50,28 +51,26 @@ export const getEditRecipe = async (
 	const docSnap = await getDoc(docRef);
 
 	if (docSnap.exists() && docSnap.data().userId === user.uid) {
-		return docSnap.data() as IRecipe;
+		return docSnap.data() as IRecipeApi;
 	} else {
 		navigate(`/profil/przepisy`);
 		console.log('No such document!');
 	}
 };
 
-export const getSearchingRecipes = async (term: string) => {
-	let recipeList: IRecipe[] = [];
+export const getRecipesBySearch = async (term: string) => {
+	let recipeList: IRecipeApi[] = [];
 	const q = query(collection(db, 'recipes'), where('status', '==', true));
 	const querySnapshot = await getDocs(q);
 
 	querySnapshot.forEach((doc) => {
-		const recipe = { id: doc.id, ...doc.data() } as IRecipe;
+		const recipe = { id: doc.id, ...doc.data() } as IRecipeApi;
 		recipeList.push(recipe);
 	});
 
-	return term
-		? recipeList.filter((item) =>
-				item.name.toLowerCase().includes(term.toLowerCase())
-		  )
-		: null;
+	return recipeList.filter((item) =>
+		item.name.toLowerCase().includes(term.toLowerCase())
+	);
 };
 
 export const uploadFileToStorage = (

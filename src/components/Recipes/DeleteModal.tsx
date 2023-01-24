@@ -1,12 +1,12 @@
 import { Modal } from 'flowbite-react';
 import { Button } from 'flowbite-react/lib/esm/components';
-import { IRecipe } from '../../lib/interfaces/recipe';
+import { IRecipeApi } from '../../lib/interfaces/recipe';
 import { ModalData } from './RecipeTable';
 
 interface props {
 	modalData: ModalData;
-	changeModalData: (status: boolean, deletingRecipe: IRecipe | null) => void;
-	deleteFunction: (recipe: IRecipe, cb: () => void) => Promise<void>;
+	changeModalData: (status: boolean, deletingRecipe: IRecipeApi | null) => void;
+	deleteFunction: (recipe: IRecipeApi, cb: () => void) => Promise<void>;
 }
 
 function DeleteModal({

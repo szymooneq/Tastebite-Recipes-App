@@ -81,6 +81,7 @@ function RecipeForm({
 					.filter((item) => item.length > 0)
 					.map((item) => item.trim().replace(/  +/g, ' '))
 			};
+
 			submitForm(filteredValues);
 		}
 	});

@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Details from '../components/Recipes/[id]/Details';
 import Ingredients from '../components/Recipes/[id]/Ingredients';
 import Nutrions from '../components/Recipes/[id]/Nutrions';
 import Badges from '../components/UI/Badges';
 import Image from '../components/UI/Image';
 import Spinner from '../components/UI/Spinner';
-import { getRecipeView } from '../lib/firebase/getRecipes';
+import { getRecipeData } from '../lib/firebase/getRecipes';
 
 function ProductView(): JSX.Element {
 	const { id } = useParams();
@@ -14,13 +14,9 @@ function ProductView(): JSX.Element {
 
 	const { isLoading, data } = useQuery({
 		queryKey: ['recipe', id],
-		queryFn: () =>
-			getRecipeView(id!, navigate).then((res) => {
-				if (res) {
-					document.title = `${res.name} | Tastebite Recipes App`;
-					return res;
-				}
-			}),
+		queryFn: () => {
+			if (id) return getRecipeData(id, navigate);
+		},
 		useErrorBoundary: true
 	});
 

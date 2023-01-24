@@ -1,4 +1,4 @@
-export const skeletonImage = (
+export const skeletonImage: JSX.Element = (
 	<svg
 		className="w-12 h-12 text-gray-200 dark:text-gray-600"
 		xmlns="http://www.w3.org/2000/svg"

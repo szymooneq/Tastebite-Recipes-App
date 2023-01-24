@@ -7,11 +7,11 @@ import Spinner from '../../../components/UI/Spinner';
 import { Context } from '../../../lib/context/AppContext';
 import { db } from '../../../lib/firebase/config';
 import {
-	getEditRecipe,
+	getRecipeToEdit,
 	uploadFileToStorage
 } from '../../../lib/firebase/getRecipes';
 import useDocumentTitle from '../../../lib/hooks/useDocumentTitle';
-import { IRecipe } from '../../../lib/interfaces/recipe';
+import { IRecipe, IRecipeApi } from '../../../lib/interfaces/recipe';
 
 function EditRecipe(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy | Edycja');
@@ -22,14 +22,14 @@ function EditRecipe(): JSX.Element {
 
 	const { isLoading, data } = useQuery({
 		queryKey: ['editRecipe', id],
-		queryFn: () => getEditRecipe(id!, state.user!, navigate),
+		queryFn: () => getRecipeToEdit(id!, state.user!, navigate),
 		cacheTime: 1,
 		useErrorBoundary: true
 	});
 
 	const editExistingRecipe = async (formValues: IRecipe) => {
 		setLoading(true);
-		let newData = { ...formValues, lastEdit: serverTimestamp() };
+		let newData = { ...formValues, editedAt: serverTimestamp() };
 
 		if (newData.file && state.user && data) {
 			const downloadURL = (await uploadFileToStorage(
@@ -40,7 +40,7 @@ function EditRecipe(): JSX.Element {
 			newData = { ...newData, img: downloadURL };
 		}
 
-		const { file, createdAt, userId, ...restParams } = newData;
+		const { file, ...restParams } = newData;
 		const docRef = doc(db, 'recipes', id!);
 		await updateDoc(docRef, restParams).catch((error) => console.log(error));
 		navigate('/profil/przepisy');

@@ -1,7 +1,6 @@
 export interface Base {
 	name: string;
 	label: string;
-	// error: string | undefined;
 	onChange: (e: React.ChangeEvent | File) => void;
 }
 
@@ -17,13 +16,6 @@ export interface IFileField extends Base {
 	imgSrc: string;
 	file: Blob | null;
 	error: string | undefined;
-
-	/* file: {
-		lastModified: number;
-		name: string;
-		size: number;
-		webkitRelativePath: string;
-	} | null; */
 }
 
 export interface ISwitchField extends Base {

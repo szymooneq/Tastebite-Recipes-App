@@ -13,6 +13,7 @@ function Indicator({ color, children }: props): JSX.Element {
 		green: 'bg-green-500',
 		red: 'bg-red-500'
 	};
+
 	return (
 		<span
 			className={`mr-2 px-2.5 py-0.5 inline-flex items-center text-xs font-medium rounded-full ${bgVariatns[color]}`}>

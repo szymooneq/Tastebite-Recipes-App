@@ -1,6 +1,6 @@
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
-import { IRecipe } from '../../lib/interfaces/recipe';
+import { IRecipeApi } from '../../lib/interfaces/recipe';
 import Button from '../UI/Button';
 import CustomLink from '../UI/CustomLink';
 import Image from '../UI/Image';
@@ -8,13 +8,13 @@ import Indicator from '../UI/Indicator';
 import DeleteModal from './DeleteModal';
 
 interface props {
-	recipes: IRecipe[];
-	deleteRecipe: (recipe: IRecipe, cb: () => void) => Promise<void>;
+	recipes: IRecipeApi[];
+	deleteRecipe: (recipe: IRecipeApi, cb: () => void) => Promise<void>;
 }
 
 export interface ModalData {
 	status: boolean;
-	deletingRecipe: IRecipe | null;
+	deletingRecipe: IRecipeApi | null;
 }
 
 function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
@@ -23,7 +23,10 @@ function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
 		deletingRecipe: null
 	});
 
-	const changeModalData = (status: boolean, deletingRecipe: IRecipe | null) => {
+	const changeModalData = (
+		status: boolean,
+		deletingRecipe: IRecipeApi | null
+	) => {
 		setModalData({ status, deletingRecipe });
 	};
 
@@ -64,7 +67,6 @@ function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
 							<td className="p-4 font-semibold">
 								<div className="flex gap-2 items-center justify-center">
 									<CustomLink href={`edytuj/${product.id}`} color="blue">
-										{/* Edytuj */}
 										<PencilSquareIcon className="w-4 h-4" />
 									</CustomLink>
 									<Button
@@ -72,7 +74,6 @@ function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
 										disabled={false}
 										color="red"
 										onClick={() => changeModalData(true, product)}>
-										{/* Usuń */}
 										<TrashIcon className="w-4 h-4" />
 									</Button>
 								</div>
