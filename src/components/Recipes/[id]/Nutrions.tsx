@@ -16,7 +16,7 @@ function Nutrions({
 }: props): JSX.Element {
 	const nutrionList = [
 		{
-			title: 'Kalorie',
+			title: 'Wartość energetyczna',
 			description: `${roundToTwo(calories * 4.2)} kJ / ${calories} kcal`
 		},
 		{

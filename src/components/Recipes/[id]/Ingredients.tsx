@@ -8,9 +8,11 @@ function Ingredients({ data }: props): JSX.Element {
 	return (
 		<InfoCardLayout color="blue" title="Składniki:">
 			<ul className="list-disc list-inside italic">
-				{data.map((item, id) => (
-					<li key={id}>{item}</li>
-				))}
+				{data.length ? (
+					data.map((item, id) => <li key={id}>{item}</li>)
+				) : (
+					<p>Brak informacji</p>
+				)}
 			</ul>
 		</InfoCardLayout>
 	);

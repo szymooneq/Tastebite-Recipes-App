@@ -1,5 +1,8 @@
 import * as yup from 'yup';
 
+const TEXT_REGEX = /^[A-Za-z0-9 ]+$/;
+// no special characters
+
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 // min 6 characters, 1 upper case letter, 1 lower case letter, 1 numeric digit
 
@@ -40,11 +43,21 @@ export const loginSchema = yup.object().shape({
 export const recipeSchema = yup.object().shape({
 	name: yup
 		.string()
+		.min(1, 'Pole wymagane')
 		.max(50, 'Maksymalna ilość znaków wynosi 50')
+		.trim('Nieprawidłowa wartość')
+		.matches(TEXT_REGEX, {
+			message: 'Tekst zawiera znaki specjalne'
+		})
 		.required('Pole wymagane'),
 	description: yup
 		.string()
+		.min(1, 'Pole wymagane')
 		.max(550, 'Maksymalna ilość znaków wynosi 550')
+		.trim('Nieprawidłowa wartość')
+		.matches(TEXT_REGEX, {
+			message: 'Tekst zawiera znaki specjalne'
+		})
 		.required('Pole wymagane'),
 	file: yup
 		.mixed()
@@ -63,13 +76,18 @@ export const recipeSchema = yup.object().shape({
 		duration: yup
 			.number()
 			.min(1, 'Niedozwolona wartość')
+			.max(999, 'Maksymalna wartość wynosi 999')
 			.integer('Niedozwolona wartość')
 			.positive('Wartość nie może być ujemna')
 			.required('Wprowadzona wartość nie jest liczbą'),
-		level: yup.string().required('Musisz wybrać jedną z dostępnych opcji'),
+		level: yup
+			.string()
+			.matches(/(easy|medium|hard)/, 'Niedozwolona wartość')
+			.required('Musisz wybrać jedną z dostępnych opcji'),
 		portions: yup
 			.number()
 			.min(1, 'Niedozwolona wartość')
+			.max(99, 'Maksymalna wartość wynosi 99')
 			.integer('Niedozwolona wartość')
 			.positive('Wartość nie może być ujemna')
 			.required('Wprowadzona wartość nie jest liczbą')
@@ -78,21 +96,25 @@ export const recipeSchema = yup.object().shape({
 		calories: yup
 			.number()
 			.min(0.1, 'Niedozwolona wartość')
+			.max(9999, 'Maksymalna wartość wynosi 9999')
 			.positive('Wartość nie może być ujemna')
 			.required('Wprowadzona wartość nie jest liczbą'),
 		protein: yup
 			.number()
 			.min(0.1, 'Niedozwolona wartość')
+			.max(9999, 'Maksymalna wartość wynosi 9999')
 			.positive('Wartość nie może być ujemna')
 			.required('Wprowadzona wartość nie jest liczbą'),
 		carbohydrates: yup
 			.number()
 			.min(0.1, 'Niedozwolona wartość')
+			.max(9999, 'Maksymalna wartość wynosi 9999')
 			.positive('Wartość nie może być ujemna')
 			.required('Wprowadzona wartość nie jest liczbą'),
 		fat: yup
 			.number()
 			.min(0.1, 'Niedozwolona wartość')
+			.max(9999, 'Maksymalna wartość wynosi 9999')
 			.positive('Wartość nie może być ujemna')
 			.required('Wprowadzona wartość nie jest liczbą')
 	})

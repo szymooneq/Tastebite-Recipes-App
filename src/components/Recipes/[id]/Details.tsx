@@ -2,11 +2,17 @@ import InfoCardLayout from './InfoCardLayout';
 
 interface props {
 	duration: number;
-	level: string;
+	level: 'easy' | 'medium' | 'hard';
 	portions: number;
 }
 
 function Details({ duration, level, portions }: props): JSX.Element {
+	const levelDescription = {
+		easy: 'Łatwy',
+		medium: 'Średni',
+		hard: 'Trudny'
+	};
+
 	const detailList = [
 		{
 			title: 'Całkowity czas',
@@ -14,7 +20,7 @@ function Details({ duration, level, portions }: props): JSX.Element {
 		},
 		{
 			title: 'Trudność',
-			description: level
+			description: levelDescription[level]
 		},
 		{
 			title: 'Porcji',

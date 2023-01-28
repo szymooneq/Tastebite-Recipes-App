@@ -28,8 +28,8 @@ function SelectField({
 					Wybierz opcję
 				</option>
 				{options?.map((option) => (
-					<option key={option} value={option}>
-						{option}
+					<option key={option.value} value={option.value}>
+						{option.display}
 					</option>
 				))}
 			</select>

@@ -170,7 +170,11 @@ function RecipeForm({
 								name="details.level"
 								label="Trudność"
 								value={values.details.level}
-								options={['Łatwe', 'Średnie', 'Trudne']}
+								options={[
+									{ display: 'Łatwy', value: 'easy' },
+									{ display: 'Średni', value: 'medium' },
+									{ display: 'Trudny', value: 'hard' }
+								]}
 								error={errors.details?.level}
 								touched={touched.details?.level}
 								onChange={handleChange}

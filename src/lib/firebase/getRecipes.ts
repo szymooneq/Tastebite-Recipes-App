@@ -46,7 +46,7 @@ export const getRecipeData = async (
 	const docRef = doc(db, 'recipes', id);
 	const docSnap = await getDoc(docRef);
 
-	if (docSnap.exists()) {
+	if (docSnap.exists() && docSnap.data().status === true) {
 		document.title = `${docSnap.data().name} | Tastebite Recipes App`;
 		return docSnap.data() as IRecipeApi;
 	} else {

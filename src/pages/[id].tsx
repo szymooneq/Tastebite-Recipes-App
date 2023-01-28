@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Details from '../components/Recipes/[id]/Details';
 import Ingredients from '../components/Recipes/[id]/Ingredients';
 import Nutrions from '../components/Recipes/[id]/Nutrions';
+import Steps from '../components/Recipes/[id]/Steps';
 import Badges from '../components/UI/Badges';
 import Image from '../components/UI/Image';
 import Spinner from '../components/UI/Spinner';
@@ -25,10 +26,10 @@ function ProductView(): JSX.Element {
 	if (isLoading) return <Spinner />;
 
 	return (
-		<div className="mx-4 flex flex-col gap-4 lg:flex-row lg:justify-center">
+		<div className="mx-4 flex flex-col gap-4 lg:flex-row lg:justify-center break-words">
 			{data && (
 				<>
-					<div className="flex flex-col gap-3 lg:w-[50rem] xl:w-[60rem]">
+					<div className="flex flex-col gap-3 flex-1 lg:max-w-[40rem] xl:max-w-[50rem]">
 						<h1 className="text-3xl font-bold dark:text-white">{data.name}</h1>
 						<Badges {...data.details} />
 
@@ -41,34 +42,16 @@ function ProductView(): JSX.Element {
 							{data.description}
 						</p>
 						<div className="my-3 hidden lg:block dark:text-white">
-							<h2 className="mb-2 text-2xl font-bold text-green-600 dark:text-green-500">
-								Wykonanie
-							</h2>
-							<ol className="list-decimal list-inside dark:text-gray-400">
-								{data.steps.map((item, id) => (
-									<li key={id} className="mb-3">
-										{item}
-									</li>
-								))}
-							</ol>
+							<Steps data={data.steps} />
 						</div>
 					</div>
 
-					<div className="flex flex-row flex-wrap h-max gap-3 lg:flex-col lg:sticky lg:top-0 lg:w-[20rem]">
+					<div className="flex flex-row flex-wrap h-max gap-3 lg:flex-col lg:sticky lg:top-3 lg:w-[23rem]">
 						<Details {...data.details} />
 						<Nutrions {...data.nutrions} />
 						<Ingredients data={data.ingredients} />
 						<div className="my-3 block lg:hidden dark:text-white">
-							<h2 className="mb-2 text-2xl font-bold text-green-600 dark:text-green-500">
-								Wykonanie
-							</h2>
-							<ol className="list-decimal list-inside dark:text-gray-400">
-								{data.steps.map((item, id) => (
-									<li key={id} className="mb-3">
-										{item}
-									</li>
-								))}
-							</ol>
+							<Steps data={data.steps} />
 						</div>
 					</div>
 				</>

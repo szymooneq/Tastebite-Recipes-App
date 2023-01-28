@@ -34,7 +34,10 @@ export interface INumberField extends Base {
 
 export interface ISelectField extends Base {
 	value: string;
-	options: string[];
+	options: {
+		display: 'Łatwy' | 'Średni' | 'Trudny';
+		value: 'easy' | 'medium' | 'hard';
+	}[];
 	error: string | undefined;
 	touched: boolean | undefined;
 	onBlur: (e: React.FocusEvent) => void;

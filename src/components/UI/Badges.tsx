@@ -2,12 +2,25 @@ import { ChartBarIcon, ClockIcon, StarIcon } from '@heroicons/react/20/solid';
 
 interface props {
 	duration: number;
-	level: string;
+	level: 'easy' | 'medium' | 'hard';
 	rating?: number;
 }
 
 function Badges({ duration, level, rating }: props): JSX.Element {
 	// TODO: add different colors for levels
+
+	const levelColors = {
+		easy: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+		medium:
+			'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+		hard: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+	};
+
+	const levelDescription = {
+		easy: 'Łatwy',
+		medium: 'Średni',
+		hard: 'Trudny'
+	};
 
 	const badgeList = [
 		{
@@ -19,10 +32,9 @@ function Badges({ duration, level, rating }: props): JSX.Element {
 		},
 		{
 			name: 'level',
-			color:
-				'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+			color: levelColors[level],
 			icon: ChartBarIcon,
-			description: level
+			description: levelDescription[level]
 		},
 		{
 			name: 'rating',
@@ -34,7 +46,7 @@ function Badges({ duration, level, rating }: props): JSX.Element {
 	];
 
 	return (
-		<div className="flex gap-2">
+		<div className="flex gap-2 flex-wrap">
 			{badgeList.map((badge) => (
 				<span
 					key={badge.name}
