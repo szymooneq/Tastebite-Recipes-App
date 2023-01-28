@@ -6,7 +6,7 @@ export interface IRecipe {
 	img?: string;
 	details: {
 		duration: number;
-		level: string;
+		level: 'easy' | 'medium' | 'hard';
 		portions: number;
 	};
 	nutrions: {

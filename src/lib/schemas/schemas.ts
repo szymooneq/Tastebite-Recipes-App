@@ -38,7 +38,7 @@ export const loginSchema = yup.object().shape({
 	password: yup.string().required('Pole wymagane')
 });
 
-// TODO: add validationSchema for ingredients and steps arrays
+// TODO: add validation for ingredients and steps, improve validation for numbers
 
 export const recipeSchema = yup.object().shape({
 	name: yup
