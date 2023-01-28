@@ -28,7 +28,7 @@ const INITIAL_VALUES = {
 	file: null,
 	details: {
 		duration: 0,
-		level: '',
+		level: '' as 'easy' | 'medium' | 'hard',
 		portions: 0
 	},
 	nutrions: {
