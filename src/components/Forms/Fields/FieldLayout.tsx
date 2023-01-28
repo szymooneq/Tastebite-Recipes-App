@@ -22,7 +22,7 @@ function FieldLayout({
 		<div className="mb-4">
 			<label
 				htmlFor={name}
-				className={`block mb-2 text-sm font-medium ${labelColors} `}>
+				className={`block mb-2 text-sm font-medium ${labelColors}`}>
 				{label}
 			</label>
 

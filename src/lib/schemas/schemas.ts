@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const TEXT_REGEX = /^[A-Za-z0-9 ]+$/;
+const NAME_REGEX = /^[A-Za-z0-9 ]+$/;
 // no special characters
 
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
@@ -46,7 +46,7 @@ export const recipeSchema = yup.object().shape({
 		.min(1, 'Pole wymagane')
 		.max(50, 'Maksymalna ilość znaków wynosi 50')
 		.trim('Nieprawidłowa wartość')
-		.matches(TEXT_REGEX, {
+		.matches(NAME_REGEX, {
 			message: 'Tekst zawiera znaki specjalne'
 		})
 		.required('Pole wymagane'),
@@ -55,9 +55,6 @@ export const recipeSchema = yup.object().shape({
 		.min(1, 'Pole wymagane')
 		.max(550, 'Maksymalna ilość znaków wynosi 550')
 		.trim('Nieprawidłowa wartość')
-		.matches(TEXT_REGEX, {
-			message: 'Tekst zawiera znaki specjalne'
-		})
 		.required('Pole wymagane'),
 	file: yup
 		.mixed()
