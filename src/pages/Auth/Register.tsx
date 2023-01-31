@@ -3,12 +3,13 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { FormikHelpers, useFormik } from 'formik';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import Button from '../../components/UI/Button';
 import { buttonSpinner } from '../../components/UI/SVG/buttonSpinner';
 import { Context } from '../../lib/context/AppContext';
 import { auth } from '../../lib/firebase/config';
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
-import { registerSchema } from '../../lib/schemas/schemas';
+import { registerSchema } from '../../lib/schemas/authSchema';
 import { PasswordField, TextField } from './../../components/Forms/Fields';
 
 function Register(): JSX.Element {
@@ -58,7 +59,7 @@ function Register(): JSX.Element {
 		handleSubmit
 	} = useFormik({
 		initialValues,
-		validationSchema: registerSchema,
+		validationSchema: toFormikValidationSchema(registerSchema),
 		onSubmit
 	});
 

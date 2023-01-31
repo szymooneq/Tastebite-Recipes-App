@@ -20,6 +20,7 @@ function TextareaField({
 		<FieldLayout name={name} label={label} error={error} touched={touched}>
 			<textarea
 				name={name}
+				id={name}
 				placeholder={placeholder}
 				value={value}
 				onChange={onChange}

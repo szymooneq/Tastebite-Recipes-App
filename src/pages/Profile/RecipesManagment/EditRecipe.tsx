@@ -14,7 +14,7 @@ import {
 import { roundToTwo } from '../../../lib/helpers/roundToTwo';
 import useDocumentTitle from '../../../lib/hooks/useDocumentTitle';
 import { IRecipe } from '../../../lib/interfaces/recipe';
-import { recipeSchema } from '../../../lib/schemas/zodSchema';
+import { recipeSchema } from '../../../lib/schemas/recipeSchema';
 
 function EditRecipe(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy | Edycja');

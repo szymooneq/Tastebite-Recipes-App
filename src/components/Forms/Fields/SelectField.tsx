@@ -20,6 +20,7 @@ function SelectField({
 		<FieldLayout name={name} label={label} error={error} touched={touched}>
 			<select
 				name={name}
+				id={name}
 				value={value}
 				onChange={onChange}
 				onBlur={onBlur}

@@ -22,6 +22,7 @@ function NumberField({
 			<input
 				type="number"
 				name={name}
+				id={name}
 				placeholder={placeholder}
 				value={value === 0 ? '' : value}
 				step={step}

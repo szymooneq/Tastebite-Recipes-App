@@ -60,9 +60,10 @@ function FileField({
 
 			<input
 				ref={inputRef}
+				name={name}
+				id={name}
 				type="file"
 				hidden
-				name={name}
 				onChange={handleSetImage}
 				className={`w-full border text-sm rounded-lg outline-none ${fieldColors}`}
 				accept="image/jpg, image/jpeg, image/gif, image/png"

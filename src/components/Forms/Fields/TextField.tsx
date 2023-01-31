@@ -21,6 +21,7 @@ function TextField({
 			<input
 				type="text"
 				name={name}
+				id={name}
 				value={value || ''}
 				onChange={onChange}
 				onBlur={onBlur}
