@@ -1,52 +1,65 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useFormik } from 'formik';
-import { useContext, useState } from 'react';
+import { FormikHelpers, useFormik } from 'formik';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Alert from '../../components/UI/Alert';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import Button from '../../components/UI/Button';
+import { buttonSpinner } from '../../components/UI/SVG/buttonSpinner';
 import { Context } from '../../lib/context/AppContext';
 import { auth } from '../../lib/firebase/config';
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
-import { loginSchema } from '../../lib/schemas/schemas';
+import { loginSchema } from '../../lib/schemas/authSchema';
 import { PasswordField, TextField } from './../../components/Forms/Fields';
 
 function Login(): JSX.Element {
 	useDocumentTitle('Logowanie | Tastebite Recipe App');
 	const { login } = useContext(Context);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(null);
 	const navigate = useNavigate();
 
-	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-		useFormik({
-			initialValues: {
-				email: '',
-				password: ''
-			},
-			validationSchema: loginSchema,
-			onSubmit: async (values) => {
-				setLoading(true);
-				signInWithEmailAndPassword(auth, values.email, values.password)
-					.then((userCredential) => {
-						// Signed in
-						const user = userCredential.user;
-						login(user);
-						navigate('/');
-					})
-					.catch((error) => {
-						// console.log(error.code)
-						setError(error.message);
-						setLoading(false);
-					});
-			}
-		});
+	const initialValues = {
+		email: '',
+		password: ''
+	};
+
+	const onSubmit = async (
+		values: typeof initialValues,
+		formikHelpers: FormikHelpers<typeof initialValues>
+	) => {
+		await signInWithEmailAndPassword(auth, values.email, values.password)
+			.then((userCredential) => {
+				// Signed in
+				const user = userCredential.user;
+				login(user);
+				navigate('/');
+			})
+			.catch((error) => {
+				formikHelpers.setErrors({
+					email: error.message,
+					password: error.message
+				});
+			});
+	};
+
+	const {
+		values,
+		errors,
+		touched,
+		isValid,
+		isSubmitting,
+		handleBlur,
+		handleChange,
+		handleSubmit
+	} = useFormik({
+		initialValues,
+		validationSchema: toFormikValidationSchema(loginSchema),
+		onSubmit
+	});
 
 	return (
 		<div className="mx-7 md:mx-auto md:w-96">
 			<h2 className="p-5 text-3xl font-bold text-center dark:text-white">
 				Logowanie
 			</h2>
-			{error && <Alert color="red" message={error} />}
 
 			<form onSubmit={handleSubmit}>
 				<TextField
@@ -72,8 +85,18 @@ function Login(): JSX.Element {
 				/>
 
 				<div className="text-center">
-					<Button type="submit" color="green" disabled={loading}>
-						{!loading ? 'Zaloguj' : 'Logowanie'}
+					<Button
+						type="submit"
+						color="green"
+						disabled={!isValid || isSubmitting}>
+						{isSubmitting ? (
+							<>
+								{buttonSpinner}
+								Logowanie
+							</>
+						) : (
+							<>Zaloguj</>
+						)}
 					</Button>
 				</div>
 			</form>

@@ -23,13 +23,13 @@ function SelectField({
 				value={value}
 				onChange={onChange}
 				onBlur={onBlur}
-				className={`block w-full p-2.5 border text-sm rounded-lg outline-none ${selectColors}`}>
-				<option className="bg-gray-100" value={''} disabled hidden>
+				className={`block w-full p-2.5 border text-sm rounded-lg outline-none hover:cursor-pointer ${selectColors}`}>
+				<option className="bg-gray-100" value={' '} disabled hidden>
 					Wybierz opcję
 				</option>
 				{options?.map((option) => (
-					<option key={option.value} value={option.value}>
-						{option.display}
+					<option key={option.key} value={option.value}>
+						{option.key}
 					</option>
 				))}
 			</select>

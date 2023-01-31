@@ -7,7 +7,7 @@ interface props {
 }
 
 function NavItem({ href, onClick, children }: props): JSX.Element {
-	const activeColor = 'text-white bg-green-700';
+	const activeColor = 'text-white bg-rose-600';
 	const inActiveColor =
 		'text-gray-700 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700';
 

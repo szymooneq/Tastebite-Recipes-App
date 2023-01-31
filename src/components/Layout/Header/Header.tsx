@@ -24,7 +24,7 @@ function Header() {
 	return (
 		<header className="p-3 flex flex-col items-center justify-center gap-3 relative h-[40vh] overflow-hidden">
 			<div className={styles.headerImage} style={paralaxStyles}></div>
-			<div className={`${styles.logo} text-[3.4rem] text-white`}>Tastebite</div>
+			<div className={`${styles.logo} text-white text-[3.4rem]`}>Tastebite</div>
 			<div className="container flex items-center justify-center gap-3">
 				<Searchbar />
 				<ThemeButton />

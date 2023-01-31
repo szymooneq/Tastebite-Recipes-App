@@ -1,9 +1,9 @@
-import { useFormik } from 'formik';
-import { roundToTwo } from '../../lib/helpers/roundToTwo';
+import { FormikHelpers, useFormik } from 'formik';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { IRecipe } from '../../lib/interfaces/recipe';
-import { recipeSchema } from '../../lib/schemas/schemas';
 import Button from '../UI/Button';
 import CustomLink from '../UI/CustomLink';
+import { buttonSpinner } from '../UI/SVG/buttonSpinner';
 import {
 	DynamicField,
 	FileField,
@@ -13,79 +13,42 @@ import {
 	TextField,
 	TextareaField
 } from './Fields';
+import RecipeFormHeader from './RecipeFormHeader';
 
 interface props {
-	recipe?: IRecipe;
-	loading: boolean;
-	buttonText: string;
-	submitForm: (recipe: IRecipe) => void;
+	buttonData: {
+		title: string;
+		loading: string;
+	};
+	initialValues: IRecipe;
+	validationSchema: any;
+	onSubmit: (
+		values: IRecipe,
+		formikHelpers: FormikHelpers<IRecipe>
+	) => Promise<void>;
 }
 
-const INITIAL_VALUES = {
-	name: '',
-	description: '',
-	img: '',
-	file: null,
-	details: {
-		duration: 0,
-		level: '' as 'easy' | 'medium' | 'hard',
-		portions: 0
-	},
-	nutrions: {
-		calories: 0,
-		protein: 0,
-		carbohydrates: 0,
-		fat: 0
-	},
-	ingredients: [],
-	steps: [],
-	status: false
-};
-
 function RecipeForm({
-	recipe,
-	loading,
-	buttonText,
-	submitForm
+	buttonData,
+	initialValues,
+	validationSchema,
+	onSubmit
 }: props): JSX.Element {
 	const {
 		values,
 		errors,
 		touched,
+		dirty,
+		isValid,
+		isSubmitting,
 		setFieldValue,
 		handleBlur,
 		handleChange,
 		handleSubmit
 	} = useFormik({
-		initialValues: recipe || INITIAL_VALUES,
-		validationSchema: recipeSchema,
-		onSubmit: async (values: IRecipe) => {
-			const filteredValues = {
-				name: values.name.trim().replace(/  +/g, ' '),
-				description: values.description.trim().replace(/  +/g, ' '),
-				status: values.status,
-				file: values.file,
-				details: {
-					duration: +values.details.duration,
-					level: values.details.level,
-					portions: +values.details.portions
-				},
-				nutrions: {
-					calories: roundToTwo(+values.nutrions.calories),
-					protein: roundToTwo(+values.nutrions.protein),
-					carbohydrates: roundToTwo(+values.nutrions.carbohydrates),
-					fat: roundToTwo(+values.nutrions.fat)
-				},
-				ingredients: values.ingredients
-					.filter((item) => item.length > 0)
-					.map((item) => item.trim().replace(/  +/g, ' ')),
-				steps: values.steps
-					.filter((item) => item.length > 0)
-					.map((item) => item.trim().replace(/  +/g, ' '))
-			};
-
-			submitForm(filteredValues);
-		}
+		initialValues,
+		validationSchema: toFormikValidationSchema(validationSchema),
+		onSubmit
 	});
 
 	return (
@@ -94,10 +57,7 @@ function RecipeForm({
 				<div className="flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-7">
 					<div>
 						<div className="md:w-96">
-							<h2 className="font-bold text-2xl text-center text-black dark:text-white">
-								Główne informacje
-							</h2>
-							<hr className="mt-2 mb-7 border-4 border-amber-600" />
+							<RecipeFormHeader title="Główne informacje" hrColor="amber" />
 
 							<TextField
 								name="name"
@@ -128,8 +88,8 @@ function RecipeForm({
 								onChange={(value) => {
 									setFieldValue('file', value);
 								}}
-								imgSrc={recipe?.img || ''}
-								file={values.file || null}
+								imgValue={values?.img || null}
+								value={values.file || null}
 							/>
 
 							<SwitchField
@@ -137,7 +97,6 @@ function RecipeForm({
 								label="Status"
 								value={values.status}
 								onChange={handleChange}
-								onBlur={handleBlur}
 							/>
 
 							<div className="flex flex-nowrap justify-between gap-3">
@@ -171,9 +130,9 @@ function RecipeForm({
 								label="Trudność"
 								value={values.details.level}
 								options={[
-									{ display: 'Łatwy', value: 'easy' },
-									{ display: 'Średni', value: 'medium' },
-									{ display: 'Trudny', value: 'hard' }
+									{ key: 'Łatwy', value: 'easy' },
+									{ key: 'Średni', value: 'medium' },
+									{ key: 'Trudny', value: 'hard' }
 								]}
 								error={errors.details?.level}
 								touched={touched.details?.level}
@@ -183,10 +142,7 @@ function RecipeForm({
 						</div>
 
 						<div className="md:w-96">
-							<h2 className="font-bold text-2xl text-center text-black dark:text-white">
-								Wartości odżywcze
-							</h2>
-							<hr className="mt-2 mb-7 border-4 border-rose-700" />
+							<RecipeFormHeader title="Wartości odżywcze" hrColor="rose" />
 
 							<NumberField
 								name="nutrions.calories"
@@ -242,30 +198,26 @@ function RecipeForm({
 
 					<div>
 						<div className="md:w-96">
-							<h2 className="font-bold text-2xl text-center text-black dark:text-white">
-								Lista składników
-							</h2>
-							<hr className="mt-2 mb-7 border-4 border-blue-700" />
+							<RecipeFormHeader title="Składniki" hrColor="blue" />
 
 							<DynamicField
 								placeholder="Wprowadź składnik..."
 								type="list-disc"
-								value={values.ingredients}
-								setValue={(value) => setFieldValue('ingredients', value)}
+								error={errors.ingredients}
+								array={values.ingredients}
+								setArray={(value) => setFieldValue('ingredients', value)}
 							/>
 						</div>
 
 						<div className="md:w-96">
-							<h2 className="font-bold text-2xl text-center text-black dark:text-white">
-								Przygotowanie
-							</h2>
-							<hr className="mt-2 mb-7 border-4 border-green-700" />
+							<RecipeFormHeader title="Przygotowanie" hrColor="green" />
 
 							<DynamicField
 								placeholder="Wprowadź krok..."
 								type="list-decimal"
-								value={values.steps}
-								setValue={(value) => setFieldValue('steps', value)}
+								error={errors.steps}
+								array={values.steps}
+								setArray={(value) => setFieldValue('steps', value)}
 							/>
 						</div>
 					</div>
@@ -275,8 +227,18 @@ function RecipeForm({
 					<CustomLink href="/profil/przepisy" color="red">
 						Anuluj
 					</CustomLink>
-					<Button type="submit" color="green" disabled={loading}>
-						{!loading ? buttonText : 'Zapisywanie'}
+					<Button
+						type="submit"
+						color="green"
+						disabled={!isValid || isSubmitting || !dirty}>
+						{isSubmitting ? (
+							<>
+								{buttonSpinner}
+								{buttonData.loading}
+							</>
+						) : (
+							buttonData.title
+						)}
 					</Button>
 				</div>
 			</form>

@@ -1,10 +1,10 @@
 import { InformationCircleIcon } from '@heroicons/react/20/solid';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useFormik } from 'formik';
+import { FormikHelpers, useFormik } from 'formik';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Alert from '../../components/UI/Alert';
 import Button from '../../components/UI/Button';
+import { buttonSpinner } from '../../components/UI/SVG/buttonSpinner';
 import { Context } from '../../lib/context/AppContext';
 import { auth } from '../../lib/firebase/config';
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
@@ -14,47 +14,59 @@ import { PasswordField, TextField } from './../../components/Forms/Fields';
 function Register(): JSX.Element {
 	useDocumentTitle('Rejestracja | Tastebite Recipe App');
 	const { login } = useContext(Context);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(null);
-	const [registered, setRegistered] = useState(false);
+	const [welcomeMessage, setWelcomeMessage] = useState(false);
 	const navigate = useNavigate();
 
 	// TODO: Add user to firestore
+	const initialValues = {
+		email: '',
+		password: '',
+		confirmPassword: ''
+	};
 
-	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-		useFormik({
-			initialValues: {
-				email: '',
-				password: '',
-				confirmPassword: ''
-			},
-			validationSchema: registerSchema,
-			onSubmit: async (values) => {
-				setLoading(true);
-				createUserWithEmailAndPassword(auth, values.email, values.password)
-					.then((userCredential) => {
-						// Signed in
-						const user = userCredential.user;
-						setRegistered(true);
-						login(user);
-						setTimeout(() => {
-							navigate('/');
-						}, 5000);
-					})
-					.catch((error) => {
-						// console.log(error.code)
-						setError(error.message);
-						setLoading(false);
-					});
-			}
-		});
+	const onSubmit = async (
+		values: typeof initialValues,
+		formikHelpers: FormikHelpers<typeof initialValues>
+	) => {
+		await createUserWithEmailAndPassword(auth, values.email, values.password)
+			.then((userCredential) => {
+				// Signed in
+				const user = userCredential.user;
+				setWelcomeMessage(true);
+				login(user);
+				setTimeout(() => {
+					navigate('/');
+				}, 5000);
+			})
+			.catch((error) => {
+				formikHelpers.setErrors({
+					email: error.message,
+					password: error.message,
+					confirmPassword: error.message
+				});
+			});
+	};
 
-	return !registered ? (
+	const {
+		values,
+		errors,
+		touched,
+		isValid,
+		isSubmitting,
+		handleBlur,
+		handleChange,
+		handleSubmit
+	} = useFormik({
+		initialValues,
+		validationSchema: registerSchema,
+		onSubmit
+	});
+
+	return !welcomeMessage ? (
 		<div className="mx-7 md:mx-auto md:w-96">
 			<h2 className="p-5 text-3xl font-bold text-center dark:text-white">
 				Rejestracja
 			</h2>
-			{error && <Alert color="red" message={error} />}
 
 			<form onSubmit={handleSubmit}>
 				<TextField
@@ -91,21 +103,31 @@ function Register(): JSX.Element {
 				/>
 
 				<div className="text-center">
-					<Button type="submit" color="green" disabled={loading}>
-						{!loading ? 'Zarejestruj' : 'Rejestrowanie'}
+					<Button
+						type="submit"
+						color="green"
+						disabled={!isValid || isSubmitting}>
+						{isSubmitting ? (
+							<>
+								{buttonSpinner}
+								Logowanie
+							</>
+						) : (
+							<>Zaloguj</>
+						)}
 					</Button>
 				</div>
 			</form>
 		</div>
 	) : (
-		<div className="p-3 my-5 mx-auto rounded-lg">
+		<div className="p-3 my-5 mx-auto rounded-lg text-center">
 			<div className="flex justify-center items-center">
 				<InformationCircleIcon className="w-5 h-5 mr-2 text-green-700 dark:text-green-200" />
-				<h3 className="text-2xl font-bold text-green-700 dark:text-green-200">
+				<h3 className="text-xl font-bold text-green-700 dark:text-green-200">
 					Twoje konto zostało utworzone!
 				</h3>
 			</div>
-			<div className="my-3 text-center font-semibold text-md text-green-700 dark:text-green-200">
+			<div className="my-3 font-semibold text-md text-green-700 dark:text-green-200">
 				<p>
 					Gratulacje! Twoje konto zostało utworzone.
 					<br />

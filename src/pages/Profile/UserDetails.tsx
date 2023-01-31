@@ -24,7 +24,7 @@ function UserDetails(): JSX.Element {
 	return (
 		<div className="mx-7 md:mx-auto md:w-96">
 			<p className="text-black italic dark:text-white">
-				Chwilowo niedostępne...
+				Tymczasowo niedostępne...
 			</p>
 
 			{/* <div className="relative">

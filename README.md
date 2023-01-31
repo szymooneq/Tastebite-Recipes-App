@@ -13,7 +13,7 @@ https://tastebite-app-sd.vercel.app
 ![JavaScript](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-0ea5e9?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwind_css-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black)
 
 ## Stack
@@ -25,7 +25,7 @@ https://tastebite-app-sd.vercel.app
 - [React Router](https://reactrouter.com/en/main) - a standard library for routing in React
 - [React Query](https://tanstack.com/query/v4) - powerful asynchronous state management for TS/JS, React, Solid, Vue and Svelte
 - [Vite](https://vitejs.dev) - a new breed of frontend build tooling that significantly improves the frontend development experience
-- [Yup](https://github.com/jquense/yup) - a schema builder for runtime value parsing and validation
+- [Zod](https://zod.dev) - TypeScript-first schema validation with static type inference
 
 ## Details
 
@@ -40,7 +40,7 @@ https://tastebite-app-sd.vercel.app
 - saving data in local storage using custom hook
 - routing with React Router
 - forms created with the Formik
-- form validation and sanitization (yup)
+- form validation and sanitization (zod)
 - layout and styling with Tailwind CSS and Flowbite
 - responsive website design
 - light/dark mode prefer system color scheme
@@ -61,7 +61,7 @@ PROJECT_ROOT
     │   ├── helpers     # helpful functions
     │   ├── hooks       # custom hooks
     │   ├── interfaces  # TypeScript interfaces
-    │   └── schemas     # yup schemas
+    │   └── schemas     # zod schemas
     └── pages           # page files
 ```
 

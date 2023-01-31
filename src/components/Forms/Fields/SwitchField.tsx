@@ -4,9 +4,9 @@ function SwitchField({
 	name,
 	label,
 	value,
-	onChange,
-	onBlur
-}: ISwitchField): JSX.Element {
+	onChange
+}: // onBlur
+ISwitchField): JSX.Element {
 	return (
 		<div className="mb-4">
 			<label
@@ -24,7 +24,6 @@ function SwitchField({
 					name={name}
 					checked={value}
 					onChange={onChange}
-					onBlur={onBlur}
 					className="sr-only peer"
 				/>
 
