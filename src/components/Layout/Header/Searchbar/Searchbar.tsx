@@ -32,6 +32,7 @@ function Searchbar() {
 			<input
 				ref={inputRef}
 				id="search"
+				name="search"
 				type="text"
 				value={term}
 				onKeyDown={handlePressEnter}

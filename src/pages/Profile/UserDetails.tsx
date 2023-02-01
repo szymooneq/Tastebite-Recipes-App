@@ -6,11 +6,9 @@ function UserDetails(): JSX.Element {
 	useDocumentTitle('Profil | Szczegóły profilu');
 
 	return (
-		<div className="mx-7 md:mx-auto md:w-96">
-			<p className="text-black italic dark:text-white">
-				Tymczasowo niedostępne...
-			</p>
-		</div>
+		<p className="text-center italic text-gray-700 dark:text-white">
+			Tymczasowo niedostępne...
+		</p>
 	);
 }
 

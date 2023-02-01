@@ -69,14 +69,14 @@ function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
 									<CustomLink
 										ariaLabel="Edytuj przepis"
 										href={`edytuj/${product.id}`}
-										color="blue">
+										color="blueOutline">
 										<PencilSquareIcon className="w-4 h-4" />
 									</CustomLink>
 									<Button
 										ariaLabel="Usuń przepis"
 										type="button"
 										disabled={false}
-										color="red"
+										color="redOutline"
 										onClick={() => changeModalData(true, product)}>
 										<TrashIcon className="w-4 h-4" />
 									</Button>
