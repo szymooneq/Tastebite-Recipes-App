@@ -5,9 +5,9 @@ interface props {
 function Steps({ data }: props): JSX.Element {
 	return (
 		<>
-			<h2 className="mb-2 text-2xl font-bold text-green-600 dark:text-green-500">
+			<h3 className="mb-2 text-2xl font-bold text-green-600 dark:text-green-500">
 				Wykonanie
-			</h2>
+			</h3>
 			<ol className="list-decimal list-inside dark:text-gray-400">
 				{data.length ? (
 					data.map((item, id) => (

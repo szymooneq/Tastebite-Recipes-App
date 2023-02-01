@@ -1,6 +1,9 @@
+import { PlusIcon, TrashIcon } from '@heroicons/react/20/solid';
 import { IDynamicField } from '../../../lib/interfaces/fields';
+import Button from '../../UI/Button';
 
 function DynamicField({
+	name,
 	placeholder,
 	type,
 	error,
@@ -43,7 +46,11 @@ function DynamicField({
 					return (
 						<li key={id} className={`mb-2 ml-2 ${markerColor}`}>
 							<div className="flex gap-2 font-normal">
+								<label
+									htmlFor={`${name}-${id}`}
+									hidden>{`${name}-${id}`}</label>
 								<input
+									id={`${name}-${id}`}
 									placeholder={placeholder}
 									onChange={(e) => handleChangeItem(e, id)}
 									value={item}
@@ -51,12 +58,16 @@ function DynamicField({
 								/>
 
 								{id !== 0 && (
-									<button
-										type="button"
-										onClick={() => handleDeleteItem(id)}
-										className="px-3 py-2 w-max border rounded-lg text-sm font-semibold focus:ring-4 focus:outline-none text-rose-600 border-rose-300 hover:bg-rose-100 focus:ring-rose-300 dark:text-rose-600 dark:hover:bg-gray-800 dark:border-rose-600 dark:focus:ring-rose-800">
-										Usuń
-									</button>
+									<>
+										<Button
+											color="redOutline"
+											aria-label="Usuń pozycję"
+											type="button"
+											onClick={() => handleDeleteItem(id)}
+											disabled={false}>
+											<TrashIcon className="w-4 h-4" />
+										</Button>
+									</>
 								)}
 							</div>
 						</li>
@@ -64,12 +75,16 @@ function DynamicField({
 				})}
 			</ul>
 
-			<button
-				type="button"
-				onClick={handleAddItem}
-				className="block p-2.5 ml-auto w-max border rounded-lg text-sm font-semibold focus:ring-4 focus:outline-none text-sky-600 border-sky-300 hover:bg-sky-100 focus:ring-sky-300 dark:text-sky-600 dark:hover:bg-gray-800 dark:border-sky-600 dark:focus:ring-sky-800">
-				Dodaj
-			</button>
+			<div className="w-full inline-flex justify-end">
+				<Button
+					color="greenOutline"
+					aria-label="Dodaj pozycję"
+					type="button"
+					onClick={handleAddItem}
+					disabled={false}>
+					<PlusIcon className="w-4 h-4" />
+				</Button>
+			</div>
 		</>
 	);
 }

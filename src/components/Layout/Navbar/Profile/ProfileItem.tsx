@@ -10,7 +10,7 @@ function ProfileItem({ button, href, children }: props): JSX.Element {
 	const className =
 		'p-4 inline-block rounded-t-lg border-b-2 border-transparent';
 	const activeColor =
-		'text-green-600 border-green-600 active dark:text-green-500 dark:border-green-500';
+		'text-blue-600 border-blue-600 active dark:text-blue-500 dark:border-blue-500';
 	const inActiveColor =
 		'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300';
 

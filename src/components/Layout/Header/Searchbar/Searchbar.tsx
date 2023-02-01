@@ -25,8 +25,13 @@ function Searchbar() {
 				<MagnifyingGlassIcon className="w-5 h-5 text-gray-500 dark:text-gray-400" />
 			</div>
 
+			<label htmlFor="search" hidden>
+				Szukaj potrawy
+			</label>
+
 			<input
 				ref={inputRef}
+				id="search"
 				type="text"
 				value={term}
 				onKeyDown={handlePressEnter}

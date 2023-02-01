@@ -15,17 +15,17 @@ function RootLayout(): JSX.Element {
 		<ErrorBoundary>
 			<AppContext>
 				<div className="flex flex-col min-h-screen">
-					<div className="flex-1">
-						<Header />
-						<Navbar />
-						<div className="container my-8 mx-auto">
-							<Suspense fallback={<Spinner />}>
-								<QueryClientProvider client={queryClient}>
+					<Header />
+					<Navbar />
+					<main className="flex-1">
+						<Suspense fallback={<Spinner />}>
+							<QueryClientProvider client={queryClient}>
+								<div className="container mx-auto py-10">
 									<Outlet />
-								</QueryClientProvider>
-							</Suspense>
-						</div>
-					</div>
+								</div>
+							</QueryClientProvider>
+						</Suspense>
+					</main>
 					<Footer />
 				</div>
 			</AppContext>

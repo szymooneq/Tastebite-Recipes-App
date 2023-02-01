@@ -201,6 +201,7 @@ function RecipeForm({
 							<RecipeFormHeader title="Składniki" hrColor="blue" />
 
 							<DynamicField
+								name="ingredients"
 								placeholder="Wprowadź składnik..."
 								type="list-disc"
 								error={errors.ingredients}
@@ -213,6 +214,7 @@ function RecipeForm({
 							<RecipeFormHeader title="Przygotowanie" hrColor="green" />
 
 							<DynamicField
+								name="steps"
 								placeholder="Wprowadź krok..."
 								type="list-decimal"
 								error={errors.steps}

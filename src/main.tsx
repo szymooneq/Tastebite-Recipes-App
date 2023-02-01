@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import ProfileNavbar from './components/Layout/Navbar/Profile/ProfileNavbar';
 import RootLayout from './components/Layout/RootLayout';
 import './index.css';
 const NotFound = React.lazy(() => import('./pages/404'));
 const Home = React.lazy(() => import('./pages/Home'));
 const Search = React.lazy(() => import('./pages/Search'));
 const ProductView = React.lazy(() => import('./pages/[id]'));
-const Profile = React.lazy(
-	() => import('./components/Layout/Navbar/Profile/Profile')
-);
 const UserDetails = React.lazy(() => import('./pages/Profile/UserDetails'));
 const UserRecipes = React.lazy(() => import('./pages/Profile/UserRecipes'));
 const AddRecipe = React.lazy(
@@ -53,10 +51,10 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'profil',
-				element: <Profile />,
+				element: <ProfileNavbar />,
 				children: [
 					{
-						path: '',
+						index: true,
 						element: <UserDetails />
 					},
 					{

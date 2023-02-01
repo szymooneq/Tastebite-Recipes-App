@@ -33,7 +33,7 @@ function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
 	return (
 		<>
 			<table className="mx-auto w-full text-sm text-gray-500 dark:text-gray-400">
-				<thead className="uppercase text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+				<thead className="uppercase text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-[#D3D3D3]">
 					<tr>
 						{['Podgląd', 'Nazwa', 'Status', 'Opcje'].map((el) => (
 							<th key={el} className="py-3 px-6">
@@ -51,7 +51,7 @@ function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
 								<Image
 									className="mx-auto block w-12 h-12 object-contain object-center"
 									src={product.img}
-									alt={product.name}
+									alt={`Zdjęcie podglądowe przepisu "${product.name}"`}
 								/>
 							</td>
 							<td className="p-4 font-semibold whitespace-nowrap text-gray-900 dark:text-white">
@@ -66,10 +66,14 @@ function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
 							</td>
 							<td className="p-4 font-semibold">
 								<div className="flex gap-2 items-center justify-center">
-									<CustomLink href={`edytuj/${product.id}`} color="blue">
+									<CustomLink
+										ariaLabel="Edytuj przepis"
+										href={`edytuj/${product.id}`}
+										color="blue">
 										<PencilSquareIcon className="w-4 h-4" />
 									</CustomLink>
 									<Button
+										ariaLabel="Usuń przepis"
 										type="button"
 										disabled={false}
 										color="red"

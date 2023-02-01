@@ -10,7 +10,7 @@ function Navbar(): JSX.Element {
 			<NavItem href="/">Home</NavItem>
 			{state.user ? (
 				<>
-					<NavItem href="profil">Mój profil</NavItem>
+					<NavItem href="profil">Profil</NavItem>
 					<NavItem href="/" onClick={() => logout()}>
 						Wyloguj
 					</NavItem>

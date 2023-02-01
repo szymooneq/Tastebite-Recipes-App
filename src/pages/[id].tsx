@@ -30,17 +30,15 @@ function ProductView(): JSX.Element {
 			{data && (
 				<>
 					<div className="flex flex-col gap-3 flex-1 lg:max-w-[40rem] xl:max-w-[50rem]">
-						<h1 className="text-3xl font-bold dark:text-white">{data.name}</h1>
+						<h2 className="text-3xl font-bold dark:text-white">{data.name}</h2>
 						<Badges {...data.details} />
 
 						<Image
 							className="w-full h-60 md:h-80 lg:h-96 rounded object-cover object-center"
 							src={data.img}
-							alt="Meal preview"
+							alt={`Zdjęcie podglądowe przepisu "${data.name}"`}
 						/>
-						<p className="text-justify italic dark:text-gray-400">
-							{data.description}
-						</p>
+						<p className="italic dark:text-gray-400">{data.description}</p>
 						<div className="my-3 hidden lg:block dark:text-white">
 							<Steps data={data.steps} />
 						</div>

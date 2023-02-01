@@ -14,13 +14,13 @@ function RecipeCard({ recipe }: props): JSX.Element {
 			<Image
 				className="w-full h-60 object-cover object-center rounded-t-lg"
 				src={recipe.img}
-				alt={recipe.name}
+				alt={`Zdjęcie podglądowe przepisu "${recipe.name}"`}
 			/>
 
 			<div className="p-4 flex flex-col gap-2">
-				<h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
+				<h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
 					{recipe.name}
-				</h5>
+				</h3>
 
 				<Badges
 					duration={recipe.details.duration}

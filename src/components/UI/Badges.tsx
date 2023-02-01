@@ -41,7 +41,7 @@ function Badges({ duration, level, rating }: props): JSX.Element {
 			color:
 				'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
 			icon: StarIcon,
-			description: `${rating ?? 'Brak ocen'}`
+			description: 'Brak'
 		}
 	];
 

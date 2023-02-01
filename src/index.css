@@ -10,8 +10,11 @@
 
 body {
 	overflow-y: scroll;
+	background-color: #ffffff;
+	color: #000000;
 }
 
 .dark body {
 	background-color: #111827;
+	color: #ffffff;
 }

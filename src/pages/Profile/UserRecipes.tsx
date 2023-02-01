@@ -45,9 +45,15 @@ function UserRecipes(): JSX.Element {
 
 	return (
 		<>
-			<CustomLink href="dodaj" color="green">
-				Dodaj nowy przepis
-			</CustomLink>
+			<div className="px-3 mt-2 inline-flex justify-between w-full items-center gap-5 lg:px-0">
+				<h2 className="text-xl font-bold dark:text-white lg:text-3xl">
+					Twoje przepisy
+				</h2>
+				<CustomLink href="dodaj" color="green">
+					Dodaj
+				</CustomLink>
+			</div>
+
 			<div className="my-2 overflow-x-auto">
 				{data ? (
 					<RecipeTable recipes={data} deleteRecipe={deleteRecipe} />

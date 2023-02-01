@@ -38,6 +38,7 @@ export interface ISelectField extends Base<string> {
 }
 
 export interface IDynamicField {
+	name: string;
 	placeholder: string;
 	type: string;
 	error?: string | string[];

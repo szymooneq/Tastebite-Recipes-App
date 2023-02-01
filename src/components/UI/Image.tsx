@@ -25,7 +25,7 @@ function Image({ className, src, alt }: props): JSX.Element {
 				className={className}
 				src={src ? src : placeholder}
 				onLoad={() => setLoadingImg(false)}
-				alt={alt}
+				alt={src ? alt : ''}
 			/>
 		</>
 	);
