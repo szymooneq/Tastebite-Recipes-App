@@ -10,12 +10,14 @@ interface props {
 
 function RecipeCard({ recipe }: props): JSX.Element {
 	return (
-		<div className="w-full break-words overflow-hidden rounded-lg shadow-md hover:shadow-2xl transition bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700 xl:w-full">
-			<Image
-				className="w-full h-60 object-cover object-center rounded-t-lg"
-				src={recipe.img}
-				alt={`Zdjęcie podglądowe przepisu "${recipe.name}"`}
-			/>
+		<div className="w-full break-words overflow-hidden rounded-lg shadow-md hover:shadow-2xl transition group bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700 xl:w-full">
+			<div className="h-60 rounded-t-lg overflow-hidden">
+				<Image
+					className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform"
+					src={recipe.img}
+					alt={`Zdjęcie podglądowe przepisu "${recipe.name}"`}
+				/>
+			</div>
 
 			<div className="p-4 flex flex-col gap-2">
 				<h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
