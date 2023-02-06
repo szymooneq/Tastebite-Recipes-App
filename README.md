@@ -2,7 +2,7 @@
 
 ![tutorial thumbnail](./src/assets/_thumbnail.jpg)
 
-Application with the ability to add and manage recipes.
+React app with the ability to create accounts and manage custom recipes (CRUD). Auth and database from Google Firebase. Data fetching, form validation, and sanitization.
 
 https://tastebite-app-sd.vercel.app
 
@@ -29,25 +29,25 @@ https://tastebite-app-sd.vercel.app
 
 ## Details
 
-- created with the React (Vite) and TypeScript
-- CRUD - the ability to manage account and recipes
+- created with React (Vite) and TypeScript
+- CRUD - the ability to manage accounts and recipes
 - data stored on Cloud Firestore
 - data fetching and caching with Tanstack React Query
-- auth by Firebase Authentication
-- context and reducer used to manage context values
+- authentication through Firebase Authentication
+- context and reducer for managing context values
 - suspense for data fetching with lazy loading
-- error boundary to catch errors in child components
-- saving data in local storage using custom hook
+- Error Boundary component to catch errors in child components
+- storing data in local storage using a custom hook
 - routing with React Router
 - forms created with the Formik
-- form validation and sanitization (zod)
-- layout and styling with Tailwind CSS and Flowbite
+- form validation and sanitization (Zod)
+- styling with Tailwind CSS and Flowbite components
 - responsive website design
-- light/dark mode prefer system color scheme
+- light/dark mode prefers the system color scheme
 
 ## Tutorial and project structure
 
-Inside of project, you'll see the following folders and files:
+Inside the project you'll see the following folders and files:
 
 ```
 PROJECT_ROOT
@@ -71,7 +71,7 @@ Download the repository to your local machine and run to download all missing de
 yarn install
 ```
 
-After that you can run this project using:
+After that you can run this project with:
 
 ```
 yarn dev
@@ -83,9 +83,9 @@ To build your application use:
 yarn build
 ```
 
-**To manage the app content you need to create a new Firebase project. Check the official documentation: https://firebase.google.com/docs**
+**To manage the content of the app, you need to create a new Firebase project. See the official documentation: https://firebase.google.com/docs**
 
-After creating your own firebase project, just create the `.env.local` file with the following data in the main folder and restart your application:
+After you have created your own Firebase project, simply create the `.env.local` file with the following data in the main folder and restart your application:
 
 ```
 VITE_FIREBASE_KEY = YOUR_FIREBASE_KEY
