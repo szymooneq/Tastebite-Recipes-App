@@ -5,22 +5,14 @@ import Button from '../UI/Button/Button'
 import CustomLink from '../UI/CustomLink/CustomLink'
 import Image from '../UI/Image/Image'
 import Indicator from '../UI/Indicator/Indicator'
-import DeleteModal from '../Recipes/DeleteModal'
+import DeleteModal from '../Modal/Modal'
 import { TableProps } from './Table.types'
 
-export interface ModalData {
-	status: boolean
-	deletingRecipe: IRecipeApi | null
-}
+const Table = ({ content }: TableProps): JSX.Element => {
+	const [modalData, setModalData] = useState<IRecipeApi | null>(null)
 
-const Table = ({ recipes, deleteRecipe }: TableProps): JSX.Element => {
-	const [modalData, setModalData] = useState<ModalData>({
-		status: false,
-		deletingRecipe: null
-	})
-
-	const changeModalData = (status: boolean, deletingRecipe: IRecipeApi | null) => {
-		setModalData({ status, deletingRecipe })
+	const handleModalOpen = (product: IRecipeApi | null = null) => {
+		setModalData(product)
 	}
 
 	return (
@@ -36,7 +28,7 @@ const Table = ({ recipes, deleteRecipe }: TableProps): JSX.Element => {
 					</tr>
 				</thead>
 				<tbody>
-					{recipes.map((product) => (
+					{content.map((product) => (
 						<tr
 							key={product.id}
 							className="text-center bg-white hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -70,7 +62,7 @@ const Table = ({ recipes, deleteRecipe }: TableProps): JSX.Element => {
 										type="button"
 										disabled={false}
 										color="redOutline"
-										onClick={() => changeModalData(true, product)}>
+										onClick={() => handleModalOpen(product)}>
 										<TrashIcon className="w-4 h-4" />
 									</Button>
 								</div>
@@ -79,11 +71,7 @@ const Table = ({ recipes, deleteRecipe }: TableProps): JSX.Element => {
 					))}
 				</tbody>
 			</table>
-			<DeleteModal
-				modalData={modalData}
-				changeModalData={changeModalData}
-				deleteFunction={deleteRecipe}
-			/>
+			{modalData ? <DeleteModal content={modalData} setModalStatus={handleModalOpen} /> : null}
 		</>
 	)
 }

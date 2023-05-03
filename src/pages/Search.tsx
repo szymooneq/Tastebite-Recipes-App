@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import RecipeList from '../components/Recipes/RecipeList'
+import RecipeList from '../components/Recipes/List/List'
 import Spinner from '../components/UI/LoadingSpinner/LoadingSpinner'
 import { getRecipesBySearch } from '../lib/firebase/getRecipes'
 // import useLocalStorage from '../lib/hooks/useLocalStorage';

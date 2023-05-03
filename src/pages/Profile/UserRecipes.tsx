@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { deleteObject, ref } from 'firebase/storage'
+import { db, storage } from '../../lib/firebase/config'
 import { useContext } from 'react'
 import RecipeTable from '../../components/Table/Table'
 import CustomLink from '../../components/UI/CustomLink/CustomLink'
 import Spinner from '../../components/UI/LoadingSpinner/LoadingSpinner'
 import { Context } from '../../lib/context/Auth/AuthProvider'
-import { db, storage } from '../../lib/firebase/config'
 import { getUserRecipes } from '../../lib/firebase/getRecipes'
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle'
 import { IRecipeApi } from '../../lib/interfaces/recipe'
@@ -22,24 +22,6 @@ function UserRecipes(): JSX.Element {
 		},
 		useErrorBoundary: true
 	})
-
-	const deleteRecipe = async (recipe: IRecipeApi, cb: () => void) => {
-		try {
-			if (recipe.img) {
-				const imageRef = ref(
-					storage,
-					`${state.user?.uid}/${recipe.createdAt?.seconds}${state.user?.uid}`
-				)
-				await deleteObject(imageRef)
-			}
-
-			await deleteDoc(doc(db, 'recipes', recipe.id))
-			refetch()
-			cb()
-		} catch (error) {
-			console.log(error)
-		}
-	}
 
 	if (isLoading) return <Spinner />
 

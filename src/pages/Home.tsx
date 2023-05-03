@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import RecipeList from '../components/Recipes/RecipeList'
+import RecipeList from '../components/Recipes/List/List'
 import Spinner from '../components/UI/LoadingSpinner/LoadingSpinner'
 import { getAllRecipes } from '../lib/firebase/getRecipes'
 import useDocumentTitle from '../lib/hooks/useDocumentTitle'
