@@ -1,9 +1,9 @@
-import { FormikHelpers, useFormik } from 'formik';
-import { toFormikValidationSchema } from 'zod-formik-adapter';
-import { IRecipe } from '../../lib/interfaces/recipe';
-import Button from '../UI/Button';
-import CustomLink from '../UI/CustomLink';
-import { buttonSpinner } from '../UI/SVG/buttonSpinner';
+import { FormikHelpers, useFormik } from 'formik'
+import { toFormikValidationSchema } from 'zod-formik-adapter'
+import { IRecipe } from '../../lib/interfaces/recipe'
+import Button from '../UI/Button/Button'
+import CustomLink from '../UI/CustomLink/CustomLink'
+import { buttonSpinner } from '../UI/SVG/buttonSpinner'
 import {
 	DynamicField,
 	FileField,
@@ -12,20 +12,17 @@ import {
 	SwitchField,
 	TextField,
 	TextareaField
-} from './Fields';
-import RecipeFormHeader from './RecipeFormHeader';
+} from './Fields'
+import RecipeFormHeader from './RecipeFormHeader'
 
 interface props {
 	buttonData: {
-		title: string;
-		loading: string;
-	};
-	initialValues: IRecipe;
-	validationSchema: any;
-	onSubmit: (
-		values: IRecipe,
-		formikHelpers: FormikHelpers<IRecipe>
-	) => Promise<void>;
+		title: string
+		loading: string
+	}
+	initialValues: IRecipe
+	validationSchema: any
+	onSubmit: (values: IRecipe, formikHelpers: FormikHelpers<IRecipe>) => Promise<void>
 }
 
 function RecipeForm({
@@ -49,7 +46,7 @@ function RecipeForm({
 		initialValues,
 		validationSchema: toFormikValidationSchema(validationSchema),
 		onSubmit
-	});
+	})
 
 	return (
 		<div className="mx-7 md:mx-auto lg:w-[60rem] xl:w-[70rem]">
@@ -86,7 +83,7 @@ function RecipeForm({
 								label="Zdjęcie (podgląd)"
 								error={errors.file}
 								onChange={(value) => {
-									setFieldValue('file', value);
+									setFieldValue('file', value)
 								}}
 								imgValue={values?.img || null}
 								value={values.file || null}
@@ -245,7 +242,7 @@ function RecipeForm({
 				</div>
 			</form>
 		</div>
-	);
+	)
 }
 
-export default RecipeForm;
+export default RecipeForm

@@ -1,29 +1,29 @@
-import { useQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
-import Details from '../components/Recipes/[id]/Details';
-import Ingredients from '../components/Recipes/[id]/Ingredients';
-import Nutrions from '../components/Recipes/[id]/Nutrions';
-import Steps from '../components/Recipes/[id]/Steps';
-import Badges from '../components/UI/Badges';
-import Image from '../components/UI/Image';
-import Spinner from '../components/UI/Spinner';
-import { getRecipeData } from '../lib/firebase/getRecipes';
+import { useQuery } from '@tanstack/react-query'
+import { useNavigate, useParams } from 'react-router-dom'
+import Details from '../components/Recipes/[id]/Details'
+import Ingredients from '../components/Recipes/[id]/Ingredients'
+import Nutrions from '../components/Recipes/[id]/Nutrions'
+import Steps from '../components/Recipes/[id]/Steps'
+import Badges from '../components/UI/Badges/Badges'
+import Image from '../components/UI/Image/Image'
+import Spinner from '../components/UI/LoadingSpinner/LoadingSpinner'
+import { getRecipeData } from '../lib/firebase/getRecipes'
 
 function ProductView(): JSX.Element {
-	const { id } = useParams();
-	const navigate = useNavigate();
+	const { id } = useParams()
+	const navigate = useNavigate()
 
 	const { isLoading, data } = useQuery({
 		queryKey: ['recipe', id],
 		queryFn: () => {
-			if (id) return getRecipeData(id, navigate);
+			if (id) return getRecipeData(id, navigate)
 		},
 		useErrorBoundary: true
-	});
+	})
 
 	// TODO: rating system
 
-	if (isLoading) return <Spinner />;
+	if (isLoading) return <Spinner />
 
 	return (
 		<div className="mx-4 flex flex-col gap-4 lg:flex-row lg:justify-center break-words">
@@ -55,7 +55,7 @@ function ProductView(): JSX.Element {
 				</>
 			)}
 		</div>
-	);
+	)
 }
 
-export default ProductView;
+export default ProductView

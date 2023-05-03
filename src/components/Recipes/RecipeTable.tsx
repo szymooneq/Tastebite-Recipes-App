@@ -1,34 +1,31 @@
-import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid';
-import { useState } from 'react';
-import { IRecipeApi } from '../../lib/interfaces/recipe';
-import Button from '../UI/Button';
-import CustomLink from '../UI/CustomLink';
-import Image from '../UI/Image';
-import Indicator from '../UI/Indicator';
-import DeleteModal from './DeleteModal';
+import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { useState } from 'react'
+import { IRecipeApi } from '../../lib/interfaces/recipe'
+import Button from '../UI/Button/Button'
+import CustomLink from '../UI/CustomLink/CustomLink'
+import Image from '../UI/Image/Image'
+import Indicator from '../UI/Indicator/Indicator'
+import DeleteModal from './DeleteModal'
 
 interface props {
-	recipes: IRecipeApi[];
-	deleteRecipe: (recipe: IRecipeApi, cb: () => void) => Promise<void>;
+	recipes: IRecipeApi[]
+	deleteRecipe: (recipe: IRecipeApi, cb: () => void) => Promise<void>
 }
 
 export interface ModalData {
-	status: boolean;
-	deletingRecipe: IRecipeApi | null;
+	status: boolean
+	deletingRecipe: IRecipeApi | null
 }
 
 function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
 	const [modalData, setModalData] = useState<ModalData>({
 		status: false,
 		deletingRecipe: null
-	});
+	})
 
-	const changeModalData = (
-		status: boolean,
-		deletingRecipe: IRecipeApi | null
-	) => {
-		setModalData({ status, deletingRecipe });
-	};
+	const changeModalData = (status: boolean, deletingRecipe: IRecipeApi | null) => {
+		setModalData({ status, deletingRecipe })
+	}
 
 	return (
 		<>
@@ -92,7 +89,7 @@ function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
 				deleteFunction={deleteRecipe}
 			/>
 		</>
-	);
+	)
 }
 
-export default RecipeTable;
+export default RecipeTable

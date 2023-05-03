@@ -1,11 +1,11 @@
-import { ArrowRightIcon } from '@heroicons/react/20/solid';
-import { IRecipeApi } from '../../lib/interfaces/recipe';
-import Badges from '../UI/Badges';
-import CustomLink from '../UI/CustomLink';
-import Image from '../UI/Image';
+import { ArrowRightIcon } from '@heroicons/react/20/solid'
+import { IRecipeApi } from '../../lib/interfaces/recipe'
+import Badges from '../UI/Badges/Badges'
+import CustomLink from '../UI/CustomLink/CustomLink'
+import Image from '../UI/Image/Image'
 
 interface props {
-	recipe: IRecipeApi;
+	recipe: IRecipeApi
 }
 
 function RecipeCard({ recipe }: props): JSX.Element {
@@ -24,11 +24,7 @@ function RecipeCard({ recipe }: props): JSX.Element {
 					{recipe.name}
 				</h3>
 
-				<Badges
-					duration={recipe.details.duration}
-					level={recipe.details.level}
-					rating={5}
-				/>
+				<Badges duration={recipe.details.duration} level={recipe.details.level} rating={5} />
 
 				<p className="min-h-[4.5rem] text-gray-700 dark:text-gray-400 line-clamp-3">
 					{recipe.description}
@@ -39,7 +35,7 @@ function RecipeCard({ recipe }: props): JSX.Element {
 				</CustomLink>
 			</div>
 		</div>
-	);
+	)
 }
 
-export default RecipeCard;
+export default RecipeCard
