@@ -3,7 +3,7 @@ import { Modal, ModalProps } from 'flowbite-react'
 import { FC, useEffect } from 'react'
 import { IRecipeApi } from '../../lib/interfaces/recipe'
 import Button from '../UI/Button/Button'
-import { ModalData } from './RecipeTable'
+import { ModalData } from '../Table/Table'
 
 interface props {
 	modalData: ModalData

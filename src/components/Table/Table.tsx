@@ -5,19 +5,15 @@ import Button from '../UI/Button/Button'
 import CustomLink from '../UI/CustomLink/CustomLink'
 import Image from '../UI/Image/Image'
 import Indicator from '../UI/Indicator/Indicator'
-import DeleteModal from './DeleteModal'
-
-interface props {
-	recipes: IRecipeApi[]
-	deleteRecipe: (recipe: IRecipeApi, cb: () => void) => Promise<void>
-}
+import DeleteModal from '../Recipes/DeleteModal'
+import { TableProps } from './Table.types'
 
 export interface ModalData {
 	status: boolean
 	deletingRecipe: IRecipeApi | null
 }
 
-function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
+const Table = ({ recipes, deleteRecipe }: TableProps): JSX.Element => {
 	const [modalData, setModalData] = useState<ModalData>({
 		status: false,
 		deletingRecipe: null
@@ -92,4 +88,4 @@ function RecipeTable({ recipes, deleteRecipe }: props): JSX.Element {
 	)
 }
 
-export default RecipeTable
+export default Table

@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
-import AppContext from '../../lib/context/AppContext'
+import AppContext from '../../lib/context/Auth/AuthProvider'
 import Spinner from '../UI/LoadingSpinner/LoadingSpinner'
 import ErrorBoundary from './ErrorBoundary'
 import Footer from './Footer/Footer'

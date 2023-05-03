@@ -1,42 +1,35 @@
-import { Timestamp, addDoc, collection } from 'firebase/firestore';
-import { FormikHelpers } from 'formik';
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import RecipeForm from '../../../components/Forms/RecipeForm';
-import { Context } from '../../../lib/context/AppContext';
-import { db } from '../../../lib/firebase/config';
-import { uploadFileToStorage } from '../../../lib/firebase/getRecipes';
-import { roundToTwo } from '../../../lib/helpers/roundToTwo';
-import useDocumentTitle from '../../../lib/hooks/useDocumentTitle';
-import { IRecipe } from '../../../lib/interfaces/recipe';
-import { recipeSchema } from '../../../lib/schemas/recipeSchema';
+import { Timestamp, addDoc, collection } from 'firebase/firestore'
+import { FormikHelpers } from 'formik'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import RecipeForm from '../../../components/Forms/RecipeForm'
+import { Context } from '../../../lib/context/Auth/AuthProvider'
+import { db } from '../../../lib/firebase/config'
+import { uploadFileToStorage } from '../../../lib/firebase/getRecipes'
+import { roundToTwo } from '../../../lib/helpers/roundToTwo'
+import useDocumentTitle from '../../../lib/hooks/useDocumentTitle'
+import { IRecipe } from '../../../lib/interfaces/recipe'
+import { recipeSchema } from '../../../lib/schemas/recipeSchema'
 
 function AddRecipe(): JSX.Element {
-	useDocumentTitle('Profil | Moje przepisy | Nowy');
-	const { state } = useContext(Context);
-	const navigate = useNavigate();
+	useDocumentTitle('Profil | Moje przepisy | Nowy')
+	const { state } = useContext(Context)
+	const navigate = useNavigate()
 
 	const buttonData = {
 		title: 'Dodaj przepis',
 		loading: 'Dodawanie'
-	};
+	}
 
 	// TODO: add react query mutations
 
-	const onSubmit = async (
-		values: IRecipe,
-		formikHelpers: FormikHelpers<IRecipe>
-	) => {
-		const timeStamp = Timestamp.now();
-		let downloadURL;
+	const onSubmit = async (values: IRecipe, formikHelpers: FormikHelpers<IRecipe>) => {
+		const timeStamp = Timestamp.now()
+		let downloadURL
 
 		try {
 			if (values.file && state.user) {
-				downloadURL = await uploadFileToStorage(
-					values.file,
-					state.user?.uid,
-					timeStamp.seconds
-				);
+				downloadURL = await uploadFileToStorage(values.file, state.user?.uid, timeStamp.seconds)
 			}
 
 			const sendingValues = {
@@ -63,14 +56,14 @@ function AddRecipe(): JSX.Element {
 					.map((item) => item.trim().replace(/  +/g, ' ')),
 				userId: state.user?.uid,
 				createdAt: timeStamp
-			};
+			}
 
-			await addDoc(collection(db, 'recipes'), sendingValues);
-			navigate('/profil/przepisy');
+			await addDoc(collection(db, 'recipes'), sendingValues)
+			navigate('/profil/przepisy')
 		} catch (error) {
-			console.error('Error adding document: ', error);
+			console.error('Error adding document: ', error)
 		}
-	};
+	}
 
 	return (
 		<RecipeForm
@@ -98,7 +91,7 @@ function AddRecipe(): JSX.Element {
 			validationSchema={recipeSchema}
 			onSubmit={onSubmit}
 		/>
-	);
+	)
 }
 
-export default AddRecipe;
+export default AddRecipe
