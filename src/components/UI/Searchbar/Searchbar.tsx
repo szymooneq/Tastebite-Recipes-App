@@ -1,23 +1,23 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
-import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
-function Searchbar() {
-	const [term, setTerm] = useState('');
-	const inputRef = useRef<HTMLInputElement>(null);
-	const navigate = useNavigate();
+const Searchbar = () => {
+	const [term, setTerm] = useState<string>('')
+	const inputRef = useRef<HTMLInputElement>(null)
+	const navigate = useNavigate()
 
 	const handlePressEnter = (e: React.KeyboardEvent) => {
-		e.key === 'Enter' && navigate(`/szukaj/${term}`);
-	};
+		if (e.key === 'Enter') navigate(`/szukaj/${term}`)
+	}
 
-	const focusInput = () => {
-		inputRef.current?.focus();
-	};
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setTerm(e.target.value)
+	}
 
 	useEffect(() => {
-		focusInput();
-	}, []);
+		inputRef.current?.focus()
+	}, [])
 
 	return (
 		<div className="relative w-80">
@@ -36,7 +36,7 @@ function Searchbar() {
 				type="text"
 				value={term}
 				onKeyDown={handlePressEnter}
-				onChange={(e) => setTerm(e.target.value)}
+				onChange={(e) => handleChange(e)}
 				placeholder="Czego szukasz..."
 				className="p-4 pl-10 w-full rounded-lg border text-sm text-gray-900 bg-gray-50 border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
 			/>
@@ -47,7 +47,7 @@ function Searchbar() {
 				Szukaj
 			</Link>
 		</div>
-	);
+	)
 }
 
-export default Searchbar;
+export default Searchbar

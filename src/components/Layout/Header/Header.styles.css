@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-.headerImage {
+.header {
 	position: absolute;
 	top: -5%;
 	bottom: -5%;
@@ -13,7 +13,7 @@
 	z-index: -1;
 }
 
-.headerImage::after {
+.header::after {
 	content: '';
 	position: absolute;
 	top: 0;

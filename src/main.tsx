@@ -1,23 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import ProfileNavbar from './components/Layout/Navbar/Profile/ProfileNavbar';
-import RootLayout from './components/Layout/RootLayout';
-import './index.css';
-const NotFound = React.lazy(() => import('./pages/404'));
-const Home = React.lazy(() => import('./pages/Home'));
-const Search = React.lazy(() => import('./pages/Search'));
-const ProductView = React.lazy(() => import('./pages/[id]'));
-const UserDetails = React.lazy(() => import('./pages/Profile/UserDetails'));
-const UserRecipes = React.lazy(() => import('./pages/Profile/UserRecipes'));
-const AddRecipe = React.lazy(
-	() => import('./pages/Profile/RecipesManagment/AddRecipe')
-);
-const EditRecipe = React.lazy(
-	() => import('./pages/Profile/RecipesManagment/EditRecipe')
-);
-const Login = React.lazy(() => import('./pages/Auth/Login'));
-const Register = React.lazy(() => import('./pages/Auth/Register'));
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import ProfileNavbar from './components/Layout/ProfileNavbar/ProfileNavbar'
+import RootLayout from './components/Layout/Layout'
+import './index.css'
+const NotFound = React.lazy(() => import('./pages/404'))
+const Home = React.lazy(() => import('./pages/Home'))
+const Search = React.lazy(() => import('./pages/Search'))
+const ProductView = React.lazy(() => import('./pages/[id]'))
+const UserDetails = React.lazy(() => import('./pages/Profile/UserDetails'))
+const UserRecipes = React.lazy(() => import('./pages/Profile/UserRecipes'))
+const AddRecipe = React.lazy(() => import('./pages/Profile/RecipesManagment/AddRecipe'))
+const EditRecipe = React.lazy(() => import('./pages/Profile/RecipesManagment/EditRecipe'))
+const Login = React.lazy(() => import('./pages/Auth/Login'))
+const Register = React.lazy(() => import('./pages/Auth/Register'))
 
 const router = createBrowserRouter([
 	{
@@ -77,10 +73,10 @@ const router = createBrowserRouter([
 			}
 		]
 	}
-]);
+])
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<RouterProvider router={router} />
 	</React.StrictMode>
-);
+)
