@@ -1,20 +1,13 @@
-import { ISwitchField } from '../../../lib/interfaces/fields';
+import { ISwitchField } from '../../lib/interfaces/fields'
 
-function SwitchField({
-	name,
-	label,
-	value,
-	onChange
-}: ISwitchField): JSX.Element {
+function SwitchField({ name, label, value, onChange }: ISwitchField): JSX.Element {
 	return (
 		<div className="mb-4">
 			<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
 				{label}
 			</label>
 
-			<label
-				htmlFor={name}
-				className="inline-flex relative items-center cursor-pointer">
+			<label htmlFor={name} className="inline-flex relative items-center cursor-pointer">
 				<input
 					type="checkbox"
 					id={name}
@@ -29,7 +22,7 @@ function SwitchField({
 				</span>
 			</label>
 		</div>
-	);
+	)
 }
 
-export default SwitchField;
+export default SwitchField

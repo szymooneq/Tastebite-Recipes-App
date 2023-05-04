@@ -1,36 +1,17 @@
-import { FormikHelpers, useFormik } from 'formik'
-import { toFormikValidationSchema } from 'zod-formik-adapter'
-import { IRecipe } from '../../lib/interfaces/recipe'
-import Button from '../UI/Button/Button'
-import CustomLink from '../UI/CustomLink/CustomLink'
-import { buttonSpinner } from '../UI/SVG/buttonSpinner'
+import Button from '../../UI/Button/Button'
+import CustomLink from '../../UI/CustomLink/CustomLink'
 import {
 	DynamicField,
 	FileField,
-	NumberField,
 	SelectField,
 	SwitchField,
 	TextField,
 	TextareaField
-} from './Fields'
-import RecipeFormHeader from './RecipeFormHeader'
+} from '../../Fields'
+import RecipeFormHeader from '../RecipeFormHeader'
+import { RecipeFormProps } from './RecipeForm.types'
 
-interface props {
-	buttonData: {
-		title: string
-		loading: string
-	}
-	initialValues: IRecipe
-	validationSchema: any
-	onSubmit: (values: IRecipe, formikHelpers: FormikHelpers<IRecipe>) => Promise<void>
-}
-
-function RecipeForm({
-	buttonData,
-	initialValues,
-	validationSchema,
-	onSubmit
-}: props): JSX.Element {
+const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 	const {
 		values,
 		errors,
@@ -42,11 +23,7 @@ function RecipeForm({
 		handleBlur,
 		handleChange,
 		handleSubmit
-	} = useFormik({
-		initialValues,
-		validationSchema: toFormikValidationSchema(validationSchema),
-		onSubmit
-	})
+	} = control
 
 	return (
 		<div className="mx-7 md:mx-auto lg:w-[60rem] xl:w-[70rem]">
@@ -61,10 +38,10 @@ function RecipeForm({
 								label="Nazwa"
 								placeholder="Podaj nazwę potrawy..."
 								value={values.name}
-								error={errors.name}
-								touched={touched.name}
 								onChange={handleChange}
 								onBlur={handleBlur}
+								errorMsg={errors.name}
+								isTouched={touched.name}
 							/>
 
 							<TextareaField
@@ -97,26 +74,26 @@ function RecipeForm({
 							/>
 
 							<div className="flex flex-nowrap justify-between gap-3">
-								<NumberField
+								<TextField
 									name="details.duration"
 									label="Czas (min)"
 									placeholder="Minut..."
 									step={1}
 									value={values.details.duration}
-									error={errors.details?.duration}
-									touched={touched.details?.duration}
+									errorMsg={errors.details?.duration}
+									isTouched={touched.details?.duration}
 									onChange={handleChange}
 									onBlur={handleBlur}
 								/>
 
-								<NumberField
+								<TextField
 									name="details.portions"
 									label="Porcje (sztuk)"
 									placeholder="np. 10 sztuk..."
 									step={0.1}
 									value={values.details.portions}
-									error={errors.details?.portions}
-									touched={touched.details?.portions}
+									errorMsg={errors.details?.portions}
+									isTouched={touched.details?.portions}
 									onChange={handleChange}
 									onBlur={handleBlur}
 								/>
@@ -141,51 +118,51 @@ function RecipeForm({
 						<div className="md:w-96">
 							<RecipeFormHeader title="Wartości odżywcze" hrColor="rose" />
 
-							<NumberField
+							<TextField
 								name="nutrions.calories"
 								label="Kalorie (kcal)"
 								placeholder="Liczba kalorii..."
 								step={0.1}
 								value={values.nutrions.calories}
-								error={errors.nutrions?.calories}
-								touched={touched.nutrions?.calories}
+								errorMsg={errors.nutrions?.calories}
+								isTouched={touched.nutrions?.calories}
 								onChange={handleChange}
 								onBlur={handleBlur}
 							/>
 
 							<div className="flex flex-col md:flex-row md:gap-3">
-								<NumberField
+								<TextField
 									name="nutrions.protein"
 									label="Białko (g)"
 									placeholder="Ilość białka w g..."
 									step={0.1}
 									value={values.nutrions.protein}
-									error={errors.nutrions?.protein}
-									touched={touched.nutrions?.protein}
+									errorMsg={errors.nutrions?.protein}
+									isTouched={touched.nutrions?.protein}
 									onChange={handleChange}
 									onBlur={handleBlur}
 								/>
 
-								<NumberField
+								<TextField
 									name="nutrions.carbohydrates"
 									label="Węglowodany (g)"
 									placeholder="Ilość węglowodanów w g..."
 									step={0.1}
 									value={values.nutrions.carbohydrates}
-									error={errors.nutrions?.carbohydrates}
-									touched={touched.nutrions?.carbohydrates}
+									errorMsg={errors.nutrions?.carbohydrates}
+									isTouched={touched.nutrions?.carbohydrates}
 									onChange={handleChange}
 									onBlur={handleBlur}
 								/>
 
-								<NumberField
+								<TextField
 									name="nutrions.fat"
 									label="Tłuszcze (g)"
 									placeholder="Ilość tłuszczy w g..."
 									step={0.1}
 									value={values.nutrions.fat}
-									error={errors.nutrions?.fat}
-									touched={touched.nutrions?.fat}
+									errorMsg={errors.nutrions?.fat}
+									isTouched={touched.nutrions?.fat}
 									onChange={handleChange}
 									onBlur={handleBlur}
 								/>
@@ -229,15 +206,9 @@ function RecipeForm({
 					<Button
 						type="submit"
 						color="green"
-						disabled={!isValid || isSubmitting || !dirty}>
-						{isSubmitting ? (
-							<>
-								{buttonSpinner}
-								{buttonData.loading}
-							</>
-						) : (
-							buttonData.title
-						)}
+						disabled={!isValid || isSubmitting || !dirty}
+						loadingMsg="Dodawanie">
+						Dodaj
 					</Button>
 				</div>
 			</form>

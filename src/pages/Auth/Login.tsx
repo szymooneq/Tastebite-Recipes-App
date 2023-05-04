@@ -9,7 +9,7 @@ import { Context } from '../../lib/context/Auth/AuthProvider'
 import { auth } from '../../lib/firebase/config'
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle'
 import { loginSchema } from '../../lib/schemas/authSchema'
-import { PasswordField, TextField } from './../../components/Forms/Fields'
+import { PasswordField, TextField } from '../../components/Fields'
 
 export default function Login(): JSX.Element {
 	useDocumentTitle('Logowanie | Tastebite Recipe App')

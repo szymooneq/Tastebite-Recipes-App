@@ -1,6 +1,6 @@
 import { PlusIcon, TrashIcon } from '@heroicons/react/20/solid'
-import { IDynamicField } from '../../../lib/interfaces/fields'
-import Button from '../../UI/Button/Button'
+import { IDynamicField } from '../../lib/interfaces/fields'
+import Button from '../UI/Button/Button'
 
 function DynamicField({
 	name,

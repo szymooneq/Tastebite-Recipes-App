@@ -1,8 +1,6 @@
-export interface ButtonProps {
-	ariaLabel?: string
-	type: 'submit' | 'button'
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	color: 'green' | 'red' | 'blue' | 'gray' | 'redOutline' | 'greenOutline' | 'blueOutline'
-	disabled: boolean
 	children: React.ReactNode
-	onClick?: React.MouseEventHandler<HTMLButtonElement>
+	loadingMsg?: string
+	disabled?: boolean
 }

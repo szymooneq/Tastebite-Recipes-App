@@ -10,7 +10,7 @@ import { Context } from '../../lib/context/Auth/AuthProvider'
 import { auth } from '../../lib/firebase/config'
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle'
 import { registerSchema } from '../../lib/schemas/authSchema'
-import { PasswordField, TextField } from './../../components/Forms/Fields'
+import { PasswordField, TextField } from '../../components/Fields'
 
 function Register(): JSX.Element {
 	useDocumentTitle('Rejestracja | Tastebite Recipe App')

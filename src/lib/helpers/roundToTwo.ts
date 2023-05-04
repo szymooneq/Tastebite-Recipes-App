@@ -1,3 +1,3 @@
 export const roundToTwo = (num: number) => {
-	return +num.toExponential(2);
-};
+	return +num.toExponential(2)
+}
