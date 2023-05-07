@@ -1,5 +1,5 @@
-import { FormikValues } from 'formik'
+import { FormikProps } from 'formik'
 
-export interface RecipeFormProps {
-	control: FormikValues
+export interface RecipeFormProps<T> {
+	control: FormikProps<T>
 }

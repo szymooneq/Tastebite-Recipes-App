@@ -16,7 +16,7 @@ export interface IRecipe {
 	description: string
 	status: boolean
 	file: Blob | null
-	img?: string
+	img: string | null
 	details: IRecipeDetails
 	nutrions: IRecipeNutrions
 	ingredients: string[]

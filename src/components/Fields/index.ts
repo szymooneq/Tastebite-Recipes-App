@@ -1,9 +1,9 @@
-import DynamicField from './DynamicField'
+import DynamicField from './Dynamic'
 import FileField from './FileField'
 import NumberField from './NumberField'
 import PasswordField from './PasswordField'
-import SelectField from './SelectField'
-import SwitchField from './SwitchField'
+import SelectField from './Select/Select'
+import SwitchField from './Checkbox/SwitchField'
 import TextField from './Text/Text'
 import TextareaField from './Textarea/Textarea'
 

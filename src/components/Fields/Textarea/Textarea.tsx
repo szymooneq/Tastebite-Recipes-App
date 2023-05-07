@@ -1,26 +1,27 @@
-import FieldLayout from '../FieldLayout'
 import { TextareaProps } from './Textarea.types'
-
-const variants = (isError: string | undefined, isTouched: boolean | undefined) => {
-	if (isError && isTouched) {
-		return 'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 dark:bg-gray-700 focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
-	}
-	return 'bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-}
+import { getFieldStyles } from '../../../lib/helpers/getFieldStyles'
+import ErrorMsg from '../ErrorMsg'
 
 const Textarea = ({ name, label, errorMsg, isTouched, ...rest }: TextareaProps): JSX.Element => {
-	const color = variants(errorMsg, isTouched)
+	const styles = getFieldStyles(errorMsg, isTouched)
+	const { fieldStyle, labelStyle } = styles
 
 	return (
-		<FieldLayout name={name} label={label} error={errorMsg} touched={isTouched}>
+		<div className="mb-4">
+			<label htmlFor={name} className={`block mb-2 text-sm font-medium ${labelStyle}`}>
+				{label}
+			</label>
+
 			<textarea
 				name={name}
 				id={name}
 				rows={4}
 				{...rest}
-				className={`block w-full p-2.5 border text-sm rounded-lg outline-none ${color}`}
+				className={`block w-full p-2.5 border text-sm rounded-lg outline-none ${fieldStyle}`}
 			/>
-		</FieldLayout>
+
+			<ErrorMsg content={errorMsg} isTouched={isTouched} />
+		</div>
 	)
 }
 

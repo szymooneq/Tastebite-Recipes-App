@@ -10,8 +10,9 @@ import {
 } from '../../Fields'
 import RecipeFormHeader from '../RecipeFormHeader'
 import { RecipeFormProps } from './RecipeForm.types'
+import { IRecipe } from '../../../lib/interfaces/recipe'
 
-const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
+const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 	const {
 		values,
 		errors,
@@ -49,8 +50,8 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 								label="Opis"
 								placeholder="Opisz swoją potrawę..."
 								value={values.description}
-								error={errors.description}
-								touched={touched.description}
+								errorMsg={errors.description}
+								isTouched={touched.description}
 								onChange={handleChange}
 								onBlur={handleBlur}
 							/>
@@ -59,11 +60,9 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 								name="file"
 								label="Zdjęcie (podgląd)"
 								error={errors.file}
-								onChange={(value) => {
-									setFieldValue('file', value)
-								}}
-								imgValue={values?.img || null}
-								value={values.file || null}
+								currentImg={values.img}
+								value={values.file}
+								setValue={setFieldValue}
 							/>
 
 							<SwitchField
@@ -103,13 +102,8 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 								name="details.level"
 								label="Trudność"
 								value={values.details.level}
-								options={[
-									{ key: 'Łatwy', value: 'easy' },
-									{ key: 'Średni', value: 'medium' },
-									{ key: 'Trudny', value: 'hard' }
-								]}
-								error={errors.details?.level}
-								touched={touched.details?.level}
+								errorMsg={errors.details?.level}
+								isTouched={touched.details?.level}
 								onChange={handleChange}
 								onBlur={handleBlur}
 							/>
@@ -177,10 +171,10 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 							<DynamicField
 								name="ingredients"
 								placeholder="Wprowadź składnik..."
-								type="list-disc"
-								error={errors.ingredients}
-								array={values.ingredients}
-								setArray={(value) => setFieldValue('ingredients', value)}
+								listType="list-disc"
+								errorMsg={errors.ingredients}
+								value={values.ingredients}
+								setValue={setFieldValue}
 							/>
 						</div>
 
@@ -190,10 +184,10 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 							<DynamicField
 								name="steps"
 								placeholder="Wprowadź krok..."
-								type="list-decimal"
-								error={errors.steps}
-								array={values.steps}
-								setArray={(value) => setFieldValue('steps', value)}
+								listType="list-decimal"
+								errorMsg={errors.steps}
+								value={values.steps}
+								setValue={setFieldValue}
 							/>
 						</div>
 					</div>
