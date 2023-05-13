@@ -1,8 +1,8 @@
 import { Timestamp, addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore'
-import { IRecipe } from '../interfaces/recipe'
+import { IRecipe } from '../interfaces/Recipe.types'
 import { db } from './config'
 import { filterFormValues } from '../helpers/filterFormValues'
-import { getImageUrl } from './getRecipes'
+import { getRecipeImageUrl } from './getRecipe'
 
 const postRecipe = async (values: IRecipe, userId: string) => {
 	const { file } = values
@@ -10,7 +10,7 @@ const postRecipe = async (values: IRecipe, userId: string) => {
 	try {
 		const filteredValues = filterFormValues(values)
 		const createdAt = Timestamp.now()
-		const img = await getImageUrl(file, userId, createdAt.seconds)
+		const img = await getRecipeImageUrl(file, userId, createdAt.seconds)
 
 		const valuesToSend = {
 			...filteredValues,
@@ -31,7 +31,7 @@ const updateRecipe = async (values: IRecipe, userId: string, seconds: number, id
 	try {
 		const filteredValues = filterFormValues(values)
 		const editedAt = serverTimestamp()
-		const img = await getImageUrl(file, userId, seconds)
+		const img = await getRecipeImageUrl(file, userId, seconds)
 
 		const valuesToSend = {
 			...filteredValues,

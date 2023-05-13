@@ -1,18 +1,11 @@
 import Button from '../../UI/Button/Button'
 import CustomLink from '../../UI/CustomLink/CustomLink'
-import {
-	DynamicField,
-	FileField,
-	SelectField,
-	SwitchField,
-	TextField,
-	TextareaField
-} from '../../Fields'
-import RecipeFormHeader from '../RecipeFormHeader'
+import * as Field from '../../Fields'
+import Header from '../Header/Header'
 import { RecipeFormProps } from './RecipeForm.types'
-import { IRecipe } from '../../../lib/interfaces/recipe'
 
-const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
+// TODO: add fieldsets
+const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 	const {
 		values,
 		errors,
@@ -32,9 +25,9 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 				<div className="flex flex-col md:flex-row md:flex-wrap md:justify-center md:gap-7">
 					<div>
 						<div className="md:w-96">
-							<RecipeFormHeader title="Główne informacje" hrColor="amber" />
+							<Header title="Główne informacje" hrColor="amber" />
 
-							<TextField
+							<Field.Text
 								name="name"
 								label="Nazwa"
 								placeholder="Podaj nazwę potrawy..."
@@ -45,7 +38,7 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 								isTouched={touched.name}
 							/>
 
-							<TextareaField
+							<Field.Textarea
 								name="description"
 								label="Opis"
 								placeholder="Opisz swoją potrawę..."
@@ -56,24 +49,24 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 								onBlur={handleBlur}
 							/>
 
-							<FileField
+							<Field.File
 								name="file"
 								label="Zdjęcie (podgląd)"
-								error={errors.file}
+								errorMsg={errors.file}
 								currentImg={values.img}
 								value={values.file}
 								setValue={setFieldValue}
 							/>
 
-							<SwitchField
+							<Field.Checkbox
 								name="status"
 								label="Status"
-								value={values.status}
+								checked={values.status}
 								onChange={handleChange}
 							/>
 
 							<div className="flex flex-nowrap justify-between gap-3">
-								<TextField
+								<Field.Text
 									name="details.duration"
 									label="Czas (min)"
 									placeholder="Minut..."
@@ -85,7 +78,7 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 									onBlur={handleBlur}
 								/>
 
-								<TextField
+								<Field.Text
 									name="details.portions"
 									label="Porcje (sztuk)"
 									placeholder="np. 10 sztuk..."
@@ -98,7 +91,7 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 								/>
 							</div>
 
-							<SelectField
+							<Field.Select
 								name="details.level"
 								label="Trudność"
 								value={values.details.level}
@@ -110,9 +103,9 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 						</div>
 
 						<div className="md:w-96">
-							<RecipeFormHeader title="Wartości odżywcze" hrColor="rose" />
+							<Header title="Wartości odżywcze" hrColor="rose" />
 
-							<TextField
+							<Field.Text
 								name="nutrions.calories"
 								label="Kalorie (kcal)"
 								placeholder="Liczba kalorii..."
@@ -125,7 +118,7 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 							/>
 
 							<div className="flex flex-col md:flex-row md:gap-3">
-								<TextField
+								<Field.Text
 									name="nutrions.protein"
 									label="Białko (g)"
 									placeholder="Ilość białka w g..."
@@ -137,7 +130,7 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 									onBlur={handleBlur}
 								/>
 
-								<TextField
+								<Field.Text
 									name="nutrions.carbohydrates"
 									label="Węglowodany (g)"
 									placeholder="Ilość węglowodanów w g..."
@@ -149,7 +142,7 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 									onBlur={handleBlur}
 								/>
 
-								<TextField
+								<Field.Text
 									name="nutrions.fat"
 									label="Tłuszcze (g)"
 									placeholder="Ilość tłuszczy w g..."
@@ -166,9 +159,9 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 
 					<div>
 						<div className="md:w-96">
-							<RecipeFormHeader title="Składniki" hrColor="blue" />
+							<Header title="Składniki" hrColor="blue" />
 
-							<DynamicField
+							<Field.Dynamic
 								name="ingredients"
 								placeholder="Wprowadź składnik..."
 								listType="list-disc"
@@ -179,9 +172,9 @@ const RecipeForm = ({ control }: RecipeFormProps<IRecipe>): JSX.Element => {
 						</div>
 
 						<div className="md:w-96">
-							<RecipeFormHeader title="Przygotowanie" hrColor="green" />
+							<Header title="Przygotowanie" hrColor="green" />
 
-							<DynamicField
+							<Field.Dynamic
 								name="steps"
 								placeholder="Wprowadź krok..."
 								listType="list-decimal"

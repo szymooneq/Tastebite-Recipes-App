@@ -1,12 +1,13 @@
-import { z } from 'zod';
+import { z } from 'zod'
+import { name } from './recipe'
 
-const NO_SPECIAL_CHARACTERS = /^[A-Za-z0-9 ]+$/;
+const NO_SPECIAL_CHARACTERS = /^[A-Za-z0-9 ]+$/
 // no special characters
 
-const FILE_SIZE = 1024000;
+const FILE_SIZE = 1024000
 // max 1mb
 
-const FILE_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
+const FILE_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png']
 // supported formats: jpg, jpeg, gif, png
 
 const nutrionSchema = z
@@ -17,7 +18,7 @@ const nutrionSchema = z
 	.gte(0.1, 'Pole wymagane')
 	.lte(9999, 'Maksymalna wartość wynosi 999')
 	.positive('Nieprawidłowa wartość')
-	.finite('Nieprawidłowa wartość');
+	.finite('Nieprawidłowa wartość')
 
 /* const arraySchema = z
 	.string()
@@ -27,15 +28,7 @@ const nutrionSchema = z
 	.nonempty('Wymagana przynajmniej jedna pozycja'); */
 
 export const recipeSchema = z.object({
-	name: z
-		.string({
-			required_error: 'Pole wymagane',
-			invalid_type_error: 'Nieprawidłowa wartość'
-		})
-		.min(1, 'Pole wymagane')
-		.max(50, 'Maksymalna ilość znaków wynosi 50')
-		.trim()
-		.regex(NO_SPECIAL_CHARACTERS, 'Tekst zawiera znaki specjalne'),
+	name: name,
 	description: z
 		.string({
 			required_error: 'Pole wymagane',
@@ -70,11 +63,11 @@ export const recipeSchema = z.object({
 			errorMap: (issue, _ctx) => {
 				switch (issue.code) {
 					case 'invalid_type':
-						return { message: 'Nieprawidłowa wartość' };
+						return { message: 'Nieprawidłowa wartość' }
 					case 'invalid_enum_value':
-						return { message: 'Nieprawidłowa wartość' };
+						return { message: 'Nieprawidłowa wartość' }
 					default:
-						return { message: 'Pole wymagane' };
+						return { message: 'Pole wymagane' }
 				}
 			}
 		}),
@@ -97,4 +90,4 @@ export const recipeSchema = z.object({
 	})
 	/* ingredients: arraySchema,
 	steps: arraySchema */
-});
+})

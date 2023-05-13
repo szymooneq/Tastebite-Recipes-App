@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import RecipeList from '../components/Recipes/List/List'
 import Spinner from '../components/UI/LoadingSpinner/LoadingSpinner'
-import { getAllRecipes } from '../lib/firebase/getRecipes'
+import { getRecipes } from '../lib/firebase/getRecipe'
 import useDocumentTitle from '../lib/hooks/useDocumentTitle'
 
 function Home(): JSX.Element {
@@ -10,7 +10,7 @@ function Home(): JSX.Element {
 
 	const { isLoading, data } = useQuery({
 		queryKey: ['recipes'],
-		queryFn: () => getAllRecipes(),
+		queryFn: () => getRecipes(),
 		useErrorBoundary: true
 	})
 
@@ -21,7 +21,7 @@ function Home(): JSX.Element {
 	if (isLoading) return <Spinner />
 
 	return data ? (
-		<RecipeList recipeList={data} header="Wszystkich przepisów" />
+		<RecipeList content={data} header="Wszystkich przepisów" />
 	) : (
 		<div>Nie ma żadnego przepisu</div>
 	)

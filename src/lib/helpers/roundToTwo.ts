@@ -1,3 +1,3 @@
-export const roundToTwo = (num: number) => {
-	return +num.toExponential(2)
+export const roundToTwo = (n: number) => {
+	Number(`${Math.round(Number(`${n}e${2}`))}e-${2}`)
 }

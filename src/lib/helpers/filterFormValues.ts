@@ -1,4 +1,4 @@
-import { IRecipe } from '../interfaces/recipe'
+import { IRecipe } from '../interfaces/Recipe.types'
 import { roundToTwo } from './roundToTwo'
 
 const removeStringWhitespaces = (value: string) => {
@@ -10,7 +10,7 @@ const removeArrayWhitespaces = (array: string[]) => {
 }
 
 export const filterFormValues = (values: IRecipe) => {
-	const { name, description, status, img, details, nutrions, ingredients, steps } = values
+	const { name, description, status, details, nutrions, ingredients, steps } = values
 	const { duration, level, portions } = details
 	const { calories, protein, carbohydrates, fat } = nutrions
 
@@ -18,7 +18,6 @@ export const filterFormValues = (values: IRecipe) => {
 		name: removeStringWhitespaces(name),
 		description: removeStringWhitespaces(description),
 		status: status,
-		// img: downloadURL ? downloadURL : null,
 		details: {
 			duration: Number(duration),
 			level: level,
@@ -32,7 +31,5 @@ export const filterFormValues = (values: IRecipe) => {
 		},
 		ingredients: removeArrayWhitespaces(ingredients),
 		steps: removeArrayWhitespaces(steps)
-		// userId: user?.uid,
-		// createdAt: timeStamp
 	}
 }

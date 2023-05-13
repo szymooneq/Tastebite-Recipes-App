@@ -7,9 +7,9 @@ import RecipeTable from '../../components/Table/Table'
 import CustomLink from '../../components/UI/CustomLink/CustomLink'
 import Spinner from '../../components/UI/LoadingSpinner/LoadingSpinner'
 import { Context } from '../../lib/context/Auth/AuthProvider'
-import { getUserRecipes } from '../../lib/firebase/getRecipes'
+import { getUserRecipes } from '../../lib/firebase/getRecipe'
 import useDocumentTitle from '../../lib/hooks/useDocumentTitle'
-import { IRecipeApi } from '../../lib/interfaces/recipe'
+import { IRecipeApi } from '../../lib/interfaces/Recipe.types'
 
 function UserRecipes(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy')

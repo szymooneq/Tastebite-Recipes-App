@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import Button from '../../UI/Button/Button'
 import Image from '../../UI/Image/Image'
 import { getFieldStyles } from '../../../lib/helpers/getFieldStyles'
 import ErrorMsg from '../ErrorMsg/ErrorMsg'
 import { FileProps } from './File.types'
+import { usePreview } from '../../../lib/hooks/usePreview'
 
 const File = ({ name, label, errorMsg, currentImg, value, setValue }: FileProps): JSX.Element => {
-	const [preview, setPreview] = useState<string | null>(currentImg)
+	const { image } = usePreview(value, currentImg)
 	const inputRef = useRef<HTMLInputElement | null>(null)
 
 	const styles = getFieldStyles(errorMsg, true)
@@ -23,9 +24,11 @@ const File = ({ name, label, errorMsg, currentImg, value, setValue }: FileProps)
 	}
 
 	const handleRemoveFile = () => {
-		if (currentImg) return setValue('file', currentImg)
 		setValue('file', null)
 	}
+
+	// TODO: removing the current image from the API
+	// const handleDeleteFile = () => {}
 
 	return (
 		<div className="mb-4">
@@ -33,10 +36,10 @@ const File = ({ name, label, errorMsg, currentImg, value, setValue }: FileProps)
 				{label}
 			</label>
 
-			{preview && !errorMsg ? (
+			{image && !errorMsg ? (
 				<Image
 					className="w-full mb-2 h-52 rounded-lg object-cover object-center"
-					src={preview}
+					src={image}
 					alt="Food preview"
 				/>
 			) : null}

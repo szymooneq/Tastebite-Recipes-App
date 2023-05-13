@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const loginSchema = z.object({
 	email: z
@@ -11,7 +11,7 @@ export const loginSchema = z.object({
 		required_error: 'Pole wymagane',
 		invalid_type_error: 'Nieprawidłowa wartość'
 	})
-});
+})
 
 export const registerSchema = z
 	.object({
@@ -33,4 +33,4 @@ export const registerSchema = z
 	.refine((value) => value.password === value.confirmPassword, {
 		message: 'Hasła nie są identyczne',
 		path: ['confirmPassword']
-	});
+	})

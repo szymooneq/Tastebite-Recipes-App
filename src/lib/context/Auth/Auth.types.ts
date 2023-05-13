@@ -1,5 +1,5 @@
 import { Dispatch } from 'react'
-import { IUser } from '../../interfaces/user'
+import { IUser } from '../../interfaces/User.types'
 
 export interface AuthProviderProps {
 	children: React.ReactNode

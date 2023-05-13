@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 import { AuthContext } from '../context/Auth/AuthProvider'
-import { IUser } from '../interfaces/user'
+import { IUser } from '../interfaces/User.types'
 
 export const useAuth = () => {
 	const { state, dispatch } = useContext(AuthContext)

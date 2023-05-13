@@ -1,4 +1,4 @@
-import { IRecipeApi } from '../../../lib/interfaces/recipe'
+import { IRecipeApi } from '../../../lib/interfaces/Recipe.types'
 
 export interface ListProps {
 	header: string

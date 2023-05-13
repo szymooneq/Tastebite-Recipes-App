@@ -1,5 +1,5 @@
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
-import { IRecipeApi } from '../../../lib/interfaces/recipe'
+import { IRecipeApi } from '../../../lib/interfaces/Recipe.types'
 import Badges from '../../UI/Badges/Badges'
 import CustomLink from '../../UI/CustomLink/CustomLink'
 import Image from '../../UI/Image/Image'

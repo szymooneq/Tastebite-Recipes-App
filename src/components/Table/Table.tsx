@@ -1,6 +1,6 @@
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
-import { IRecipeApi } from '../../lib/interfaces/recipe'
+import { IRecipeApi } from '../../lib/interfaces/Recipe.types'
 import Button from '../UI/Button/Button'
 import CustomLink from '../UI/CustomLink/CustomLink'
 import Image from '../UI/Image/Image'

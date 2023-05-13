@@ -1,7 +1,7 @@
 import { deleteDoc, doc } from 'firebase/firestore'
 import { deleteObject, ref } from 'firebase/storage'
 import { db, storage } from '../../lib/firebase/config'
-import { IRecipeApi } from '../interfaces/recipe'
+import { IRecipeApi } from '../interfaces/Recipe.types'
 
 const deleteRecipe = async (recipe: IRecipeApi, userId: string) => {
 	const { img, id, createdAt } = recipe
