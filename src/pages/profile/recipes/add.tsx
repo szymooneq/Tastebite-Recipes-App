@@ -1,12 +1,12 @@
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import RecipeForm from '../../../components/Forms/RecipeForm/RecipeForm'
-import useDocumentTitle from '../../../lib/hooks/useDocumentTitle'
 import { IRecipe } from '../../../lib/interfaces/Recipe.types'
 import { useAuth } from '../../../lib/hooks/useAuth'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { postRecipe } from '../../../lib/firebase/postRecipe'
-import { recipeSchema } from '../../../lib/schemas/recipeSchema'
+import { useDocumentTitle } from '../../../lib/hooks/useDocumentTitle'
+import { recipeSchema } from '../../../lib/schemas'
 
 const initialValues = {
 	name: '',
@@ -29,8 +29,7 @@ const initialValues = {
 	status: false
 }
 
-// TODO: redirect
-export default function AddRecipe(): JSX.Element {
+export default function AddRecipePage(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy | Nowy')
 	const { user } = useAuth()
 	const navigate = useNavigate()

@@ -1,34 +1,20 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import RecipeList from '../components/Recipes/List/List'
-import Spinner from '../components/UI/LoadingSpinner/LoadingSpinner'
-import { getRecipesBySearch } from '../lib/firebase/getRecipe'
-// import useLocalStorage from '../lib/hooks/useLocalStorage';
 
-function Search(): JSX.Element {
+export default function SearchPage(): JSX.Element {
 	const { term } = useParams()
 
 	const { isLoading, data } = useQuery({
 		queryKey: ['recipes', term],
-		queryFn: () => {
-			if (term) {
-				return getRecipesBySearch(term)
-			} else {
-				return []
-			}
-		},
+		queryFn: () => null,
 		useErrorBoundary: true
 	})
 
-	if (isLoading) return <Spinner />
+	if (isLoading) return <LoadingSpinner />
 
-	return (
-		<>
-			{data && (
-				<RecipeList recipeList={data} header={`Rezultat wyszukiwania dla "${term ?? ''}"`} />
-			)}
-		</>
-	)
+	if (data)
+		return <RecipeList content={data} header={`Rezultat wyszukiwania dla "${term ?? ''}"`} />
+
+	return <></>
 }
-
-export default Search

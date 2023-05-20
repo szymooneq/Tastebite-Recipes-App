@@ -2,11 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 import RecipeList from '../components/Recipes/List/List'
 import Spinner from '../components/UI/LoadingSpinner/LoadingSpinner'
 import { getRecipes } from '../lib/firebase/getRecipe'
-import useDocumentTitle from '../lib/hooks/useDocumentTitle'
+import { useDocumentTitle } from '../lib/hooks/useDocumentTitle'
 
-function Home(): JSX.Element {
+export default function HomePage(): JSX.Element {
 	useDocumentTitle('Home | Tastebite Recipes App')
-	// const [lastProducts, setLastProduct] = useLocalStorage('last-recipe', null);
 
 	const { isLoading, data } = useQuery({
 		queryKey: ['recipes'],
@@ -14,17 +13,9 @@ function Home(): JSX.Element {
 		useErrorBoundary: true
 	})
 
-	/* const saveLastSeenRecipe = (recipe: IRecipe) => {
-		setLastProduct(recipe);
-	}; */
-
 	if (isLoading) return <Spinner />
 
-	return data ? (
-		<RecipeList content={data} header="Wszystkich przepisów" />
-	) : (
-		<div>Nie ma żadnego przepisu</div>
-	)
-}
+	if (data) return <RecipeList content={data} header="Wszystkich przepisów" />
 
-export default Home
+	return <div>Nie ma żadnego przepisu</div>
+}

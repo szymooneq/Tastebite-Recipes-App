@@ -1,18 +1,17 @@
 import { useQuery } from '@tanstack/react-query'
 import { useFormik } from 'formik'
 import { useNavigate, useParams } from 'react-router-dom'
-import RecipeForm from '../../../components/Forms/RecipeForm/RecipeForm'
-import Spinner from '../../../components/UI/LoadingSpinner/LoadingSpinner'
-import { getRecipeToEdit } from '../../../lib/firebase/getRecipe'
-import useDocumentTitle from '../../../lib/hooks/useDocumentTitle'
-import { IRecipe } from '../../../lib/interfaces/Recipe.types'
-import { recipeSchema } from '../../../lib/schemas/recipeSchema'
-import { useAuth } from '../../../lib/hooks/useAuth'
+import RecipeForm from '../../../../components/Forms/RecipeForm/RecipeForm'
+import Spinner from '../../../../components/UI/LoadingSpinner/LoadingSpinner'
+import { IRecipe } from '../../../../lib/interfaces/Recipe.types'
+import { useAuth } from '../../../../lib/hooks/useAuth'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
-import { updateRecipe } from '../../../lib/firebase/postRecipe'
+import { updateRecipe } from '../../../../lib/firebase/postRecipe'
+import { useDocumentTitle } from '../../../../lib/hooks/useDocumentTitle'
+import { recipeSchema } from '../../../../lib/schemas'
+import { getRecipeData } from '../../../../lib/firebase/getRecipe'
 
-// TODO: redirect
-export default function EditRecipe(): JSX.Element {
+export default function EditRecipePage(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy | Edycja')
 	const { id } = useParams()
 	const { user } = useAuth()
@@ -25,8 +24,7 @@ export default function EditRecipe(): JSX.Element {
 
 	const { isLoading, data } = useQuery({
 		queryKey: ['editRecipe', id],
-		queryFn: () => getRecipeToEdit(id, user, navigate),
-		cacheTime: 1,
+		queryFn: () => getRecipeData(id, user.uid),
 		useErrorBoundary: true
 	})
 

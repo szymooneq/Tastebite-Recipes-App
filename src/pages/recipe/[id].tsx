@@ -1,13 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
-import Spinner from '../components/UI/LoadingSpinner/LoadingSpinner'
-import { getRecipeData } from '../lib/firebase/getRecipe'
-import View from '../components/Recipes/View/View'
+import Spinner from '../../components/UI/LoadingSpinner/LoadingSpinner'
+import { getRecipeData } from '../../lib/firebase/getRecipe'
+import View from '../../components/Recipes/View/View'
 
 // TODO: Rating system
-export default function Page(): JSX.Element {
+export default function RecipePage(): JSX.Element {
 	const { id } = useParams()
 	const navigate = useNavigate()
+
+	if (!id) {
+		navigate('/')
+		return <></>
+	}
 
 	const { isLoading, data } = useQuery({
 		queryKey: ['recipe', id],

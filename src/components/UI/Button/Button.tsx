@@ -25,7 +25,7 @@ const Button = ({ color, children, disabled, loadingMsg, ...rest }: ButtonProps)
 	<button
 		className={`${baseStyle} ${disabled ? disabledState : allowedState} ${variants[color]}`}
 		{...rest}>
-		{loadingMsg ? `${icon.buttonSpinner} ${loadingMsg}` : children}
+		{loadingMsg && disabled ? `${icon.buttonSpinner} ${loadingMsg}` : children}
 	</button>
 )
 
