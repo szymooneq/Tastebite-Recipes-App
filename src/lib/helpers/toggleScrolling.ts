@@ -1,5 +1,5 @@
 export const toggleScrolling = (isActive: boolean) => {
-	if (isActive) return document.documentElement.classList.add('overflow-hidden')
+	if (isActive) return document.body.classList.add('overflow-hidden')
 
-	document.documentElement.classList.remove('overflow-hidden')
+	document.body.classList.remove('overflow-hidden')
 }

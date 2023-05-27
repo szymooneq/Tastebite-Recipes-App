@@ -3,9 +3,18 @@ import CustomLink from '../../UI/CustomLink/CustomLink'
 import * as Field from '../../Fields'
 import Header from '../Header/Header'
 import { RecipeFormProps } from './RecipeForm.types'
+import { toFormikValidationSchema } from 'zod-formik-adapter'
+import { recipeSchema } from '../../../lib/schemas'
+import { useFormik } from 'formik'
 
 // TODO: add fieldsets
-const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
+const RecipeForm = ({ initialValues, onSubmit }: RecipeFormProps): JSX.Element => {
+	const formik = useFormik({
+		initialValues,
+		validationSchema: toFormikValidationSchema(recipeSchema),
+		onSubmit
+	})
+
 	const {
 		values,
 		errors,
@@ -17,7 +26,7 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 		handleBlur,
 		handleChange,
 		handleSubmit
-	} = control
+	} = formik
 
 	return (
 		<div className="mx-7 md:mx-auto lg:w-[60rem] xl:w-[70rem]">
@@ -67,6 +76,7 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 
 							<div className="flex flex-nowrap justify-between gap-3">
 								<Field.Text
+									type="number"
 									name="details.duration"
 									label="Czas (min)"
 									placeholder="Minut..."
@@ -79,6 +89,7 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 								/>
 
 								<Field.Text
+									type="number"
 									name="details.portions"
 									label="Porcje (sztuk)"
 									placeholder="np. 10 sztuk..."
@@ -106,6 +117,7 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 							<Header title="Wartości odżywcze" hrColor="rose" />
 
 							<Field.Text
+								type="number"
 								name="nutrions.calories"
 								label="Kalorie (kcal)"
 								placeholder="Liczba kalorii..."
@@ -119,6 +131,7 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 
 							<div className="flex flex-col md:flex-row md:gap-3">
 								<Field.Text
+									type="number"
 									name="nutrions.protein"
 									label="Białko (g)"
 									placeholder="Ilość białka w g..."
@@ -131,6 +144,7 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 								/>
 
 								<Field.Text
+									type="number"
 									name="nutrions.carbohydrates"
 									label="Węglowodany (g)"
 									placeholder="Ilość węglowodanów w g..."
@@ -143,6 +157,7 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 								/>
 
 								<Field.Text
+									type="number"
 									name="nutrions.fat"
 									label="Tłuszcze (g)"
 									placeholder="Ilość tłuszczy w g..."
@@ -187,7 +202,7 @@ const RecipeForm = ({ control }: RecipeFormProps): JSX.Element => {
 				</div>
 
 				<div className="my-12 flex justify-center items-center gap-5">
-					<CustomLink href="/profil/przepisy" color="red">
+					<CustomLink href="/profile/recipes" color="red">
 						Anuluj
 					</CustomLink>
 					<Button

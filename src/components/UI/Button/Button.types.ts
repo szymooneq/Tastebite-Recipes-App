@@ -2,5 +2,6 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 	color: 'green' | 'red' | 'blue' | 'gray' | 'redOutline' | 'greenOutline' | 'blueOutline'
 	children: React.ReactNode
 	loadingMsg?: string
+	isLoading?: boolean
 	disabled?: boolean
 }

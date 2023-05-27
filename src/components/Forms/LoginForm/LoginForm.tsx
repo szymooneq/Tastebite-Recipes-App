@@ -24,6 +24,7 @@ const LoginForm = ({ control }: LoginFormProps) => {
 				/>
 
 				<Field.Text
+					type="password"
 					name="password"
 					label="Hasło"
 					placeholder="Podaj hasło..."
@@ -39,6 +40,7 @@ const LoginForm = ({ control }: LoginFormProps) => {
 						type="submit"
 						color="green"
 						disabled={!isValid || isSubmitting}
+						isLoading={isSubmitting}
 						loadingMsg="Logowanie">
 						Zaloguj
 					</Button>

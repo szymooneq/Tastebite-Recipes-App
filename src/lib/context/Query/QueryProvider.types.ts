@@ -1,3 +1,3 @@
-export interface QueryProvider {
+export interface QueryProviderProps {
 	children: React.ReactNode
 }

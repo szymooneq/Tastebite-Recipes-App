@@ -2,7 +2,7 @@ import { ButtonProps } from './Button.types'
 import * as icon from '../../../assets/svg'
 
 const baseStyle =
-	'px-5 py-2.5 inline-flex items-center w-max rounded-lg text-sm text-center focus:outline-none font-medium'
+	'px-5 py-2.5 inline-flex items-center w-max rounded-lg text-sm text-center focus:outline-none font-bold'
 
 const variants = {
 	green:
@@ -19,13 +19,27 @@ const variants = {
 }
 
 const allowedState = 'focus:ring-4'
-const disabledState = 'cursor-not-allowed disabled:opacity-75'
+const disabledState = 'cursor-not-allowed opacity-75'
 
-const Button = ({ color, children, disabled, loadingMsg, ...rest }: ButtonProps): JSX.Element => (
+const Button = ({
+	color,
+	children,
+	disabled,
+	isLoading,
+	loadingMsg,
+	...rest
+}: ButtonProps): JSX.Element => (
 	<button
 		className={`${baseStyle} ${disabled ? disabledState : allowedState} ${variants[color]}`}
 		{...rest}>
-		{loadingMsg && disabled ? `${icon.buttonSpinner} ${loadingMsg}` : children}
+		{loadingMsg && isLoading ? (
+			<>
+				{icon.buttonSpinner}
+				{loadingMsg}
+			</>
+		) : (
+			children
+		)}
 	</button>
 )
 

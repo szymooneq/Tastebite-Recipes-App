@@ -4,34 +4,28 @@
 		<meta charset="UTF-8" />
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 		<meta name="theme-color" content="#046c4e" />
-		<meta
-			name="description"
-			content="CRUD React app with the ability to add and manage recipes." />
+		<meta name="description" content="CRUD React app with the ability to add and manage recipes." />
 		<meta name="author" content="Szymon Dudka" />
 		<title>Tastebite Recipe App</title>
 
 		<script is:inline>
 			const theme = (() => {
-				if (
-					typeof localStorage !== 'undefined' &&
-					localStorage.getItem('theme')
-				) {
-					return localStorage.getItem('theme');
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return JSON.parse(localStorage.getItem('theme'))
 				}
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					return 'dark';
-				}
-				return 'light';
-			})();
 
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark'
+				}
+
+				return 'light'
+			})()
 			if (theme === 'light') {
-				document.documentElement.classList.remove('dark');
+				document.documentElement.classList.remove('dark')
 			} else {
-				document.documentElement.classList.add('dark');
+				document.documentElement.classList.add('dark')
 			}
 		</script>
 	</head>

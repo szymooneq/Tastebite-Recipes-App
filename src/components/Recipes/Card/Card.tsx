@@ -13,7 +13,7 @@ const Card = ({ id, img, name, details, description }: IRecipeApi): JSX.Element 
 			<Image
 				className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform"
 				src={img}
-				alt={`Zdjęcie podglądowe przepisu "${name}"`}
+				alt={name}
 			/>
 		</div>
 
@@ -26,7 +26,7 @@ const Card = ({ id, img, name, details, description }: IRecipeApi): JSX.Element 
 
 			<p className="min-h-[4.5rem] text-gray-700 dark:text-gray-400 line-clamp-3">{description}</p>
 
-			<CustomLink href={`/przepis/${id}`} color="green">
+			<CustomLink href={`/recipe/${id}`} color="green">
 				Sprawdź <ArrowRightIcon className="ml-2 -mr-1 w-4 h-4" />
 			</CustomLink>
 		</div>

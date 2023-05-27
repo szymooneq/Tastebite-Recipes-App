@@ -9,15 +9,15 @@ const Navbar = (): JSX.Element => {
 			<NavItem href="/">Home</NavItem>
 			{user ? (
 				<>
-					<NavItem href="profil">Profil</NavItem>
+					<NavItem href="profile">Profil</NavItem>
 					<NavItem href="/" onClick={() => logoutUser()} isLink>
 						Wyloguj
 					</NavItem>
 				</>
 			) : (
 				<>
-					<NavItem href="rejestracja">Rejestracja</NavItem>
-					<NavItem href="logowanie">Logowanie</NavItem>
+					<NavItem href="register">Rejestracja</NavItem>
+					<NavItem href="login">Logowanie</NavItem>
 				</>
 			)}
 		</nav>

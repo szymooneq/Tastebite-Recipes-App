@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
-import Spinner from '../../components/UI/LoadingSpinner/LoadingSpinner'
 import { getRecipeData } from '../../lib/firebase/getRecipe'
 import View from '../../components/Recipes/View/View'
+import LoadingSpinner from '../../components/UI/LoadingSpinner/LoadingSpinner'
 
 // TODO: Rating system
 export default function RecipePage(): JSX.Element {
@@ -20,7 +20,7 @@ export default function RecipePage(): JSX.Element {
 		useErrorBoundary: true
 	})
 
-	if (isLoading) return <Spinner />
+	if (isLoading) return <LoadingSpinner />
 
 	if (data) return <View content={data} />
 

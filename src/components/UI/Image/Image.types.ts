@@ -1,5 +1,5 @@
 export interface ImageProps {
 	className: string
-	src?: string
+	src: string | null
 	alt: string
 }

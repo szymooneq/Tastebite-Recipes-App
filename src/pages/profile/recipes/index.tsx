@@ -24,7 +24,7 @@ export default function UserRecipesPage(): JSX.Element {
 		<>
 			<div className="px-3 mt-2 inline-flex justify-between w-full items-center gap-5 lg:px-0">
 				<h2 className="text-xl font-bold dark:text-white lg:text-3xl">Twoje przepisy</h2>
-				<CustomLink href="dodaj" color="green">
+				<CustomLink href="add" color="green">
 					Dodaj
 				</CustomLink>
 			</div>

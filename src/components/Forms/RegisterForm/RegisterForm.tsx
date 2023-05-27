@@ -23,6 +23,7 @@ const RegisterForm = ({ control }: RegisterFormProps) => {
 				/>
 
 				<Field.Text
+					type="password"
 					name="password"
 					label="Hasło"
 					placeholder="Podaj hasło..."
@@ -34,6 +35,7 @@ const RegisterForm = ({ control }: RegisterFormProps) => {
 				/>
 
 				<Field.Text
+					type="password"
 					name="confirmPassword"
 					label="Potwierdź hasło"
 					placeholder="Potwierdź hasło..."

@@ -1,12 +1,9 @@
-import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 import RecipeForm from '../../../components/Forms/RecipeForm/RecipeForm'
 import { IRecipe } from '../../../lib/interfaces/Recipe.types'
 import { useAuth } from '../../../lib/hooks/useAuth'
-import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { postRecipe } from '../../../lib/firebase/postRecipe'
 import { useDocumentTitle } from '../../../lib/hooks/useDocumentTitle'
-import { recipeSchema } from '../../../lib/schemas'
 
 const initialValues = {
 	name: '',
@@ -39,14 +36,11 @@ export default function AddRecipePage(): JSX.Element {
 		return <></>
 	}
 
-	const formik = useFormik({
-		initialValues,
-		validationSchema: toFormikValidationSchema(recipeSchema),
-		onSubmit: (values: IRecipe) => {
-			postRecipe(values, user?.uid)
-			navigate('/profil/przepisy')
-		}
-	})
+	// TODO: error handling from the API
+	const onSubmit = async (values: IRecipe) => {
+		await postRecipe(values, user?.uid)
+		navigate('/profile/recipes')
+	}
 
-	return <RecipeForm control={formik} />
+	return <RecipeForm initialValues={initialValues} onSubmit={onSubmit} />
 }

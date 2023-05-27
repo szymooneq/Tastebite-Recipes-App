@@ -9,10 +9,13 @@ import DeleteModal from '../Modal/Modal'
 import { TableProps } from './Table.types'
 
 const Table = ({ content }: TableProps): JSX.Element => {
-	const [modalData, setModalData] = useState<IRecipeApi | null>(null)
+	const [modal, setModal] = useState<{ data: IRecipeApi | null; isOpen: boolean }>({
+		data: null,
+		isOpen: false
+	})
 
-	const handleModalOpen = (product: IRecipeApi | null = null) => {
-		setModalData(product)
+	const handleModal = (product: IRecipeApi | null, isOpen: boolean = false) => {
+		setModal({ data: product, isOpen })
 	}
 
 	return (
@@ -51,18 +54,14 @@ const Table = ({ content }: TableProps): JSX.Element => {
 							</td>
 							<td className="p-4 font-semibold">
 								<div className="flex gap-2 items-center justify-center">
-									<CustomLink
-										ariaLabel="Edytuj przepis"
-										href={`edytuj/${product.id}`}
-										color="blueOutline">
+									<CustomLink href={`edit/${product.id}`} color="blueOutline">
 										<PencilSquareIcon className="w-4 h-4" />
 									</CustomLink>
 									<Button
-										ariaLabel="Usuń przepis"
 										type="button"
 										disabled={false}
 										color="redOutline"
-										onClick={() => handleModalOpen(product)}>
+										onClick={() => handleModal(product, true)}>
 										<TrashIcon className="w-4 h-4" />
 									</Button>
 								</div>
@@ -71,7 +70,7 @@ const Table = ({ content }: TableProps): JSX.Element => {
 					))}
 				</tbody>
 			</table>
-			{modalData ? <DeleteModal content={modalData} setModalStatus={handleModalOpen} /> : null}
+			<DeleteModal content={modal} setModal={handleModal} />
 		</>
 	)
 }

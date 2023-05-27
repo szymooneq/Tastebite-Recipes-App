@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { throttle } from '../../../lib/helpers/throttle'
-import 'Header.styles.css'
 import Searchbar from '../../UI/Searchbar/Searchbar'
 import ThemeButton from '../../UI/ThemeButton/ThemeButton'
+import styles from './Header.module.css'
 
 const Header = () => {
 	const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
@@ -22,8 +22,8 @@ const Header = () => {
 
 	return (
 		<header className="p-3 md:p-0 flex flex-col items-center justify-center gap-3 relative h-[40vh] overflow-hidden">
-			<div className="header" style={paralax} />
-			<h1 className="logo text-white text-[3.4rem]">Tastebite</h1>
+			<div className={styles.header} style={paralax} />
+			<h1 className={`${styles.logo} text-white text-[3.4rem]`}>Tastebite</h1>
 			<div className="container flex items-center justify-center gap-3">
 				<Searchbar />
 				<ThemeButton />

@@ -15,8 +15,8 @@ const DynamicInput = ({
 	const { fieldStyle, markerStyle } = styles
 
 	return (
-		<div className={`mb-2 ml-2 ${markerStyle}`}>
-			<div className="flex gap-2 font-normal">
+		<div className={`flex gap-2 font-normal mb-2 ml-2 ${markerStyle}`}>
+			<div className="flex-1">
 				<label htmlFor={name} hidden>
 					{name}
 				</label>

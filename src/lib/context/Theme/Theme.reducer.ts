@@ -1,4 +1,3 @@
-import { toggleTheme } from '../../helpers/toggleTheme'
 import { ReducerAction, ReducerState } from './Theme.types'
 
 const themeDefaultState: ReducerState = document.documentElement.classList.contains('dark')
@@ -10,7 +9,14 @@ const themeReducer = (state: ReducerState, action: ReducerAction) => {
 
 	switch (type) {
 		case 'SWITCH_THEME':
-			return toggleTheme(state)
+			const newState = state === 'dark' ? 'light' : 'dark'
+
+			localStorage.setItem('theme', JSON.stringify(newState))
+
+			document.documentElement.classList.remove(state)
+			document.documentElement.classList.add(newState)
+
+			return newState
 
 		default:
 			return state
