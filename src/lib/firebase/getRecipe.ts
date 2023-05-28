@@ -1,7 +1,7 @@
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
-import { IRecipeApi } from '../interfaces/Recipe.types'
 import { db, storage } from './config'
+import { IRecipeApi } from '@/lib/types/Recipe.types'
 
 const getRecipes = async (userId?: string) => {
 	let recipes: IRecipeApi[] = []

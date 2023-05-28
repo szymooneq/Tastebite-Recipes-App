@@ -1,14 +1,15 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { useFormik } from 'formik'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
-import { auth } from '../lib/firebase/config'
-import RegisterForm from '../components/Forms/RegisterForm/RegisterForm'
-import { useAuth } from '../lib/hooks/useAuth'
-import { useDocumentTitle } from '../lib/hooks/useDocumentTitle'
-import { registerSchema } from '../lib/schemas'
-import SuccessMessage from '../components/Layout/SuccessMessage/SuccessMessage'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '@/lib/firebase/config'
+import { registerSchema } from '@/lib/schemas'
+import { useAuth } from '@/lib/hooks/useAuth'
+import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
+
+import SuccessMessage from '@/components/Layout/SuccessMessage'
+import RegisterForm from '@/components/Forms/RegisterForm'
 
 const initialValues = {
 	email: '',

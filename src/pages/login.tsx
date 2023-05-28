@@ -1,12 +1,13 @@
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
-import { useDocumentTitle } from '../lib/hooks/useDocumentTitle'
-import { useAuth } from '../lib/hooks/useAuth'
-import { loginSchema } from '../lib/schemas'
-import { auth } from '../lib/firebase/config'
-import LoginForm from '../components/Forms/LoginForm/LoginForm'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '@/lib/firebase/config'
+import { loginSchema } from '@/lib/schemas'
+import { useAuth } from '@/lib/hooks/useAuth'
+import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
+
+import LoginForm from '@/components/Forms/LoginForm'
 
 const initialValues = {
 	email: '',

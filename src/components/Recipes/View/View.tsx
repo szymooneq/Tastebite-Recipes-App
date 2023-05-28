@@ -1,9 +1,10 @@
-import Badges from '../../UI/Badges/Badges'
-import Image from '../../UI/Image/Image'
-import Steps from '../Steps/Steps'
-import DetailCard from '../DetailsCard/DetailCard'
-import { filterDetails, filterNutrions } from '../../../lib/helpers/filterRecipeData'
+import { filterDetails, filterNutrions } from '@/lib/helpers/filterRecipeData'
 import { ViewProps } from './View.types'
+
+import DetailCard from '@/components/Recipes/DetailsCard'
+import Steps from '@/components/Recipes/Steps'
+import Badges from '@/components/UI/Badges'
+import Image from '@/components/UI/Image'
 
 const View = ({ content }: ViewProps) => {
 	const { name, description, details, nutrions, ingredients, steps, img } = content

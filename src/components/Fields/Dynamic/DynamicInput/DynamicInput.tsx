@@ -1,7 +1,8 @@
 import { TrashIcon } from '@heroicons/react/20/solid'
-import Button from '../../../UI/Button/Button'
+import { getFieldStyles } from '@/lib/helpers/getFieldStyles'
 import { DynamicInputProps } from './DynamicInput.types'
-import { getFieldStyles } from '../../../../lib/helpers/getFieldStyles'
+
+import Button from '@/components/UI/Button'
 
 const DynamicInput = ({
 	index,

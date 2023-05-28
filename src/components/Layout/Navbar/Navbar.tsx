@@ -1,5 +1,6 @@
+import { useAuth } from '@/lib/hooks/useAuth'
+
 import NavItem from './NavItem'
-import { useAuth } from '../../../lib/hooks/useAuth'
 
 const Navbar = (): JSX.Element => {
 	const { user, logoutUser } = useAuth()

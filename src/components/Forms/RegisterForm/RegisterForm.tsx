@@ -1,6 +1,7 @@
-import * as Field from '../../Fields'
-import Button from '../../UI/Button/Button'
 import { RegisterFormProps } from './RegisterForm.types'
+
+import * as Field from '@/components/Fields'
+import Button from '@/components/UI/Button'
 
 const RegisterForm = ({ control }: RegisterFormProps) => {
 	const { values, errors, touched, isValid, isSubmitting, handleChange, handleBlur, handleSubmit } =

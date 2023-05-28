@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
 
 export const useDocumentTitle = (title: string) => {
-	const [documentTitle, setDocumentTitle] = useState(title)
+	const [state, setState] = useState(title)
+
+	const setTitle = (value: string) => {
+		setState(value)
+	}
 
 	useEffect(() => {
-		document.title = documentTitle
-	}, [documentTitle])
+		document.title = state
+	}, [state])
 
-	return [documentTitle, setDocumentTitle]
+	return { setTitle }
 }

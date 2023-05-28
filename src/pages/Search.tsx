@@ -1,7 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import RecipeList from '../components/Recipes/List/List'
-import LoadingSpinner from '../components/UI/LoadingSpinner'
+import { useQuery } from '@tanstack/react-query'
+
+import RecipeList from '@/components/Recipes/List'
+import LoadingSpinner from '@/components/UI/LoadingSpinner'
 
 export default function SearchPage(): JSX.Element {
 	const { term } = useParams()

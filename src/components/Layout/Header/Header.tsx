@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { throttle } from '../../../lib/helpers/throttle'
-import Searchbar from '../../UI/Searchbar/Searchbar'
-import ThemeButton from '../../UI/ThemeButton/ThemeButton'
+import { throttle } from '@/lib/helpers/throttle'
 import styles from './Header.module.css'
+
+import Searchbar from '@/components/UI/Searchbar'
+import ThemeButton from '@/components/UI/ThemeButton'
 
 const Header = () => {
 	const [mousePos, setMousePos] = useState({ x: 0, y: 0 })

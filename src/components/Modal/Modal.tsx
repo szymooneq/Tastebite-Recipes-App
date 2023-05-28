@@ -1,11 +1,12 @@
-import { ExclamationCircleIcon } from '@heroicons/react/20/solid'
-import { Modal as FlowbiteModal } from 'flowbite-react'
 import { useEffect } from 'react'
-import Button from '../UI/Button/Button'
+import { Modal as FlowbiteModal } from 'flowbite-react'
+import { ExclamationCircleIcon } from '@heroicons/react/20/solid'
+import { deleteRecipe } from '@/lib/firebase/deleteRecipe'
+import { toggleScrolling } from '@/lib/helpers/toggleScrolling'
+import { useAuth } from '@/lib/hooks/useAuth'
 import { ModalProps } from './Modal.types'
-import { toggleScrolling } from '../../lib/helpers/toggleScrolling'
-import { deleteRecipe } from '../../lib/firebase/deleteRecipe'
-import { useAuth } from '../../lib/hooks/useAuth'
+
+import Button from '@/components/UI/Button'
 
 // TODO: modal refractoring, remove Flowbite Modal
 const Modal = ({ content, setModal }: ModalProps): JSX.Element => {

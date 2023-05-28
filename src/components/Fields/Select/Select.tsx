@@ -1,6 +1,7 @@
+import { getFieldStyles } from '@/lib/helpers/getFieldStyles'
 import { SelectProps } from './Select.types'
-import { getFieldStyles } from '../../../lib/helpers/getFieldStyles'
-import ErrorMsg from '../ErrorMsg/ErrorMsg'
+
+import ErrorMsg from '@/components/Fields/ErrorMsg'
 
 const renderOptions = () => {
 	const options = [

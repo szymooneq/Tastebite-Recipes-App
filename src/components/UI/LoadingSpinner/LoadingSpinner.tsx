@@ -1,4 +1,4 @@
-import * as icon from '../../../assets/svg'
+import * as icon from '@/assets/svg'
 
 const LoadingSpinner = (): JSX.Element => (
 	<div className="flex items-center justify-center h-96" role="status">

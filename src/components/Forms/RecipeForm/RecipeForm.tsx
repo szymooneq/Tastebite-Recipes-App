@@ -1,11 +1,12 @@
-import Button from '../../UI/Button/Button'
-import CustomLink from '../../UI/CustomLink/CustomLink'
-import * as Field from '../../Fields'
-import Header from '../Header/Header'
-import { RecipeFormProps } from './RecipeForm.types'
-import { toFormikValidationSchema } from 'zod-formik-adapter'
-import { recipeSchema } from '../../../lib/schemas'
 import { useFormik } from 'formik'
+import { toFormikValidationSchema } from 'zod-formik-adapter'
+import { recipeSchema } from '@/lib/schemas'
+import { RecipeFormProps } from './RecipeForm.types'
+
+import * as Field from '@/components/Fields'
+import Header from '@/components/Forms/Header'
+import Button from '@/components/UI/Button'
+import CustomLink from '@/components/UI/CustomLink'
 
 // TODO: add fieldsets
 const RecipeForm = ({ initialValues, onSubmit }: RecipeFormProps): JSX.Element => {

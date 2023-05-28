@@ -1,7 +1,8 @@
 import { PlusIcon } from '@heroicons/react/20/solid'
 import { DynamicProps } from './Dynamic.types'
-import Button from '../../UI/Button/Button'
-import DynamicInput from './Input/DynamicInput'
+
+import DynamicInput from './DynamicInput'
+import Button from '@/components/UI/Button'
 
 const Dynamic = ({
 	name,

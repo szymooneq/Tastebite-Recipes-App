@@ -1,6 +1,6 @@
 import { createContext, useReducer } from 'react'
-import { ThemeContextTypes, ThemeProviderProps } from './Theme.types'
 import { themeDefaultState, themeReducer } from './Theme.reducer'
+import { ThemeContextTypes, ThemeProviderProps } from './Theme.types'
 
 export const ThemeContext = createContext({} as ThemeContextTypes)
 

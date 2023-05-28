@@ -1,6 +1,7 @@
+import { getFieldStyles } from '@/lib/helpers/getFieldStyles'
 import { TextareaProps } from './Textarea.types'
-import { getFieldStyles } from '../../../lib/helpers/getFieldStyles'
-import ErrorMsg from '../ErrorMsg'
+
+import ErrorMsg from '@/components/Fields/ErrorMsg'
 
 const Textarea = ({ name, label, errorMsg, isTouched, ...rest }: TextareaProps): JSX.Element => {
 	const styles = getFieldStyles(errorMsg, isTouched)

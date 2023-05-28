@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react'
-import { ThemeContext } from '../context/Theme/ThemeProvider'
+import { ThemeContext } from '@/lib/context/Theme/ThemeProvider'
 
 export const useTheme = () => {
 	const { state, dispatch } = useContext(ThemeContext)

@@ -1,8 +1,8 @@
 import { Timestamp, addDoc, collection, doc, serverTimestamp, updateDoc } from 'firebase/firestore'
-import { IRecipe } from '../interfaces/Recipe.types'
 import { db } from './config'
-import { filterFormValues } from '../helpers/filterFormValues'
 import { getRecipeImageUrl } from './getRecipe'
+import { filterFormValues } from '@/lib/helpers/filterFormValues'
+import { IRecipe } from '@/lib/types/Recipe.types'
 
 const postRecipe = async (values: IRecipe, userId: string) => {
 	const { file } = values

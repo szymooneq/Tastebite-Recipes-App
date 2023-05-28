@@ -1,10 +1,11 @@
 import { useRef } from 'react'
-import Button from '../../UI/Button/Button'
-import Image from '../../UI/Image/Image'
-import { getFieldStyles } from '../../../lib/helpers/getFieldStyles'
-import ErrorMsg from '../ErrorMsg/ErrorMsg'
+import { getFieldStyles } from '@/lib/helpers/getFieldStyles'
+import { usePreview } from '@/lib/hooks/usePreview'
 import { FileProps } from './File.types'
-import { usePreview } from '../../../lib/hooks/usePreview'
+
+import Image from '@/components/UI/Image'
+import Button from '@/components/UI/Button'
+import ErrorMsg from '@/components/Fields/ErrorMsg'
 
 const File = ({ name, label, errorMsg, currentImg, value, setValue }: FileProps): JSX.Element => {
 	const { image } = usePreview(value, currentImg)

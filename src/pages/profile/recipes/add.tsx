@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom'
-import RecipeForm from '../../../components/Forms/RecipeForm/RecipeForm'
-import { IRecipe } from '../../../lib/interfaces/Recipe.types'
-import { useAuth } from '../../../lib/hooks/useAuth'
-import { postRecipe } from '../../../lib/firebase/postRecipe'
-import { useDocumentTitle } from '../../../lib/hooks/useDocumentTitle'
+import { postRecipe } from '@/lib/firebase/postRecipe'
+import { useAuth } from '@/lib/hooks/useAuth'
+import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
+import { IRecipe } from '@/lib/types/Recipe.types'
+
+import RecipeForm from '@/components/Forms/RecipeForm'
 
 const initialValues = {
 	name: '',

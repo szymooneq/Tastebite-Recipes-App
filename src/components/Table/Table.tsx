@@ -1,12 +1,13 @@
-import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { useState } from 'react'
-import { IRecipeApi } from '../../lib/interfaces/Recipe.types'
-import Button from '../UI/Button/Button'
-import CustomLink from '../UI/CustomLink/CustomLink'
-import Image from '../UI/Image/Image'
-import Indicator from '../UI/Indicator/Indicator'
-import DeleteModal from '../Modal/Modal'
+import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { IRecipeApi } from '@/lib/types/Recipe.types'
 import { TableProps } from './Table.types'
+
+import Button from '@/components/UI/Button'
+import CustomLink from '@/components/UI/CustomLink'
+import Image from '@/components/UI/Image'
+import Indicator from '@/components/UI/Indicator'
+import Modal from '@/components/Modal'
 
 const Table = ({ content }: TableProps): JSX.Element => {
 	const [modal, setModal] = useState<{ data: IRecipeApi | null; isOpen: boolean }>({
@@ -70,7 +71,7 @@ const Table = ({ content }: TableProps): JSX.Element => {
 					))}
 				</tbody>
 			</table>
-			<DeleteModal content={modal} setModal={handleModal} />
+			<Modal content={modal} setModal={handleModal} />
 		</>
 	)
 }

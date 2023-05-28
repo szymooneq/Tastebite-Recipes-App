@@ -1,5 +1,5 @@
 import { ButtonProps } from './Button.types'
-import * as icon from '../../../assets/svg'
+import * as icon from '@/assets/svg'
 
 const baseStyle =
 	'px-5 py-2.5 inline-flex items-center w-max rounded-lg text-sm text-center focus:outline-none font-bold'

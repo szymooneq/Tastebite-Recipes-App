@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import QueryProvider from '../../lib/context/Query'
+import QueryProvider from '@/lib/context/Query'
 
 import Footer from './Footer'
 import Header from './Header'

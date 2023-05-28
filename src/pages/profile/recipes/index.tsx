@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import RecipeTable from '../../../components/Table/Table'
-import CustomLink from '../../../components/UI/CustomLink/CustomLink'
-import { useAuth } from '../../../lib/hooks/useAuth'
-import { getRecipes } from '../../../lib/firebase/getRecipe'
-import LoadingSpinner from '../../../components/UI/LoadingSpinner/LoadingSpinner'
-import { useDocumentTitle } from '../../../lib/hooks/useDocumentTitle'
+import { getRecipes } from '@/lib/firebase/getRecipe'
+import { useAuth } from '@/lib/hooks/useAuth'
+import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
+
+import RecipeTable from '@/components/Table'
+import CustomLink from '@/components/UI/CustomLink'
+import LoadingSpinner from '@/components/UI/LoadingSpinner'
 
 export default function UserRecipesPage(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy')

@@ -3,5 +3,4 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 	children: React.ReactNode
 	loadingMsg?: string
 	isLoading?: boolean
-	disabled?: boolean
 }

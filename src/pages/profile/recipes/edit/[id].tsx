@@ -1,12 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
-import RecipeForm from '../../../../components/Forms/RecipeForm/RecipeForm'
-import { IRecipe } from '../../../../lib/interfaces/Recipe.types'
-import { useAuth } from '../../../../lib/hooks/useAuth'
-import { updateRecipe } from '../../../../lib/firebase/postRecipe'
-import { useDocumentTitle } from '../../../../lib/hooks/useDocumentTitle'
-import { getRecipeData } from '../../../../lib/firebase/getRecipe'
-import LoadingSpinner from '../../../../components/UI/LoadingSpinner/LoadingSpinner'
+import { useQuery } from '@tanstack/react-query'
+import { getRecipeData } from '@/lib/firebase/getRecipe'
+import { updateRecipe } from '@/lib/firebase/postRecipe'
+import { useAuth } from '@/lib/hooks/useAuth'
+import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
+import { IRecipe } from '@/lib/types/Recipe.types'
+
+import RecipeForm from '@/components/Forms/RecipeForm'
+import LoadingSpinner from '@/components/UI/LoadingSpinner'
 
 export default function EditRecipePage(): JSX.Element {
 	useDocumentTitle('Profil | Moje przepisy | Edycja')

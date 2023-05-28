@@ -1,8 +1,9 @@
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
-import { IRecipeApi } from '../../../lib/interfaces/Recipe.types'
-import Badges from '../../UI/Badges/Badges'
-import CustomLink from '../../UI/CustomLink/CustomLink'
-import Image from '../../UI/Image/Image'
+import { IRecipeApi } from '@/lib/types/Recipe.types'
+
+import Badges from '@/components/UI/Badges'
+import CustomLink from '@/components/UI/CustomLink'
+import Image from '@/components/UI/Image'
 
 const wrapperStyles =
 	'w-full break-words overflow-hidden rounded-lg shadow-md hover:shadow-2xl transition group bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700 xl:w-full'

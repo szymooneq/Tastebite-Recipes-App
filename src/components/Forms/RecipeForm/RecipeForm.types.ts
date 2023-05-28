@@ -1,4 +1,4 @@
-import { IRecipe } from '../../../lib/interfaces/Recipe.types'
+import { IRecipe } from '@/lib/types/Recipe.types'
 
 export interface RecipeFormProps {
 	initialValues: IRecipe

@@ -1,6 +1,7 @@
+import { getFieldStyles } from '@/lib/helpers/getFieldStyles'
 import { TextProps } from './Text.types'
-import { getFieldStyles } from '../../../lib/helpers/getFieldStyles'
-import ErrorMsg from '../ErrorMsg/ErrorMsg'
+
+import ErrorMsg from '@/components/Fields/ErrorMsg'
 
 const Text = ({ name, label, errorMsg, isTouched, ...rest }: TextProps): JSX.Element => {
 	const styles = getFieldStyles(errorMsg, isTouched)

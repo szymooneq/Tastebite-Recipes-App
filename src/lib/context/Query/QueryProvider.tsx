@@ -1,7 +1,8 @@
 import { Suspense } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import LoadingSpinner from '../../../components/UI/LoadingSpinner'
 import { QueryProviderProps } from './QueryProvider.types'
+
+import LoadingSpinner from '@/components/UI/LoadingSpinner'
 
 const queryClient = new QueryClient()
 

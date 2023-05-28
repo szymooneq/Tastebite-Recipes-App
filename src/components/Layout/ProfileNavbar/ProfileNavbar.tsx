@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom'
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-import ProfileItem from './NavItem/NavItem'
+import ProtectedRoute from '@/components/Layout/ProtectedRoute'
+
+import ProfileItem from './NavItem'
 
 const ProfileNavbar = (): JSX.Element => {
 	const { pathname } = useLocation()

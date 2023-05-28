@@ -1,5 +1,6 @@
-import RecipeCard from '../Card/Card'
 import { ListProps } from './List.types'
+
+import RecipeCard from '@/components/Recipes/Card'
 
 const List = ({ header, content }: ListProps): JSX.Element => (
 	<div className="mx-3">
