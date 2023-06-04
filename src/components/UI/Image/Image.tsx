@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ImageProps } from './Image.types'
-import placeholder from '@/assets/placeholder.jpg'
+import placeholder from '@/assets/images/placeholder.jpg'
 import * as icon from '@/assets/svg'
 
 const Image = ({ className, src, alt }: ImageProps): JSX.Element => {
