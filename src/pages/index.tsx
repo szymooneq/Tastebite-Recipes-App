@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { getRecipes } from '@/lib/firebase/getRecipe'
-import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 import RecipeList from '@/components/Recipes/List'
 import LoadingSpinner from '@/components/UI/LoadingSpinner'

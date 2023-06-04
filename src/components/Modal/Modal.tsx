@@ -3,7 +3,7 @@ import { Modal as FlowbiteModal } from 'flowbite-react'
 import { ExclamationCircleIcon } from '@heroicons/react/20/solid'
 import { deleteRecipe } from '@/lib/firebase/deleteRecipe'
 import { toggleScrolling } from '@/lib/helpers/toggleScrolling'
-import { useAuth } from '@/lib/hooks/useAuth'
+import { useAuth } from '@/hooks/useAuth'
 import { ModalProps } from './Modal.types'
 
 import Button from '@/components/UI/Button'

@@ -1,12 +1,11 @@
 import { useCallback, useContext } from 'react'
-import { AuthContext } from '@/lib/context/Auth/AuthProvider'
-import { IUser } from '@/lib/types/User.types'
+import { AuthContext } from '@/context/Auth/AuthProvider'
+import { IUser } from '@/types/User.types'
 
 export const useAuth = () => {
 	const { state, dispatch } = useContext(AuthContext)
-	const { user } = state
 
-	if (!AuthContext) {
+	if (!state && !dispatch) {
 		throw new Error('useAuth should be used inside AuthProvider')
 	}
 
@@ -22,7 +21,7 @@ export const useAuth = () => {
 	}, [dispatch])
 
 	return {
-		user,
+		user: state.user,
 		loginUser,
 		logoutUser
 	}

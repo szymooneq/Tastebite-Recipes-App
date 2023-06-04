@@ -1,11 +1,10 @@
 import { useCallback, useContext } from 'react'
-import { ThemeContext } from '@/lib/context/Theme/ThemeProvider'
+import { ThemeContext } from '@/context/Theme/ThemeProvider'
 
 export const useTheme = () => {
 	const { state, dispatch } = useContext(ThemeContext)
-	const theme = state
 
-	if (!ThemeContext) {
+	if (!state && !dispatch) {
 		throw new Error('useTheme should be used inside ThemeProvider')
 	}
 
@@ -13,5 +12,5 @@ export const useTheme = () => {
 		dispatch({ type: 'SWITCH_THEME' })
 	}, [dispatch])
 
-	return { theme, changeTheme }
+	return { theme: state, changeTheme }
 }

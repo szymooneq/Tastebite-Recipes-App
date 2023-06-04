@@ -1,4 +1,4 @@
-import { IRecipeApi } from '@/lib/types/Recipe.types'
+import { IRecipeApi } from '@/types/Recipe.types'
 
 export interface TableProps {
 	content: IRecipeApi[]

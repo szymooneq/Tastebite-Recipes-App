@@ -35,7 +35,5 @@ export const usePreview = (file: Blob | null, path: string | null) => {
 		}
 	}, [file])
 
-	return {
-		image
-	}
+	return { image }
 }

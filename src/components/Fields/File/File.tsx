@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { getFieldStyles } from '@/lib/helpers/getFieldStyles'
-import { usePreview } from '@/lib/hooks/usePreview'
+import { usePreview } from '@/hooks/usePreview'
 import { FileProps } from './File.types'
 
 import Image from '@/components/UI/Image'

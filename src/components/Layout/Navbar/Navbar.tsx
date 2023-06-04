@@ -1,4 +1,4 @@
-import { useAuth } from '@/lib/hooks/useAuth'
+import { useAuth } from '@/hooks/useAuth'
 
 import NavItem from './NavItem'
 

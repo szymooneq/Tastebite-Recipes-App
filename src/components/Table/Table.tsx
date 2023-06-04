@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid'
-import { IRecipeApi } from '@/lib/types/Recipe.types'
+import { IRecipeApi } from '@/types/Recipe.types'
 import { TableProps } from './Table.types'
 
 import Button from '@/components/UI/Button'

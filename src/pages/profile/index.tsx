@@ -1,4 +1,4 @@
-import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 // TODO: profile update information
 export default function ProfilePage(): JSX.Element {

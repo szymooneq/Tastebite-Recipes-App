@@ -2,7 +2,7 @@ import { Timestamp, addDoc, collection, doc, serverTimestamp, updateDoc } from '
 import { db } from './config'
 import { getRecipeImageUrl } from './getRecipe'
 import { filterFormValues } from '@/lib/helpers/filterFormValues'
-import { IRecipe } from '@/lib/types/Recipe.types'
+import { IRecipe } from '@/types/Recipe.types'
 
 const postRecipe = async (values: IRecipe, userId: string) => {
 	const { file } = values

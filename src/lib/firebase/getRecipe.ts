@@ -1,7 +1,7 @@
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { db, storage } from './config'
-import { IRecipeApi } from '@/lib/types/Recipe.types'
+import { IRecipeApi } from '@/types/Recipe.types'
 
 const getRecipes = async (userId?: string) => {
 	let recipes: IRecipeApi[] = []
@@ -31,7 +31,7 @@ const getRecipeData = async (id: string, uid?: string) => {
 			return data
 		}
 
-		if (status) {
+		if (!uid && status) {
 			return data
 		}
 	}

@@ -1,4 +1,4 @@
-import { IRecipeDetails, IRecipeNutrions } from '@/lib/types/Recipe.types'
+import { IRecipeDetails, IRecipeNutrions } from '@/types/Recipe.types'
 import { roundToTwo } from './roundToTwo'
 
 const filterNutrions = (data: IRecipeNutrions) => {

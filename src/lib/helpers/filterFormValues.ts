@@ -1,4 +1,4 @@
-import { IRecipe } from '@/lib/types/Recipe.types'
+import { IRecipe } from '@/types/Recipe.types'
 import { roundToTwo } from './roundToTwo'
 
 const removeStringWhitespaces = (value: string) => {

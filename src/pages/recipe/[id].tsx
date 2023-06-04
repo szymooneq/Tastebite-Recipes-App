@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getRecipeData } from '@/lib/firebase/getRecipe'
-import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 import View from '@/components/Recipes/View'
 import LoadingSpinner from '@/components/UI/LoadingSpinner'

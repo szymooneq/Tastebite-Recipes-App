@@ -2,9 +2,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getRecipeData } from '@/lib/firebase/getRecipe'
 import { updateRecipe } from '@/lib/firebase/postRecipe'
-import { useAuth } from '@/lib/hooks/useAuth'
-import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
-import { IRecipe } from '@/lib/types/Recipe.types'
+import { useAuth } from '@/hooks/useAuth'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
+import { IRecipe } from '@/types/Recipe.types'
 
 import RecipeForm from '@/components/Forms/RecipeForm'
 import LoadingSpinner from '@/components/UI/LoadingSpinner'
@@ -22,7 +22,11 @@ export default function EditRecipePage(): JSX.Element {
 
 	const { isLoading, data } = useQuery({
 		queryKey: ['editRecipe', id],
-		queryFn: () => getRecipeData(id, user.uid),
+		queryFn: () =>
+			getRecipeData(id, user.uid).then((data) => {
+				if (!data) navigate('/profile/recipes')
+				return data
+			}),
 		useErrorBoundary: true
 	})
 

@@ -4,8 +4,8 @@ import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '@/lib/firebase/config'
 import { loginSchema } from '@/lib/schemas'
-import { useAuth } from '@/lib/hooks/useAuth'
-import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
+import { useAuth } from '@/hooks/useAuth'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 import LoginForm from '@/components/Forms/LoginForm'
 

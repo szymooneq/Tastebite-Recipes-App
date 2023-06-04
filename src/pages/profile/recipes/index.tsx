@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getRecipes } from '@/lib/firebase/getRecipe'
-import { useAuth } from '@/lib/hooks/useAuth'
-import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
+import { useAuth } from '@/hooks/useAuth'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
 
 import RecipeTable from '@/components/Table'
 import CustomLink from '@/components/UI/CustomLink'

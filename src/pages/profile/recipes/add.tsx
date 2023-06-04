@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { postRecipe } from '@/lib/firebase/postRecipe'
-import { useAuth } from '@/lib/hooks/useAuth'
-import { useDocumentTitle } from '@/lib/hooks/useDocumentTitle'
-import { IRecipe } from '@/lib/types/Recipe.types'
+import { useAuth } from '@/hooks/useAuth'
+import { useDocumentTitle } from '@/hooks/useDocumentTitle'
+import { IRecipe } from '@/types/Recipe.types'
 
 import RecipeForm from '@/components/Forms/RecipeForm'
 
