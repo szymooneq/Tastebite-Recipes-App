@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-.headerImage {
+.header {
 	position: absolute;
 	top: -5%;
 	bottom: -5%;
 	left: -5%;
 	right: -5%;
-	background: url('../../../assets/header.jpg') center;
+	background: url('../../../assets/images/header.jpg') center;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-size: 120%;
 	z-index: -1;
 }
 
-.headerImage::after {
+.header::after {
 	content: '';
 	position: absolute;
 	top: 0;
