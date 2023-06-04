@@ -14,7 +14,7 @@ const UserRecipesPage = React.lazy(() => import('@/pages/profile/recipes'))
 const AddRecipePage = React.lazy(() => import('@/pages/profile/recipes/add'))
 const EditRecipePage = React.lazy(() => import('@/pages/profile/recipes/edit/[id]'))
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
 	{
 		element: <Layout />,
 		children: [
@@ -73,3 +73,5 @@ export const router = createBrowserRouter([
 		]
 	}
 ])
+
+export default router
